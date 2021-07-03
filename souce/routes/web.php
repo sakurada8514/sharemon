@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/redis_test', function () {
-    Redis::set("hoge", "iii");
+Route::get('{any}', function () {
+    return view('app');
+})->where('any', '.*');
 
-    print_r(Redis::get("hoge"));
+
+Route::get('/redis_test', function () {
+    Cache::forever('key', "hoge");
+
+    print_r(Cache::get("key"));
 });
