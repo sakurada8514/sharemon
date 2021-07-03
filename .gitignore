@@ -1,0 +1,15 @@
+/souce/node_modules
+/souce/public/hot
+/souce/public/storage
+/souce/storage/*.key
+/souce/vendor
+/souce/.env
+/souce/.env.backup
+/souce/.phpunit.result.cache
+/souce/docker-compose.override.yml
+/souce/Homestead.json
+/souce/Homestead.yaml
+/souce/npm-debug.log
+/souce/yarn-error.log
+/souce/.idea
+/souce/.vscode
