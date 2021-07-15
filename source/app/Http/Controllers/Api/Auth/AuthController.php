@@ -20,30 +20,32 @@ class AuthController extends Controller
         $this->_authService = $_authService;
     }
 
-    public function authUser()
+    public function authUser(): JsonResponse
     {
         $_user = Auth::user();
         if (!$_user) {
             return response()->json([], 401);
         }
 
-        return response()->json(['user' => $_user]);
+        return response()->json(['user' => $_user], 200);
     }
 
     public function login(LoginRequest $request): JsonResponse
     {
         $_loginData = $request->only('email', 'password');
+
         $_user = $this->_authService->login($_loginData);
+
         if (is_null($_user)) {
-            return response()->json(['result' => false], 401);
+            return response()->json(['errors' => config('sharemonWebApp.ERROR_MESSAGE.AUTH')], 401);
         }
 
-        return response()->json(['user' => $_user, 'result' => true], 200);
+        return response()->json(['user' => $_user]);
     }
 
     public function logout(): JsonResponse
     {
         Auth::logout();
-        return response()->json(['result' => true], 200);
+        return response()->json([], 200);
     }
 }

@@ -3,31 +3,34 @@ require("./bootstrap");
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./stores/index";
+import { setCurrentUser } from "./stores/auth";
 
 import Top from "./pages/Top";
+import Error from "./pages/Error";
 import Login from "./pages/Auth/Login";
-import Auth from "./pages/Auth/Auth";
+import Mypage from "./pages/private/Mypage";
+import GuestRoute from "./components/GuestRoute";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
     return (
-        <BrowserRouter>
-            <Route exact path="/">
-                <Top></Top>
-            </Route>
-            <Route exact path="/login">
-                <Login></Login>
-            </Route>
-            {/* <Auth>
+        <Provider store={store}>
+            <BrowserRouter>
                 <Switch>
-                    <Route exact path="/list1" component={List1} />
-                    <Route exact path="/list2" component={List2} />
-                    <Redirect from="/" to="/login" />
+                    <Route exact path="/" children={<Top />} />
+                    <Route exact path="/error" children={<Error />} />
+                    <GuestRoute path="/login" children={<Login />} />
+                    <PrivateRoute path="/mypage" children={<Mypage />} />
                 </Switch>
-            </Auth> */}
-        </BrowserRouter>
+            </BrowserRouter>
+        </Provider>
     );
 };
 
-if (document.getElementById("app")) {
-    ReactDOM.render(<App />, document.getElementById("app"));
-}
+store.dispatch(setCurrentUser()).then(() => {
+    if (document.getElementById("app")) {
+        ReactDOM.render(<App />, document.getElementById("app"));
+    }
+});
