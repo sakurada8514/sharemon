@@ -37,33 +37,91 @@ const Login = () => {
         }
     }
 
-    const hello = css({});
+    function pushRegist() {
+        history.push("/regist");
+    }
+
     return (
-        <div>
-            <form onSubmit={login}>
-                <label>email</label>
+        <div css={styles.allWrapper}>
+            <form onSubmit={login} css={styles.form}>
                 <input
+                    css={styles.input}
                     type="email"
                     required
                     value={email}
                     onChange={handleChangeEmail}
+                    placeholder="メールアドレス"
                 />
                 {typeof errors.email !== "undefined" && <p>{errors.email}</p>}
-                <label>password</label>
                 <input
+                    css={styles.input}
                     type="password"
                     required
                     value={password}
                     onChange={handleChangePassword}
+                    placeholder="パスワード"
                 />
                 {typeof errors.password !== "undefined" && (
                     <p>{errors.password}</p>
                 )}
                 {typeof errors.auth !== "undefined" && <p>{errors.auth}</p>}
-                <button type="submit">Login</button>
+                <button css={styles.button} type="submit">
+                    ログイン
+                </button>
+                <p css={styles.link} onClick={pushRegist}>
+                    新規登録
+                </p>
             </form>
         </div>
     );
+};
+const styles = {
+    allWrapper: css({
+        height: "100vh",
+        backgroundColor: "#76b852",
+        paddingTop: "100px",
+    }),
+    form: css({
+        width: "90%",
+        maxWidth: "360px",
+        margin: "0 auto",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        backgroundColor: "#fff",
+        padding: "45px",
+        textAlign: "center",
+        boxShadow:
+            "0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24)",
+    }),
+    input: css({
+        fontFamily: '"Roboto", sans-serif',
+        backgroundColor: "#f2f2f2",
+        width: "100%",
+        padding: "15px",
+        fontsize: "14px",
+        marginBottom: "15px",
+        textAlign: "left",
+    }),
+    button: css({
+        fontFamily: '"Roboto", sans-serif',
+        backgroundColor: "#4caf50",
+        width: "100%",
+        padding: "15px",
+        fontsize: "14px",
+        color: "#fff",
+        transform: "all .3s ease",
+        "&:hover": {
+            backgroundColor: "#43a047",
+        },
+    }),
+    link: css({
+        color: "#4caf50",
+        fontsize: "12px",
+        cursor: "pointer",
+        width: "50%",
+        margin: "15px auto 0",
+    }),
 };
 
 export default Login;

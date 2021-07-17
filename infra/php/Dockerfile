@@ -13,7 +13,9 @@ RUN apt-get update && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* && \
   git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis && \
-  docker-php-ext-install intl pdo_mysql zip bcmath redis
+  docker-php-ext-install intl pdo_mysql zip bcmath redis && \
+  pecl install xdebug && \
+  docker-php-ext-enable xdebug
 
 
 #nodejs,npm

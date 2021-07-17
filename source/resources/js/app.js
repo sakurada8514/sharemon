@@ -10,6 +10,7 @@ import { setCurrentUser } from "./stores/auth";
 import Top from "./pages/Top";
 import Error from "./pages/Error";
 import Login from "./pages/Auth/Login";
+import Regist from "./pages/Auth/Regist";
 import Mypage from "./pages/private/Mypage";
 import GuestRoute from "./components/GuestRoute";
 import PrivateRoute from "./components/PrivateRoute";
@@ -22,6 +23,7 @@ const App = () => {
                     <Route exact path="/" children={<Top />} />
                     <Route exact path="/error" children={<Error />} />
                     <GuestRoute path="/login" children={<Login />} />
+                    <GuestRoute path="/regist" children={<Regist />} />
                     <PrivateRoute path="/mypage" children={<Mypage />} />
                 </Switch>
             </BrowserRouter>
