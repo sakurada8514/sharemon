@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { css } from "@emotion/react";
 
 import { setUser } from "../../stores/auth";
-import { login as loginApi } from "../../api/login";
+import { login as loginApi } from "../../api/Auth/login";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../constant";
 
 const Login = () => {

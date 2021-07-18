@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -41,4 +43,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function insert(array $_registData): void
+    {
+        $_registData['password'] = Hash::make($_registData['password']);
+
+        $_insert = $this->_createInsertUpdateData($_registData, $this->_getBaseDefaultInsertData());
+
+        DB::table('users')->insert($_insert);
+        return;
+    }
+
+    public function uniqueCheckByEmail(string $_email): int
+    {
+        $_ret = DB::table('users')
+            ->where('email', $_email)
+            ->count();
+
+        return $_ret;
+    }
 }

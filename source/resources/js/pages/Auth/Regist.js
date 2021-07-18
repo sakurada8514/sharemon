@@ -6,23 +6,33 @@ import { useDispatch } from "react-redux";
 import { css } from "@emotion/react";
 
 import { setUser } from "../../stores/auth";
-import { login as loginApi } from "../../api/login";
+import { regist as registApi } from "../../api/Auth/regist";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../constant";
 
 const Regist = () => {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [password_confirmation, setPasswordConfirmation] = useState("");
     const [errors, setErrors] = useState([]);
 
+    const handleChangeName = (e) => setName(e.target.value);
     const handleChangeEmail = (e) => setEmail(e.target.value);
     const handleChangePassword = (e) => setPassword(e.target.value);
+    const handleChangePasswordConfirmation = (e) =>
+        setPasswordConfirmation(e.target.value);
 
     const history = useHistory();
     const dispatch = useDispatch();
 
-    async function login(e) {
+    async function regist(e) {
         e.preventDefault();
-        const response = await loginApi(email, password);
+        const response = await registApi(
+            name,
+            email,
+            password,
+            password_confirmation
+        );
 
         if (response.status === OK) {
             dispatch(setUser(response.data.user));
@@ -37,13 +47,22 @@ const Regist = () => {
         }
     }
 
-    function pushRegist() {
-        history.push("/regist");
+    function pushLogin() {
+        history.push("/login");
     }
 
     return (
         <div css={styles.allWrapper}>
-            <form onSubmit={login} css={styles.form}>
+            <form onSubmit={regist} css={styles.form}>
+                <input
+                    css={styles.input}
+                    type="text"
+                    required
+                    value={name}
+                    onChange={handleChangeName}
+                    placeholder="ユーザー名"
+                />
+                {typeof errors.name !== "undefined" && <p>{errors.name}</p>}
                 <input
                     css={styles.input}
                     type="email"
@@ -61,15 +80,23 @@ const Regist = () => {
                     onChange={handleChangePassword}
                     placeholder="パスワード"
                 />
+                <input
+                    css={styles.input}
+                    type="password"
+                    required
+                    value={password_confirmation}
+                    onChange={handleChangePasswordConfirmation}
+                    placeholder="パスワード確認"
+                />
                 {typeof errors.password !== "undefined" && (
                     <p>{errors.password}</p>
                 )}
                 {typeof errors.auth !== "undefined" && <p>{errors.auth}</p>}
                 <button css={styles.button} type="submit">
-                    ログイン
-                </button>
-                <p css={styles.link} onClick={pushRegist}>
                     新規登録
+                </button>
+                <p css={styles.link} onClick={pushLogin}>
+                    ログイン
                 </p>
             </form>
         </div>
