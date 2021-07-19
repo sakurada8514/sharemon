@@ -14,6 +14,7 @@ import Regist from "./pages/Auth/Regist";
 import Mypage from "./pages/private/Mypage";
 import GuestRoute from "./components/GuestRoute";
 import PrivateRoute from "./components/PrivateRoute";
+import RoomRegist from "./pages/private/RoomRegist";
 
 const App = () => {
     return (
@@ -22,9 +23,13 @@ const App = () => {
                 <Switch>
                     <Route exact path="/" children={<Top />} />
                     <Route exact path="/error" children={<Error />} />
-                    <GuestRoute path="/login" children={<Login />} />
-                    <GuestRoute path="/regist" children={<Regist />} />
+                    <GuestRoute exact path="/login" children={<Login />} />
+                    <GuestRoute exact path="/regist" children={<Regist />} />
                     <PrivateRoute path="/mypage" children={<Mypage />} />
+                    <PrivateRoute
+                        path="/regist/room"
+                        children={<RoomRegist />}
+                    />
                 </Switch>
             </BrowserRouter>
         </Provider>

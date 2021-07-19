@@ -9,7 +9,7 @@ import { setUser } from "../../stores/auth";
 import { login as loginApi } from "../../api/Auth/login";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../constant";
 
-const Login = () => {
+const RoomRegist = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
@@ -26,7 +26,7 @@ const Login = () => {
 
         if (response.status === OK) {
             dispatch(setUser(response.data.user));
-            history.push("/regist/room");
+            history.push("/mypage");
         } else if (
             response.status === UNAUTHORIZED ||
             response.status === VALIDATION
@@ -52,28 +52,14 @@ const Login = () => {
                     onChange={handleChangeEmail}
                     placeholder="メールアドレス"
                 />
-                {typeof errors.email !== "undefined" && (
+                {typeof errors.room_name !== "undefined" && (
                     <p css={formStyles.error}>{errors.email}</p>
                 )}
-                <input
-                    css={formStyles.input}
-                    type="password"
-                    required
-                    value={password}
-                    onChange={handleChangePassword}
-                    placeholder="パスワード"
-                />
-                {typeof errors.password !== "undefined" && (
-                    <p css={formStyles.error}>{errors.password}</p>
-                )}
-                {typeof errors.auth !== "undefined" && (
-                    <p css={formStyles.error}>{errors.auth}</p>
-                )}
                 <button css={formStyles.button} type="submit">
-                    ログイン
+                    ルーム作成
                 </button>
                 <p css={formStyles.link} onClick={pushRegist}>
-                    新規登録
+                    ルームとは？
                 </p>
             </form>
         </div>
@@ -133,4 +119,4 @@ export const formStyles = {
     }),
 };
 
-export default Login;
+export default RoomRegist;
