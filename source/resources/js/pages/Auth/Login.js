@@ -12,17 +12,19 @@ import { OK, UNAUTHORIZED, VALIDATION } from "../../constant";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [remember, setRemember] = useState(false);
     const [errors, setErrors] = useState([]);
 
     const handleChangeEmail = (e) => setEmail(e.target.value);
     const handleChangePassword = (e) => setPassword(e.target.value);
+    const handleChangeRemember = (e) => setRemember(!remember);
 
     const history = useHistory();
     const dispatch = useDispatch();
 
     async function login(e) {
         e.preventDefault();
-        const response = await loginApi(email, password);
+        const response = await loginApi(email, password, remember);
 
         if (response.status === OK) {
             dispatch(setUser(response.data.user));
@@ -56,7 +58,7 @@ const Login = () => {
                     <p css={formStyles.error}>{errors.email}</p>
                 )}
                 <input
-                    css={formStyles.input}
+                    css={formStyles.input_last}
                     type="password"
                     required
                     value={password}
@@ -69,6 +71,22 @@ const Login = () => {
                 {typeof errors.auth !== "undefined" && (
                     <p css={formStyles.error}>{errors.auth}</p>
                 )}
+                <div css={formStyles.check_box_area}>
+                    <input
+                        name="remember"
+                        type="checkbox"
+                        onClick={handleChangeRemember}
+                        value={remember}
+                        checked={remember ? "checked" : ""}
+                    />
+                    <label
+                        css={formStyles.check_box}
+                        for="remember"
+                        onClick={handleChangeRemember}
+                    >
+                        次回から自動ログイン
+                    </label>
+                </div>
                 <button css={formStyles.button} type="submit">
                     ログイン
                 </button>
@@ -103,16 +121,31 @@ export const formStyles = {
         backgroundColor: "#f2f2f2",
         width: "100%",
         padding: "15px",
-        fontsize: "14px",
         marginBottom: "15px",
         textAlign: "left",
+    }),
+    input_last: css({
+        fontFamily: '"Roboto", sans-serif',
+        backgroundColor: "#f2f2f2",
+        width: "100%",
+        padding: "15px",
+        marginBottom: "5px",
+        textAlign: "left",
+    }),
+    check_box: css({
+        fontFamily: '"Roboto", sans-serif',
+        fontSize: "12px",
+    }),
+    check_box_area: css({
+        margin: "5px 0 15px",
+        display: "flex",
+        justifyContent: "flex-start",
     }),
     button: css({
         fontFamily: '"Roboto", sans-serif',
         backgroundColor: "#4caf50",
         width: "100%",
         padding: "15px",
-        fontsize: "14px",
         color: "#fff",
         transform: "all .3s ease",
         "&:hover": {
@@ -121,14 +154,14 @@ export const formStyles = {
     }),
     link: css({
         color: "#4caf50",
-        fontsize: "12px",
+        fontSize: "14px",
         cursor: "pointer",
         width: "50%",
         margin: "15px auto 0",
     }),
     error: css({
         color: "#dc143c",
-        fontsize: "14px",
+        fontSize: "14px",
         marginBottom: "15px",
     }),
 };

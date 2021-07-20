@@ -14,13 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/redis_test', function () {
+    return session()->all();
+});
+
 Route::get('{any}', function () {
     return view('app');
 })->where('any', '.*');
-
-
-Route::get('/redis_test', function () {
-    Cache::forever('key', "hoge");
-
-    print_r(Cache::get("key"));
-});

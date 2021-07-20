@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Rooms\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +24,5 @@ Route::get('/logout', [AuthController::class, "logout"]);
 Route::get('/user', [AuthController::class, "authUser"]);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/room/create', [RoomController::class, "roomCreate"]);
 });

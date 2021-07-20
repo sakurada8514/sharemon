@@ -15,11 +15,11 @@ class AuthService extends BaseService
         $this->_userModel = $_userModel;
     }
 
-    public function login(array $_data)
+    public function login(array $_data, bool $_remember)
     {
         $_loginData = $this->_convateLoginData($_data);
 
-        if (!Auth::attempt($_loginData)) {
+        if (!Auth::attempt($_loginData, $_remember)) {
             return null;
         }
 
