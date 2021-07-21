@@ -29,7 +29,7 @@ class AuthController extends Controller
 
         $this->_authService->regist($_userData);
 
-        $_user = $this->_authService->login($_userData);
+        $_user = $this->_authService->login($_userData, false);
 
         return $this->_authResponse($_user);
     }

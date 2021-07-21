@@ -5529,6 +5529,73 @@ function GuestRoute(props) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Modal.js":
+/*!******************************************!*\
+  !*** ./resources/js/components/Modal.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-react.browser.esm.js");
+/* harmony import */ var _emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @emotion/react/jsx-runtime */ "./node_modules/@emotion/react/jsx-runtime/dist/emotion-react-jsx-runtime.browser.esm.js");
+/** @jsxImportSource @emotion/react */
+
+
+
+
+function Modal(props) {
+  if (props.modalShow) {
+    return (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      css: styles.overlay,
+      children: (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        css: styles.content,
+        children: [(0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+          children: props.content
+        }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+          children: props.button
+        })]
+      })
+    });
+  } else {
+    return null;
+  }
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Modal);
+var styles = {
+  overlay: (0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__.css)({
+    position: "fixed",
+    top: "0",
+    left: "0",
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  }),
+  content: (0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__.css)({
+    zIndex: "2",
+    backgroundColor: "#fff",
+    width: "40%",
+    padding: "30px",
+    borderRadius: "10px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+  }),
+  text: (0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__.css)({
+    marginBottom: "15px"
+  })
+};
+
+/***/ }),
+
 /***/ "./resources/js/components/NavBar.js":
 /*!*******************************************!*\
   !*** ./resources/js/components/NavBar.js ***!
@@ -6237,11 +6304,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _Auth_Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Auth/Login */ "./resources/js/pages/Auth/Login.js");
 /* harmony import */ var _api_Room_createRoom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../api/Room/createRoom */ "./resources/js/api/Room/createRoom.js");
 /* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../constant */ "./resources/js/constant.js");
-/* harmony import */ var _emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @emotion/react/jsx-runtime */ "./node_modules/@emotion/react/jsx-runtime/dist/emotion-react-jsx-runtime.browser.esm.js");
+/* harmony import */ var _components_Modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/Modal */ "./resources/js/components/Modal.js");
+/* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-react.browser.esm.js");
+/* harmony import */ var _emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @emotion/react/jsx-runtime */ "./node_modules/@emotion/react/jsx-runtime/dist/emotion-react-jsx-runtime.browser.esm.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -6269,6 +6338,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
 var RoomRegist = function RoomRegist() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
@@ -6280,11 +6352,16 @@ var RoomRegist = function RoomRegist() {
       errors = _useState4[0],
       setErrors = _useState4[1];
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      modalShow = _useState6[0],
+      setModalShow = _useState6[1];
+
   var handleChangeRoomName = function handleChangeRoomName(e) {
     return setRoomName(e.target.value);
   };
 
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useHistory)();
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useHistory)();
 
   function createRoom(_x) {
     return _createRoom.apply(this, arguments);
@@ -6307,7 +6384,7 @@ var RoomRegist = function RoomRegist() {
               if (response.status === _constant__WEBPACK_IMPORTED_MODULE_4__.OK) {
                 history.push("/mypage");
               } else if (response.status === _constant__WEBPACK_IMPORTED_MODULE_4__.VALIDATION) {
-                setErrors(response.data.errors);
+                setModalShow(true);
               } else {
                 history.push("/error");
               }
@@ -6326,34 +6403,66 @@ var RoomRegist = function RoomRegist() {
     history.push("/regist");
   }
 
-  return (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+  function pushMypage() {
+    history.push("/mypage");
+  }
+
+  function button() {
+    return (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+      css: _Auth_Login__WEBPACK_IMPORTED_MODULE_2__.formStyles.button,
+      onClick: pushMypage,
+      children: "\u30DE\u30A4\u30DA\u30FC\u30B8\u3078\u79FB\u52D5"
+    });
+  }
+
+  function modalText() {
+    return (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+      children: [(0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+        children: "\u65E2\u306B\u30EB\u30FC\u30E0\u304C\u8A2D\u5B9A\u3055\u308C\u3066\u3044\u307E\u3059\u3002"
+      }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+        css: styles.modalText,
+        children: "\u30DE\u30A4\u30DA\u30FC\u30B8\u3078\u79FB\u52D5\u3057\u3066\u304F\u3060\u3055\u3044"
+      })]
+    });
+  }
+
+  return (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     css: _Auth_Login__WEBPACK_IMPORTED_MODULE_2__.formStyles.allWrapper,
-    children: (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("form", {
+    children: [(0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("form", {
       onSubmit: createRoom,
       css: _Auth_Login__WEBPACK_IMPORTED_MODULE_2__.formStyles.form,
-      children: [(0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+      children: [(0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
         css: _Auth_Login__WEBPACK_IMPORTED_MODULE_2__.formStyles.input,
         type: "text",
         required: true,
         value: roomName,
         onChange: handleChangeRoomName,
         placeholder: "\u30EB\u30FC\u30E0\u540D"
-      }), typeof errors.room_name !== "undefined" && (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+      }), typeof errors.room_name !== "undefined" && (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
         css: _Auth_Login__WEBPACK_IMPORTED_MODULE_2__.formStyles.error,
         children: errors.room_name
-      }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+      }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
         css: _Auth_Login__WEBPACK_IMPORTED_MODULE_2__.formStyles.button,
         type: "submit",
         children: "\u30EB\u30FC\u30E0\u4F5C\u6210"
-      }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+      }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
         css: _Auth_Login__WEBPACK_IMPORTED_MODULE_2__.formStyles.link,
         onClick: pushRegist,
         children: "\u30EB\u30FC\u30E0\u3068\u306F\uFF1F"
       })]
-    })
+    }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Modal__WEBPACK_IMPORTED_MODULE_5__.default, {
+      modalShow: modalShow,
+      button: button(),
+      content: modalText()
+    })]
   });
 };
 
+var styles = {
+  modalText: (0,_emotion_react__WEBPACK_IMPORTED_MODULE_8__.css)({
+    marginBottom: "15px"
+  })
+};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RoomRegist);
 
 /***/ }),

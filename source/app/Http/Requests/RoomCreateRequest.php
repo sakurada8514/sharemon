@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\CreateRoomRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RoomCreateRequest extends FormRequest
@@ -24,7 +25,7 @@ class RoomCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'room_name' => 'required'
+            'room_name' => ['required', new CreateRoomRule]
         ];
     }
 }

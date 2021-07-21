@@ -21,4 +21,13 @@ class RoomModel extends BaseModel
 
         return;
     }
+
+    public function uniqueCheck(string $_userId)
+    {
+        $_ret = DB::table($this->table)
+            ->where('user_id', $_userId)
+            ->count();
+
+        return $_ret;
+    }
 }

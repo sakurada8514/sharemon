@@ -16,6 +16,11 @@ class RoomController extends Controller
         $this->_roomService = $_roomService;
     }
 
+    public function currentRoom()
+    {
+        $_userId = Auth::id();
+    }
+
     public function roomCreate(RoomCreateRequest $request)
     {
         $_data = [

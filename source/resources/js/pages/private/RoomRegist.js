@@ -6,10 +6,13 @@ import { formStyles } from "../Auth/Login";
 
 import { createRoom as createRoomApi } from "../../api/Room/createRoom";
 import { OK, VALIDATION } from "../../constant";
+import Modal from "../../components/Modal";
+import { css } from "@emotion/react";
 
 const RoomRegist = () => {
     const [roomName, setRoomName] = useState("");
     const [errors, setErrors] = useState([]);
+    const [modalShow, setModalShow] = useState(false);
 
     const handleChangeRoomName = (e) => setRoomName(e.target.value);
 
@@ -22,7 +25,7 @@ const RoomRegist = () => {
         if (response.status === OK) {
             history.push("/mypage");
         } else if (response.status === VALIDATION) {
-            setErrors(response.data.errors);
+            setModalShow(true);
         } else {
             history.push("/error");
         }
@@ -30,6 +33,26 @@ const RoomRegist = () => {
 
     function pushRegist() {
         history.push("/regist");
+    }
+
+    function pushMypage() {
+        history.push("/mypage");
+    }
+
+    function button() {
+        return (
+            <button css={formStyles.button} onClick={pushMypage}>
+                マイページへ移動
+            </button>
+        );
+    }
+    function modalText() {
+        return (
+            <>
+                <p>既にルームが設定されています。</p>
+                <p css={styles.modalText}>マイページへ移動してください</p>
+            </>
+        );
     }
 
     return (
@@ -53,8 +76,19 @@ const RoomRegist = () => {
                     ルームとは？
                 </p>
             </form>
+            <Modal
+                modalShow={modalShow}
+                button={button()}
+                content={modalText()}
+            ></Modal>
         </div>
     );
+};
+
+const styles = {
+    modalText: css({
+        marginBottom: "15px",
+    }),
 };
 
 export default RoomRegist;
