@@ -4,32 +4,32 @@ namespace App\Http\Controllers\Api\Rooms;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoomCreateRequest;
+use App\Models\User;
 use App\Services\RoomService;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller
 {
     private ?RoomService $_roomService = null;
+    private ?UserService $_userService = null;
 
-    public function __construct(RoomService $_roomService)
+    public function __construct(RoomService $_roomService, UserService $_userService)
     {
         $this->_roomService = $_roomService;
-    }
-
-    public function currentRoom()
-    {
-        $_userId = Auth::id();
+        $this->_userService = $_userService;
     }
 
     public function roomCreate(RoomCreateRequest $request)
     {
-        $_data = [
-            'user_id' => Auth::id(),
-            'room_name' => $request->room_name
-        ];
+        $_data = ['room_name' => $request->room_name];
 
-        $this->_roomService->createRoom($_data);
+        $_userId = Auth::id();
 
-        return response()->json([]);
+        $this->_roomService->createRoom($_data, $_userId);
+
+        $_user = $this->_userService->findDetailByUserId($_userId);
+
+        return response()->json(['user' => $_user]);
     }
 }

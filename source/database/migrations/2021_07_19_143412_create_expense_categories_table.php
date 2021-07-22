@@ -15,7 +15,7 @@ class CreateExpenseCategoriesTable extends Migration
     {
         Schema::create('expense_categories', function (Blueprint $table) {
             $table->bigIncrements('category_id');
-            $table->bigInteger('room_id')->unsigned();
+            $table->bigInteger('room_id')->nullable()->unsigned();
             $table->text('category_name');
             $table->integer('all_flg');
             $table->timestamps();

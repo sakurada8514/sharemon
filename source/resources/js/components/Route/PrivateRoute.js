@@ -6,12 +6,14 @@ import RoomRegist from "../../pages/private/RoomRegist";
 
 function PrivateRoute(props) {
     const isAuth = useSelector(isAuthSelector);
-    const roomId = useSelector((state) => state.auth.user.room_id);
-    console.log(roomId);
-    if (isAuth && roomId !== null) {
-        return <Route {...props} />;
-    } else if (isAuth && roomId === null) {
-        return <Redirect to="/regist/room" />;
+
+    if (isAuth) {
+        const roomId = useSelector((state) => state.auth.user.room_id);
+        if (roomId !== null) {
+            return <Route {...props} />;
+        } else {
+            return <Redirect to="/regist/room" />;
+        }
     } else {
         return <Redirect to="/login" />;
     }

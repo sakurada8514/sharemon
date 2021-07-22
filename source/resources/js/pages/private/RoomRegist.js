@@ -2,27 +2,30 @@
 
 import { React, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { formStyles } from "../Auth/Login";
+import { useDispatch } from "react-redux";
+import { css } from "@emotion/react";
 
 import { createRoom as createRoomApi } from "../../api/Room/createRoom";
+import { setUser } from "../../stores/auth";
 import { OK, VALIDATION } from "../../constant";
 import Modal from "../../components/Modal";
-import { css } from "@emotion/react";
+import { formStyles } from "../Auth/Login";
 
 const RoomRegist = () => {
     const [roomName, setRoomName] = useState("");
-    const [errors, setErrors] = useState([]);
     const [modalShow, setModalShow] = useState(false);
 
     const handleChangeRoomName = (e) => setRoomName(e.target.value);
 
     const history = useHistory();
+    const dispatch = useDispatch();
 
     async function createRoom(e) {
         e.preventDefault();
         const response = await createRoomApi(roomName);
 
         if (response.status === OK) {
+            dispatch(setUser(response.data.user));
             history.push("/mypage");
         } else if (response.status === VALIDATION) {
             setModalShow(true);
@@ -66,9 +69,6 @@ const RoomRegist = () => {
                     onChange={handleChangeRoomName}
                     placeholder="ルーム名"
                 />
-                {typeof errors.room_name !== "undefined" && (
-                    <p css={formStyles.error}>{errors.room_name}</p>
-                )}
                 <button css={formStyles.button} type="submit">
                     ルーム作成
                 </button>

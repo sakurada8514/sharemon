@@ -5538,12 +5538,14 @@ var styles = {
     backgroundColor: "rgba(0,0,0,0.5)",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    transition: "all 0.2s"
   }),
   content: (0,_emotion_react__WEBPACK_IMPORTED_MODULE_1__.css)({
     zIndex: "2",
     backgroundColor: "#fff",
-    width: "40%",
+    width: "80%",
+    maxWidth: "400px",
     padding: "30px",
     borderRadius: "10px",
     display: "flex",
@@ -5664,17 +5666,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 function PrivateRoute(props) {
   var isAuth = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(_stores_auth__WEBPACK_IMPORTED_MODULE_2__.isAuthSelector);
-  var roomId = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
-    return state.auth.user.room_id;
-  });
-  console.log(roomId);
 
-  if (isAuth && roomId !== null) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, _objectSpread({}, props));
-  } else if (isAuth && roomId === null) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Redirect, {
-      to: "/regist/room"
+  if (isAuth) {
+    var roomId = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+      return state.auth.user.room_id;
     });
+
+    if (roomId !== null) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, _objectSpread({}, props));
+    } else {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Redirect, {
+        to: "/regist/room"
+      });
+    }
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Redirect, {
       to: "/login"
@@ -5718,17 +5722,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 function RoomRegistRoute(props) {
   var isAuth = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(_stores_auth__WEBPACK_IMPORTED_MODULE_2__.isAuthSelector);
-  var roomId = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
-    return state.auth.user.room_id;
-  });
-  console.log(roomId);
 
-  if (isAuth && roomId === null) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, _objectSpread({}, props));
-  } else if (isAuth && roomId !== null) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Redirect, {
-      to: "/mypage"
+  if (isAuth) {
+    var roomId = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+      return state.auth.user.room_id;
     });
+
+    if (roomId === null) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, _objectSpread({}, props));
+    } else {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Redirect, {
+        to: "/mypage"
+      });
+    }
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Redirect, {
       to: "/login"
@@ -6373,13 +6379,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _Auth_Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Auth/Login */ "./resources/js/pages/Auth/Login.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-react.browser.esm.js");
 /* harmony import */ var _api_Room_createRoom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../api/Room/createRoom */ "./resources/js/api/Room/createRoom.js");
-/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../constant */ "./resources/js/constant.js");
-/* harmony import */ var _components_Modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/Modal */ "./resources/js/components/Modal.js");
-/* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-react.browser.esm.js");
-/* harmony import */ var _emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @emotion/react/jsx-runtime */ "./node_modules/@emotion/react/jsx-runtime/dist/emotion-react-jsx-runtime.browser.esm.js");
+/* harmony import */ var _stores_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../stores/auth */ "./resources/js/stores/auth.js");
+/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../constant */ "./resources/js/constant.js");
+/* harmony import */ var _components_Modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Modal */ "./resources/js/components/Modal.js");
+/* harmony import */ var _Auth_Login__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Auth/Login */ "./resources/js/pages/Auth/Login.js");
+/* harmony import */ var _emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @emotion/react/jsx-runtime */ "./node_modules/@emotion/react/jsx-runtime/dist/emotion-react-jsx-runtime.browser.esm.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -6410,27 +6418,25 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var RoomRegist = function RoomRegist() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
       roomName = _useState2[0],
       setRoomName = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      errors = _useState4[0],
-      setErrors = _useState4[1];
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      modalShow = _useState6[0],
-      setModalShow = _useState6[1];
+      modalShow = _useState4[0],
+      setModalShow = _useState4[1];
 
   var handleChangeRoomName = function handleChangeRoomName(e) {
     return setRoomName(e.target.value);
   };
 
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useHistory)();
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useHistory)();
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
 
   function createRoom(_x) {
     return _createRoom.apply(this, arguments);
@@ -6450,9 +6456,10 @@ var RoomRegist = function RoomRegist() {
             case 3:
               response = _context.sent;
 
-              if (response.status === _constant__WEBPACK_IMPORTED_MODULE_4__.OK) {
+              if (response.status === _constant__WEBPACK_IMPORTED_MODULE_5__.OK) {
+                dispatch((0,_stores_auth__WEBPACK_IMPORTED_MODULE_4__.setUser)(response.data.user));
                 history.push("/mypage");
-              } else if (response.status === _constant__WEBPACK_IMPORTED_MODULE_4__.VALIDATION) {
+              } else if (response.status === _constant__WEBPACK_IMPORTED_MODULE_5__.VALIDATION) {
                 setModalShow(true);
               } else {
                 history.push("/error");
@@ -6477,49 +6484,46 @@ var RoomRegist = function RoomRegist() {
   }
 
   function button() {
-    return (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-      css: _Auth_Login__WEBPACK_IMPORTED_MODULE_2__.formStyles.button,
+    return (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("button", {
+      css: _Auth_Login__WEBPACK_IMPORTED_MODULE_7__.formStyles.button,
       onClick: pushMypage,
       children: "\u30DE\u30A4\u30DA\u30FC\u30B8\u3078\u79FB\u52D5"
     });
   }
 
   function modalText() {
-    return (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-      children: [(0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+    return (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
+      children: [(0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("p", {
         children: "\u65E2\u306B\u30EB\u30FC\u30E0\u304C\u8A2D\u5B9A\u3055\u308C\u3066\u3044\u307E\u3059\u3002"
-      }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+      }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("p", {
         css: styles.modalText,
         children: "\u30DE\u30A4\u30DA\u30FC\u30B8\u3078\u79FB\u52D5\u3057\u3066\u304F\u3060\u3055\u3044"
       })]
     });
   }
 
-  return (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-    css: _Auth_Login__WEBPACK_IMPORTED_MODULE_2__.formStyles.allWrapper,
-    children: [(0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("form", {
+  return (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+    css: _Auth_Login__WEBPACK_IMPORTED_MODULE_7__.formStyles.allWrapper,
+    children: [(0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("form", {
       onSubmit: createRoom,
-      css: _Auth_Login__WEBPACK_IMPORTED_MODULE_2__.formStyles.form,
-      children: [(0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-        css: _Auth_Login__WEBPACK_IMPORTED_MODULE_2__.formStyles.input,
+      css: _Auth_Login__WEBPACK_IMPORTED_MODULE_7__.formStyles.form,
+      children: [(0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("input", {
+        css: _Auth_Login__WEBPACK_IMPORTED_MODULE_7__.formStyles.input,
         type: "text",
         required: true,
         value: roomName,
         onChange: handleChangeRoomName,
         placeholder: "\u30EB\u30FC\u30E0\u540D"
-      }), typeof errors.room_name !== "undefined" && (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
-        css: _Auth_Login__WEBPACK_IMPORTED_MODULE_2__.formStyles.error,
-        children: errors.room_name
-      }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
-        css: _Auth_Login__WEBPACK_IMPORTED_MODULE_2__.formStyles.button,
+      }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("button", {
+        css: _Auth_Login__WEBPACK_IMPORTED_MODULE_7__.formStyles.button,
         type: "submit",
         children: "\u30EB\u30FC\u30E0\u4F5C\u6210"
-      }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
-        css: _Auth_Login__WEBPACK_IMPORTED_MODULE_2__.formStyles.link,
+      }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("p", {
+        css: _Auth_Login__WEBPACK_IMPORTED_MODULE_7__.formStyles.link,
         onClick: pushRegist,
         children: "\u30EB\u30FC\u30E0\u3068\u306F\uFF1F"
       })]
-    }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Modal__WEBPACK_IMPORTED_MODULE_5__.default, {
+    }), (0,_emotion_react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_Modal__WEBPACK_IMPORTED_MODULE_6__.default, {
       modalShow: modalShow,
       button: button(),
       content: modalText()
@@ -6528,7 +6532,7 @@ var RoomRegist = function RoomRegist() {
 };
 
 var styles = {
-  modalText: (0,_emotion_react__WEBPACK_IMPORTED_MODULE_8__.css)({
+  modalText: (0,_emotion_react__WEBPACK_IMPORTED_MODULE_10__.css)({
     marginBottom: "15px"
   })
 };

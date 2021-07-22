@@ -54,6 +54,15 @@ class User extends Authenticatable
         return;
     }
 
+    public function findDetailByUserId(string $_userId)
+    {
+        $_ret = DB::table('users')
+            ->where('id', $_userId)
+            ->first();
+
+        return $this->_convertArray($_ret);
+    }
+
     public function uniqueCheckByEmail(string $_email): int
     {
         $_ret = DB::table('users')

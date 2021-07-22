@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use App\Models\Tables\RoomModel;
+use App\Services\RoomService;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,9 +28,8 @@ class CreateRoomRule implements Rule
      */
     public function passes($attribute, $value): bool
     {
-        $_roomModel = new RoomModel();
-        $_userId = Auth::id();
-        return $_roomModel->uniqueCheck($_userId) > 0 ? false : true;
+        $_user = Auth::user()->room_id;
+        return is_null($_user);
     }
 
     /**

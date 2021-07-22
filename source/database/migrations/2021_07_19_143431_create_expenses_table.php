@@ -19,6 +19,7 @@ class CreateExpensesTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('category_id')->unsigned();
             $table->bigInteger('expense');
+            $table->text('comment')->nullable();
             $table->integer('repetition_flg');
             $table->dateTime('regist_date');
             $table->integer('del_flg');
@@ -26,7 +27,7 @@ class CreateExpensesTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('room_id')->references('room_id')->on('rooms')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('expense_categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('category_id')->on('expense_categories')->onDelete('cascade');
         });
     }
 
