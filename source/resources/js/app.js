@@ -12,8 +12,9 @@ import Error from "./pages/Error";
 import Login from "./pages/Auth/Login";
 import Regist from "./pages/Auth/Regist";
 import Mypage from "./pages/private/Mypage";
-import GuestRoute from "./components/GuestRoute";
-import PrivateRoute from "./components/PrivateRoute";
+import GuestRoute from "./components/Route/GuestRoute";
+import PrivateRoute from "./components/Route/PrivateRoute";
+import RoomRegistRoute from "./components/Route/RoomRegistRoute copy";
 import RoomRegist from "./pages/private/RoomRegist";
 
 const App = () => {
@@ -26,7 +27,7 @@ const App = () => {
                     <GuestRoute exact path="/login" children={<Login />} />
                     <GuestRoute exact path="/regist" children={<Regist />} />
                     <PrivateRoute path="/mypage" children={<Mypage />} />
-                    <PrivateRoute
+                    <RoomRegistRoute
                         path="/regist/room"
                         children={<RoomRegist />}
                     />

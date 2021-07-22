@@ -73,15 +73,14 @@ const Login = () => {
                 )}
                 <div css={formStyles.check_box_area}>
                     <input
-                        name="remember"
                         type="checkbox"
                         onClick={handleChangeRemember}
                         value={remember}
+                        // defaultChecked={remember ? "checked" : ""}
                         checked={remember ? "checked" : ""}
                     />
                     <label
                         css={formStyles.check_box}
-                        for="remember"
                         onClick={handleChangeRemember}
                     >
                         次回から自動ログイン

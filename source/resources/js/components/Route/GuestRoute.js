@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { isAuthSelector } from "../stores/auth";
+import { isAuthSelector } from "../../stores/auth";
 
 function GuestRoute(props) {
     const isAuth = useSelector(isAuthSelector);
