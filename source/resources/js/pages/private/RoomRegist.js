@@ -3,15 +3,13 @@
 import { React, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { css } from "@emotion/react";
 
 import { createRoom as createRoomApi } from "../../api/Room/createRoom";
 import { setUser } from "../../stores/auth";
 import { OK, VALIDATION } from "../../constant";
-import Modal from "../../components/Modal";
-import { formStyles } from "../Auth/Login";
+import RegistRoomForm from "../../components/Form/RegistRoomForm";
 
-const RoomRegist = () => {
+export default function RoomRegist() {
     const [roomName, setRoomName] = useState("");
     const [modalShow, setModalShow] = useState(false);
 
@@ -42,53 +40,12 @@ const RoomRegist = () => {
         history.push("/mypage");
     }
 
-    function button() {
-        return (
-            <button css={formStyles.button} onClick={pushMypage}>
-                マイページへ移動
-            </button>
-        );
-    }
-    function modalText() {
-        return (
-            <>
-                <p>既にルームが設定されています。</p>
-                <p css={styles.modalText}>マイページへ移動してください</p>
-            </>
-        );
-    }
-
     return (
-        <div css={formStyles.allWrapper}>
-            <form onSubmit={createRoom} css={formStyles.form}>
-                <input
-                    css={formStyles.input}
-                    type="text"
-                    required
-                    value={roomName}
-                    onChange={handleChangeRoomName}
-                    placeholder="ルーム名"
-                />
-                <button css={formStyles.button} type="submit">
-                    ルーム作成
-                </button>
-                <p css={formStyles.link} onClick={pushRegist}>
-                    ルームとは？
-                </p>
-            </form>
-            <Modal
-                modalShow={modalShow}
-                button={button()}
-                content={modalText()}
-            ></Modal>
-        </div>
+        <RegistRoomForm
+            createRoom={createRoom}
+            roomName={roomName}
+            handleChangeRoomName={handleChangeRoomName}
+            modalShow={modalShow}
+        />
     );
-};
-
-const styles = {
-    modalText: css({
-        marginBottom: "15px",
-    }),
-};
-
-export default RoomRegist;
+}

@@ -8,9 +8,9 @@ import { css } from "@emotion/react";
 import { setUser } from "../../stores/auth";
 import { regist as registApi } from "../../api/Auth/regist";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../constant";
-import { formStyles } from "./Login";
+import RegistForm from "../../components/Form/RegistForm";
 
-const Regist = () => {
+export default function Regist() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -53,61 +53,18 @@ const Regist = () => {
     }
 
     return (
-        <div css={formStyles.allWrapper}>
-            <form onSubmit={regist} css={formStyles.form}>
-                <input
-                    css={formStyles.input}
-                    type="text"
-                    required
-                    value={name}
-                    onChange={handleChangeName}
-                    placeholder="ユーザー名"
-                />
-                {typeof errors.name !== "undefined" && (
-                    <p css={formStyles.error}>{errors.name}</p>
-                )}
-                <input
-                    css={formStyles.input}
-                    type="email"
-                    required
-                    value={email}
-                    onChange={handleChangeEmail}
-                    placeholder="メールアドレス"
-                />
-                {typeof errors.email !== "undefined" && (
-                    <p css={formStyles.error}>{errors.email}</p>
-                )}
-                <input
-                    css={formStyles.input}
-                    type="password"
-                    required
-                    value={password}
-                    onChange={handleChangePassword}
-                    placeholder="パスワード"
-                />
-                <input
-                    css={formStyles.input}
-                    type="password"
-                    required
-                    value={password_confirmation}
-                    onChange={handleChangePasswordConfirmation}
-                    placeholder="パスワード確認"
-                />
-                {typeof errors.password !== "undefined" && (
-                    <p css={formStyles.error}>{errors.password}</p>
-                )}
-                {typeof errors.auth !== "undefined" && (
-                    <p css={formStyles.error}>{errors.auth}</p>
-                )}
-                <button css={formStyles.button} type="submit">
-                    新規登録
-                </button>
-                <p css={formStyles.link} onClick={pushLogin}>
-                    ログイン
-                </p>
-            </form>
-        </div>
+        <RegistForm
+            regist={regist}
+            name={name}
+            email={email}
+            password={password}
+            password_confirmation={password_confirmation}
+            errors={errors}
+            handleChangeName={handleChangeName}
+            handleChangeEmail={handleChangeEmail}
+            handleChangePassword={handleChangePassword}
+            handleChangePasswordConfirmation={handleChangePasswordConfirmation}
+            pushLogin={pushLogin}
+        />
     );
-};
-
-export default Regist;
+}
