@@ -13,6 +13,7 @@ import { ThemeProvider } from "@material-ui/core";
 
 import { theme } from "../../styleConstant";
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../styleConstant";
+import MyModal from "../Parts/MyModal";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -91,7 +92,7 @@ export default function RegistRoomForm(props) {
                                 <Link
                                     color="secondary"
                                     variant="body2"
-                                    onClick={props.pushRegist}
+                                    onClick={props.handleClickLink}
                                     className={classes.link}
                                 >
                                     {"ルームとは？"}
@@ -100,6 +101,11 @@ export default function RegistRoomForm(props) {
                         </form>
                     </div>
                 </Container>
+                <MyModal
+                    show={props.modalShow}
+                    handleModalClose={props.handleModalClose}
+                    body={<p>ppp</p>}
+                />
             </div>
         </ThemeProvider>
     );

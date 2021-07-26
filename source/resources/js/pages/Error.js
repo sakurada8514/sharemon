@@ -1,6 +1,6 @@
 import react from "react";
 
-const Error = () => {
+export default function Error() {
     return (
         <div>
             <p>大変申し訳ございません。ただ今障害が発生しております。</p>

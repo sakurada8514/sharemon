@@ -26,18 +26,20 @@ export default function RoomRegist() {
             dispatch(setUser(response.data.user));
             history.push("/mypage");
         } else if (response.status === VALIDATION) {
-            setModalShow(true);
+            alert("既にルームを設定済みです。マイページへ移動します。");
+            history.push("/mypage");
         } else {
             history.push("/error");
         }
     }
 
-    function pushRegist() {
-        history.push("/regist");
+    function handleModalOpen(e) {
+        e.preventDefault();
+        setModalShow(true);
     }
 
-    function pushMypage() {
-        history.push("/mypage");
+    function handleModalClose() {
+        setModalShow(false);
     }
 
     return (
@@ -46,6 +48,8 @@ export default function RoomRegist() {
             roomName={roomName}
             handleChangeRoomName={handleChangeRoomName}
             modalShow={modalShow}
+            handleClickLink={handleModalOpen}
+            handleModalClose={handleModalClose}
         />
     );
 }
