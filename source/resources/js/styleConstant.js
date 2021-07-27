@@ -1,4 +1,4 @@
-export const BACK_COLOR_GREEN = "#f7fff3";
+export const BACK_COLOR_GREEN = "#fcfffb";
 export const BACK_COLOR_WHITE = "#fdfdfd";
 export const BACK_COLOR_GRAY = "#f2f2f2";
 export const SUB_COLOR_GREEN = "#3EBA2B";

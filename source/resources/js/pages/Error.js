@@ -7,6 +7,4 @@ export default function Error() {
             <p>時間をおいてから再度お試しください。</p>
         </div>
     );
-};
-
-export default Error;
+}
