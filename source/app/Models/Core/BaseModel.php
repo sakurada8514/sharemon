@@ -4,9 +4,12 @@ namespace App\Models\Core;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class BaseModel extends Model
 {
+
+    private int $_attempts = 1;
 
     protected function _convertArray($_data): array
     {
@@ -42,5 +45,17 @@ class BaseModel extends Model
             'created_at' => now(),
             'updated_at' => now()
         ];
+    }
+
+    protected function setAttempts(int $_num): void
+    {
+        $this->_attempts = $_num;
+    }
+
+    public function virtualMethodTransaction(string $_methodName, array $_args = [])
+    {
+        return DB::transaction(function () use ($_methodName, $_args) {
+            return call_user_func_array([$this, $_methodName], $_args);
+        }, $this->_attempts);
     }
 }

@@ -17,7 +17,8 @@ class RoomService extends BaseService
 
     public function createRoom(array $_data, string $_userId)
     {
-        $this->_roomModel->insert($_data, $_userId);
+        // $this->_roomModel->insert($_data, $_userId);
+        $this->_roomModel->virtualMethodTransaction('insert', [$_data, $_userId]);
     }
 
     public function findRoomInfoByUserId(string $_userId)
