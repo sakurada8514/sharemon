@@ -7,10 +7,9 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
-import { MainListItems } from "./ListItems";
-import { secondaryListItems } from "./ListItems";
+import { MainListItems, SecondaryListItems } from "./ListItems";
 import { BACK_COLOR_WHITE } from "../../styleConstant";
-const drawerWidth = 240;
+const drawerWidth = 220;
 
 const useStyles = makeStyles((theme) => ({
     toolbar: {
@@ -32,6 +31,20 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
+        // overflowY: "scroll",
+        // height: "100vh",
+        // "&::-webkit-scrollbar": {
+        //     width: "0.4em",
+        // },
+        // "&::-webkit-scrollbar-track": {
+        //     boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+        //     webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+        // },
+        // "&::-webkit-scrollbar-thumb": {
+        //     backgroundColor: "rgba(0,0,0,.1)",
+        //     // outline: "1px solid slategrey",
+        //     borderRadius: "10px",
+        // },
     },
     drawerPaperClose: {
         overflowX: "hidden",
@@ -74,12 +87,19 @@ export default function SideMenu(props) {
             <Divider />
             <List>
                 <MainListItems
+                    sideMenuOpen={props.sideMenuOpen}
                     handleAccountBookMenu={props.handleAccountBookMenu}
                     accountBookMenuOpen={props.accountBookMenuOpen}
                 />
             </List>
             <Divider />
-            <List>{secondaryListItems}</List>
+            <List>
+                <SecondaryListItems
+                    sideMenuOpen={props.sideMenuOpen}
+                    handleAccountBookMenu={props.handleAccountBookMenu}
+                    accountBookMenuOpen={props.accountBookMenuOpen}
+                />
+            </List>
         </Drawer>
     );
 }

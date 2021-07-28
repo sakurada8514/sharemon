@@ -3,22 +3,36 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import Collapse from "@material-ui/core/Collapse";
 import { makeStyles } from "@material-ui/core/styles";
+import { Divider } from "@material-ui/core";
+import { Button, Box } from "@material-ui/core";
 
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import PeopleIcon from "@material-ui/icons/People";
-import BarChartIcon from "@material-ui/icons/BarChart";
-import LayersIcon from "@material-ui/icons/Layers";
-import AssignmentIcon from "@material-ui/icons/Assignment";
+import ChatIcon from "@material-ui/icons/Chat";
+import PlaylistAddCheckIcon from "@material-ui/icons/PlaylistAddCheck";
+import AnnouncementIcon from "@material-ui/icons/Announcement";
+import HomeIcon from "@material-ui/icons/Home";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
+import ListAltIcon from "@material-ui/icons/ListAlt";
+import PieChartIcon from "@material-ui/icons/PieChart";
+import MoneyIcon from "@material-ui/icons/Money";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+
+import { SUB_COLOR_BLUE } from "../../styleConstant";
 
 const useStyles = makeStyles((theme) => ({
     nestMenu: {
         paddingLeft: theme.spacing(4),
+        transition: theme.transitions.create(["all"], {
+            easing: theme.transitions.easing.sharp,
+        }),
+    },
+    icon: {
+        color: SUB_COLOR_BLUE,
+        width: "1.5em",
+        height: "1.5em",
     },
 }));
 
@@ -28,15 +42,22 @@ export function MainListItems(props) {
         <div>
             <ListItem button>
                 <ListItemIcon>
-                    <DashboardIcon />
+                    <AddCircleIcon className={classes.icon} />
+                </ListItemIcon>
+                <ListItemText primary="作成" />
+            </ListItem>
+            <Divider />
+            <ListItem button>
+                <ListItemIcon>
+                    <HomeIcon />
                 </ListItemIcon>
                 <ListItemText primary="ホーム" />
             </ListItem>
             <ListItem button onClick={props.handleAccountBookMenu}>
                 <ListItemIcon>
-                    <ShoppingCartIcon />
+                    <MenuBookIcon />
                 </ListItemIcon>
-                <ListItemText primary="Inbox" />
+                <ListItemText primary="家計簿" />
                 {props.accountBookMenuOpen ? (
                     <ExpandLessIcon />
                 ) : (
@@ -49,74 +70,61 @@ export function MainListItems(props) {
                 unmountOnExit
             >
                 <List component="div" disablePadding>
-                    <ListItem button className={classes.nestMenu}>
+                    <ListItem
+                        button
+                        className={props.sideMenuOpen ? classes.nestMenu : ""}
+                    >
                         <ListItemIcon>
-                            <BarChartIcon />
+                            <ListAltIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Starred" />
+                        <ListItemText primary="一覧" />
                     </ListItem>
-                    <ListItem button className={classes.nestMenu}>
+                    <ListItem
+                        button
+                        className={props.sideMenuOpen ? classes.nestMenu : ""}
+                    >
                         <ListItemIcon>
-                            <BarChartIcon />
+                            <PieChartIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Starred" />
+                        <ListItemText primary="グラフ" />
                     </ListItem>
-                    <ListItem button className={classes.nestMenu}>
+                    <ListItem
+                        button
+                        className={props.sideMenuOpen ? classes.nestMenu : ""}
+                    >
                         <ListItemIcon>
-                            <BarChartIcon />
+                            <MoneyIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Starred" />
+                        <ListItemText primary="予算" />
                     </ListItem>
                 </List>
             </Collapse>
-            {/* <ListItem button>
-                <ListItemIcon>
-                    <ShoppingCartIcon />
-                </ListItemIcon>
-                <ListItemText primary="Orders" />
-            </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <PeopleIcon />
-                </ListItemIcon>
-                <ListItemText primary="Customers" />
-            </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <BarChartIcon />
-                </ListItemIcon>
-                <ListItemText primary="Reports" />
-            </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <LayersIcon />
-                </ListItemIcon>
-                <ListItemText primary="Integrations" />
-            </ListItem> */}
         </div>
     );
 }
 
-export const secondaryListItems = (
-    <div>
-        <ListSubheader inset>Saved reports</ListSubheader>
-        <ListItem button>
-            <ListItemIcon>
-                <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Current month" />
-        </ListItem>
-        <ListItem button>
-            <ListItemIcon>
-                <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Last quarter" />
-        </ListItem>
-        <ListItem button>
-            <ListItemIcon>
-                <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Year-end sale" />
-        </ListItem>
-    </div>
-);
+export function SecondaryListItems(props) {
+    const classes = useStyles();
+    return (
+        <div>
+            <ListItem button>
+                <ListItemIcon>
+                    <AnnouncementIcon />
+                </ListItemIcon>
+                <ListItemText primary="お役立ちニュース" />
+            </ListItem>
+            <ListItem button>
+                <ListItemIcon>
+                    <ChatIcon />
+                </ListItemIcon>
+                <ListItemText primary="家内掲示板" />
+            </ListItem>
+            <ListItem button>
+                <ListItemIcon>
+                    <PlaylistAddCheckIcon />
+                </ListItemIcon>
+                <ListItemText primary="やる事リスト" />
+            </ListItem>
+        </div>
+    );
+}

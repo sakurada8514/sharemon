@@ -9,9 +9,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { ThemeProvider } from "@material-ui/core";
 
-import { theme } from "../../styleConstant";
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../styleConstant";
 import MyModal from "../Parts/MyModal";
 
@@ -50,63 +48,61 @@ export default function RegistRoomForm(props) {
     const classes = useStyles();
 
     return (
-        <ThemeProvider theme={theme}>
-            <div className={classes.allWrapper}>
-                <Container component="main" maxWidth="xs">
-                    <CssBaseline />
-                    <div className={classes.paper}>
-                        <Avatar className={classes.avatar}>
-                            <HomeIcon className={classes.icon} />
-                        </Avatar>
-                        <Typography component="h1" variant="h5">
-                            ルーム作成
-                        </Typography>
-                        <form
-                            className={classes.form}
-                            onSubmit={props.createRoom}
-                            noValidate
+        <div className={classes.allWrapper}>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <HomeIcon className={classes.icon} />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        ルーム作成
+                    </Typography>
+                    <form
+                        className={classes.form}
+                        onSubmit={props.createRoom}
+                        noValidate
+                    >
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="roomName"
+                            label="ルーム名"
+                            name="roomName"
+                            autoComplete="roomName"
+                            autoFocus
+                            value={props.roomName}
+                            onChange={props.handleChangeRoomName}
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
                         >
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="roomName"
-                                label="ルーム名"
-                                name="roomName"
-                                autoComplete="roomName"
-                                autoFocus
-                                value={props.roomName}
-                                onChange={props.handleChangeRoomName}
-                            />
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
+                            ルーム作成
+                        </Button>
+                        <Box display="flex" justifyContent="center">
+                            <Link
+                                color="secondary"
+                                variant="body2"
+                                onClick={props.handleClickLink}
+                                className={classes.link}
                             >
-                                ルーム作成
-                            </Button>
-                            <Box display="flex" justifyContent="center">
-                                <Link
-                                    color="secondary"
-                                    variant="body2"
-                                    onClick={props.handleClickLink}
-                                    className={classes.link}
-                                >
-                                    {"ルームとは？"}
-                                </Link>
-                            </Box>
-                        </form>
-                    </div>
-                </Container>
-                <MyModal
-                    show={props.modalShow}
-                    handleModalClose={props.handleModalClose}
-                    body={<p>ppp</p>}
-                />
-            </div>
-        </ThemeProvider>
+                                {"ルームとは？"}
+                            </Link>
+                        </Box>
+                    </form>
+                </div>
+            </Container>
+            <MyModal
+                show={props.modalShow}
+                handleModalClose={props.handleModalClose}
+                body={<p>ppp</p>}
+            />
+        </div>
     );
 }

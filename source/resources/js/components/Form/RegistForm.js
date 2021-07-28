@@ -9,9 +9,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { ThemeProvider } from "@material-ui/core";
 
-import { theme } from "../../styleConstant";
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../styleConstant";
 
 const useStyles = makeStyles((theme) => ({
@@ -49,108 +47,100 @@ export default function RegistForm(props) {
     const classes = useStyles();
 
     return (
-        <ThemeProvider theme={theme}>
-            <div className={classes.allWrapper}>
-                <Container component="main" maxWidth="xs">
-                    <CssBaseline />
-                    <div className={classes.paper}>
-                        <Avatar className={classes.avatar}>
-                            <LockOutlinedIcon className={classes.icon} />
-                        </Avatar>
-                        <Typography component="h1" variant="h5">
-                            ユーザー登録
-                        </Typography>
-                        <form
-                            className={classes.form}
-                            onSubmit={props.regist}
-                            noValidate
+        <div className={classes.allWrapper}>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon className={classes.icon} />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        ユーザー登録
+                    </Typography>
+                    <form
+                        className={classes.form}
+                        onSubmit={props.regist}
+                        noValidate
+                    >
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="name"
+                            label="ユーザー名"
+                            name="name"
+                            autoComplete="name"
+                            autoFocus
+                            value={props.name}
+                            onChange={props.handleChangeName}
+                            error={typeof props.errors.name !== "undefined"}
+                            helperText={props.errors.name}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="メールアドレス"
+                            name="email"
+                            autoComplete="email"
+                            value={props.email}
+                            onChange={props.handleChangeEmail}
+                            error={typeof props.errors.email !== "undefined"}
+                            helperText={props.errors.email}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="パスワード"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            value={props.password}
+                            onChange={props.handleChangePassword}
+                            error={typeof props.errors.password !== "undefined"}
+                            helperText={props.errors.password}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password_confirmation"
+                            label="パスワード確認"
+                            type="password"
+                            id="password_confirmation"
+                            autoComplete="current-password_confirmation"
+                            value={props.password_confirmation}
+                            onChange={props.handleChangePasswordConfirmation}
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
                         >
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="name"
-                                label="ユーザー名"
-                                name="name"
-                                autoComplete="name"
-                                autoFocus
-                                value={props.name}
-                                onChange={props.handleChangeName}
-                                error={typeof props.errors.name !== "undefined"}
-                                helperText={props.errors.name}
-                            />
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"
-                                label="メールアドレス"
-                                name="email"
-                                autoComplete="email"
-                                value={props.email}
-                                onChange={props.handleChangeEmail}
-                                error={
-                                    typeof props.errors.email !== "undefined"
-                                }
-                                helperText={props.errors.email}
-                            />
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="パスワード"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                                value={props.password}
-                                onChange={props.handleChangePassword}
-                                error={
-                                    typeof props.errors.password !== "undefined"
-                                }
-                                helperText={props.errors.password}
-                            />
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password_confirmation"
-                                label="パスワード確認"
-                                type="password"
-                                id="password_confirmation"
-                                autoComplete="current-password_confirmation"
-                                value={props.password_confirmation}
-                                onChange={
-                                    props.handleChangePasswordConfirmation
-                                }
-                            />
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
+                            登録
+                        </Button>
+                        <Box display="flex" justifyContent="center">
+                            <Link
+                                color="secondary"
+                                variant="body2"
+                                onClick={props.pushLogin}
+                                className={classes.link}
                             >
-                                登録
-                            </Button>
-                            <Box display="flex" justifyContent="center">
-                                <Link
-                                    color="secondary"
-                                    variant="body2"
-                                    onClick={props.pushLogin}
-                                    className={classes.link}
-                                >
-                                    {"ログイン"}
-                                </Link>
-                            </Box>
-                        </form>
-                    </div>
-                </Container>
-            </div>
-        </ThemeProvider>
+                                {"ログイン"}
+                            </Link>
+                        </Box>
+                    </form>
+                </div>
+            </Container>
+        </div>
     );
 }
