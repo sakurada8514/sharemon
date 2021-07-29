@@ -7,6 +7,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core";
 
+import SettingButton from "../Parts/Menu/SettingMenuButton";
+import InviteMenuButton from "../Parts/Menu/InviteMenuButton";
+
 const drawerWidth = 220;
 
 const useStyles = makeStyles((theme) => ({
@@ -16,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
+        position: "fixed",
     },
     appBarShift: {
         marginLeft: drawerWidth,
@@ -78,6 +82,16 @@ export default function Header(props) {
                 >
                     Sharemon
                 </Typography>
+                <InviteMenuButton
+                    inviteMenuOpen={props.inviteMenuOpen}
+                    handleInviteMenuOpen={props.handleInviteMenuOpen}
+                    handleInviteMenuClose={props.handleInviteMenuClose}
+                />
+                <SettingButton
+                    settingMenuOpen={props.settingMenuOpen}
+                    handleSettingMenuOpen={props.handleSettingMenuOpen}
+                    handleSettingMenuClose={props.handleSettingMenuClose}
+                />
             </Toolbar>
         </AppBar>
     );

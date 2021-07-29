@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerPaper: {
         backgroundColor: BACK_COLOR_WHITE,
-        position: "relative",
+        position: "fixed",
         whiteSpace: "nowrap",
         width: drawerWidth,
         transition: theme.transitions.create("width", {

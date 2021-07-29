@@ -28,6 +28,8 @@ export default function Mypage() {
 
     const [sideMenuOpen, setSideMenuOpen] = useState(true);
     const [accountBookMenuOpen, setAccountBookMenuOpen] = useState(true);
+    const [settingMenuOpen, setSettingMenuOpen] = useState(null);
+    const [inviteMenuOpen, setInviteMenuOpen] = useState(null);
 
     function handleSideMenuOpen() {
         setSideMenuOpen(true);
@@ -38,11 +40,33 @@ export default function Mypage() {
     function handleAccountBookMenu() {
         setAccountBookMenuOpen(!accountBookMenuOpen);
     }
+
+    function handleSettingMenuOpen(event) {
+        setSettingMenuOpen(event.currentTarget);
+    }
+
+    function handleSettingMenuClose() {
+        setSettingMenuOpen(null);
+    }
+
+    function handleInviteMenuOpen(event) {
+        setInviteMenuOpen(event.currentTarget);
+    }
+
+    function handleInviteMenuClose() {
+        setInviteMenuOpen(null);
+    }
     return (
         <div className={classes.root}>
             <Header
                 sideMenuOpen={sideMenuOpen}
+                settingMenuOpen={settingMenuOpen}
+                inviteMenuOpen={inviteMenuOpen}
                 handleSideMenuOpen={handleSideMenuOpen}
+                handleSettingMenuOpen={handleSettingMenuOpen}
+                handleSettingMenuClose={handleSettingMenuClose}
+                handleInviteMenuOpen={handleInviteMenuOpen}
+                handleInviteMenuClose={handleInviteMenuClose}
             />
             <SideMenu
                 sideMenuOpen={sideMenuOpen}
