@@ -86,6 +86,7 @@ export default function Header(props) {
                     inviteMenuOpen={props.inviteMenuOpen}
                     handleInviteMenuOpen={props.handleInviteMenuOpen}
                     handleInviteMenuClose={props.handleInviteMenuClose}
+                    handleInviteUrlCopy={props.handleInviteUrlCopy}
                 />
                 <SettingButton
                     settingMenuOpen={props.settingMenuOpen}

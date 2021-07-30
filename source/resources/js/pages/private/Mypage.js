@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import SideMenu from "../../components/SideMenu/SideMenu";
 import Header from "../../components/Header/Header";
 import { BACK_COLOR_GREEN } from "../../styleConstant";
+import { createInviteUrl as createInviteUrlApi } from "../../api/Room/createInviteUrl";
+import MyAlert from "../../components/Parts/MyAlert";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -56,6 +58,22 @@ export default function Mypage() {
     function handleInviteMenuClose() {
         setInviteMenuOpen(null);
     }
+
+    async function handleInviteUrlCopy() {
+        const reponse = await createInviteUrlApi();
+
+        navigator.clipboard
+            .writeText(reponse.data.url)
+            .then(() => {
+                console.log("good");
+                handleInviteMenuClose();
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+        console.log(reponse.data.url);
+    }
+
     return (
         <div className={classes.root}>
             <Header
@@ -67,7 +85,9 @@ export default function Mypage() {
                 handleSettingMenuClose={handleSettingMenuClose}
                 handleInviteMenuOpen={handleInviteMenuOpen}
                 handleInviteMenuClose={handleInviteMenuClose}
+                handleInviteUrlCopy={handleInviteUrlCopy}
             />
+            <MyAlert />
             <SideMenu
                 sideMenuOpen={sideMenuOpen}
                 accountBookMenuOpen={accountBookMenuOpen}

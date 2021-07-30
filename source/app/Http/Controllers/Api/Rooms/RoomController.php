@@ -20,7 +20,7 @@ class RoomController extends Controller
         $this->_userService = $_userService;
     }
 
-    public function roomCreate(RoomCreateRequest $request)
+    public function createRoom(RoomCreateRequest $request)
     {
         $_data = ['room_name' => $request->room_name];
 
@@ -31,5 +31,14 @@ class RoomController extends Controller
         $_user = $this->_userService->findDetailByUserId($_userId);
 
         return response()->json(['user' => $_user]);
+    }
+
+    public function createUrl()
+    {
+        $_userId = Auth::id();
+
+        $_url = $this->_roomService->createUrl($_userId);
+
+        return response()->json(['url' => $_url]);
     }
 }

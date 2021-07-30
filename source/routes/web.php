@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InviteController;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/redis_test', function () {
     return session()->all();
 });
+
+// 専用登録ページへ飛ばす？登録フォームはリアクトで作るかどうか
+Route::get('/regist/invite', [InviteController::class, "registByInvite"])->name("regist.invite");
 
 Route::get('{any}', function () {
     return view('app');

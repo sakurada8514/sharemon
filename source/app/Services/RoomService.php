@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Tables\RoomModel;
 use App\Services\Core\BaseService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 
 class RoomService extends BaseService
 {
@@ -24,5 +25,10 @@ class RoomService extends BaseService
     public function findRoomInfoByUserId(string $_userId)
     {
         return $this->_roomModel->findByUserId($_userId);
+    }
+
+    public function createUrl(string $_userId)
+    {
+        return URL::temporarySignedRoute('regist.invite', now()->addMinutes(30), ['invitee' => $_userId]);
     }
 }
