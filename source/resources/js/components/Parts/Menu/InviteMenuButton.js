@@ -54,9 +54,7 @@ export default function InviteMenuButton(props) {
                 onClose={props.handleInviteMenuClose}
             >
                 <MenuItem>LINEで招待</MenuItem>
-                <MenuItem onClick={props.handleInviteUrlCopy}>
-                    招待URLコピー
-                </MenuItem>
+                <MenuItem onClick={props.InviteUrlCopy}>招待URLコピー</MenuItem>
             </StyledMenu>
         </>
     );
