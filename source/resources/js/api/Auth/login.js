@@ -13,7 +13,7 @@ export async function logout() {
     const response = await axios
         .get("/api/logout")
         .catch((err) => err.response);
-    console.log(response.status);
+
     return response.status;
 }
 

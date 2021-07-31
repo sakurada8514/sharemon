@@ -56,7 +56,7 @@ export default function SettingMenuButton(props) {
                 <MenuItem>プロフィール設定</MenuItem>
                 <MenuItem>ルーム設定</MenuItem>
                 <MenuItem>家計簿設定</MenuItem>
-                <MenuItem>ログアウト</MenuItem>
+                <MenuItem onClick={props.logout}>ログアウト</MenuItem>
             </StyledMenu>
         </>
     );

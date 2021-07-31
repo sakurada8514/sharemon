@@ -86,12 +86,13 @@ export default function Header(props) {
                     inviteMenuOpen={props.inviteMenuOpen}
                     handleInviteMenuOpen={props.handleInviteMenuOpen}
                     handleInviteMenuClose={props.handleInviteMenuClose}
-                    handleInviteUrlCopy={props.handleInviteUrlCopy}
+                    InviteUrlCopy={props.InviteUrlCopy}
                 />
                 <SettingButton
                     settingMenuOpen={props.settingMenuOpen}
                     handleSettingMenuOpen={props.handleSettingMenuOpen}
                     handleSettingMenuClose={props.handleSettingMenuClose}
+                    logout={props.logout}
                 />
             </Toolbar>
         </AppBar>

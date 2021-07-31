@@ -1,12 +1,19 @@
 import React from "react";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
 import SideMenu from "../../components/SideMenu/SideMenu";
 import Header from "../../components/Header/Header";
-import { BACK_COLOR_GREEN } from "../../styleConstant";
-import { createInviteUrl as createInviteUrlApi } from "../../api/Room/createInviteUrl";
 import MyAlert from "../../components/Parts/MyAlert";
+
+import { BACK_COLOR_GREEN } from "../../styleConstant";
+import { OK } from "../../constant";
+import { setUser } from "../../stores/auth";
+
+import { createInviteUrl as createInviteUrlApi } from "../../api/Room/createInviteUrl";
+import { logout as logoutApi } from "../../api/Auth/login";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,11 +34,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Mypage() {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const [sideMenuOpen, setSideMenuOpen] = useState(true);
     const [accountBookMenuOpen, setAccountBookMenuOpen] = useState(true);
     const [settingMenuOpen, setSettingMenuOpen] = useState(null);
     const [inviteMenuOpen, setInviteMenuOpen] = useState(null);
+    const [alertOpen, setAlertOpen] = useState(false);
+    const [alertSeverity, setAlertSeverity] = useState("success");
+    const [alertMessage, setAlertMessage] = useState("test");
 
     function handleSideMenuOpen() {
         setSideMenuOpen(true);
@@ -59,19 +71,55 @@ export default function Mypage() {
         setInviteMenuOpen(null);
     }
 
-    async function handleInviteUrlCopy() {
-        const reponse = await createInviteUrlApi();
+    function handleAlert() {
+        setAlertOpen(!alertOpen);
+    }
 
-        navigator.clipboard
-            .writeText(reponse.data.url)
-            .then(() => {
-                console.log("good");
-                handleInviteMenuClose();
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-        console.log(reponse.data.url);
+    async function InviteUrlCopy() {
+        const response = await createInviteUrlApi();
+        handleInviteMenuClose();
+
+        if (response.status !== OK) {
+            setAlertOpen(true);
+            setAlertMessage(
+                "何らかの原因で招待URLのコピーに失敗しました。時間をおいて再度お試しください。"
+            );
+            setAlertSeverity("error");
+            window.setTimeout(function () {
+                setAlertOpen(false);
+            }, 3000);
+        } else {
+            navigator.clipboard
+                .writeText(response.data.url)
+                .then(() => {
+                    setAlertMessage("招待URLをコピーしました。");
+                    setAlertOpen(true);
+                    window.setTimeout(function () {
+                        setAlertOpen(false);
+                    }, 3000);
+                })
+                .catch((err) => {
+                    setAlertMessage(
+                        "何らかの原因で招待URLのコピーに失敗しました。"
+                    );
+                    setAlertSeverity("error");
+                    setAlertOpen(true);
+                    window.setTimeout(function () {
+                        setAlertOpen(false);
+                    }, 3000);
+                });
+        }
+    }
+
+    async function logout() {
+        const response = await logoutApi();
+        console.log(response);
+        if (response === OK) {
+            dispatch(setUser(null));
+            history.push("/login");
+        } else {
+            history.push("/error");
+        }
     }
 
     return (
@@ -85,9 +133,9 @@ export default function Mypage() {
                 handleSettingMenuClose={handleSettingMenuClose}
                 handleInviteMenuOpen={handleInviteMenuOpen}
                 handleInviteMenuClose={handleInviteMenuClose}
-                handleInviteUrlCopy={handleInviteUrlCopy}
+                InviteUrlCopy={InviteUrlCopy}
+                logout={logout}
             />
-            <MyAlert />
             <SideMenu
                 sideMenuOpen={sideMenuOpen}
                 accountBookMenuOpen={accountBookMenuOpen}
@@ -97,6 +145,14 @@ export default function Mypage() {
             />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
+
+                <MyAlert
+                    alertOpen={alertOpen}
+                    severity={alertSeverity}
+                    alertMessage={alertMessage}
+                    handleAlert={handleAlert}
+                />
+
                 {/* <Container
                     maxWidth="lg"
                     className={classes.container}
