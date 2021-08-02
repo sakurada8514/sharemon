@@ -38,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
     allWrapper: {
         height: "100vh",
         backgroundColor: BACK_COLOR_GREEN,
-        paddingTop: "100px",
+        display: "flex",
+        alignItems: "center",
     },
     link: {
         cursor: "pointer",

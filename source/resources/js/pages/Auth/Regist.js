@@ -1,9 +1,6 @@
-/** @jsxImportSource @emotion/react */
-
 import { React, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { css } from "@emotion/react";
 
 import { setUser } from "../../stores/auth";
 import { regist as registApi } from "../../api/Auth/regist";
@@ -60,6 +57,7 @@ export default function Regist() {
             password={password}
             password_confirmation={password_confirmation}
             errors={errors}
+            isInvite={false}
             handleChangeName={handleChangeName}
             handleChangeEmail={handleChangeEmail}
             handleChangePassword={handleChangePassword}

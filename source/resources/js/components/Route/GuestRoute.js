@@ -3,10 +3,8 @@ import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { isAuthSelector } from "../../stores/auth";
 
-function GuestRoute(props) {
+export default function GuestRoute(props) {
     const isAuth = useSelector(isAuthSelector);
 
     return isAuth ? <Redirect to="/mypage" /> : <Route {...props} />;
 }
-
-export default GuestRoute;

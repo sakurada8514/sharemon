@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { isAuthSelector } from "../../stores/auth";
 import RoomRegist from "../../pages/private/RoomRegist";
 
-function PrivateRoute(props) {
+export default function PrivateRoute(props) {
     const isAuth = useSelector(isAuthSelector);
 
     const roomId = useSelector((state) =>
@@ -21,5 +21,3 @@ function PrivateRoute(props) {
         return <Redirect to="/login" />;
     }
 }
-
-export default PrivateRoute;

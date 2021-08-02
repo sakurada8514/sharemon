@@ -36,10 +36,14 @@ const useStyles = makeStyles((theme) => ({
     allWrapper: {
         height: "100vh",
         backgroundColor: BACK_COLOR_GREEN,
-        paddingTop: "100px",
+        display: "flex",
+        alignItems: "center",
     },
     link: {
         cursor: "pointer",
+    },
+    linkNone: {
+        display: "none",
     },
 }));
 
@@ -133,7 +137,10 @@ export default function RegistForm(props) {
                                 color="secondary"
                                 variant="body2"
                                 onClick={props.pushLogin}
-                                className={classes.link}
+                                className={
+                                    (classes.link,
+                                    props.isInvite && classes.linkNone)
+                                }
                             >
                                 {"ログイン"}
                             </Link>

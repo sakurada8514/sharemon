@@ -113,7 +113,7 @@ export default function Mypage() {
 
     async function logout() {
         const response = await logoutApi();
-        console.log(response);
+
         if (response === OK) {
             dispatch(setUser(null));
             history.push("/login");

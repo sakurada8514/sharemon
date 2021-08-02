@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        "&:focus-visible": {
+            outline: "none",
+        },
     },
 }));
 export default function MyModal(props) {

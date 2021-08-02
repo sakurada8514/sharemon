@@ -10,6 +10,11 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    @isset($inviteeData)     
+    <script>
+        const laravelInviteeData=@json($inviteeData)
+    </script>
+    @endisset
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -25,7 +30,7 @@
     
 </head>
 <body>
-    <div id="app">
+    <div id="invite_app">
     </div>
     
 </body>
