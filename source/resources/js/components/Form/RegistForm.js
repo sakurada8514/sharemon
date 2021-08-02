@@ -10,43 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../styleConstant";
-
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: SUB_COLOR_GREEN,
-    },
-    form: {
-        width: "100%", // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-        backgroundColor: SUB_COLOR_GREEN,
-    },
-    icon: {
-        backgroundColor: SUB_COLOR_GREEN,
-    },
-    allWrapper: {
-        height: "100vh",
-        backgroundColor: BACK_COLOR_GREEN,
-        display: "flex",
-        alignItems: "center",
-    },
-    link: {
-        cursor: "pointer",
-    },
-    linkNone: {
-        cursor: "pointer",
-        display: "none",
-    },
-}));
+import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../Const/styleConstant";
 
 export default function RegistForm(props) {
     const classes = useStyles();
@@ -153,3 +117,39 @@ export default function RegistForm(props) {
         </div>
     );
 }
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: SUB_COLOR_GREEN,
+    },
+    form: {
+        width: "100%", // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+        backgroundColor: SUB_COLOR_GREEN,
+    },
+    icon: {
+        backgroundColor: SUB_COLOR_GREEN,
+    },
+    allWrapper: {
+        height: "100vh",
+        backgroundColor: BACK_COLOR_GREEN,
+        display: "flex",
+        alignItems: "center",
+    },
+    link: {
+        cursor: "pointer",
+    },
+    linkNone: {
+        cursor: "pointer",
+        display: "none",
+    },
+}));

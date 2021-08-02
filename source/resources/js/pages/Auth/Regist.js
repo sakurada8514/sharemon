@@ -4,10 +4,13 @@ import { useDispatch } from "react-redux";
 
 import { setUser } from "../../stores/auth";
 import { regist as registApi } from "../../api/Auth/regist";
-import { OK, UNAUTHORIZED, VALIDATION } from "../../constant";
+import { OK, UNAUTHORIZED, VALIDATION } from "../../Const/constant";
 import RegistForm from "../../components/Form/RegistForm";
 
 export default function Regist() {
+    const history = useHistory();
+    const dispatch = useDispatch();
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -19,9 +22,7 @@ export default function Regist() {
     const handleChangePassword = (e) => setPassword(e.target.value);
     const handleChangePasswordConfirmation = (e) =>
         setPasswordConfirmation(e.target.value);
-
-    const history = useHistory();
-    const dispatch = useDispatch();
+    const pushLogin = () => history.push("/login");
 
     async function regist(e) {
         e.preventDefault();
@@ -43,10 +44,6 @@ export default function Regist() {
         } else {
             history.push("/error");
         }
-    }
-
-    function pushLogin() {
-        history.push("/login");
     }
 
     return (

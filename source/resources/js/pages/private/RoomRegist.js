@@ -4,19 +4,23 @@ import { React, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { createRoom as createRoomApi } from "../../api/Room/createRoom";
+import { createRoom as createRoomApi } from "../../api/Room/room";
 import { setUser } from "../../stores/auth";
-import { OK, VALIDATION } from "../../constant";
+import { OK, VALIDATION } from "../../Const/constant";
 import RegistRoomForm from "../../components/Form/RegistRoomForm";
 
 export default function RoomRegist() {
+    const history = useHistory();
+    const dispatch = useDispatch();
+
     const [roomName, setRoomName] = useState("");
     const [modalShow, setModalShow] = useState(false);
 
     const handleChangeRoomName = (e) => setRoomName(e.target.value);
+    const handleModalOpen = (e) => e.preventDefault();
+    setModalShow(true);
 
-    const history = useHistory();
-    const dispatch = useDispatch();
+    const handleModalClose = () => setModalShow(false);
 
     async function createRoom(e) {
         e.preventDefault();
@@ -31,15 +35,6 @@ export default function RoomRegist() {
         } else {
             history.push("/error");
         }
-    }
-
-    function handleModalOpen(e) {
-        e.preventDefault();
-        setModalShow(true);
-    }
-
-    function handleModalClose() {
-        setModalShow(false);
     }
 
     return (

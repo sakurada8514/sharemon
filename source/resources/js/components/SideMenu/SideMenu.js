@@ -8,7 +8,47 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
 import { MainListItems, SecondaryListItems } from "./ListItems";
-import { BACK_COLOR_WHITE } from "../../styleConstant";
+import { BACK_COLOR_WHITE } from "../../Const/styleConstant";
+
+export default function SideMenu(props) {
+    const classes = useStyles();
+
+    return (
+        <Drawer
+            variant="permanent"
+            classes={{
+                paper: clsx(
+                    classes.drawerPaper,
+                    !props.sideMenuOpen && classes.drawerPaperClose
+                ),
+            }}
+            open={props.sideMenuOpen}
+        >
+            <div className={classes.toolbarIcon}>
+                <IconButton onClick={props.handleSideMenuClose}>
+                    <ChevronLeftIcon />
+                </IconButton>
+            </div>
+            <Divider />
+            <List>
+                <MainListItems
+                    sideMenuOpen={props.sideMenuOpen}
+                    handleAccountBookMenu={props.handleAccountBookMenu}
+                    accountBookMenuOpen={props.accountBookMenuOpen}
+                />
+            </List>
+            <Divider />
+            <List>
+                <SecondaryListItems
+                    sideMenuOpen={props.sideMenuOpen}
+                    handleAccountBookMenu={props.handleAccountBookMenu}
+                    accountBookMenuOpen={props.accountBookMenuOpen}
+                />
+            </List>
+        </Drawer>
+    );
+}
+
 const drawerWidth = 220;
 
 const useStyles = makeStyles((theme) => ({
@@ -50,42 +90,3 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "column",
     },
 }));
-
-export default function SideMenu(props) {
-    const classes = useStyles();
-
-    return (
-        <Drawer
-            variant="permanent"
-            classes={{
-                paper: clsx(
-                    classes.drawerPaper,
-                    !props.sideMenuOpen && classes.drawerPaperClose
-                ),
-            }}
-            open={props.sideMenuOpen}
-        >
-            <div className={classes.toolbarIcon}>
-                <IconButton onClick={props.handleSideMenuClose}>
-                    <ChevronLeftIcon />
-                </IconButton>
-            </div>
-            <Divider />
-            <List>
-                <MainListItems
-                    sideMenuOpen={props.sideMenuOpen}
-                    handleAccountBookMenu={props.handleAccountBookMenu}
-                    accountBookMenuOpen={props.accountBookMenuOpen}
-                />
-            </List>
-            <Divider />
-            <List>
-                <SecondaryListItems
-                    sideMenuOpen={props.sideMenuOpen}
-                    handleAccountBookMenu={props.handleAccountBookMenu}
-                    accountBookMenuOpen={props.accountBookMenuOpen}
-                />
-            </List>
-        </Drawer>
-    );
-}

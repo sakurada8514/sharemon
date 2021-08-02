@@ -6,6 +6,32 @@ import MenuItem from "@material-ui/core/MenuItem";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { makeStyles } from "@material-ui/core/styles";
 
+export default function InviteMenuButton(props) {
+    const classes = useStyles();
+    return (
+        <>
+            <IconButton
+                aria-controls="customized-menu"
+                aria-haspopup="true"
+                variant="contained"
+                onClick={props.handleInviteMenuOpen}
+            >
+                <GroupAddIcon className={classes.icon} />
+            </IconButton>
+            <StyledMenu
+                id="customized-menu"
+                anchorEl={props.inviteMenuOpen}
+                keepMounted
+                open={Boolean(props.inviteMenuOpen)}
+                onClose={props.handleInviteMenuClose}
+            >
+                <MenuItem>LINEで招待</MenuItem>
+                <MenuItem onClick={props.InviteUrlCopy}>招待URLコピー</MenuItem>
+            </StyledMenu>
+        </>
+    );
+}
+
 const useStyles = makeStyles((theme) => ({
     icon: {
         color: "#fff",
@@ -33,29 +59,3 @@ const StyledMenu = withStyles({
         {...props}
     />
 ));
-
-export default function InviteMenuButton(props) {
-    const classes = useStyles();
-    return (
-        <>
-            <IconButton
-                aria-controls="customized-menu"
-                aria-haspopup="true"
-                variant="contained"
-                onClick={props.handleInviteMenuOpen}
-            >
-                <GroupAddIcon className={classes.icon} />
-            </IconButton>
-            <StyledMenu
-                id="customized-menu"
-                anchorEl={props.inviteMenuOpen}
-                keepMounted
-                open={Boolean(props.inviteMenuOpen)}
-                onClose={props.handleInviteMenuClose}
-            >
-                <MenuItem>LINEで招待</MenuItem>
-                <MenuItem onClick={props.InviteUrlCopy}>招待URLコピー</MenuItem>
-            </StyledMenu>
-        </>
-    );
-}

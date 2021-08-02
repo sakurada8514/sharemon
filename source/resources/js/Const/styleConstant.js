@@ -1,9 +1,3 @@
-export const BACK_COLOR_GREEN = "#fcfffb";
-export const BACK_COLOR_WHITE = "#fdfdfd";
-export const BACK_COLOR_GRAY = "#f2f2f2";
-export const SUB_COLOR_GREEN = "#3EBA2B";
-export const SUB_COLOR_BLUE = "#4B75B9";
-
 import { createTheme } from "@material-ui/core/styles";
 
 export const theme = createTheme({
@@ -22,3 +16,9 @@ export const theme = createTheme({
         },
     },
 });
+
+export const BACK_COLOR_GREEN = "#fcfffb";
+export const BACK_COLOR_WHITE = "#fdfdfd";
+export const BACK_COLOR_GRAY = "#f2f2f2";
+export const SUB_COLOR_GREEN = "#3EBA2B";
+export const SUB_COLOR_BLUE = "#4B75B9";

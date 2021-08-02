@@ -7,7 +7,7 @@ import { ThemeProvider } from "@material-ui/core";
 import Top from "./pages/Top";
 import Error from "./pages/Error";
 import InviteRegist from "./pages/Auth/InviteRegist";
-import { theme } from "./styleConstant";
+import { theme } from "./Const/styleConstant";
 
 export default function InviteRegistApp() {
     return (

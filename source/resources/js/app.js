@@ -17,7 +17,7 @@ import GuestRoute from "./components/Route/GuestRoute";
 import PrivateRoute from "./components/Route/PrivateRoute";
 import RoomRegistRoute from "./components/Route/RoomRegistRoute copy";
 import RoomRegist from "./pages/private/RoomRegist";
-import { theme } from "./styleConstant";
+import { theme } from "./Const/styleConstant";
 import InviteRegistApp from "./InviteRegistApp";
 
 function App() {

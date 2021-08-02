@@ -5,9 +5,9 @@ import { makeStyles } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
 
 import { setUser } from "../../stores/auth";
-import { inviteRegist as inviteRegistApi } from "../../api/Auth/regist";
-import { OK, UNAUTHORIZED, VALIDATION } from "../../constant";
-import { BACK_COLOR_WHITE } from "../../styleConstant";
+import { inviteRegist as inviteRegistApi } from "../../api/Room/invite";
+import { OK, UNAUTHORIZED, VALIDATION } from "../../Const/constant";
+import { BACK_COLOR_WHITE } from "../../Const/styleConstant";
 import RegistForm from "../../components/Form/RegistForm";
 import MyModal from "../../components/Parts/MyModal";
 
@@ -17,6 +17,9 @@ if (typeof laravelInviteeData !== "undefined") {
 }
 
 export default function InviteRegist() {
+    const history = useHistory();
+    const dispatch = useDispatch();
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -24,25 +27,13 @@ export default function InviteRegist() {
     const [errors, setErrors] = useState([]);
     const [modalShow, setModalShow] = useState(true);
 
-    function handleChangeName(e) {
-        setName(e.target.value);
-    }
-    function handleChangeEmail(e) {
-        setEmail(e.target.value);
-    }
-    function handleChangePassword(e) {
-        setPassword(e.target.value);
-    }
-    function handleChangePasswordConfirmation(e) {
+    const handleChangeName = (e) => setName(e.target.value);
+    const handleChangeEmail = (e) => setEmail(e.target.value);
+    const handleChangePassword = (e) => setPassword(e.target.value);
+    const handleChangePasswordConfirmation = (e) =>
         setPasswordConfirmation(e.target.value);
-    }
-
-    function handleModalClose() {
-        setModalShow(false);
-    }
-
-    const history = useHistory();
-    const dispatch = useDispatch();
+    const handleModalClose = () => setModalShow(false);
+    const pushLogin = () => history.push("/login");
 
     async function regist(e) {
         e.preventDefault();
@@ -67,10 +58,6 @@ export default function InviteRegist() {
         } else {
             history.push("/error");
         }
-    }
-
-    function pushLogin() {
-        history.push("/login");
     }
 
     return (
@@ -100,8 +87,10 @@ export default function InviteRegist() {
     );
 }
 
+//モーダル
 function modalBody(handleModalClose) {
     const classes = useModalStyles();
+
     return (
         <div className={classes.root}>
             <h1>{inviteeData.name}さんからルーム招待が届いています。</h1>

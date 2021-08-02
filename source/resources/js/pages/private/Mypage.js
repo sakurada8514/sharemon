@@ -8,29 +8,12 @@ import SideMenu from "../../components/SideMenu/SideMenu";
 import Header from "../../components/Header/Header";
 import MyAlert from "../../components/Parts/MyAlert";
 
-import { BACK_COLOR_GREEN } from "../../styleConstant";
-import { OK } from "../../constant";
+import { BACK_COLOR_GREEN } from "../../Const/styleConstant";
+import { OK } from "../../Const/constant";
 import { setUser } from "../../stores/auth";
 
-import { createInviteUrl as createInviteUrlApi } from "../../api/Room/createInviteUrl";
+import { createInviteUrl as createInviteUrlApi } from "../../api/Room/invite";
 import { logout as logoutApi } from "../../api/Auth/login";
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: "flex",
-    },
-    appBarSpacer: theme.mixins.toolbar,
-    content: {
-        flexGrow: 1,
-        height: "100vh",
-        overflow: "auto",
-        backgroundColor: BACK_COLOR_GREEN,
-    },
-    container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
-    },
-}));
 
 export default function Mypage() {
     const classes = useStyles();
@@ -45,35 +28,21 @@ export default function Mypage() {
     const [alertSeverity, setAlertSeverity] = useState("success");
     const [alertMessage, setAlertMessage] = useState("test");
 
-    function handleSideMenuOpen() {
-        setSideMenuOpen(true);
-    }
-    function handleSideMenuClose() {
-        setSideMenuOpen(false);
-    }
-    function handleAccountBookMenu() {
+    const handleSideMenuOpen = () => setSideMenuOpen(true);
+    const handleSideMenuClose = () => setSideMenuOpen(false);
+
+    const handleAccountBookMenu = () =>
         setAccountBookMenuOpen(!accountBookMenuOpen);
-    }
 
-    function handleSettingMenuOpen(event) {
+    const handleSettingMenuOpen = (event) =>
         setSettingMenuOpen(event.currentTarget);
-    }
+    const handleSettingMenuClose = () => setSettingMenuOpen(null);
 
-    function handleSettingMenuClose() {
-        setSettingMenuOpen(null);
-    }
-
-    function handleInviteMenuOpen(event) {
+    const handleInviteMenuOpen = (event) =>
         setInviteMenuOpen(event.currentTarget);
-    }
+    const handleInviteMenuClose = () => setInviteMenuOpen(null);
 
-    function handleInviteMenuClose() {
-        setInviteMenuOpen(null);
-    }
-
-    function handleAlert() {
-        setAlertOpen(!alertOpen);
-    }
+    const handleAlert = () => setAlertOpen(!alertOpen);
 
     async function InviteUrlCopy() {
         const response = await createInviteUrlApi();
@@ -82,7 +51,7 @@ export default function Mypage() {
         if (response.status !== OK) {
             setAlertOpen(true);
             setAlertMessage(
-                "何らかの原因で招待URLのコピーに失敗しました。時間をおいて再度お試しください。"
+                "招待URLのコピーに失敗しました。時間をおいて再度お試しください。"
             );
             setAlertSeverity("error");
             window.setTimeout(function () {
@@ -92,18 +61,18 @@ export default function Mypage() {
             navigator.clipboard
                 .writeText(response.data.url)
                 .then(() => {
-                    setAlertMessage("招待URLをコピーしました。");
                     setAlertOpen(true);
+                    setAlertMessage("招待URLをコピーしました。");
                     window.setTimeout(function () {
                         setAlertOpen(false);
                     }, 3000);
                 })
                 .catch((err) => {
                     setAlertMessage(
-                        "何らかの原因で招待URLのコピーに失敗しました。"
+                        "招待URLのコピーに失敗しました。時間をおいて再度お試しください。"
                     );
-                    setAlertSeverity("error");
                     setAlertOpen(true);
+                    setAlertSeverity("error");
                     window.setTimeout(function () {
                         setAlertOpen(false);
                     }, 3000);
@@ -162,35 +131,19 @@ export default function Mypage() {
     );
 }
 
-// import { useHistory } from "react-router";
-// import { useDispatch } from "react-redux";
-
-// import { logout as logoutApi } from "../../api/Auth/login";
-// import { OK } from "../../constant";
-// import { setUser } from "../../stores/auth";
-
-// const Mypage = () => {
-//     const history = useHistory();
-//     const dispatch = useDispatch();
-
-//     async function logout(e) {
-//         e.preventDefault();
-//         const response = await logoutApi();
-
-//         if (response === OK) {
-//             dispatch(setUser(null));
-//             history.push("/");
-//         } else {
-//             history.push("/error");
-//         }
-//     }
-
-//     return (
-//         <div>
-//             <p>mypage</p>
-//             <button onClick={logout}>logout</button>
-//         </div>
-//     );
-// };
-
-// export default Mypage;
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: "flex",
+    },
+    appBarSpacer: theme.mixins.toolbar,
+    content: {
+        flexGrow: 1,
+        height: "100vh",
+        overflow: "auto",
+        backgroundColor: BACK_COLOR_GREEN,
+    },
+    container: {
+        paddingTop: theme.spacing(4),
+        paddingBottom: theme.spacing(4),
+    },
+}));

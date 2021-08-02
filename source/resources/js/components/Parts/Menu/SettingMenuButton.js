@@ -6,34 +6,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
-    icon: {
-        color: "#fff",
-        width: "1.25em",
-        height: "1.25em",
-    },
-}));
-
-const StyledMenu = withStyles({
-    paper: {
-        border: "1px solid #d3d4d5",
-    },
-})((props) => (
-    <Menu
-        elevation={0}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center",
-        }}
-        transformOrigin={{
-            vertical: "top",
-            horizontal: "center",
-        }}
-        {...props}
-    />
-));
-
 export default function SettingMenuButton(props) {
     const classes = useStyles();
     return (
@@ -61,3 +33,31 @@ export default function SettingMenuButton(props) {
         </>
     );
 }
+
+const useStyles = makeStyles((theme) => ({
+    icon: {
+        color: "#fff",
+        width: "1.25em",
+        height: "1.25em",
+    },
+}));
+
+const StyledMenu = withStyles({
+    paper: {
+        border: "1px solid #d3d4d5",
+    },
+})((props) => (
+    <Menu
+        elevation={0}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+        }}
+        transformOrigin={{
+            vertical: "top",
+            horizontal: "center",
+        }}
+        {...props}
+    />
+));

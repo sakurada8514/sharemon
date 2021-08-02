@@ -19,21 +19,7 @@ import PieChartIcon from "@material-ui/icons/PieChart";
 import MoneyIcon from "@material-ui/icons/Money";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
-import { SUB_COLOR_BLUE } from "../../styleConstant";
-
-const useStyles = makeStyles((theme) => ({
-    nestMenu: {
-        paddingLeft: theme.spacing(4),
-        transition: theme.transitions.create(["all"], {
-            easing: theme.transitions.easing.sharp,
-        }),
-    },
-    icon: {
-        color: SUB_COLOR_BLUE,
-        width: "1.5em",
-        height: "1.5em",
-    },
-}));
+import { SUB_COLOR_BLUE } from "../../Const/styleConstant";
 
 export function MainListItems(props) {
     const classes = useStyles();
@@ -127,3 +113,17 @@ export function SecondaryListItems(props) {
         </div>
     );
 }
+
+const useStyles = makeStyles((theme) => ({
+    nestMenu: {
+        paddingLeft: theme.spacing(4),
+        transition: theme.transitions.create(["all"], {
+            easing: theme.transitions.easing.sharp,
+        }),
+    },
+    icon: {
+        color: SUB_COLOR_BLUE,
+        width: "1.5em",
+        height: "1.5em",
+    },
+}));

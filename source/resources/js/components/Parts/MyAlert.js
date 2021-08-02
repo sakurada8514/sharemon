@@ -5,18 +5,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Collapse from "@material-ui/core/Collapse";
 import CloseIcon from "@material-ui/icons/Close";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: "30%",
-        "& > * + *": {
-            marginTop: theme.spacing(2),
-        },
-        position: "fixed",
-        top: "70px",
-        right: "10px",
-    },
-}));
-
 export default function MyAlert(props) {
     const classes = useStyles();
 
@@ -42,3 +30,15 @@ export default function MyAlert(props) {
         </div>
     );
 }
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: "30%",
+        "& > * + *": {
+            marginTop: theme.spacing(2),
+        },
+        position: "fixed",
+        top: "70px",
+        right: "10px",
+    },
+}));

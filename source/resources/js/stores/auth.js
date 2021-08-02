@@ -28,7 +28,6 @@ export function setCurrentUser() {
     return async function (dispatch) {
         try {
             const user = await currentUser();
-
             dispatch(slice.actions.setUser(user));
         } catch (err) {}
     };
