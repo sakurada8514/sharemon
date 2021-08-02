@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
         cursor: "pointer",
     },
     linkNone: {
+        cursor: "pointer",
         display: "none",
     },
 }));
@@ -138,8 +139,9 @@ export default function RegistForm(props) {
                                 variant="body2"
                                 onClick={props.pushLogin}
                                 className={
-                                    (classes.link,
-                                    props.isInvite && classes.linkNone)
+                                    props.isInvite
+                                        ? classes.linkNone
+                                        : classes.link
                                 }
                             >
                                 {"ログイン"}

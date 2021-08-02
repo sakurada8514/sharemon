@@ -32,4 +32,14 @@ class RoomModel extends BaseModel
 
         return;
     }
+
+    public function findInfoByUserId(string $_roomId)
+    {
+        $_ret = DB::table($this->table)
+            ->where('room_id', $_roomId)
+            ->select($this->_column)
+            ->first();
+
+        return $this->_convertArray($_ret);
+    }
 }

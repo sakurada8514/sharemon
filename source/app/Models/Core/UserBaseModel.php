@@ -2,10 +2,10 @@
 
 namespace App\Models\Core;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class BaseModel extends Model
+class UserBaseModel extends Authenticatable
 {
 
     private int $_attempts = 1;

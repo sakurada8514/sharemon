@@ -119,7 +119,8 @@ function modalBody(handleModalClose) {
 
 const useModalStyles = makeStyles(() => ({
     root: {
-        width: "50%",
+        width: "90%",
+        maxWidth: "400px",
         height: "30%",
         display: "flex",
         flexDirection: "column",

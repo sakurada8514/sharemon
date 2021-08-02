@@ -16,6 +16,13 @@ class UserService extends BaseService
 
     public function findDetailByUserId(string $_userId)
     {
-        return $this->_userModel->findDetailByUserId($_userId);
+        return $this->_userModel->findInfoByUserId($_userId);
     }
+
+    // public function findRoomId(string $_userId)
+    // {
+    //     $_userData = $this->_userModel->findInfoByUserId($_userId);
+
+    //     return $_userData['room_id'];
+    // }
 }

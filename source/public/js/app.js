@@ -26086,6 +26086,7 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__.default
       cursor: "pointer"
     },
     linkNone: {
+      cursor: "pointer",
       display: "none"
     }
   };
@@ -26179,7 +26180,7 @@ function RegistForm(props) {
               color: "secondary",
               variant: "body2",
               onClick: props.pushLogin,
-              className: (classes.link, props.isInvite && classes.linkNone),
+              className: props.isInvite ? classes.linkNone : classes.link,
               children: "ログイン"
             })
           })]
@@ -27147,21 +27148,7 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__.default
       transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen
-      }) // overflowY: "scroll",
-      // height: "100vh",
-      // "&::-webkit-scrollbar": {
-      //     width: "0.4em",
-      // },
-      // "&::-webkit-scrollbar-track": {
-      //     boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-      //     webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-      // },
-      // "&::-webkit-scrollbar-thumb": {
-      //     backgroundColor: "rgba(0,0,0,.1)",
-      //     // outline: "1px solid slategrey",
-      //     borderRadius: "10px",
-      // },
-
+      })
     },
     drawerPaperClose: _defineProperty({
       overflowX: "hidden",
@@ -27432,7 +27419,8 @@ function modalBody(handleModalClose) {
 var useModalStyles = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_12__.default)(function () {
   return {
     root: {
-      width: "50%",
+      width: "90%",
+      maxWidth: "400px",
       height: "30%",
       display: "flex",
       flexDirection: "column",

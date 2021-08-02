@@ -26,8 +26,8 @@ class RegistRequest extends FormRequest
     {
         return [
             "email"    => ["required", "email", new UserUniqueRule],
-            "password" => "required | min:8 | confirmed",
-            "name"     => "required"
+            "password" => ["required", "min:8", "confirmed"],
+            "name"     => ["required"]
         ];
     }
 }

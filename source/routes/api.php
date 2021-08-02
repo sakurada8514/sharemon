@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/regist', [AuthController::class, "regist"]);
 
+Route::post('/regist/invite', [AuthController::class, "inviteRegist"]);
+
 Route::post('/login', [AuthController::class, "login"]);
 
 Route::get('/logout', [AuthController::class, "logout"]);
@@ -28,5 +30,5 @@ Route::get('/room', [RoomController::class, "currentRoom"]);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/room/create', [RoomController::class, "createRoom"]);
 
-    Route::get('/regist/url', [RoomController::class, "createUrl"]);
+    Route::get('/regist/url', [RoomController::class, "createInviteUrl"]);
 });

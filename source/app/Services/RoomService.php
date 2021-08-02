@@ -22,12 +22,12 @@ class RoomService extends BaseService
         $this->_roomModel->virtualMethodTransaction('insert', [$_data, $_userId]);
     }
 
-    public function findRoomInfoByUserId(string $_userId)
+    public function findRoomInfoByRoomId(string $_roomId)
     {
-        return $this->_roomModel->findByUserId($_userId);
+        return $this->_roomModel->findInfoByUserId($_roomId);
     }
 
-    public function createUrl(string $_userId)
+    public function createInviteUrl(string $_userId)
     {
         return URL::temporarySignedRoute('regist.invite', now()->addMinutes(30), ['invitee' => $_userId]);
     }
