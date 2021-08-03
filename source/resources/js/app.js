@@ -12,10 +12,11 @@ import Top from "./pages/Top";
 import Error from "./pages/Error";
 import Login from "./pages/Auth/Login";
 import Regist from "./pages/Auth/Regist";
+import PasswordReset from "./pages/Auth/PasswordReset";
 import Mypage from "./pages/private/Mypage";
 import GuestRoute from "./components/Route/GuestRoute";
 import PrivateRoute from "./components/Route/PrivateRoute";
-import RoomRegistRoute from "./components/Route/RoomRegistRoute copy";
+import RoomRegistRoute from "./components/Route/RoomRegistRoute";
 import RoomRegist from "./pages/private/RoomRegist";
 import { theme } from "./Const/styleConstant";
 import InviteRegistApp from "./InviteRegistApp";
@@ -29,6 +30,11 @@ function App() {
                         <Route exact path="/" children={<Top />} />
                         <Route exact path="/error" children={<Error />} />
                         <GuestRoute exact path="/login" children={<Login />} />
+                        <GuestRoute
+                            exact
+                            path="/password/reset"
+                            children={<PasswordReset />}
+                        />
                         <GuestRoute
                             exact
                             path="/regist"

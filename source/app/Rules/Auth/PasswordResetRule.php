@@ -3,11 +3,20 @@
 namespace App\Rules\Auth;
 
 use App\Models\User;
-use App\Services\AuthService;
 use Illuminate\Contracts\Validation\Rule;
 
-class UserUniqueRule implements Rule
+class PasswordResetRule implements Rule
 {
+    /**
+     * Create a new rule instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+
     /**
      * Determine if the validation rule passes.
      *
@@ -15,10 +24,10 @@ class UserUniqueRule implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value): bool
+    public function passes($attribute, $value)
     {
         $_userModel = new User();
-        return $_userModel->findCountByEmail($value) > 0 ? false : true;
+        return $_userModel->findCountByEmail($value) == 1;
     }
 
     /**
@@ -28,6 +37,6 @@ class UserUniqueRule implements Rule
      */
     public function message()
     {
-        return 'このメールアドレスは既に登録されています。';
+        return 'このメールアドレスは登録されていません。';
     }
 }

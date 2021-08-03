@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Core\UserBaseModel;
+use App\Notifications\PasswordResetNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
@@ -43,6 +44,13 @@ class User extends UserBaseModel
         'email_verified_at' => 'datetime',
     ];
 
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordResetNotification($token));
+    }
+
+
     public function insert(array $_registData): void
     {
         $_registData['password'] = Hash::make($_registData['password']);
@@ -62,7 +70,7 @@ class User extends UserBaseModel
         return $this->_convertArray($_ret);
     }
 
-    public function uniqueCheckByEmail(string $_email): int
+    public function findCountByEmail(string $_email): int
     {
         $_ret = DB::table('users')
             ->where('email', $_email)

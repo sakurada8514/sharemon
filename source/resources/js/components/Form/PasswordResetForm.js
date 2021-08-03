@@ -3,8 +3,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -14,7 +12,7 @@ import Container from "@material-ui/core/Container";
 
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../Const/styleConstant";
 
-export default function LoginForm(props) {
+export default function PasswordResetForm(props) {
     const classes = useStyles();
 
     return (
@@ -26,11 +24,11 @@ export default function LoginForm(props) {
                         <LockOutlinedIcon className={classes.icon} />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        ログイン
+                        パスワードリセット
                     </Typography>
                     <form
                         className={classes.form}
-                        onSubmit={props.login}
+                        onSubmit={props.passwordReset}
                         noValidate
                     >
                         <TextField
@@ -48,31 +46,6 @@ export default function LoginForm(props) {
                             error={typeof props.errors.email !== "undefined"}
                             helperText={props.errors.email}
                         />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="パスワード"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                            value={props.password}
-                            onChange={props.handleChangePassword}
-                            error={typeof props.errors.password !== "undefined"}
-                            helperText={props.errors.password}
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    value={props.remember}
-                                    color="primary"
-                                    onClick={props.handleChangeRemember}
-                                />
-                            }
-                            label="ログインを維持する"
-                        />
                         <Button
                             type="submit"
                             fullWidth
@@ -80,7 +53,7 @@ export default function LoginForm(props) {
                             color="primary"
                             className={classes.submit}
                         >
-                            ログイン
+                            リセットメール送信
                         </Button>
                         <Box className={classes.linkArea}>
                             <Link
@@ -89,15 +62,7 @@ export default function LoginForm(props) {
                                 onClick={props.pushRegist}
                                 className={classes.link}
                             >
-                                {"ユーザー登録"}
-                            </Link>
-                            <Link
-                                color="secondary"
-                                variant="body2"
-                                onClick={props.pushPasswordReset}
-                                className={classes.link}
-                            >
-                                {"パスワードリセット"}
+                                {"ログインへ戻る"}
                             </Link>
                         </Box>
                     </form>
@@ -136,8 +101,7 @@ const useStyles = makeStyles((theme) => ({
     },
     linkArea: {
         display: "flex",
-        justifyContent: "space-between",
-        padding: "0 24px",
+        justifyContent: "center",
     },
     link: {
         cursor: "pointer",

@@ -21,3 +21,11 @@ export async function currentUser() {
     const response = await axios.get("/api/user");
     return response.data.user;
 }
+
+export async function passwordReset(email) {
+    const response = await axios
+        .post("/api/password/reset", { email })
+        .catch((err) => err.response);
+
+    return response;
+}

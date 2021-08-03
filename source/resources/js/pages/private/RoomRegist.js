@@ -17,8 +17,10 @@ export default function RoomRegist() {
     const [modalShow, setModalShow] = useState(false);
 
     const handleChangeRoomName = (e) => setRoomName(e.target.value);
-    const handleModalOpen = (e) => e.preventDefault();
-    setModalShow(true);
+    const handleModalOpen = (e) => {
+        e.preventDefault();
+        setModalShow(true);
+    };
 
     const handleModalClose = () => setModalShow(false);
 

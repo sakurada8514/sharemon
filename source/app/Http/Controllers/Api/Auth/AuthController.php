@@ -5,17 +5,21 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\InviteRegistRequest;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\PasswordResetRequest;
 use App\Http\Requests\Auth\RegistRequest;
 use App\Services\AuthService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
-    use AuthenticatesUsers;
+    use SendsPasswordResetEmails;
 
     private ?AuthService $_authService = null;
 
@@ -84,6 +88,17 @@ class AuthController extends Controller
         $_user = $this->_authService->login($_loginData, $_remember);
 
         return $this->_authResponse($_user);
+    }
+
+    public function passwordReset(PasswordResetRequest $request)
+    {
+        $_response = $this->broker()->sendResetLink(
+            $this->credentials($request)
+        );
+
+        return $_response == Password::RESET_LINK_SENT
+            ? response()->json([], 201)
+            : response()->json([], 401);
     }
 
     /**

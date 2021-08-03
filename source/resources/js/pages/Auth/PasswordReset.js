@@ -3,29 +3,24 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { setUser } from "../../stores/auth";
-import { login as loginApi } from "../../api/Auth/login";
+import { passwordReset as passwordResetApi } from "../../api/Auth/login";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../Const/constant";
-import LoginForm from "../../components/Form/LoginForm";
+import PasswordResetForm from "../../components/Form/PasswordResetForm";
 
-export default function Login() {
+export default function PasswordReset() {
     const history = useHistory();
     const dispatch = useDispatch();
 
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [remember, setRemember] = useState(false);
     const [errors, setErrors] = useState([]);
 
     const handleChangeEmail = (e) => setEmail(e.target.value);
-    const handleChangePassword = (e) => setPassword(e.target.value);
-    const handleChangeRemember = (e) => setRemember(!remember);
-    const pushRegist = () => history.push("/regist");
-    const pushPasswordReset = () => history.push("/password/reset");
+    const pushLogin = () => history.push("/login");
 
-    async function login(e) {
+    async function passwordReset(e) {
         e.preventDefault();
-        const response = await loginApi(email, password, remember);
-
+        const response = await passwordResetApi(email);
+        console.log(response);
         if (response.status === OK) {
             dispatch(setUser(response.data.user));
             history.push("/regist/room");
@@ -40,17 +35,12 @@ export default function Login() {
     }
 
     return (
-        <LoginForm
-            login={login}
+        <PasswordResetForm
+            passwordReset={passwordReset}
             email={email}
-            password={password}
-            remember={remember}
             errors={errors}
             handleChangeEmail={handleChangeEmail}
-            handleChangePassword={handleChangePassword}
-            handleChangeRemember={handleChangeRemember}
-            pushRegist={pushRegist}
-            pushPasswordReset={pushPasswordReset}
+            pushRegist={pushLogin}
         />
     );
 }
