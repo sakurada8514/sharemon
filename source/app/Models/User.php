@@ -51,13 +51,19 @@ class User extends UserBaseModel
     }
 
 
-    public function insert(array $_registData): void
+    public function insert(array $_userData): void
     {
-        $_registData['password'] = Hash::make($_registData['password']);
-
-        $_insert = $this->_createInsertUpdateData($_registData, $this->_getBaseDefaultInsertData());
+        $_insert = $this->_createInsertUpdateData($_userData, $this->_getBaseDefaultInsertData());
 
         DB::table('users')->insert($_insert);
+        return;
+    }
+
+    public function updateDataByEmail(array $_data): void
+    {
+        $_update = $this->_createInsertUpdateData($_data, $this->_getBaseDefaultUpdateData());
+
+        DB::table('users')->where('email', $_data['email'])->update($_update);
         return;
     }
 

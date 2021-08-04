@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\Rules\Auth\PasswordResetRule;
+use App\Rules\Auth\ResetPasswordRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PasswordResetRequest extends FormRequest
+class ResetPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class PasswordResetRequest extends FormRequest
     public function rules()
     {
         return [
-            "email" => ["required", "email", new PasswordResetRule]
+            "email" => ["required", "email", new ResetPasswordRule]
         ];
     }
 }

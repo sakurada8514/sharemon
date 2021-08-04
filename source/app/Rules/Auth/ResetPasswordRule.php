@@ -5,7 +5,7 @@ namespace App\Rules\Auth;
 use App\Models\User;
 use Illuminate\Contracts\Validation\Rule;
 
-class PasswordResetRule implements Rule
+class ResetPasswordRule implements Rule
 {
     /**
      * Create a new rule instance.

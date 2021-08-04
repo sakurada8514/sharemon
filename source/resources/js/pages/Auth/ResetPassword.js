@@ -3,11 +3,11 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { setUser } from "../../stores/auth";
-import { passwordReset as passwordResetApi } from "../../api/Auth/login";
+import { resetPassword as resetPasswordApi } from "../../api/Auth/login";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../Const/constant";
-import PasswordResetForm from "../../components/Form/PasswordResetForm";
+import ResetPasswordForm from "../../components/Form/ResetPasswordForm";
 
-export default function PasswordReset() {
+export default function ResetPassword() {
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -17,9 +17,9 @@ export default function PasswordReset() {
     const handleChangeEmail = (e) => setEmail(e.target.value);
     const pushLogin = () => history.push("/login");
 
-    async function passwordReset(e) {
+    async function resetPassword(e) {
         e.preventDefault();
-        const response = await passwordResetApi(email);
+        const response = await resetPasswordApi(email);
         console.log(response);
         if (response.status === OK) {
             dispatch(setUser(response.data.user));
@@ -35,8 +35,8 @@ export default function PasswordReset() {
     }
 
     return (
-        <PasswordResetForm
-            passwordReset={passwordReset}
+        <ResetPasswordForm
+            resetPassword={resetPassword}
             email={email}
             errors={errors}
             handleChangeEmail={handleChangeEmail}

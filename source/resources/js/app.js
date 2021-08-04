@@ -12,7 +12,8 @@ import Top from "./pages/Top";
 import Error from "./pages/Error";
 import Login from "./pages/Auth/Login";
 import Regist from "./pages/Auth/Regist";
-import PasswordReset from "./pages/Auth/PasswordReset";
+import ResetPassword from "./pages/Auth/ResetPassword";
+import ReregistPassword from "./pages/Auth/ReregistPassword";
 import Mypage from "./pages/private/Mypage";
 import GuestRoute from "./components/Route/GuestRoute";
 import PrivateRoute from "./components/Route/PrivateRoute";
@@ -33,7 +34,12 @@ function App() {
                         <GuestRoute
                             exact
                             path="/password/reset"
-                            children={<PasswordReset />}
+                            children={<ResetPassword />}
+                        />
+                        <GuestRoute
+                            exact
+                            path="/password/reset/form"
+                            children={<ReregistPassword />}
                         />
                         <GuestRoute
                             exact

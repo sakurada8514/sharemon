@@ -5,14 +5,13 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\InviteRegistRequest;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Requests\Auth\PasswordResetRequest;
 use App\Http\Requests\Auth\RegistRequest;
+use App\Http\Requests\Auth\ReregistPasswordRequest;
+use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Services\AuthService;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
@@ -90,7 +89,7 @@ class AuthController extends Controller
         return $this->_authResponse($_user);
     }
 
-    public function passwordReset(PasswordResetRequest $request)
+    public function resetPassword(ResetPasswordRequest $request)
     {
         $_response = $this->broker()->sendResetLink(
             $this->credentials($request)
@@ -99,6 +98,15 @@ class AuthController extends Controller
         return $_response == Password::RESET_LINK_SENT
             ? response()->json([], 201)
             : response()->json([], 401);
+    }
+
+    public function reregistPassword(ReregistPasswordRequest $request)
+    {
+        $_data = $request->only('email', 'password');
+
+        $this->_authService->reregistPassword($_data);
+
+        return response()->json([]);
     }
 
     /**

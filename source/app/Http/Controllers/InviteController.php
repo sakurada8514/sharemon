@@ -14,7 +14,7 @@ class InviteController extends Controller
         $this->_userService = $_userService;
     }
 
-    public function registByInvite(Request $request)
+    public function inviteRegistIndex(Request $request)
     {
         if (!$request->hasValidSignature()) {
             abort(401);

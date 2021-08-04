@@ -22,9 +22,21 @@ export async function currentUser() {
     return response.data.user;
 }
 
-export async function passwordReset(email) {
+export async function resetPassword(email) {
     const response = await axios
         .post("/api/password/reset", { email })
+        .catch((err) => err.response);
+
+    return response;
+}
+
+export async function reregistPassword(email, password, password_confirmation) {
+    const response = await axios
+        .post("/api/password/reregist", {
+            email,
+            password,
+            password_confirmation,
+        })
         .catch((err) => err.response);
 
     return response;

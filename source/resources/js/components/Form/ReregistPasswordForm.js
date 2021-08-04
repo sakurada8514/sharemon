@@ -12,7 +12,7 @@ import Container from "@material-ui/core/Container";
 
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../Const/styleConstant";
 
-export default function PasswordResetForm(props) {
+export default function ReregistPasswordForm(props) {
     const classes = useStyles();
 
     return (
@@ -24,11 +24,11 @@ export default function PasswordResetForm(props) {
                         <LockOutlinedIcon className={classes.icon} />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        パスワードリセット
+                        パスワード再設定
                     </Typography>
                     <form
                         className={classes.form}
-                        onSubmit={props.passwordReset}
+                        onSubmit={props.reregistPassword}
                         noValidate
                     >
                         <TextField
@@ -36,15 +36,28 @@ export default function PasswordResetForm(props) {
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
-                            label="メールアドレス"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                            value={props.email}
-                            onChange={props.handleChangeEmail}
-                            error={typeof props.errors.email !== "undefined"}
-                            helperText={props.errors.email}
+                            name="password"
+                            label="パスワード"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            value={props.password}
+                            onChange={props.handleChangePassword}
+                            error={typeof props.errors.password !== "undefined"}
+                            helperText={props.errors.password}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password_confirmation"
+                            label="パスワード確認"
+                            type="password"
+                            id="password_confirmation"
+                            autoComplete="current-password_confirmation"
+                            value={props.password_confirmation}
+                            onChange={props.handleChangePasswordConfirmation}
                         />
                         <Button
                             type="submit"
@@ -53,16 +66,16 @@ export default function PasswordResetForm(props) {
                             color="primary"
                             className={classes.submit}
                         >
-                            リセットメール送信
+                            パスワード再設定
                         </Button>
-                        <Box className={classes.linkArea}>
+                        <Box display="flex" justifyContent="center">
                             <Link
                                 color="secondary"
                                 variant="body2"
-                                onClick={props.pushRegist}
+                                onClick={props.pushLogin}
                                 className={classes.link}
                             >
-                                {"ログインへ戻る"}
+                                {"ログイン"}
                             </Link>
                         </Box>
                     </form>
@@ -98,10 +111,6 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: BACK_COLOR_GREEN,
         display: "flex",
         alignItems: "center",
-    },
-    linkArea: {
-        display: "flex",
-        justifyContent: "center",
     },
     link: {
         cursor: "pointer",

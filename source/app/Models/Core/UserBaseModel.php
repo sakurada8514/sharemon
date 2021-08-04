@@ -36,6 +36,12 @@ class UserBaseModel extends Authenticatable
             'updated_at' => now()
         ];
     }
+    protected function _getBaseDefaultUpdateData(): array
+    {
+        return [
+            'updated_at' => now()
+        ];
+    }
 
     protected function _getBaseDefaultInsertDataWithDelFlg(): array
     {

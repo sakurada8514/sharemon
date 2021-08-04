@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Services\Core\BaseService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthService extends BaseService
 {
@@ -29,10 +30,19 @@ class AuthService extends BaseService
         return $_user;
     }
 
-    public function regist(array $_registData): void
+    public function regist(array $_userData): void
     {
-        $this->_userModel->insert($_registData);
+        $_userData['password'] = Hash::make($_userData['password']);
+
+        $this->_userModel->insert($_userData);
         return;
+    }
+
+    public function reregistPassword(array $_data)
+    {
+        $_data['password'] = Hash::make($_data['password']);
+
+        $this->_userModel->updateDataByEmail($_data);
     }
 
     private function _convateLoginData(array $_data)

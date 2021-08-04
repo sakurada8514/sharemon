@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\InviteController;
-use Illuminate\Support\Facades\Cache;
+use App\Http\Controllers\PasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +20,9 @@ Route::get('/redis_test', function () {
 });
 
 // 専用登録ページへ飛ばす？登録フォームはリアクトで作るかどうか
-Route::get('/regist/invite', [InviteController::class, "registByInvite"])->name("regist.invite");
+Route::get('/regist/invite', [InviteController::class, "inviteRegistIndex"])->name("regist.invite");
+
+Route::get('/password/reset/form', [PasswordController::class, "resetFormIndex"])->name("password.reset");
 
 Route::get('{any}', function () {
     return view('app');
