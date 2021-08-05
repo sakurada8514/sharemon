@@ -26,7 +26,7 @@ class PasswordResetNotification extends ResetPassword
         return (new MailMessage)
             ->subject('パスワードリセット通知')
             ->view('emails.passwordReset', [
-                'reset_url' => URL::temporarySignedRoute('password.reset', now()->addMinutes(30), ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()])
+                'reset_url' => URL::temporarySignedRoute('password.reset', now()->addMinutes(30), ['email' => $notifiable->getEmailForPasswordReset()])
             ]);
     }
 }

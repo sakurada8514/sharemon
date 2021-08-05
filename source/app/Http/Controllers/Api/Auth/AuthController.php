@@ -96,8 +96,8 @@ class AuthController extends Controller
         );
 
         return $_response == Password::RESET_LINK_SENT
-            ? response()->json([], 201)
-            : response()->json([], 401);
+            ? response()->json([])
+            : response()->json([], Response::HTTP_UNAUTHORIZED);
     }
 
     public function reregistPassword(ReregistPasswordRequest $request)

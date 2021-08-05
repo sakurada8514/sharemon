@@ -1,10 +1,8 @@
 import { React, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
 
-import { setUser } from "../../stores/auth";
 import { inviteRegist as inviteRegistApi } from "../../api/Room/invite";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../Const/constant";
 import { BACK_COLOR_WHITE } from "../../Const/styleConstant";
@@ -18,7 +16,6 @@ if (typeof laravelInviteeData !== "undefined") {
 
 export default function InviteRegist() {
     const history = useHistory();
-    const dispatch = useDispatch();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
