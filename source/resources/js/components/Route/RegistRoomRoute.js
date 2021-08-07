@@ -2,9 +2,8 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { isAuthSelector } from "../../stores/auth";
-import RoomRegist from "../../pages/private/RoomRegist";
 
-export default function RoomRegistRoute(props) {
+export default function RegistRoomRoute(props) {
     const isAuth = useSelector(isAuthSelector);
 
     const roomId = useSelector((state) =>

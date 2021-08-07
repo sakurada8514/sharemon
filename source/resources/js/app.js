@@ -17,8 +17,8 @@ import ReregistPassword from "./pages/Auth/ReregistPassword";
 import Mypage from "./pages/private/Mypage";
 import GuestRoute from "./components/Route/GuestRoute";
 import PrivateRoute from "./components/Route/PrivateRoute";
-import RoomRegistRoute from "./components/Route/RoomRegistRoute";
-import RoomRegist from "./pages/private/RoomRegist";
+import RoomRegistRoute from "./components/Route/RegistRoomRoute";
+import RegistRoom from "./pages/private/RegistRoom";
 import { theme } from "./Const/styleConstant";
 import InviteRegistApp from "./InviteRegistApp";
 
@@ -49,7 +49,7 @@ function App() {
                         <PrivateRoute path="/mypage" children={<Mypage />} />
                         <RoomRegistRoute
                             path="/regist/room"
-                            children={<RoomRegist />}
+                            children={<RegistRoom />}
                         />
                     </Switch>
                 </BrowserRouter>

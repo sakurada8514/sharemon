@@ -9,7 +9,7 @@ import { setUser } from "../../stores/auth";
 import { OK, VALIDATION } from "../../Const/constant";
 import RegistRoomForm from "../../components/Form/RegistRoomForm";
 
-export default function RoomRegist() {
+export default function RegistRoom() {
     const history = useHistory();
     const dispatch = useDispatch();
 

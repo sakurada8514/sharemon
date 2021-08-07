@@ -3,10 +3,15 @@ import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Container } from "@material-ui/core";
+import clsx from "clsx";
 
 import SideMenu from "../../components/SideMenu/SideMenu";
 import Header from "../../components/Header/Header";
 import MyAlert from "../../components/Parts/MyAlert";
+import Top from "../Top";
+import RegistMoney from "./contents/RegistMoney/RegistMoney";
 
 import { BACK_COLOR_GREEN } from "../../Const/styleConstant";
 import { OK } from "../../Const/constant";
@@ -26,7 +31,7 @@ export default function Mypage() {
     const [inviteMenuOpen, setInviteMenuOpen] = useState(null);
     const [alertOpen, setAlertOpen] = useState(false);
     const [alertSeverity, setAlertSeverity] = useState("success");
-    const [alertMessage, setAlertMessage] = useState("test");
+    const [alertMessage, setAlertMessage] = useState("");
 
     const handleSideMenuOpen = () => setSideMenuOpen(true);
     const handleSideMenuClose = () => setSideMenuOpen(false);
@@ -122,10 +127,29 @@ export default function Mypage() {
                     handleAlert={handleAlert}
                 />
 
-                {/* <Container
-                    maxWidth="lg"
-                    className={classes.container}
-                ></Container> */}
+                <div
+                    className={clsx(
+                        classes.container,
+                        sideMenuOpen
+                            ? classes.openPadding
+                            : classes.closePadding
+                    )}
+                >
+                    <BrowserRouter>
+                        <Switch>
+                            <Route
+                                exact
+                                path="/mypage/home"
+                                children={<Top />}
+                            />
+                            <Route
+                                exact
+                                path="/mypage/regist"
+                                children={<RegistMoney />}
+                            />
+                        </Switch>
+                    </BrowserRouter>
+                </div>
             </main>
         </div>
     );
@@ -138,12 +162,24 @@ const useStyles = makeStyles((theme) => ({
     appBarSpacer: theme.mixins.toolbar,
     content: {
         flexGrow: 1,
-        height: "100vh",
-        overflow: "auto",
+        minHeight: "100vh",
         backgroundColor: BACK_COLOR_GREEN,
+        transition: theme.transitions.create(["all"], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
     },
     container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
+        padding: theme.spacing(3),
+        transition: theme.transitions.create(["all"], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+    },
+    openPadding: {
+        paddingLeft: "244px",
+    },
+    closePadding: {
+        paddingLeft: "95px",
     },
 }));
