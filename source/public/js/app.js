@@ -16243,6 +16243,333 @@ SvgIcon.muiName = 'SvgIcon';
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/core/esm/Switch/Switch.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Switch/Switch.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "styles": () => (/* binding */ styles),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _material_ui_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/esm/refType.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../styles/colorManipulator */ "./node_modules/@material-ui/core/esm/styles/colorManipulator.js");
+/* harmony import */ var _utils_capitalize__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/capitalize */ "./node_modules/@material-ui/core/esm/utils/capitalize.js");
+/* harmony import */ var _internal_SwitchBase__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../internal/SwitchBase */ "./node_modules/@material-ui/core/esm/internal/SwitchBase.js");
+
+
+// @inheritedComponent IconButton
+
+
+
+
+
+
+
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      display: 'inline-flex',
+      width: 34 + 12 * 2,
+      height: 14 + 12 * 2,
+      overflow: 'hidden',
+      padding: 12,
+      boxSizing: 'border-box',
+      position: 'relative',
+      flexShrink: 0,
+      zIndex: 0,
+      // Reset the stacking context.
+      verticalAlign: 'middle',
+      // For correct alignment with the text.
+      '@media print': {
+        colorAdjust: 'exact'
+      }
+    },
+
+    /* Styles applied to the root element if `edge="start"`. */
+    edgeStart: {
+      marginLeft: -8
+    },
+
+    /* Styles applied to the root element if `edge="end"`. */
+    edgeEnd: {
+      marginRight: -8
+    },
+
+    /* Styles applied to the internal `SwitchBase` component's `root` class. */
+    switchBase: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      zIndex: 1,
+      // Render above the focus ripple.
+      color: theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[400],
+      transition: theme.transitions.create(['left', 'transform'], {
+        duration: theme.transitions.duration.shortest
+      }),
+      '&$checked': {
+        transform: 'translateX(20px)'
+      },
+      '&$disabled': {
+        color: theme.palette.type === 'light' ? theme.palette.grey[400] : theme.palette.grey[800]
+      },
+      '&$checked + $track': {
+        opacity: 0.5
+      },
+      '&$disabled + $track': {
+        opacity: theme.palette.type === 'light' ? 0.12 : 0.1
+      }
+    },
+
+    /* Styles applied to the internal SwitchBase component's root element if `color="primary"`. */
+    colorPrimary: {
+      '&$checked': {
+        color: theme.palette.primary.main,
+        '&:hover': {
+          backgroundColor: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.alpha)(theme.palette.primary.main, theme.palette.action.hoverOpacity),
+          '@media (hover: none)': {
+            backgroundColor: 'transparent'
+          }
+        }
+      },
+      '&$disabled': {
+        color: theme.palette.type === 'light' ? theme.palette.grey[400] : theme.palette.grey[800]
+      },
+      '&$checked + $track': {
+        backgroundColor: theme.palette.primary.main
+      },
+      '&$disabled + $track': {
+        backgroundColor: theme.palette.type === 'light' ? theme.palette.common.black : theme.palette.common.white
+      }
+    },
+
+    /* Styles applied to the internal SwitchBase component's root element if `color="secondary"`. */
+    colorSecondary: {
+      '&$checked': {
+        color: theme.palette.secondary.main,
+        '&:hover': {
+          backgroundColor: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.alpha)(theme.palette.secondary.main, theme.palette.action.hoverOpacity),
+          '@media (hover: none)': {
+            backgroundColor: 'transparent'
+          }
+        }
+      },
+      '&$disabled': {
+        color: theme.palette.type === 'light' ? theme.palette.grey[400] : theme.palette.grey[800]
+      },
+      '&$checked + $track': {
+        backgroundColor: theme.palette.secondary.main
+      },
+      '&$disabled + $track': {
+        backgroundColor: theme.palette.type === 'light' ? theme.palette.common.black : theme.palette.common.white
+      }
+    },
+
+    /* Styles applied to the root element if `size="small"`. */
+    sizeSmall: {
+      width: 40,
+      height: 24,
+      padding: 7,
+      '& $thumb': {
+        width: 16,
+        height: 16
+      },
+      '& $switchBase': {
+        padding: 4,
+        '&$checked': {
+          transform: 'translateX(16px)'
+        }
+      }
+    },
+
+    /* Pseudo-class applied to the internal `SwitchBase` component's `checked` class. */
+    checked: {},
+
+    /* Pseudo-class applied to the internal SwitchBase component's disabled class. */
+    disabled: {},
+
+    /* Styles applied to the internal SwitchBase component's input element. */
+    input: {
+      left: '-100%',
+      width: '300%'
+    },
+
+    /* Styles used to create the thumb passed to the internal `SwitchBase` component `icon` prop. */
+    thumb: {
+      boxShadow: theme.shadows[1],
+      backgroundColor: 'currentColor',
+      width: 20,
+      height: 20,
+      borderRadius: '50%'
+    },
+
+    /* Styles applied to the track element. */
+    track: {
+      height: '100%',
+      width: '100%',
+      borderRadius: 14 / 2,
+      zIndex: -1,
+      transition: theme.transitions.create(['opacity', 'background-color'], {
+        duration: theme.transitions.duration.shortest
+      }),
+      backgroundColor: theme.palette.type === 'light' ? theme.palette.common.black : theme.palette.common.white,
+      opacity: theme.palette.type === 'light' ? 0.38 : 0.3
+    }
+  };
+};
+var Switch = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function Switch(props, ref) {
+  var classes = props.classes,
+      className = props.className,
+      _props$color = props.color,
+      color = _props$color === void 0 ? 'secondary' : _props$color,
+      _props$edge = props.edge,
+      edge = _props$edge === void 0 ? false : _props$edge,
+      _props$size = props.size,
+      size = _props$size === void 0 ? 'medium' : _props$size,
+      other = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["classes", "className", "color", "edge", "size"]);
+
+  var icon = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", {
+    className: classes.thumb
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", {
+    className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.root, className, {
+      'start': classes.edgeStart,
+      'end': classes.edgeEnd
+    }[edge], size === "small" && classes["size".concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(size))])
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_internal_SwitchBase__WEBPACK_IMPORTED_MODULE_7__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    type: "checkbox",
+    icon: icon,
+    checkedIcon: icon,
+    classes: {
+      root: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.switchBase, classes["color".concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color))]),
+      input: classes.input,
+      checked: classes.checked,
+      disabled: classes.disabled
+    },
+    ref: ref
+  }, other)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", {
+    className: classes.track
+  }));
+});
+ true ? Switch.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * If `true`, the component is checked.
+   */
+  checked: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool),
+
+  /**
+   * The icon to display when the component is checked.
+   */
+  checkedIcon: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().node),
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
+
+  /**
+   * @ignore
+   */
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */
+  color: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['default', 'primary', 'secondary']),
+
+  /**
+   * @ignore
+   */
+  defaultChecked: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool),
+
+  /**
+   * If `true`, the switch will be disabled.
+   */
+  disabled: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool),
+
+  /**
+   * If `true`, the ripple effect will be disabled.
+   */
+  disableRipple: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool),
+
+  /**
+   * If given, uses a negative margin to counteract the padding on one
+   * side (this is often helpful for aligning the left or right
+   * side of the icon with content above or below, without ruining the border
+   * size and shape).
+   */
+  edge: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['end', 'start', false]),
+
+  /**
+   * The icon to display when the component is unchecked.
+   */
+  icon: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().node),
+
+  /**
+   * The id of the `input` element.
+   */
+  id: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * [Attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Attributes) applied to the `input` element.
+   */
+  inputProps: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
+
+  /**
+   * Pass a ref to the `input` element.
+   */
+  inputRef: _material_ui_utils__WEBPACK_IMPORTED_MODULE_8__.default,
+
+  /**
+   * Callback fired when the state is changed.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new value by accessing `event.target.value` (string).
+   * You can pull out the new checked state by accessing `event.target.checked` (boolean).
+   */
+  onChange: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().func),
+
+  /**
+   * If `true`, the `input` element will be required.
+   */
+  required: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool),
+
+  /**
+   * The size of the switch.
+   * `small` is equivalent to the dense switch styling.
+   */
+  size: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['medium', 'small']),
+
+  /**
+   * The value of the component. The DOM API casts this to a string.
+   * The browser uses "on" as the default value.
+   */
+  value: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().any)
+} : 0;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_styles_withStyles__WEBPACK_IMPORTED_MODULE_9__.default)(styles, {
+  name: 'MuiSwitch'
+})(Switch));
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/core/esm/Tab/Tab.js":
 /*!*******************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/Tab/Tab.js ***!
@@ -33499,6 +33826,102 @@ var useStyles = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default)(func
 
 /***/ }),
 
+/***/ "./resources/js/components/Parts/FormParts/DatePicker.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/Parts/FormParts/DatePicker.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ MyDatePicker)
+/* harmony export */ });
+/* harmony import */ var date_fns_format__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns/format */ "./node_modules/date-fns/esm/format/index.js");
+/* harmony import */ var _material_ui_pickers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/pickers */ "./node_modules/@material-ui/pickers/esm/useUtils-cfb96ac9.js");
+/* harmony import */ var _date_io_date_fns__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @date-io/date-fns */ "./node_modules/@date-io/date-fns/build/index.esm.js");
+/* harmony import */ var _material_ui_pickers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/pickers */ "./node_modules/@material-ui/pickers/esm/DatePicker.js");
+/* harmony import */ var date_fns_locale_ja__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns/locale/ja */ "./node_modules/date-fns/esm/locale/ja/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+
+var ExtendedUtils = /*#__PURE__*/function (_DateFnsUtils) {
+  _inherits(ExtendedUtils, _DateFnsUtils);
+
+  var _super = _createSuper(ExtendedUtils);
+
+  function ExtendedUtils() {
+    _classCallCheck(this, ExtendedUtils);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(ExtendedUtils, [{
+    key: "getCalendarHeaderText",
+    value: function getCalendarHeaderText(date) {
+      return (0,date_fns_format__WEBPACK_IMPORTED_MODULE_2__.default)(date, "yyyy MMM", {
+        locale: this.locale
+      });
+    }
+  }, {
+    key: "getDatePickerHeaderText",
+    value: function getDatePickerHeaderText(date) {
+      return (0,date_fns_format__WEBPACK_IMPORTED_MODULE_2__.default)(date, "MMMd日", {
+        locale: this.locale
+      });
+    }
+  }]);
+
+  return ExtendedUtils;
+}(_date_io_date_fns__WEBPACK_IMPORTED_MODULE_0__.default);
+
+function MyDatePicker(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_pickers__WEBPACK_IMPORTED_MODULE_3__.M, {
+    utils: ExtendedUtils,
+    locale: date_fns_locale_ja__WEBPACK_IMPORTED_MODULE_4__.default,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_pickers__WEBPACK_IMPORTED_MODULE_5__.DatePicker, {
+      label: "\u65E5\u4ED8*",
+      okLabel: "\u6C7A\u5B9A",
+      cancelLabel: "\u30AD\u30E3\u30F3\u30BB\u30EB",
+      value: props.date,
+      onChange: props.setDate,
+      format: "yyyy/MM/dd",
+      animateYearScrolling: true,
+      fullWidth: true,
+      margin: "normal"
+    })
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/components/Parts/Menu/InviteMenuButton.js":
 /*!****************************************************************!*\
   !*** ./resources/js/components/Parts/Menu/InviteMenuButton.js ***!
@@ -35630,15 +36053,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ RegistExpense)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/esm/makeStyles/makeStyles.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Button/Button.js");
+/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/esm/makeStyles/makeStyles.js");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
-/* harmony import */ var _material_ui_pickers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/pickers */ "./node_modules/@material-ui/pickers/esm/useUtils-cfb96ac9.js");
-/* harmony import */ var _date_io_date_fns__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @date-io/date-fns */ "./node_modules/@date-io/date-fns/build/index.esm.js");
-/* harmony import */ var _material_ui_pickers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/pickers */ "./node_modules/@material-ui/pickers/esm/DatePicker.js");
-/* harmony import */ var date_fns_locale_ja__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns/locale/ja */ "./node_modules/date-fns/esm/locale/ja/index.js");
-/* harmony import */ var _material_ui_icons_Receipt__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/icons/Receipt */ "./node_modules/@material-ui/icons/Receipt.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Typography/Typography.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputAdornment/InputAdornment.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/FormControl/FormControl.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputLabel/InputLabel.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Select/Select.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/MenuItem/MenuItem.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/FormControlLabel/FormControlLabel.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Switch/Switch.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Button/Button.js");
+/* harmony import */ var _material_ui_icons_Receipt__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/icons/Receipt */ "./node_modules/@material-ui/icons/Receipt.js");
+/* harmony import */ var _components_Parts_FormParts_DatePicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../components/Parts/FormParts/DatePicker */ "./resources/js/components/Parts/FormParts/DatePicker.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -35661,23 +36089,51 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-
-
-
 function RegistExpense() {
   var classes = useStyles();
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(new Date()),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
-      date = _useState2[0],
-      setDate = _useState2[1];
+      expense = _useState2[0],
+      setExpense = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(new Date()),
+      _useState4 = _slicedToArray(_useState3, 2),
+      date = _useState4[0],
+      setDate = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      category = _useState6[0],
+      setCategory = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      repetition = _useState8[0],
+      setRepetition = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState10 = _slicedToArray(_useState9, 2),
+      comment = _useState10[0],
+      setComment = _useState10[1];
 
   var fileInput = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
 
-  function handleFileInputClick() {
+  var handleFileInputClick = function handleFileInputClick() {
     fileInput.current.click();
-  }
+  };
+
+  var handleToggleRepetition = function handleToggleRepetition() {
+    setRepetition(!repetition);
+  };
+
+  var handleChangeExpense = function handleChangeExpense(e) {
+    return setExpense(e.target.value);
+  };
+
+  var handleChangeComment = function handleChangeComment(e) {
+    return setComment(e.target.value);
+  };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
     container: true,
@@ -35688,34 +36144,84 @@ function RegistExpense() {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         noValidate: true,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__.default, {
-          variant: "outlined",
+          className: classes.instructions,
+          children: "*\u306F\u5FC5\u9808\u3067\u3059"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
           margin: "normal",
           required: true,
           fullWidth: true,
-          id: "",
+          id: "expense",
           label: "\u652F\u51FA\u91D1\u984D",
-          name: "email",
-          autoComplete: "email",
-          autoFocus: true // value={props.email}
-          // onChange={props.handleChangeEmail}
-          // error={
+          name: "expense",
+          autoComplete: "expense",
+          autoFocus: true,
+          value: expense,
+          onChange: handleChangeExpense // error={
           //     typeof props.errors.email !== "undefined" ||
           //     typeof props.errors.auth !== "undefined"
           // }
           // helperText={props.errors.email}
-
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_pickers__WEBPACK_IMPORTED_MODULE_5__.M, {
-          utils: _date_io_date_fns__WEBPACK_IMPORTED_MODULE_1__.default,
-          locale: date_fns_locale_ja__WEBPACK_IMPORTED_MODULE_6__.default,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_pickers__WEBPACK_IMPORTED_MODULE_7__.DatePicker, {
-            label: "\u65E5\u4ED8*",
-            okLabel: "\u6C7A\u5B9A",
-            cancelLabel: "\u30AD\u30E3\u30F3\u30BB\u30EB",
-            value: date,
-            onChange: setDate,
-            format: "yyyy/MM/dd",
-            animateYearScrolling: true
-          })
+          ,
+          InputProps: {
+            endAdornment: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__.default, {
+              position: "end",
+              children: "\u5186"
+            })
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_Parts_FormParts_DatePicker__WEBPACK_IMPORTED_MODULE_1__.default, {
+          date: date,
+          setDate: setDate
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__.default // variant="outlined"
+        // className={classes.formControl}
+        , {
+          fullWidth: true,
+          required: true,
+          margin: "normal",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__.default, {
+            id: "select-outlined-label",
+            children: "\u30AB\u30C6\u30B4\u30EA\u30FC"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__.default, {
+            labelId: "select-outlined-label",
+            id: "select-outlined",
+            value: category,
+            onChange: function onChange(e) {
+              setCategory(e.target.value);
+            },
+            label: "\u30AB\u30C6\u30B4\u30EA\u30FC",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
+              value: "",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("em", {
+                children: "None"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
+              value: "test",
+              children: "Ten"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
+              value: "test",
+              children: "Twenty"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
+              value: "test",
+              children: "Thirty"
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
+          id: "comment",
+          label: "\u30B3\u30E1\u30F3\u30C8",
+          multiline: true,
+          rows: 5,
+          value: comment,
+          onChange: handleChangeComment // variant="filled"
+          ,
+          fullWidth: true,
+          margin: "normal"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__.default, {
+          control: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__.default, {
+            checked: repetition,
+            onChange: handleToggleRepetition
+          }),
+          fullWidth: true,
+          label: "\u7E70\u308A\u8FD4\u3057\u767B\u9332\uFF08\u56FA\u5B9A\u8CBB\u7B49\uFF09",
+          labelPlacement: "start"
         })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
@@ -35731,11 +36237,12 @@ function RegistExpense() {
           style: {
             display: "none"
           }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__.default, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__.default, {
           variant: "outlined",
           color: "primary",
           size: "large",
-          startIcon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_Receipt__WEBPACK_IMPORTED_MODULE_9__.default, {}),
+          fullWidth: true,
+          startIcon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_Receipt__WEBPACK_IMPORTED_MODULE_14__.default, {}),
           className: classes.receiptButton,
           onClick: handleFileInputClick,
           children: "\u30EC\u30B7\u30FC\u30C8\u30A2\u30C3\u30D7\u30ED\u30FC\u30C9"
@@ -35747,18 +36254,18 @@ function RegistExpense() {
       item: true,
       xs: 12,
       className: classes.buttonArea,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__.default, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__.default, {
         type: "submit",
         variant: "contained",
         color: "secondary",
         size: "large",
         className: classes.button,
-        children: "\u4F5C\u6210"
+        children: "\u652F\u51FA\u4F5C\u6210"
       })
     })]
   });
 }
-var useStyles = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_10__.default)(function (thema) {
+var useStyles = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_15__.default)(function (thema) {
   return {
     buttonArea: {
       display: "flex",
@@ -35770,7 +36277,7 @@ var useStyles = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_10__.default)(fu
       fontSize: "1.25em"
     },
     receiptImageArea: {
-      padding: "10px",
+      padding: "16px 10px",
       display: "flex",
       flexDirection: "column",
       alignItems: "center"
@@ -35778,7 +36285,11 @@ var useStyles = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_10__.default)(fu
     receiptButton: {
       padding: "2px 56px",
       fontSize: "1.25em",
-      height: "70px"
+      height: "56px"
+    },
+    instructions: {
+      marginTop: "16px",
+      color: "red"
     }
   };
 });
