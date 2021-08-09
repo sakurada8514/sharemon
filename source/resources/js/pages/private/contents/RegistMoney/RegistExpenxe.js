@@ -2,6 +2,7 @@ import React from "react";
 
 import { useRef, useState } from "react";
 import { makeStyles } from "@material-ui/styles";
+import MediaQuery from "react-responsive";
 import {
     Select,
     MenuItem,
@@ -17,7 +18,7 @@ import {
 } from "@material-ui/core";
 
 import ReceiptIcon from "@material-ui/icons/Receipt";
-import CameraAltIcon from "@material-ui/icons/CameraAlt";
+import ClearIcon from "@material-ui/icons/Clear";
 
 import MyDatePicker from "../../../../components/Parts/FormParts/DatePicker";
 
@@ -29,6 +30,7 @@ export default function RegistExpense() {
     const [category, setCategory] = useState("");
     const [repetition, setRepetition] = useState(false);
     const [comment, setComment] = useState("");
+    const [receiptImg, setReceiptImg] = useState("");
 
     const fileInput = useRef(null);
     const handleFileInputClick = () => {
@@ -40,6 +42,22 @@ export default function RegistExpense() {
     };
     const handleChangeExpense = (e) => setExpense(e.target.value);
     const handleChangeComment = (e) => setComment(e.target.value);
+    const handleChangeFile = (e) => {
+        const files = e.target.files;
+        console.log(files);
+        if (files.length > 0) {
+            const file = files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setReceiptImg(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+    const handleFileReset = () => {
+        fileInput.current.value = "";
+        setReceiptImg("");
+    };
 
     return (
         <Grid container>
@@ -49,6 +67,7 @@ export default function RegistExpense() {
                         *は必須です
                     </Typography>
                     <TextField
+                        variant="outlined"
                         margin="normal"
                         required
                         fullWidth
@@ -75,7 +94,7 @@ export default function RegistExpense() {
 
                     <MyDatePicker date={date} setDate={setDate} />
                     <FormControl
-                        // variant="outlined"
+                        variant="outlined"
                         // className={classes.formControl}
                         fullWidth
                         required
@@ -102,6 +121,7 @@ export default function RegistExpense() {
                         </Select>
                     </FormControl>
                     <TextField
+                        variant="outlined"
                         id="comment"
                         label="コメント"
                         multiline
@@ -112,17 +132,31 @@ export default function RegistExpense() {
                         fullWidth
                         margin="normal"
                     />
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                checked={repetition}
-                                onChange={handleToggleRepetition}
-                            />
-                        }
-                        fullWidth
-                        label="繰り返し登録（固定費等）"
-                        labelPlacement="start"
-                    />
+                    <div>
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={repetition}
+                                    onChange={handleToggleRepetition}
+                                />
+                            }
+                            label="繰り返し登録（固定費等）"
+                            labelPlacement="start"
+                        />
+                    </div>
+                    <MediaQuery query="(min-width: 960px)">
+                        <Grid item xs={12} className={classes.buttonArea}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="secondary"
+                                size={"large"}
+                                className={classes.button}
+                            >
+                                支出作成
+                            </Button>
+                        </Grid>
+                    </MediaQuery>
                 </div>
             </Grid>
             <Grid item xs={12} md={6} className={classes.receiptImageArea}>
@@ -132,6 +166,7 @@ export default function RegistExpense() {
                         type="file"
                         ref={fileInput}
                         style={{ display: "none" }}
+                        onChange={handleChangeFile}
                     />
                     <Button
                         variant="outlined"
@@ -157,19 +192,35 @@ export default function RegistExpense() {
                         レシート撮影
                     </Button> */}
                 </div>
-                <div>プレビュー</div>
+                <div className={classes.imgArea}>
+                    <img src={receiptImg} />
+                </div>
+                {receiptImg && (
+                    <Button
+                        variant="outlined"
+                        color="inherit"
+                        size={"small"}
+                        startIcon={<ClearIcon />}
+                        className={classes.fileResetButton}
+                        onClick={handleFileReset}
+                    >
+                        リセット
+                    </Button>
+                )}
             </Grid>
-            <Grid item xs={12} className={classes.buttonArea}>
-                <Button
-                    type="submit"
-                    variant="contained"
-                    color="secondary"
-                    size={"large"}
-                    className={classes.button}
-                >
-                    支出作成
-                </Button>
-            </Grid>
+            <MediaQuery query="(max-width: 960px)">
+                <Grid item xs={12} className={classes.buttonArea}>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="secondary"
+                        size={"large"}
+                        className={classes.button}
+                    >
+                        支出作成
+                    </Button>
+                </Grid>
+            </MediaQuery>
         </Grid>
     );
 }
@@ -197,6 +248,19 @@ const useStyles = makeStyles((thema) => ({
     },
     instructions: {
         marginTop: "16px",
-        color: "red",
+        color: "#ababab",
+    },
+    imgArea: {
+        width: "100%",
+        marginTop: "16px",
+        display: "flex",
+        justifyContent: "center",
+        "& > img": {
+            width: "80%",
+            height: "auto",
+        },
+    },
+    fileResetButton: {
+        marginTop: "16px",
     },
 }));

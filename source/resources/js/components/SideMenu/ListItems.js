@@ -6,6 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import { makeStyles } from "@material-ui/core/styles";
 import { Divider } from "@material-ui/core";
+import { NavLink } from "react-router-dom";
 
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -25,19 +26,31 @@ export function MainListItems(props) {
     const classes = useStyles();
     return (
         <div>
-            <ListItem button>
-                <ListItemIcon>
-                    <AddCircleIcon className={classes.icon} />
-                </ListItemIcon>
-                <ListItemText primary="作成" />
-            </ListItem>
+            <NavLink
+                to="/mypage/regist"
+                activeClassName={classes.activeNav}
+                exact
+            >
+                <ListItem button>
+                    <ListItemIcon>
+                        <AddCircleIcon className={classes.icon} />
+                    </ListItemIcon>
+                    <ListItemText primary="作成" />
+                </ListItem>
+            </NavLink>
             <Divider />
-            <ListItem button>
-                <ListItemIcon>
-                    <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="ホーム" />
-            </ListItem>
+            <NavLink
+                to="/mypage/home"
+                activeClassName={classes.activeNav}
+                exact
+            >
+                <ListItem button>
+                    <ListItemIcon>
+                        <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="ホーム" />
+                </ListItem>
+            </NavLink>
             <ListItem button onClick={props.handleAccountBookMenu}>
                 <ListItemIcon>
                     <MenuBookIcon />
@@ -125,5 +138,10 @@ const useStyles = makeStyles((theme) => ({
         color: SUB_COLOR_BLUE,
         width: "1.5em",
         height: "1.5em",
+    },
+    activeNav: {
+        "& > .MuiListItem-button": {
+            borderRight: "4px solid #4B75B9",
+        },
     },
 }));

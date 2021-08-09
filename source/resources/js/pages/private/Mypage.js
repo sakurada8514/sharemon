@@ -3,8 +3,8 @@ import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Container } from "@material-ui/core";
 import clsx from "clsx";
 
 import SideMenu from "../../components/SideMenu/SideMenu";
@@ -24,6 +24,11 @@ export default function Mypage() {
     const classes = useStyles();
     const dispatch = useDispatch();
     const history = useHistory();
+    useEffect(() => {
+        if (window.matchMedia("(max-width: 960px)").matches) {
+            setSideMenuOpen(false);
+        }
+    }, []);
 
     const [sideMenuOpen, setSideMenuOpen] = useState(true);
     const [accountBookMenuOpen, setAccountBookMenuOpen] = useState(true);
@@ -98,44 +103,44 @@ export default function Mypage() {
 
     return (
         <div className={classes.root}>
-            <Header
-                sideMenuOpen={sideMenuOpen}
-                settingMenuOpen={settingMenuOpen}
-                inviteMenuOpen={inviteMenuOpen}
-                handleSideMenuOpen={handleSideMenuOpen}
-                handleSettingMenuOpen={handleSettingMenuOpen}
-                handleSettingMenuClose={handleSettingMenuClose}
-                handleInviteMenuOpen={handleInviteMenuOpen}
-                handleInviteMenuClose={handleInviteMenuClose}
-                InviteUrlCopy={InviteUrlCopy}
-                logout={logout}
-            />
-            <SideMenu
-                sideMenuOpen={sideMenuOpen}
-                accountBookMenuOpen={accountBookMenuOpen}
-                handleSideMenuOpen={handleSideMenuOpen}
-                handleSideMenuClose={handleSideMenuClose}
-                handleAccountBookMenu={handleAccountBookMenu}
-            />
-            <main className={classes.content}>
-                <div className={classes.appBarSpacer} />
-
-                <MyAlert
-                    alertOpen={alertOpen}
-                    severity={alertSeverity}
-                    alertMessage={alertMessage}
-                    handleAlert={handleAlert}
+            <BrowserRouter>
+                <Header
+                    sideMenuOpen={sideMenuOpen}
+                    settingMenuOpen={settingMenuOpen}
+                    inviteMenuOpen={inviteMenuOpen}
+                    handleSideMenuOpen={handleSideMenuOpen}
+                    handleSettingMenuOpen={handleSettingMenuOpen}
+                    handleSettingMenuClose={handleSettingMenuClose}
+                    handleInviteMenuOpen={handleInviteMenuOpen}
+                    handleInviteMenuClose={handleInviteMenuClose}
+                    InviteUrlCopy={InviteUrlCopy}
+                    logout={logout}
                 />
+                <SideMenu
+                    sideMenuOpen={sideMenuOpen}
+                    accountBookMenuOpen={accountBookMenuOpen}
+                    handleSideMenuOpen={handleSideMenuOpen}
+                    handleSideMenuClose={handleSideMenuClose}
+                    handleAccountBookMenu={handleAccountBookMenu}
+                />
+                <main className={classes.content}>
+                    <div className={classes.appBarSpacer} />
 
-                <div
-                    className={clsx(
-                        classes.container,
-                        sideMenuOpen
-                            ? classes.openPadding
-                            : classes.closePadding
-                    )}
-                >
-                    <BrowserRouter>
+                    <MyAlert
+                        alertOpen={alertOpen}
+                        severity={alertSeverity}
+                        alertMessage={alertMessage}
+                        handleAlert={handleAlert}
+                    />
+
+                    <div
+                        className={clsx(
+                            classes.container,
+                            sideMenuOpen
+                                ? classes.openPadding
+                                : classes.closePadding
+                        )}
+                    >
                         <Switch>
                             <Route
                                 exact
@@ -148,9 +153,9 @@ export default function Mypage() {
                                 children={<RegistMoney />}
                             />
                         </Switch>
-                    </BrowserRouter>
-                </div>
-            </main>
+                    </div>
+                </main>
+            </BrowserRouter>
         </div>
     );
 }

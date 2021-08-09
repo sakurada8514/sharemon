@@ -17,6 +17,7 @@ export default function MyDatePicker(props) {
     return (
         <MuiPickersUtilsProvider utils={ExtendedUtils} locale={jaLocale}>
             <DatePicker
+                inputVariant="outlined"
                 label="日付*"
                 okLabel="決定"
                 cancelLabel="キャンセル"
