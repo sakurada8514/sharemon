@@ -33143,6 +33143,252 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_14__.defaul
 
 /***/ }),
 
+/***/ "./resources/js/components/Form/RegistExpenseForm.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/Form/RegistExpenseForm.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ RegistExpenseForm)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/esm/makeStyles/makeStyles.js");
+/* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-responsive */ "./node_modules/react-responsive/dist/react-responsive.js");
+/* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_responsive__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Typography/Typography.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputAdornment/InputAdornment.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/FormControl/FormControl.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputLabel/InputLabel.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Select/Select.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/MenuItem/MenuItem.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/FormControlLabel/FormControlLabel.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Switch/Switch.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Button/Button.js");
+/* harmony import */ var _material_ui_icons_Receipt__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/icons/Receipt */ "./node_modules/@material-ui/icons/Receipt.js");
+/* harmony import */ var _material_ui_icons_Clear__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/icons/Clear */ "./node_modules/@material-ui/icons/Clear.js");
+/* harmony import */ var _Parts_FormParts_DatePicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Parts/FormParts/DatePicker */ "./resources/js/components/Parts/FormParts/DatePicker.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+
+function RegistExpenseForm(props) {
+  var classes = useStyles();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
+    container: true,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
+      item: true,
+      xs: 12,
+      md: 6,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        noValidate: true,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__.default, {
+          className: classes.instructions,
+          children: "*\u306F\u5FC5\u9808\u3067\u3059"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
+          variant: "outlined",
+          margin: "normal",
+          required: true,
+          fullWidth: true,
+          id: "expense",
+          label: "\u652F\u51FA\u91D1\u984D",
+          name: "expense",
+          autoComplete: "expense",
+          autoFocus: true,
+          value: props.expense,
+          onChange: props.handleChangeExpense // error={
+          //     typeof props.errors.email !== "undefined" ||
+          //     typeof props.errors.auth !== "undefined"
+          // }
+          // helperText={props.errors.email}
+          ,
+          InputProps: {
+            endAdornment: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__.default, {
+              position: "end",
+              children: "\u5186"
+            })
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Parts_FormParts_DatePicker__WEBPACK_IMPORTED_MODULE_1__.default, {
+          date: props.date,
+          setDate: props.setDate
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__.default, {
+          variant: "outlined" // className={classes.formControl}
+          ,
+          fullWidth: true,
+          required: true,
+          margin: "normal",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__.default, {
+            id: "select-outlined-label",
+            children: "\u30AB\u30C6\u30B4\u30EA\u30FC"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__.default, {
+            labelId: "select-outlined-label",
+            id: "select-outlined",
+            value: props.category,
+            onChange: props.handleChangeCategory,
+            label: "\u30AB\u30C6\u30B4\u30EA\u30FC",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
+              value: "",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("em", {
+                children: "None"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
+              value: "test",
+              children: "Ten"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
+              value: "test",
+              children: "Twenty"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
+              value: "test",
+              children: "Thirty"
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
+          variant: "outlined",
+          id: "comment",
+          label: "\u30B3\u30E1\u30F3\u30C8",
+          multiline: true,
+          rows: 5,
+          value: props.comment,
+          onChange: props.handleChangeComment // variant="filled"
+          ,
+          fullWidth: true,
+          margin: "normal"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__.default, {
+            control: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__.default, {
+              checked: props.repetition,
+              onChange: props.handleToggleRepetition
+            }),
+            label: "\u7E70\u308A\u8FD4\u3057\u767B\u9332\uFF08\u56FA\u5B9A\u8CBB\u7B49\uFF09",
+            labelPlacement: "start"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)((react_responsive__WEBPACK_IMPORTED_MODULE_13___default()), {
+          query: "(min-width: 960px)",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
+            item: true,
+            xs: 12,
+            className: classes.buttonArea,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__.default, {
+              type: "submit",
+              variant: "contained",
+              color: "secondary",
+              size: "large",
+              className: classes.button,
+              children: "\u652F\u51FA\u4F5C\u6210"
+            })
+          })
+        })]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
+      item: true,
+      xs: 12,
+      md: 6,
+      className: classes.receiptImageArea,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          id: "myInput",
+          type: "file",
+          ref: props.fileInput,
+          style: {
+            display: "none"
+          },
+          onChange: props.handleChangeFile
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__.default, {
+          variant: "outlined",
+          color: "primary",
+          size: "large",
+          fullWidth: true,
+          startIcon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_Receipt__WEBPACK_IMPORTED_MODULE_15__.default, {}),
+          className: classes.receiptButton,
+          onClick: props.handleClickFileInput,
+          children: "\u30EC\u30B7\u30FC\u30C8\u30A2\u30C3\u30D7\u30ED\u30FC\u30C9"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: classes.imgArea,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+          src: props.receiptImg
+        })
+      }), props.receiptImg && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__.default, {
+        variant: "outlined",
+        color: "inherit",
+        size: "small",
+        startIcon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_Clear__WEBPACK_IMPORTED_MODULE_16__.default, {}),
+        className: classes.fileResetButton,
+        onClick: props.handleFileReset,
+        children: "\u30EA\u30BB\u30C3\u30C8"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)((react_responsive__WEBPACK_IMPORTED_MODULE_13___default()), {
+      query: "(max-width: 960px)",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
+        item: true,
+        xs: 12,
+        className: classes.buttonArea,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__.default, {
+          type: "submit",
+          variant: "contained",
+          color: "secondary",
+          size: "large",
+          className: classes.button,
+          children: "\u652F\u51FA\u4F5C\u6210"
+        })
+      })
+    })]
+  });
+}
+var useStyles = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_17__.default)(function (thema) {
+  return {
+    buttonArea: {
+      display: "flex",
+      justifyContent: "center",
+      marginTop: "24px"
+    },
+    button: {
+      padding: "2px 56px",
+      fontSize: "1.25em"
+    },
+    receiptImageArea: {
+      padding: "16px 10px",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    },
+    receiptButton: {
+      padding: "2px 56px",
+      fontSize: "1.25em",
+      height: "56px"
+    },
+    instructions: {
+      marginTop: "16px",
+      color: "#ababab"
+    },
+    imgArea: {
+      width: "100%",
+      marginTop: "16px",
+      display: "flex",
+      justifyContent: "center",
+      "& > img": {
+        width: "80%",
+        height: "auto"
+      }
+    },
+    fileResetButton: {
+      marginTop: "16px"
+    }
+  };
+});
+
+/***/ }),
+
 /***/ "./resources/js/components/Form/RegistForm.js":
 /*!****************************************************!*\
   !*** ./resources/js/components/Form/RegistForm.js ***!
@@ -36106,23 +36352,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ RegistExpense)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/esm/makeStyles/makeStyles.js");
-/* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-responsive */ "./node_modules/react-responsive/dist/react-responsive.js");
-/* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_responsive__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Typography/Typography.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputAdornment/InputAdornment.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/FormControl/FormControl.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputLabel/InputLabel.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Select/Select.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/MenuItem/MenuItem.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/FormControlLabel/FormControlLabel.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Switch/Switch.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Button/Button.js");
-/* harmony import */ var _material_ui_icons_Receipt__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/icons/Receipt */ "./node_modules/@material-ui/icons/Receipt.js");
-/* harmony import */ var _material_ui_icons_Clear__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/icons/Clear */ "./node_modules/@material-ui/icons/Clear.js");
-/* harmony import */ var _components_Parts_FormParts_DatePicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../components/Parts/FormParts/DatePicker */ "./resources/js/components/Parts/FormParts/DatePicker.js");
+/* harmony import */ var _components_Form_RegistExpenseForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../components/Form/RegistExpenseForm */ "./resources/js/components/Form/RegistExpenseForm.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -36140,15 +36370,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-
-
-
-
-
 function RegistExpense() {
-  var classes = useStyles();
-
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
       expense = _useState2[0],
@@ -36179,27 +36401,35 @@ function RegistExpense() {
       receiptImg = _useState12[0],
       setReceiptImg = _useState12[1];
 
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState14 = _slicedToArray(_useState13, 2),
+      errors = _useState14[0],
+      setErrors = _useState14[1];
+
   var fileInput = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-
-  var handleFileInputClick = function handleFileInputClick() {
-    fileInput.current.click();
-  };
-
-  var handleToggleRepetition = function handleToggleRepetition() {
-    setRepetition(!repetition);
-  };
 
   var handleChangeExpense = function handleChangeExpense(e) {
     return setExpense(e.target.value);
+  };
+
+  var handleChangeCategory = function handleChangeCategory(e) {
+    return setCategory(e.target.value);
   };
 
   var handleChangeComment = function handleChangeComment(e) {
     return setComment(e.target.value);
   };
 
+  var handleToggleRepetition = function handleToggleRepetition() {
+    setRepetition(!repetition);
+  };
+
+  var handleClickFileInput = function handleClickFileInput() {
+    fileInput.current.click();
+  };
+
   var handleChangeFile = function handleChangeFile(e) {
     var files = e.target.files;
-    console.log(files);
 
     if (files.length > 0) {
       var file = files[0];
@@ -36218,210 +36448,24 @@ function RegistExpense() {
     setReceiptImg("");
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
-    container: true,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
-      item: true,
-      xs: 12,
-      md: 6,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        noValidate: true,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__.default, {
-          className: classes.instructions,
-          children: "*\u306F\u5FC5\u9808\u3067\u3059"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
-          variant: "outlined",
-          margin: "normal",
-          required: true,
-          fullWidth: true,
-          id: "expense",
-          label: "\u652F\u51FA\u91D1\u984D",
-          name: "expense",
-          autoComplete: "expense",
-          autoFocus: true,
-          value: expense,
-          onChange: handleChangeExpense // error={
-          //     typeof props.errors.email !== "undefined" ||
-          //     typeof props.errors.auth !== "undefined"
-          // }
-          // helperText={props.errors.email}
-          ,
-          InputProps: {
-            endAdornment: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__.default, {
-              position: "end",
-              children: "\u5186"
-            })
-          }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_Parts_FormParts_DatePicker__WEBPACK_IMPORTED_MODULE_1__.default, {
-          date: date,
-          setDate: setDate
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__.default, {
-          variant: "outlined" // className={classes.formControl}
-          ,
-          fullWidth: true,
-          required: true,
-          margin: "normal",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__.default, {
-            id: "select-outlined-label",
-            children: "\u30AB\u30C6\u30B4\u30EA\u30FC"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__.default, {
-            labelId: "select-outlined-label",
-            id: "select-outlined",
-            value: category,
-            onChange: function onChange(e) {
-              setCategory(e.target.value);
-            },
-            label: "\u30AB\u30C6\u30B4\u30EA\u30FC",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
-              value: "",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("em", {
-                children: "None"
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
-              value: "test",
-              children: "Ten"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
-              value: "test",
-              children: "Twenty"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
-              value: "test",
-              children: "Thirty"
-            })]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
-          variant: "outlined",
-          id: "comment",
-          label: "\u30B3\u30E1\u30F3\u30C8",
-          multiline: true,
-          rows: 5,
-          value: comment,
-          onChange: handleChangeComment // variant="filled"
-          ,
-          fullWidth: true,
-          margin: "normal"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__.default, {
-            control: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__.default, {
-              checked: repetition,
-              onChange: handleToggleRepetition
-            }),
-            label: "\u7E70\u308A\u8FD4\u3057\u767B\u9332\uFF08\u56FA\u5B9A\u8CBB\u7B49\uFF09",
-            labelPlacement: "start"
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)((react_responsive__WEBPACK_IMPORTED_MODULE_13___default()), {
-          query: "(min-width: 960px)",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
-            item: true,
-            xs: 12,
-            className: classes.buttonArea,
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__.default, {
-              type: "submit",
-              variant: "contained",
-              color: "secondary",
-              size: "large",
-              className: classes.button,
-              children: "\u652F\u51FA\u4F5C\u6210"
-            })
-          })
-        })]
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
-      item: true,
-      xs: 12,
-      md: 6,
-      className: classes.receiptImageArea,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-          id: "myInput",
-          type: "file",
-          ref: fileInput,
-          style: {
-            display: "none"
-          },
-          onChange: handleChangeFile
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__.default, {
-          variant: "outlined",
-          color: "primary",
-          size: "large",
-          fullWidth: true,
-          startIcon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_Receipt__WEBPACK_IMPORTED_MODULE_15__.default, {}),
-          className: classes.receiptButton,
-          onClick: handleFileInputClick,
-          children: "\u30EC\u30B7\u30FC\u30C8\u30A2\u30C3\u30D7\u30ED\u30FC\u30C9"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        className: classes.imgArea,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-          src: receiptImg
-        })
-      }), receiptImg && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__.default, {
-        variant: "outlined",
-        color: "inherit",
-        size: "small",
-        startIcon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_Clear__WEBPACK_IMPORTED_MODULE_16__.default, {}),
-        className: classes.fileResetButton,
-        onClick: handleFileReset,
-        children: "\u30EA\u30BB\u30C3\u30C8"
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)((react_responsive__WEBPACK_IMPORTED_MODULE_13___default()), {
-      query: "(max-width: 960px)",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
-        item: true,
-        xs: 12,
-        className: classes.buttonArea,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__.default, {
-          type: "submit",
-          variant: "contained",
-          color: "secondary",
-          size: "large",
-          className: classes.button,
-          children: "\u652F\u51FA\u4F5C\u6210"
-        })
-      })
-    })]
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_Form_RegistExpenseForm__WEBPACK_IMPORTED_MODULE_1__.default, {
+    expense: expense,
+    date: date,
+    category: category,
+    comment: comment,
+    repetition: repetition,
+    fileInput: fileInput,
+    receiptImg: receiptImg,
+    setDate: setDate,
+    handleChangeExpense: handleChangeExpense,
+    handleChangeCategory: handleChangeCategory,
+    handleChangeComment: handleChangeComment,
+    handleToggleRepetition: handleToggleRepetition,
+    handleChangeFile: handleChangeFile,
+    handleClickFileInput: handleClickFileInput,
+    handleFileReset: handleFileReset
   });
 }
-var useStyles = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_17__.default)(function (thema) {
-  return {
-    buttonArea: {
-      display: "flex",
-      justifyContent: "center",
-      marginTop: "24px"
-    },
-    button: {
-      padding: "2px 56px",
-      fontSize: "1.25em"
-    },
-    receiptImageArea: {
-      padding: "16px 10px",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center"
-    },
-    receiptButton: {
-      padding: "2px 56px",
-      fontSize: "1.25em",
-      height: "56px"
-    },
-    instructions: {
-      marginTop: "16px",
-      color: "#ababab"
-    },
-    imgArea: {
-      width: "100%",
-      marginTop: "16px",
-      display: "flex",
-      justifyContent: "center",
-      "& > img": {
-        width: "80%",
-        height: "auto"
-      }
-    },
-    fileResetButton: {
-      marginTop: "16px"
-    }
-  };
-});
 
 /***/ }),
 

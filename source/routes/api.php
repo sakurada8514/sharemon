@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Money\ExpenseController;
 use App\Http\Controllers\Api\Rooms\RoomController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +36,4 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/regist/url', [RoomController::class, "createInviteUrl"]);
 });
+Route::get('/expense/category/list', [ExpenseController::class, 'getExpenseCategoryList']);

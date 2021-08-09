@@ -18,6 +18,7 @@ class CreateExpenseCategoriesTable extends Migration
             $table->bigInteger('room_id')->nullable()->unsigned();
             $table->text('category_name');
             $table->integer('all_flg');
+            $table->integer('del_flg');
             $table->timestamps();
 
             $table->foreign('room_id')->references('room_id')->on('rooms')->onDelete('cascade');

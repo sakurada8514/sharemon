@@ -131,7 +131,7 @@ class AuthController extends Controller
         if (is_null($_user)) {
             return response()->json(
                 [
-                    'errors' => config('sharemonWebApp.ERROR_MESSAGE.AUTH')
+                    'errors' => config('Const.webApp.ERROR_MESSAGE.AUTH')
                 ],
                 Response::HTTP_UNAUTHORIZED
             );

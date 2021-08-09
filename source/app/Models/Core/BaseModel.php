@@ -40,7 +40,7 @@ class BaseModel extends Model
     protected function _getBaseDefaultInsertDataWithDelFlg(): array
     {
         return [
-            'del_flg' => config('sharemonWebDB.DEL_FLG.OFF'),
+            'del_flg' => config('Const.webDB.DEL_FLG.OFF'),
             'created_at' => now(),
             'updated_at' => now()
         ];
