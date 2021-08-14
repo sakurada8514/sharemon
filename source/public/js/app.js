@@ -32643,6 +32643,120 @@ function _regist() {
 
 /***/ }),
 
+/***/ "./resources/js/api/Expense/category.js":
+/*!**********************************************!*\
+  !*** ./resources/js/api/Expense/category.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getCategoryList": () => (/* binding */ getCategoryList)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+function getCategoryList() {
+  return _getCategoryList.apply(this, arguments);
+}
+
+function _getCategoryList() {
+  _getCategoryList = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+    var response;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/expense/category/list")["catch"](function (err) {
+              return err.response;
+            });
+
+          case 2:
+            response = _context.sent;
+            return _context.abrupt("return", response);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _getCategoryList.apply(this, arguments);
+}
+
+/***/ }),
+
+/***/ "./resources/js/api/Expense/regist.js":
+/*!********************************************!*\
+  !*** ./resources/js/api/Expense/regist.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "registExpense": () => (/* binding */ registExpense)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+function registExpense(_x, _x2, _x3, _x4, _x5) {
+  return _registExpense.apply(this, arguments);
+}
+
+function _registExpense() {
+  _registExpense = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(expense, regist_date, category_id, comment, repetition_flg) {
+    var response;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/expense/regist", {
+              expense: expense,
+              regist_date: regist_date,
+              category_id: category_id,
+              comment: comment,
+              repetition_flg: repetition_flg
+            })["catch"](function (err) {
+              return err.response;
+            });
+
+          case 2:
+            response = _context.sent;
+            return _context.abrupt("return", response);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _registExpense.apply(this, arguments);
+}
+
+/***/ }),
+
 /***/ "./resources/js/api/Room/invite.js":
 /*!*****************************************!*\
   !*** ./resources/js/api/Room/invite.js ***!
@@ -33230,27 +33344,18 @@ function RegistExpenseForm(props) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__.default, {
             id: "select-outlined-label",
             children: "\u30AB\u30C6\u30B4\u30EA\u30FC"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__.default, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__.default, {
             labelId: "select-outlined-label",
             id: "select-outlined",
             value: props.category,
             onChange: props.handleChangeCategory,
             label: "\u30AB\u30C6\u30B4\u30EA\u30FC",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
-              value: "",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("em", {
-                children: "None"
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
-              value: "test",
-              children: "Ten"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
-              value: "test",
-              children: "Twenty"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
-              value: "test",
-              children: "Thirty"
-            })]
+            children: props.categoryList.map(function (data) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
+                value: data.category_id,
+                children: data.category_name
+              }, data.category_id);
+            })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
           variant: "outlined",
@@ -33279,6 +33384,7 @@ function RegistExpenseForm(props) {
             xs: 12,
             className: classes.buttonArea,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__.default, {
+              onClick: props.registExpense,
               type: "submit",
               variant: "contained",
               color: "secondary",
@@ -33298,6 +33404,7 @@ function RegistExpenseForm(props) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
           id: "myInput",
           type: "file",
+          accept: "image/*",
           ref: props.fileInput,
           style: {
             display: "none"
@@ -33334,6 +33441,7 @@ function RegistExpenseForm(props) {
         xs: 12,
         className: classes.buttonArea,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__.default, {
+          onClick: props.registExpense,
           type: "submit",
           variant: "contained",
           color: "secondary",
@@ -36351,9 +36459,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ RegistExpense)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _components_Form_RegistExpenseForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../components/Form/RegistExpenseForm */ "./resources/js/components/Form/RegistExpenseForm.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _components_Form_RegistExpenseForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../components/Form/RegistExpenseForm */ "./resources/js/components/Form/RegistExpenseForm.js");
+/* harmony import */ var _Const_constant__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../Const/constant */ "./resources/js/Const/constant.js");
+/* harmony import */ var _api_Expense_category__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../api/Expense/category */ "./resources/js/api/Expense/category.js");
+/* harmony import */ var _api_Expense_regist__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../api/Expense/regist */ "./resources/js/api/Expense/regist.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -36370,43 +36489,87 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
 function RegistExpense() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
       expense = _useState2[0],
       setExpense = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(new Date()),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(new Date()),
       _useState4 = _slicedToArray(_useState3, 2),
       date = _useState4[0],
       setDate = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState6 = _slicedToArray(_useState5, 2),
       category = _useState6[0],
       setCategory = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
       repetition = _useState8[0],
       setRepetition = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState10 = _slicedToArray(_useState9, 2),
       comment = _useState10[0],
       setComment = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState12 = _slicedToArray(_useState11, 2),
       receiptImg = _useState12[0],
       setReceiptImg = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState14 = _slicedToArray(_useState13, 2),
       errors = _useState14[0],
       setErrors = _useState14[1];
 
-  var fileInput = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState16 = _slicedToArray(_useState15, 2),
+      categoryList = _useState16[0],
+      setCategoryList = _useState16[1];
+
+  var fileInput = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    function getCategoryList() {
+      return _getCategoryList.apply(this, arguments);
+    }
+
+    function _getCategoryList() {
+      _getCategoryList = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return (0,_api_Expense_category__WEBPACK_IMPORTED_MODULE_4__.getCategoryList)();
+
+              case 2:
+                response = _context.sent;
+
+                if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.OK) {
+                  setCategoryList(response.data);
+                } else {
+                  history.push("/error");
+                }
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+      return _getCategoryList.apply(this, arguments);
+    }
+
+    getCategoryList();
+  }, []);
 
   var handleChangeExpense = function handleChangeExpense(e) {
     return setExpense(e.target.value);
@@ -36448,7 +36611,20 @@ function RegistExpense() {
     setReceiptImg("");
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_Form_RegistExpenseForm__WEBPACK_IMPORTED_MODULE_1__.default, {
+  function registExpense() {
+    var response = (0,_api_Expense_regist__WEBPACK_IMPORTED_MODULE_5__.registExpense)(expense, date, category, comment, repetition);
+
+    if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.OK) {
+      console.log("ok");
+    } else if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.VALIDATION) {
+      setErrors(response.data.errors);
+    } else {
+      history.push("/error");
+    }
+  }
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Form_RegistExpenseForm__WEBPACK_IMPORTED_MODULE_2__.default, {
+    registExpense: registExpense,
     expense: expense,
     date: date,
     category: category,
@@ -36456,6 +36632,7 @@ function RegistExpense() {
     repetition: repetition,
     fileInput: fileInput,
     receiptImg: receiptImg,
+    categoryList: categoryList,
     setDate: setDate,
     handleChangeExpense: handleChangeExpense,
     handleChangeCategory: handleChangeCategory,

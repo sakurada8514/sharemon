@@ -73,12 +73,16 @@ export default function RegistExpenseForm(props) {
                             onChange={props.handleChangeCategory}
                             label="カテゴリー"
                         >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value="test">Ten</MenuItem>
-                            <MenuItem value="test">Twenty</MenuItem>
-                            <MenuItem value="test">Thirty</MenuItem>
+                            {props.categoryList.map((data) => {
+                                return (
+                                    <MenuItem
+                                        key={data.category_id}
+                                        value={data.category_id}
+                                    >
+                                        {data.category_name}
+                                    </MenuItem>
+                                );
+                            })}
                         </Select>
                     </FormControl>
                     <TextField
@@ -108,6 +112,7 @@ export default function RegistExpenseForm(props) {
                     <MediaQuery query="(min-width: 960px)">
                         <Grid item xs={12} className={classes.buttonArea}>
                             <Button
+                                onClick={props.registExpense}
                                 type="submit"
                                 variant="contained"
                                 color="secondary"
@@ -125,6 +130,7 @@ export default function RegistExpenseForm(props) {
                     <input
                         id="myInput"
                         type="file"
+                        accept="image/*"
                         ref={props.fileInput}
                         style={{ display: "none" }}
                         onChange={props.handleChangeFile}
@@ -160,6 +166,7 @@ export default function RegistExpenseForm(props) {
             <MediaQuery query="(max-width: 960px)">
                 <Grid item xs={12} className={classes.buttonArea}>
                     <Button
+                        onClick={props.registExpense}
                         type="submit"
                         variant="contained"
                         color="secondary"

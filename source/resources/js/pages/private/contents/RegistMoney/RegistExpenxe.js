@@ -1,7 +1,11 @@
 import React from "react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import RegistExpenseForm from "../../../../components/Form/RegistExpenseForm";
+import { OK, VALIDATION } from "../../../../Const/constant";
+
+import { getCategoryList as getCategoryListApi } from "../../../../api/Expense/category";
+import { registExpense as registExpenseApi } from "../../../../api/Expense/regist";
 
 export default function RegistExpense() {
     const [expense, setExpense] = useState("");
@@ -11,8 +15,22 @@ export default function RegistExpense() {
     const [comment, setComment] = useState("");
     const [receiptImg, setReceiptImg] = useState("");
     const [errors, setErrors] = useState([]);
+    const [categoryList, setCategoryList] = useState([]);
 
     const fileInput = useRef(null);
+
+    useEffect(() => {
+        async function getCategoryList() {
+            const response = await getCategoryListApi();
+
+            if (response.status === OK) {
+                setCategoryList(response.data);
+            } else {
+                history.push("/error");
+            }
+        }
+        getCategoryList();
+    }, []);
 
     const handleChangeExpense = (e) => setExpense(e.target.value);
     const handleChangeCategory = (e) => setCategory(e.target.value);
@@ -41,8 +59,26 @@ export default function RegistExpense() {
         setReceiptImg("");
     };
 
+    function registExpense() {
+        const response = registExpenseApi(
+            expense,
+            date,
+            category,
+            comment,
+            repetition
+        );
+        if (response.status === OK) {
+            console.log("ok");
+        } else if (response.status === VALIDATION) {
+            setErrors(response.data.errors);
+        } else {
+            history.push("/error");
+        }
+    }
+
     return (
         <RegistExpenseForm
+            registExpense={registExpense}
             expense={expense}
             date={date}
             category={category}
@@ -50,6 +86,7 @@ export default function RegistExpense() {
             repetition={repetition}
             fileInput={fileInput}
             receiptImg={receiptImg}
+            categoryList={categoryList}
             setDate={setDate}
             handleChangeExpense={handleChangeExpense}
             handleChangeCategory={handleChangeCategory}
