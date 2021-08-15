@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Money;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Expense\RegistExpenseRequest;
 use App\Services\ExpenseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,11 +16,22 @@ class ExpenseController extends Controller
     {
         $this->_expenseService = $_expenseService;
     }
+
     public function getExpenseCategoryList()
     {
-        // $_roomId = Auth::user()->room_id;
-        $_roomId = 1;
+        $_roomId = Auth::user()->room_id;
+
         $_ret = $this->_expenseService->findCategoryList($_roomId);
+
         return response()->json($_ret);
+    }
+
+    public function registExpense(RegistExpenseRequest $request)
+    {
+        $_user = Auth::user();
+        $_registData = $request->only('expense', 'regist_date', 'category_id', 'comment', 'repetition_flg');
+        $this->_expenseService->insertExpense($_registData, $_user);
+
+        return response()->json([]);
     }
 }

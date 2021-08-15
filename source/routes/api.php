@@ -35,5 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/room/create', [RoomController::class, "createRoom"]);
 
     Route::get('/regist/url', [RoomController::class, "createInviteUrl"]);
+
+    Route::get('/expense/category/list', [ExpenseController::class, 'getExpenseCategoryList']);
+    Route::post('/expense/regist', [ExpenseController::class, 'registExpense']);
 });
-Route::get('/expense/category/list', [ExpenseController::class, 'getExpenseCategoryList']);
