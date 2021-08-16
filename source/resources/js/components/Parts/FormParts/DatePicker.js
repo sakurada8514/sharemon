@@ -27,6 +27,8 @@ export default function MyDatePicker(props) {
                 animateYearScrolling
                 fullWidth
                 margin="normal"
+                error={typeof props.errors.regist_date !== "undefined"}
+                helperText={props.errors.regist_date}
             />
         </MuiPickersUtilsProvider>
     );

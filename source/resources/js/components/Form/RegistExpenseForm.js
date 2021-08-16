@@ -41,11 +41,8 @@ export default function RegistExpenseForm(props) {
                         autoFocus
                         value={props.expense}
                         onChange={props.handleChangeExpense}
-                        // error={
-                        //     typeof props.errors.email !== "undefined" ||
-                        //     typeof props.errors.auth !== "undefined"
-                        // }
-                        // helperText={props.errors.email}
+                        error={typeof props.errors.expense !== "undefined"}
+                        helperText={props.errors.expense}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
@@ -55,13 +52,18 @@ export default function RegistExpenseForm(props) {
                         }}
                     />
 
-                    <MyDatePicker date={props.date} setDate={props.setDate} />
+                    <MyDatePicker
+                        date={props.date}
+                        setDate={props.setDate}
+                        errors={props.errors}
+                    />
                     <FormControl
                         variant="outlined"
                         // className={classes.formControl}
                         fullWidth
                         required
                         margin="normal"
+                        error={typeof props.errors.category_id !== "undefined"}
                     >
                         <InputLabel id="select-outlined-label">
                             カテゴリー
@@ -96,6 +98,8 @@ export default function RegistExpenseForm(props) {
                         // variant="filled"
                         fullWidth
                         margin="normal"
+                        error={typeof props.errors.comment !== "undefined"}
+                        helperText={props.errors.comment}
                     />
                     <div>
                         <FormControlLabel

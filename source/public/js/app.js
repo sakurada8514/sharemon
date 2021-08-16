@@ -33006,7 +33006,6 @@ function App() {
             path: "/",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_18__.jsx)(_pages_Top__WEBPACK_IMPORTED_MODULE_5__.default, {})
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_18__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_21__.Route, {
-            exact: true,
             path: "/error",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_18__.jsx)(_pages_Error__WEBPACK_IMPORTED_MODULE_6__.default, {})
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_18__.jsx)(_components_Route_GuestRoute__WEBPACK_IMPORTED_MODULE_12__.default, {
@@ -33320,12 +33319,9 @@ function RegistExpenseForm(props) {
           autoComplete: "expense",
           autoFocus: true,
           value: props.expense,
-          onChange: props.handleChangeExpense // error={
-          //     typeof props.errors.email !== "undefined" ||
-          //     typeof props.errors.auth !== "undefined"
-          // }
-          // helperText={props.errors.email}
-          ,
+          onChange: props.handleChangeExpense,
+          error: typeof props.errors.expense !== "undefined",
+          helperText: props.errors.expense,
           InputProps: {
             endAdornment: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__.default, {
               position: "end",
@@ -33334,13 +33330,15 @@ function RegistExpenseForm(props) {
           }
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Parts_FormParts_DatePicker__WEBPACK_IMPORTED_MODULE_1__.default, {
           date: props.date,
-          setDate: props.setDate
+          setDate: props.setDate,
+          errors: props.errors
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__.default, {
           variant: "outlined" // className={classes.formControl}
           ,
           fullWidth: true,
           required: true,
           margin: "normal",
+          error: typeof props.errors.category_id !== "undefined",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__.default, {
             id: "select-outlined-label",
             children: "\u30AB\u30C6\u30B4\u30EA\u30FC"
@@ -33367,7 +33365,9 @@ function RegistExpenseForm(props) {
           onChange: props.handleChangeComment // variant="filled"
           ,
           fullWidth: true,
-          margin: "normal"
+          margin: "normal",
+          error: typeof props.errors.comment !== "undefined",
+          helperText: props.errors.comment
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__.default, {
             control: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__.default, {
@@ -34300,7 +34300,9 @@ function MyDatePicker(props) {
       format: "yyyy/MM/dd",
       animateYearScrolling: true,
       fullWidth: true,
-      margin: "normal"
+      margin: "normal",
+      error: typeof props.errors.regist_date !== "undefined",
+      helperText: props.errors.regist_date
     })
   });
 }
@@ -36462,6 +36464,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _components_Form_RegistExpenseForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../components/Form/RegistExpenseForm */ "./resources/js/components/Form/RegistExpenseForm.js");
 /* harmony import */ var _Const_constant__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../Const/constant */ "./resources/js/Const/constant.js");
 /* harmony import */ var _api_Expense_category__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../api/Expense/category */ "./resources/js/api/Expense/category.js");
@@ -36492,7 +36495,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function RegistExpense() {
+  var history = (0,react_router__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
+
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
       expense = _useState2[0],
@@ -36554,6 +36560,7 @@ function RegistExpense() {
 
                 if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.OK) {
                   setCategoryList(response.data);
+                  setCategory(1);
                 } else {
                   history.push("/error");
                 }
@@ -36612,15 +36619,39 @@ function RegistExpense() {
   };
 
   function registExpense() {
-    var response = (0,_api_Expense_regist__WEBPACK_IMPORTED_MODULE_5__.registExpense)(expense, date, category, comment, repetition);
+    return _registExpense.apply(this, arguments);
+  }
 
-    if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.OK) {
-      console.log("ok");
-    } else if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.VALIDATION) {
-      setErrors(response.data.errors);
-    } else {
-      history.push("/error");
-    }
+  function _registExpense() {
+    _registExpense = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return (0,_api_Expense_regist__WEBPACK_IMPORTED_MODULE_5__.registExpense)(expense, date, category, comment, repetition);
+
+            case 2:
+              response = _context2.sent;
+              console.log(response);
+
+              if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.OK) {
+                console.log("ok");
+              } else if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.VALIDATION) {
+                setErrors(response.data.errors);
+              } else {
+                console.log("error");
+              }
+
+            case 5:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+    return _registExpense.apply(this, arguments);
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Form_RegistExpenseForm__WEBPACK_IMPORTED_MODULE_2__.default, {
@@ -36633,6 +36664,7 @@ function RegistExpense() {
     fileInput: fileInput,
     receiptImg: receiptImg,
     categoryList: categoryList,
+    errors: errors,
     setDate: setDate,
     handleChangeExpense: handleChangeExpense,
     handleChangeCategory: handleChangeCategory,

@@ -29,7 +29,7 @@ function App() {
                 <BrowserRouter>
                     <Switch>
                         <Route exact path="/" children={<Top />} />
-                        <Route exact path="/error" children={<Error />} />
+                        <Route path="/error" children={<Error />} />
                         <GuestRoute exact path="/login" children={<Login />} />
                         <GuestRoute
                             exact

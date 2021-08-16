@@ -149,7 +149,9 @@ return [
     'attributes' => [
         "email" => "メールアドレス",
         "password" => "パスワード",
-        "name" => "ユーザー名"
+        "name" => "ユーザー名",
+        "expense" => "支出金額",
+        "category_id" => "カテゴリー"
     ],
 
 ];

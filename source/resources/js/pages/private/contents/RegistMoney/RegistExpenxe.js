@@ -1,5 +1,6 @@
 import React from "react";
 import { useRef, useState, useEffect } from "react";
+import { useHistory } from "react-router";
 
 import RegistExpenseForm from "../../../../components/Form/RegistExpenseForm";
 import { OK, VALIDATION } from "../../../../Const/constant";
@@ -8,6 +9,8 @@ import { getCategoryList as getCategoryListApi } from "../../../../api/Expense/c
 import { registExpense as registExpenseApi } from "../../../../api/Expense/regist";
 
 export default function RegistExpense() {
+    const history = useHistory();
+
     const [expense, setExpense] = useState("");
     const [date, setDate] = useState(new Date());
     const [category, setCategory] = useState("");
@@ -25,6 +28,7 @@ export default function RegistExpense() {
 
             if (response.status === OK) {
                 setCategoryList(response.data);
+                setCategory(1);
             } else {
                 history.push("/error");
             }
@@ -59,20 +63,21 @@ export default function RegistExpense() {
         setReceiptImg("");
     };
 
-    function registExpense() {
-        const response = registExpenseApi(
+    async function registExpense() {
+        const response = await registExpenseApi(
             expense,
             date,
             category,
             comment,
             repetition
         );
+        console.log(response);
         if (response.status === OK) {
             console.log("ok");
         } else if (response.status === VALIDATION) {
             setErrors(response.data.errors);
         } else {
-            history.push("/error");
+            console.log("error");
         }
     }
 
@@ -87,6 +92,7 @@ export default function RegistExpense() {
             fileInput={fileInput}
             receiptImg={receiptImg}
             categoryList={categoryList}
+            errors={errors}
             setDate={setDate}
             handleChangeExpense={handleChangeExpense}
             handleChangeCategory={handleChangeCategory}
