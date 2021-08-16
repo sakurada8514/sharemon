@@ -8,7 +8,7 @@ import { OK, VALIDATION } from "../../../../Const/constant";
 import { getCategoryList as getCategoryListApi } from "../../../../api/Expense/category";
 import { registExpense as registExpenseApi } from "../../../../api/Expense/regist";
 
-export default function RegistExpense() {
+export default function RegistExpense(props) {
     const history = useHistory();
 
     const [expense, setExpense] = useState("");
@@ -73,11 +73,23 @@ export default function RegistExpense() {
         );
         console.log(response);
         if (response.status === OK) {
-            console.log("ok");
+            props.handleAlertOpen();
+            props.setAlertMessage("正常に支出を作成しました");
+            setExpense("");
+            setDate(new Date());
+            setCategory(1);
+            setComment("");
+            setRepetition(false);
+            setErrors([]);
+            handleFileReset();
         } else if (response.status === VALIDATION) {
             setErrors(response.data.errors);
         } else {
-            console.log("error");
+            props.setAlertOpen(true);
+            props.setAlertSeverity("error");
+            props.setAlertMessage(
+                "何かしらのエラーが発生しました。時間をおいてから再度お試しください。"
+            );
         }
     }
 

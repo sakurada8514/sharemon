@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -15,9 +16,9 @@ import {
     BACK_COLOR_WHITE,
 } from "../../../../Const/styleConstant";
 
-export default function RegistMoney() {
+export default function RegistMoney(props) {
     const classes = useStyles();
-    const [tabValue, setTabValue] = React.useState(0);
+    const [tabValue, setTabValue] = useState(0);
 
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
@@ -44,7 +45,11 @@ export default function RegistMoney() {
                 </Tabs>
             </AppBar>
             <TabPanel value={tabValue} index={0}>
-                <RegistExpense />
+                <RegistExpense
+                    handleAlertOpen={props.handleAlertOpen}
+                    setAlertSeverity={props.setAlertSeverity}
+                    setAlertMessage={props.setAlertMessage}
+                />
             </TabPanel>
             <TabPanel value={tabValue} index={1}>
                 <RegistIncome />

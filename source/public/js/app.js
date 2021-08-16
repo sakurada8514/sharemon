@@ -36155,8 +36155,15 @@ function Mypage() {
     return setInviteMenuOpen(null);
   };
 
-  var handleAlert = function handleAlert() {
-    return setAlertOpen(!alertOpen);
+  var handleAlertClose = function handleAlertClose() {
+    return setAlertOpen(false);
+  };
+
+  var handleAlertOpen = function handleAlertOpen() {
+    setAlertOpen(true);
+    window.setTimeout(function () {
+      setAlertOpen(false);
+    }, 3000);
   };
 
   function InviteUrlCopy() {
@@ -36273,7 +36280,7 @@ function Mypage() {
           alertOpen: alertOpen,
           severity: alertSeverity,
           alertMessage: alertMessage,
-          handleAlert: handleAlert
+          handleAlert: handleAlertClose
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)("div", {
           className: (0,clsx__WEBPACK_IMPORTED_MODULE_3__.default)(classes.container, sideMenuOpen ? classes.openPadding : classes.closePadding),
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxs)(react_router__WEBPACK_IMPORTED_MODULE_15__.Switch, {
@@ -36284,7 +36291,11 @@ function Mypage() {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_15__.Route, {
               exact: true,
               path: "/mypage/regist",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_contents_RegistMoney_RegistMoney__WEBPACK_IMPORTED_MODULE_8__.default, {})
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_contents_RegistMoney_RegistMoney__WEBPACK_IMPORTED_MODULE_8__.default, {
+                handleAlertOpen: handleAlertOpen,
+                setAlertSeverity: setAlertSeverity,
+                setAlertMessage: setAlertMessage
+              })
             })]
           })
         })]
@@ -36496,7 +36507,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function RegistExpense() {
+function RegistExpense(props) {
   var history = (0,react_router__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
@@ -36637,11 +36648,21 @@ function RegistExpense() {
               console.log(response);
 
               if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.OK) {
-                console.log("ok");
+                props.handleAlertOpen();
+                props.setAlertMessage("正常に支出を作成しました");
+                setExpense("");
+                setDate(new Date());
+                setCategory(1);
+                setComment("");
+                setRepetition(false);
+                setErrors([]);
+                handleFileReset();
               } else if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.VALIDATION) {
                 setErrors(response.data.errors);
               } else {
-                console.log("error");
+                props.setAlertOpen(true);
+                props.setAlertSeverity("error");
+                props.setAlertMessage("何かしらのエラーが発生しました。時間をおいてから再度お試しください。");
               }
 
             case 5:
@@ -36760,13 +36781,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function RegistMoney() {
+
+function RegistMoney(props) {
   var classes = useStyles();
 
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(0),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      tabValue = _React$useState2[0],
-      setTabValue = _React$useState2[1];
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      tabValue = _useState2[0],
+      setTabValue = _useState2[1];
 
   var handleTabChange = function handleTabChange(event, newValue) {
     setTabValue(newValue);
@@ -36792,7 +36814,11 @@ function RegistMoney() {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(TabPanel, {
       value: tabValue,
       index: 0,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_RegistExpenxe__WEBPACK_IMPORTED_MODULE_2__.default, {})
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_RegistExpenxe__WEBPACK_IMPORTED_MODULE_2__.default, {
+        handleAlertOpen: props.handleAlertOpen,
+        setAlertSeverity: props.setAlertSeverity,
+        setAlertMessage: props.setAlertMessage
+      })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(TabPanel, {
       value: tabValue,
       index: 1,

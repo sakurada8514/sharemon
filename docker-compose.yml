@@ -4,6 +4,8 @@ services:
     build: ./infra/php
     volumes:
       - ./source:/work
+    environment:
+      TZ: Asia/Tokyo
 
   web:
     image: nginx:1.20-alpine

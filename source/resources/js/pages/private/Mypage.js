@@ -52,7 +52,14 @@ export default function Mypage() {
         setInviteMenuOpen(event.currentTarget);
     const handleInviteMenuClose = () => setInviteMenuOpen(null);
 
-    const handleAlert = () => setAlertOpen(!alertOpen);
+    const handleAlertClose = () => setAlertOpen(false);
+
+    const handleAlertOpen = () => {
+        setAlertOpen(true);
+        window.setTimeout(function () {
+            setAlertOpen(false);
+        }, 3000);
+    };
 
     async function InviteUrlCopy() {
         const response = await createInviteUrlApi();
@@ -130,7 +137,7 @@ export default function Mypage() {
                         alertOpen={alertOpen}
                         severity={alertSeverity}
                         alertMessage={alertMessage}
-                        handleAlert={handleAlert}
+                        handleAlert={handleAlertClose}
                     />
 
                     <div
@@ -150,7 +157,13 @@ export default function Mypage() {
                             <Route
                                 exact
                                 path="/mypage/regist"
-                                children={<RegistMoney />}
+                                children={
+                                    <RegistMoney
+                                        handleAlertOpen={handleAlertOpen}
+                                        setAlertSeverity={setAlertSeverity}
+                                        setAlertMessage={setAlertMessage}
+                                    />
+                                }
                             />
                         </Switch>
                     </div>
