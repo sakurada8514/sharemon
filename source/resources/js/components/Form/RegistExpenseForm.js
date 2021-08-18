@@ -152,9 +152,9 @@ export default function RegistExpenseForm(props) {
                     </Button>
                 </div>
                 <div className={classes.imgArea}>
-                    <img src={props.receiptImg} />
+                    <img src={props.receiptImgPreview} />
                 </div>
-                {props.receiptImg && (
+                {props.receiptImgPreview && (
                     <Button
                         variant="outlined"
                         color="inherit"

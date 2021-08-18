@@ -17,6 +17,7 @@ export default function RegistExpense(props) {
     const [repetition, setRepetition] = useState(false);
     const [comment, setComment] = useState("");
     const [receiptImg, setReceiptImg] = useState("");
+    const [receiptImgPreview, setReceiptImgPreview] = useState("");
     const [errors, setErrors] = useState([]);
     const [categoryList, setCategoryList] = useState([]);
 
@@ -53,14 +54,17 @@ export default function RegistExpense(props) {
             const file = files[0];
             const reader = new FileReader();
             reader.onload = (e) => {
-                setReceiptImg(e.target.result);
+                setReceiptImgPreview(e.target.result);
             };
             reader.readAsDataURL(file);
+
+            setReceiptImg(file);
         }
     };
     const handleFileReset = () => {
         fileInput.current.value = "";
         setReceiptImg("");
+        setReceiptImgPreview("");
     };
 
     async function registExpense() {
@@ -69,9 +73,10 @@ export default function RegistExpense(props) {
             date,
             category,
             comment,
-            repetition
+            repetition,
+            receiptImg
         );
-        console.log(response);
+
         if (response.status === OK) {
             props.handleAlertOpen();
             props.setAlertMessage("正常に支出を作成しました");
@@ -102,7 +107,7 @@ export default function RegistExpense(props) {
             comment={comment}
             repetition={repetition}
             fileInput={fileInput}
-            receiptImg={receiptImg}
+            receiptImgPreview={receiptImgPreview}
             categoryList={categoryList}
             errors={errors}
             setDate={setDate}

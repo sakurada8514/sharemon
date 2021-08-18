@@ -32643,6 +32643,41 @@ function _regist() {
 
 /***/ }),
 
+/***/ "./resources/js/api/Core/BaseApi.js":
+/*!******************************************!*\
+  !*** ./resources/js/api/Core/BaseApi.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "setRequestParams": () => (/* binding */ setRequestParams),
+/* harmony export */   "formatDate": () => (/* binding */ formatDate)
+/* harmony export */ });
+function setRequestParams(formData) {
+  var params = new FormData();
+
+  for (var key in formData) {
+    params.append(key, formData[key]);
+    console.log(key, formData[key]);
+  }
+
+  return params;
+}
+function formatDate(date, format) {
+  format = format.replace(/yyyy/g, date.getFullYear());
+  format = format.replace(/MM/g, ("0" + (date.getMonth() + 1)).slice(-2));
+  format = format.replace(/dd/g, ("0" + date.getDate()).slice(-2));
+  format = format.replace(/HH/g, ("0" + date.getHours()).slice(-2));
+  format = format.replace(/mm/g, ("0" + date.getMinutes()).slice(-2));
+  format = format.replace(/ss/g, ("0" + date.getSeconds()).slice(-2));
+  format = format.replace(/SSS/g, ("00" + date.getMilliseconds()).slice(-3));
+  return format;
+}
+
+/***/ }),
+
 /***/ "./resources/js/api/Expense/category.js":
 /*!**********************************************!*\
   !*** ./resources/js/api/Expense/category.js ***!
@@ -32712,6 +32747,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Core_BaseApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Core/BaseApi */ "./resources/js/api/Core/BaseApi.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -32719,33 +32755,37 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-function registExpense(_x, _x2, _x3, _x4, _x5) {
+
+function registExpense(_x, _x2, _x3, _x4, _x5, _x6) {
   return _registExpense.apply(this, arguments);
 }
 
 function _registExpense() {
-  _registExpense = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(expense, regist_date, category_id, comment, repetition_flg) {
-    var response;
+  _registExpense = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(expense, regist_date, category_id, comment, repetition_flg, receipt_img) {
+    var formData, params, response;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
-            return axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/expense/regist", {
+            formData = {
               expense: expense,
-              regist_date: regist_date,
+              regist_date: (0,_Core_BaseApi__WEBPACK_IMPORTED_MODULE_2__.formatDate)(regist_date, "yyyy-MM-dd HH:mm:ss"),
               category_id: category_id,
               comment: comment,
-              repetition_flg: repetition_flg
-            })["catch"](function (err) {
+              repetition_flg: repetition_flg ? 1 : 0,
+              receipt_img: receipt_img
+            };
+            params = (0,_Core_BaseApi__WEBPACK_IMPORTED_MODULE_2__.setRequestParams)(formData);
+            _context.next = 4;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/expense/regist", params)["catch"](function (err) {
               return err.response;
             });
 
-          case 2:
+          case 4:
             response = _context.sent;
             return _context.abrupt("return", response);
 
-          case 4:
+          case 6:
           case "end":
             return _context.stop();
         }
@@ -33423,9 +33463,9 @@ function RegistExpenseForm(props) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: classes.imgArea,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-          src: props.receiptImg
+          src: props.receiptImgPreview
         })
-      }), props.receiptImg && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__.default, {
+      }), props.receiptImgPreview && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__.default, {
         variant: "outlined",
         color: "inherit",
         size: "small",
@@ -36540,15 +36580,20 @@ function RegistExpense(props) {
       receiptImg = _useState12[0],
       setReceiptImg = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState14 = _slicedToArray(_useState13, 2),
-      errors = _useState14[0],
-      setErrors = _useState14[1];
+      receiptImgPreview = _useState14[0],
+      setReceiptImgPreview = _useState14[1];
 
   var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState16 = _slicedToArray(_useState15, 2),
-      categoryList = _useState16[0],
-      setCategoryList = _useState16[1];
+      errors = _useState16[0],
+      setErrors = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState18 = _slicedToArray(_useState17, 2),
+      categoryList = _useState18[0],
+      setCategoryList = _useState18[1];
 
   var fileInput = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
@@ -36617,16 +36662,18 @@ function RegistExpense(props) {
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        setReceiptImg(e.target.result);
+        setReceiptImgPreview(e.target.result);
       };
 
       reader.readAsDataURL(file);
+      setReceiptImg(file);
     }
   };
 
   var handleFileReset = function handleFileReset() {
     fileInput.current.value = "";
     setReceiptImg("");
+    setReceiptImgPreview("");
   };
 
   function registExpense() {
@@ -36641,11 +36688,10 @@ function RegistExpense(props) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return (0,_api_Expense_regist__WEBPACK_IMPORTED_MODULE_5__.registExpense)(expense, date, category, comment, repetition);
+              return (0,_api_Expense_regist__WEBPACK_IMPORTED_MODULE_5__.registExpense)(expense, date, category, comment, repetition, receiptImg);
 
             case 2:
               response = _context2.sent;
-              console.log(response);
 
               if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.OK) {
                 props.handleAlertOpen();
@@ -36665,7 +36711,7 @@ function RegistExpense(props) {
                 props.setAlertMessage("何かしらのエラーが発生しました。時間をおいてから再度お試しください。");
               }
 
-            case 5:
+            case 4:
             case "end":
               return _context2.stop();
           }
@@ -36683,7 +36729,7 @@ function RegistExpense(props) {
     comment: comment,
     repetition: repetition,
     fileInput: fileInput,
-    receiptImg: receiptImg,
+    receiptImgPreview: receiptImgPreview,
     categoryList: categoryList,
     errors: errors,
     setDate: setDate,

@@ -7,6 +7,7 @@ use App\Http\Requests\Expense\RegistExpenseRequest;
 use App\Services\ExpenseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ExpenseController extends Controller
 {
@@ -30,6 +31,10 @@ class ExpenseController extends Controller
     {
         $_user = Auth::user();
         $_registData = $request->only('expense', 'regist_date', 'category_id', 'comment', 'repetition_flg');
+
+        // $_img = $request->file('receipt_img');
+        // $path = Storage::disk('s3')->put('/', $_img, 'public');
+
         $this->_expenseService->insertExpense($_registData, $_user);
 
         return response()->json([]);

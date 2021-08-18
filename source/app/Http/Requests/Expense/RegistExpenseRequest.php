@@ -28,7 +28,8 @@ class RegistExpenseRequest extends FormRequest
             'regist_date' => ['required', 'date'],
             'category_id' => ['required'],
             'comment' => ['nullable', 'string'],
-            'repetition_flg' => ['required', 'boolean'],
+            'repetition_flg' => ['required'],
+            'receipt_img' => ['nullable', 'image']
         ];
     }
 }
