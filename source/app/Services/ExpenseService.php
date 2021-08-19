@@ -23,7 +23,7 @@ class ExpenseService extends BaseService
         return $this->_expenseCategoryModel->findListByRoomId($_roomId);
     }
 
-    public function insertExpense(array $_registData, Authenticatable $_user)
+    public function insertExpense(array $_registData, ?string $_s3ImgUrl, Authenticatable $_user)
     {
         $_registData['regist_date'] = $this->_doConvertDate($_registData['regist_date']);
         $_data = $this->_addUserData($_registData, $_user);
