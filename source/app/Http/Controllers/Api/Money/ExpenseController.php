@@ -8,7 +8,6 @@ use App\Services\ExpenseService;
 use App\Services\Lib\S3Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class ExpenseController extends Controller
 {
@@ -25,9 +24,9 @@ class ExpenseController extends Controller
     {
         $_roomId = Auth::user()->room_id;
 
-        $_ret = $this->_expenseService->findCategoryList($_roomId);
+        $_res = $this->_expenseService->findCategoryList($_roomId);
 
-        return response()->json($_ret);
+        return response()->json(['categoryList' => $_res]);
     }
 
     public function registExpense(RegistExpenseRequest $request)

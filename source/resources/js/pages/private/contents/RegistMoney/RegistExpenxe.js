@@ -28,7 +28,7 @@ export default function RegistExpense(props) {
             const response = await getCategoryListApi();
 
             if (response.status === OK) {
-                setCategoryList(response.data);
+                setCategoryList(response.data.categoryList);
                 setCategory(1);
             } else {
                 history.push("/error");

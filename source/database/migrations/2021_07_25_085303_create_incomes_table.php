@@ -27,7 +27,7 @@ class CreateIncomesTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('room_id')->references('room_id')->on('rooms')->onDelete('cascade');
-            $table->foreign('category_id')->references('category_id')->on('incomes_categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('category_id')->on('income_categories')->onDelete('cascade');
         });
     }
 

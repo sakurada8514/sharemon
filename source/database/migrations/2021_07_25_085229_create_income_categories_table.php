@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIncomesCategoriesTable extends Migration
+class CreateIncomeCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateIncomesCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('incomes_categories', function (Blueprint $table) {
+        Schema::create('income_categories', function (Blueprint $table) {
             $table->bigIncrements('category_id');
             $table->bigInteger('room_id')->nullable()->unsigned();
             $table->text('category_name');
             $table->integer('all_flg');
+            $table->integer('del_flg');
             $table->timestamps();
 
             $table->foreign('room_id')->references('room_id')->on('rooms')->onDelete('cascade');

@@ -32797,6 +32797,60 @@ function _registExpense() {
 
 /***/ }),
 
+/***/ "./resources/js/api/Income/category.js":
+/*!*********************************************!*\
+  !*** ./resources/js/api/Income/category.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getCategoryList": () => (/* binding */ getCategoryList)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+function getCategoryList() {
+  return _getCategoryList.apply(this, arguments);
+}
+
+function _getCategoryList() {
+  _getCategoryList = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+    var response;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/income/category/list")["catch"](function (err) {
+              return err.response;
+            });
+
+          case 2:
+            response = _context.sent;
+            return _context.abrupt("return", response);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _getCategoryList.apply(this, arguments);
+}
+
+/***/ }),
+
 /***/ "./resources/js/api/Room/invite.js":
 /*!*****************************************!*\
   !*** ./resources/js/api/Room/invite.js ***!
@@ -33708,6 +33762,181 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_12__.defaul
     linkNone: {
       cursor: "pointer",
       display: "none"
+    }
+  };
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/Form/RegistIncomeForm.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/Form/RegistIncomeForm.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ RegistIncomeForm)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/esm/makeStyles/makeStyles.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Typography/Typography.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputAdornment/InputAdornment.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/FormControl/FormControl.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/InputLabel/InputLabel.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Select/Select.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/MenuItem/MenuItem.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/FormControlLabel/FormControlLabel.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Switch/Switch.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Button/Button.js");
+/* harmony import */ var _Parts_FormParts_DatePicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Parts/FormParts/DatePicker */ "./resources/js/components/Parts/FormParts/DatePicker.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+function RegistIncomeForm(props) {
+  var classes = useStyles();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
+    container: true,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
+      item: true,
+      xs: 12,
+      md: 6,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        noValidate: true,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__.default, {
+          className: classes.instructions,
+          children: "*\u306F\u5FC5\u9808\u3067\u3059"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
+          variant: "outlined",
+          margin: "normal",
+          required: true,
+          fullWidth: true,
+          id: "income",
+          label: "\u53CE\u5165\u91D1\u984D",
+          name: "income",
+          autoComplete: "income",
+          autoFocus: true,
+          value: props.income,
+          onChange: props.handleChangeIncome,
+          error: typeof props.errors.income !== "undefined",
+          helperText: props.errors.income,
+          InputProps: {
+            endAdornment: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__.default, {
+              position: "end",
+              children: "\u5186"
+            })
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Parts_FormParts_DatePicker__WEBPACK_IMPORTED_MODULE_1__.default, {
+          date: props.date,
+          setDate: props.setDate,
+          errors: props.errors
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__.default, {
+          variant: "outlined",
+          fullWidth: true,
+          required: true,
+          margin: "normal",
+          error: typeof props.errors.category_id !== "undefined",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__.default, {
+            id: "select-outlined-label",
+            children: "\u30AB\u30C6\u30B4\u30EA\u30FC"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__.default, {
+            labelId: "select-outlined-label",
+            id: "select-outlined",
+            value: props.category,
+            onChange: props.handleChangeCategory,
+            label: "\u30AB\u30C6\u30B4\u30EA\u30FC",
+            children: props.categoryList.map(function (data) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
+                value: data.category_id,
+                children: data.category_name
+              }, data.category_id);
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
+          variant: "outlined",
+          id: "comment",
+          label: "\u30B3\u30E1\u30F3\u30C8",
+          multiline: true,
+          rows: 5,
+          value: props.comment,
+          onChange: props.handleChangeComment // variant="filled"
+          ,
+          fullWidth: true,
+          margin: "normal",
+          error: typeof props.errors.comment !== "undefined",
+          helperText: props.errors.comment
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__.default, {
+            control: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__.default, {
+              checked: props.repetition,
+              onChange: props.handleToggleRepetition
+            }),
+            label: "\u7E70\u308A\u8FD4\u3057\u767B\u9332\uFF08\u56FA\u5B9A\u53CE\u5165\u7B49\uFF09",
+            labelPlacement: "start"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
+          item: true,
+          xs: 12,
+          className: classes.buttonArea,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__.default, {
+            onClick: props.registIncome,
+            type: "submit",
+            variant: "contained",
+            color: "secondary",
+            size: "large",
+            className: classes.button,
+            children: "\u652F\u51FA\u4F5C\u6210"
+          })
+        })]
+      })
+    })
+  });
+}
+var useStyles = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_14__.default)(function (thema) {
+  return {
+    buttonArea: {
+      display: "flex",
+      justifyContent: "center",
+      marginTop: "24px"
+    },
+    button: {
+      padding: "2px 56px",
+      fontSize: "1.25em"
+    },
+    receiptImageArea: {
+      padding: "16px 10px",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    },
+    receiptButton: {
+      padding: "2px 56px",
+      fontSize: "1.25em",
+      height: "56px"
+    },
+    instructions: {
+      marginTop: "16px",
+      color: "#ababab"
+    },
+    imgArea: {
+      width: "100%",
+      marginTop: "16px",
+      display: "flex",
+      justifyContent: "center",
+      "& > img": {
+        width: "80%",
+        height: "auto"
+      }
+    },
+    fileResetButton: {
+      marginTop: "16px"
     }
   };
 });
@@ -36615,7 +36844,7 @@ function RegistExpense(props) {
                 response = _context.sent;
 
                 if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.OK) {
-                  setCategoryList(response.data);
+                  setCategoryList(response.data.categoryList);
                   setCategory(1);
                 } else {
                   history.push("/error");
@@ -36756,13 +36985,195 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ RegistIncome)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _components_Form_RegistIncomeForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../components/Form/RegistIncomeForm */ "./resources/js/components/Form/RegistIncomeForm.js");
+/* harmony import */ var _Const_constant__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../Const/constant */ "./resources/js/Const/constant.js");
+/* harmony import */ var _api_Income_category__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../api/Income/category */ "./resources/js/api/Income/category.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
-function RegistIncome() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    children: "income"
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+function RegistIncome(props) {
+  var history = (0,react_router__WEBPACK_IMPORTED_MODULE_6__.useHistory)();
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      income = _useState2[0],
+      setIncome = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(new Date()),
+      _useState4 = _slicedToArray(_useState3, 2),
+      date = _useState4[0],
+      setDate = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      category = _useState6[0],
+      setCategory = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      repetition = _useState8[0],
+      setRepetition = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState10 = _slicedToArray(_useState9, 2),
+      comment = _useState10[0],
+      setComment = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState12 = _slicedToArray(_useState11, 2),
+      receiptImgPreview = _useState12[0],
+      setReceiptImgPreview = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState14 = _slicedToArray(_useState13, 2),
+      errors = _useState14[0],
+      setErrors = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState16 = _slicedToArray(_useState15, 2),
+      categoryList = _useState16[0],
+      setCategoryList = _useState16[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    function getCategoryList() {
+      return _getCategoryList.apply(this, arguments);
+    }
+
+    function _getCategoryList() {
+      _getCategoryList = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return (0,_api_Income_category__WEBPACK_IMPORTED_MODULE_4__.getCategoryList)();
+
+              case 2:
+                response = _context.sent;
+
+                if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.OK) {
+                  setCategoryList(response.data.categoryList);
+                  setCategory(1);
+                } else {
+                  history.push("/error");
+                }
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+      return _getCategoryList.apply(this, arguments);
+    }
+
+    getCategoryList();
+  }, []);
+
+  var handleChangeIncome = function handleChangeIncome(e) {
+    return setIncome(e.target.value);
+  };
+
+  var handleChangeCategory = function handleChangeCategory(e) {
+    return setCategory(e.target.value);
+  };
+
+  var handleChangeComment = function handleChangeComment(e) {
+    return setComment(e.target.value);
+  };
+
+  var handleToggleRepetition = function handleToggleRepetition() {
+    setRepetition(!repetition);
+  };
+
+  function registIncome() {
+    return _registIncome.apply(this, arguments);
+  }
+
+  function _registIncome() {
+    _registIncome = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return registIncomeApi(income, date, category, comment, repetition);
+
+            case 2:
+              response = _context2.sent;
+
+              if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.OK) {
+                props.handleAlertOpen();
+                props.setAlertMessage("正常に支出を作成しました");
+                setIncome("");
+                setDate(new Date());
+                setCategory(1);
+                setComment("");
+                setRepetition(false);
+                setErrors([]);
+              } else if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.VALIDATION) {
+                setErrors(response.data.errors);
+              } else {
+                props.setAlertOpen(true);
+                props.setAlertSeverity("error");
+                props.setAlertMessage("何かしらのエラーが発生しました。時間をおいてから再度お試しください。");
+              }
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+    return _registIncome.apply(this, arguments);
+  }
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_Form_RegistIncomeForm__WEBPACK_IMPORTED_MODULE_2__.default, {
+    registIncome: registIncome,
+    income: income,
+    date: date,
+    category: category,
+    comment: comment,
+    repetition: repetition,
+    receiptImgPreview: receiptImgPreview,
+    categoryList: categoryList,
+    errors: errors,
+    setDate: setDate,
+    handleChangeIncome: handleChangeIncome,
+    handleChangeCategory: handleChangeCategory,
+    handleChangeComment: handleChangeComment,
+    handleToggleRepetition: handleToggleRepetition
   });
 }
 

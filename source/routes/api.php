@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Money\ExpenseController;
+use App\Http\Controllers\Api\Money\IncomeController;
 use App\Http\Controllers\Api\Rooms\RoomController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,4 +39,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/expense/category/list', [ExpenseController::class, 'getExpenseCategoryList']);
     Route::post('/expense/regist', [ExpenseController::class, 'registExpense']);
+
+    Route::get('/income/category/list', [IncomeController::class, 'getIncomeCategoryList']);
 });
