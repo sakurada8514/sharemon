@@ -2,6 +2,7 @@
 
 namespace App\Models\Core;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -56,5 +57,13 @@ class BaseModel extends Model
         return DB::transaction(function () use ($_methodName, $_args) {
             return call_user_func_array([$this, $_methodName], $_args);
         }, $this->_attempts);
+    }
+
+    protected function _addUserData(array $_targetArray, Authenticatable $_userData)
+    {
+        $_targetArray['user_id'] = $_userData->id;
+        $_targetArray['room_id'] = $_userData->room_id;
+
+        return $_targetArray;
     }
 }

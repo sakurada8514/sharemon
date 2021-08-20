@@ -25,10 +25,7 @@ class ExpenseService extends BaseService
 
     public function insertExpense(array $_registData, ?string $_s3ImgUrl, Authenticatable $_user)
     {
-        $_registData['regist_date'] = $this->_doConvertDate($_registData['regist_date']);
-        $_data = $this->_addUserData($_registData, $_user);
-
-        $this->_expenseModel->insert($_data);
+        $this->_expenseModel->virtualMethodTransaction('insert', [$_registData, $_s3ImgUrl, $_user]);
 
         return;
     }

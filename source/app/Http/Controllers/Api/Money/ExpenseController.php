@@ -35,10 +35,7 @@ class ExpenseController extends Controller
         $_user = Auth::user();
         $_registData = $request->only('expense', 'regist_date', 'category_id', 'comment', 'repetition_flg');
 
-        $_s3ImgUrl = $request->file('receipt_img');
-        if ($request->file('receipt_img')) {
-            $_s3ImgUrl = $this->_s3Service->setDirName()->upload($request->file('receipt_img'));
-        }
+        $_s3ImgUrl = $this->_s3Service->setDirName()->upload($request->file('receipt_img'));
 
         $this->_expenseService->insertExpense($_registData, $_s3ImgUrl, $_user);
 
