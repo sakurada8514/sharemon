@@ -33,7 +33,7 @@ class RoomModel extends BaseModel
         return;
     }
 
-    public function findInfoByUserId(string $_roomId)
+    public function findInfoByUserId(string $_roomId): array
     {
         $_ret = DB::table($this->table)
             ->where('room_id', $_roomId)

@@ -24,7 +24,7 @@ class ExpenseModel extends BaseModel
         $this->_s3ImageModel = $_s3ImageModel;
     }
 
-    public function insert(array $_registData, string $_s3ImgUrl, Authenticatable $_user)
+    public function insert(array $_registData, string $_s3ImgUrl, Authenticatable $_user): void
     {
         $_insert = $this->_createInsertUpdateData($this->_addUserData($_registData, $_user), $this->_getBaseDefaultInsertDataWithDelFlg());
 

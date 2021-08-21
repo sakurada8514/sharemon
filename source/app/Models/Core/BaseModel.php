@@ -52,14 +52,14 @@ class BaseModel extends Model
         $this->_attempts = $_num;
     }
 
-    public function virtualMethodTransaction(string $_methodName, array $_args = [])
+    public function virtualMethodTransaction(string $_methodName, array $_args = []): mixed
     {
         return DB::transaction(function () use ($_methodName, $_args) {
             return call_user_func_array([$this, $_methodName], $_args);
         }, $this->_attempts);
     }
 
-    protected function _addUserData(array $_targetArray, Authenticatable $_userData)
+    protected function _addUserData(array $_targetArray, Authenticatable $_userData): array
     {
         $_targetArray['user_id'] = $_userData->id;
         $_targetArray['room_id'] = $_userData->room_id;

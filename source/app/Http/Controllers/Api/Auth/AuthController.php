@@ -89,7 +89,7 @@ class AuthController extends Controller
         return $this->_authResponse($_user);
     }
 
-    public function resetPassword(ResetPasswordRequest $request)
+    public function resetPassword(ResetPasswordRequest $request): JsonResponse
     {
         $_response = $this->broker()->sendResetLink(
             $this->credentials($request)
@@ -100,7 +100,7 @@ class AuthController extends Controller
             : response()->json([], Response::HTTP_UNAUTHORIZED);
     }
 
-    public function reregistPassword(ReregistPasswordRequest $request)
+    public function reregistPassword(ReregistPasswordRequest $request): JsonResponse
     {
         $_data = $request->only('email', 'password');
 

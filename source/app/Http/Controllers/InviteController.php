@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class InviteController extends Controller
 {
@@ -14,7 +15,7 @@ class InviteController extends Controller
         $this->_userService = $_userService;
     }
 
-    public function inviteRegistIndex(Request $request)
+    public function inviteRegistIndex(Request $request): View
     {
         if (!$request->hasValidSignature()) {
             abort(401);

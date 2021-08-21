@@ -1,3 +1,4 @@
+//共通使用関数
 export function setRequestParams(formData) {
     const params = new FormData();
     for (let key in formData) {

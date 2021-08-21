@@ -57,7 +57,7 @@ class UserBaseModel extends Authenticatable
         $this->_attempts = $_num;
     }
 
-    public function virtualMethodTransaction(string $_methodName, array $_args = [])
+    public function virtualMethodTransaction(string $_methodName, array $_args = []): mixed
     {
         return DB::transaction(function () use ($_methodName, $_args) {
             return call_user_func_array([$this, $_methodName], $_args);

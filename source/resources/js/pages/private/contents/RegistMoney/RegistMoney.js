@@ -2,18 +2,13 @@ import React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+import { AppBar, Tabs, Tab } from "@material-ui/core";
 
 import RegistExpense from "./RegistExpenxe";
 import RegistIncome from "./RegistIncome";
 import {
     TEXT_COLOR_BLACK,
     BACK_COLOR_GREEN,
-    BACK_COLOR_WHITE,
 } from "../../../../Const/styleConstant";
 
 export default function RegistMoney(props) {

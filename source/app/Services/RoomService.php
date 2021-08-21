@@ -16,18 +16,19 @@ class RoomService extends BaseService
         $this->_roomModel = $_roomModel;
     }
 
-    public function createRoom(array $_data, string $_userId)
+    public function createRoom(array $_data, string $_userId): void
     {
-        // $this->_roomModel->insert($_data, $_userId);
         $this->_roomModel->virtualMethodTransaction('insert', [$_data, $_userId]);
+
+        return;
     }
 
-    public function findRoomInfoByRoomId(string $_roomId)
+    public function findRoomInfoByRoomId(string $_roomId): array
     {
         return $this->_roomModel->findInfoByUserId($_roomId);
     }
 
-    public function createInviteUrl(string $_userId)
+    public function createInviteUrl(string $_userId): string
     {
         return URL::temporarySignedRoute('regist.invite', now()->addMinutes(30), ['invitee' => $_userId]);
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Expense\RegistExpenseRequest;
 use App\Services\ExpenseService;
 use App\Services\Lib\S3Service;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +21,7 @@ class ExpenseController extends Controller
         $this->_s3Service      = $_s3Service;
     }
 
-    public function getExpenseCategoryList()
+    public function getExpenseCategoryList(): JsonResponse
     {
         $_roomId = Auth::user()->room_id;
 
@@ -29,7 +30,7 @@ class ExpenseController extends Controller
         return response()->json(['categoryList' => $_res]);
     }
 
-    public function registExpense(RegistExpenseRequest $request)
+    public function registExpense(RegistExpenseRequest $request): JsonResponse
     {
         $_user = Auth::user();
         $_registData = $request->only('expense', 'regist_date', 'category_id', 'comment', 'repetition_flg');

@@ -4,9 +4,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
+import { ThemeProvider } from "@material-ui/core";
+
 import store from "./stores/index";
 import { setCurrentUser } from "./stores/auth";
-import { ThemeProvider } from "@material-ui/core";
 
 import Top from "./pages/Top";
 import Error from "./pages/Error";

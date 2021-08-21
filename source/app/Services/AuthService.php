@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Services\Core\BaseService;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,7 +17,7 @@ class AuthService extends BaseService
         $this->_userModel = $_userModel;
     }
 
-    public function login(array $_data, bool $_remember)
+    public function login(array $_data, bool $_remember): Authenticatable
     {
         $_loginData = $this->_convateLoginData($_data);
 
@@ -38,14 +39,16 @@ class AuthService extends BaseService
         return;
     }
 
-    public function reregistPassword(array $_data)
+    public function reregistPassword(array $_data): void
     {
         $_data['password'] = Hash::make($_data['password']);
 
         $this->_userModel->updateDataByEmail($_data);
+
+        return;
     }
 
-    private function _convateLoginData(array $_data)
+    private function _convateLoginData(array $_data): array
     {
         if (!isset($_data['name'])) {
             return $_data;

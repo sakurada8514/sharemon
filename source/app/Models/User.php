@@ -67,7 +67,7 @@ class User extends UserBaseModel
         return;
     }
 
-    public function findInfoByUserId(string $_userId)
+    public function findInfoByUserId(string $_userId): array
     {
         $_ret = DB::table('users')
             ->where('id', $_userId)

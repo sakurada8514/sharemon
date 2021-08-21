@@ -13,7 +13,7 @@ class IncomeCategoryModel extends BaseModel
         'category_id', 'room_id', 'category_name', 'del_flg'
     ];
 
-    public function findListByRoomId(string $_roomId)
+    public function findListByRoomId(string $_roomId): array
     {
         $_ret = DB::table($this->table)
             ->where('room_id', $_roomId)

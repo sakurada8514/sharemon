@@ -13,10 +13,6 @@ export default function MyModal(props) {
             open={props.show}
             onClose={props.handleModalClose}
             closeAfterTransition
-            // BackdropComponent={Backdrop}
-            // BackdropProps={{
-            //     timeout: 500,
-            // }}
         >
             <Fade in={props.show}>{props.body}</Fade>
         </Modal>

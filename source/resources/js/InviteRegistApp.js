@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./stores/index";
 import { ThemeProvider } from "@material-ui/core";
+
+import store from "./stores/index";
 
 import Top from "./pages/Top";
 import Error from "./pages/Error";

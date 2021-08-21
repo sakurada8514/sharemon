@@ -14,7 +14,7 @@ class IncomeModel extends BaseModel
         'user_id', 'room_id', 'category_id', 'income', 'comment', 'repetition_flg', 'regist_date', 'del_flg'
     ];
 
-    public function insert(array $_registData, Authenticatable $_user)
+    public function insert(array $_registData, Authenticatable $_user): void
     {
         $_insert = $this->_createInsertUpdateData($this->_addUserData($_registData, $_user), $this->_getBaseDefaultInsertDataWithDelFlg());
 

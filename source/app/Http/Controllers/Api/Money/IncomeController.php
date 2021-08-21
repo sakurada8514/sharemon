@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Money;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Income\RegistIncomeRequest;
 use App\Services\IncomeService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,7 @@ class IncomeController extends Controller
         $this->_incomeService = $_incomeService;
     }
 
-    public function getIncomeCategoryList()
+    public function getIncomeCategoryList(): JsonResponse
     {
         $_roomId = Auth::user()->room_id;
 
@@ -26,7 +27,7 @@ class IncomeController extends Controller
         return response()->json(['categoryList' => $_res]);
     }
 
-    public function registIncome(RegistIncomeRequest $request)
+    public function registIncome(RegistIncomeRequest $request): JsonResponse
     {
         $_user = Auth::user();
         $_registData = $request->only('income', 'regist_date', 'category_id', 'comment', 'repetition_flg');

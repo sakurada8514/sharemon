@@ -7,6 +7,7 @@ use App\Http\Requests\RoomCreateRequest;
 use App\Models\User;
 use App\Services\RoomService;
 use App\Services\UserService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller
@@ -20,7 +21,7 @@ class RoomController extends Controller
         $this->_userService = $_userService;
     }
 
-    public function createRoom(RoomCreateRequest $request)
+    public function createRoom(RoomCreateRequest $request): JsonResponse
     {
         $_data = ['room_name' => $request->room_name];
 
@@ -33,7 +34,7 @@ class RoomController extends Controller
         return response()->json(['user' => $_user]);
     }
 
-    public function createInviteUrl()
+    public function createInviteUrl(): JsonResponse
     {
         $_userId = Auth::id();
 

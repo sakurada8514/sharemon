@@ -18,13 +18,7 @@ class S3Service extends BaseService
         $this->_user = Auth::user();
     }
 
-    public function setImg(string $_img)
-    {
-        $this->_img = $_img;
-        return $this;
-    }
-
-    public function setDirName()
+    public function setDirName(): object
     {
         $_callClassName = debug_backtrace()[1]['class'];
         $_user = Auth::user();

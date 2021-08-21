@@ -23,7 +23,7 @@ class IncomeService extends BaseService
         return $this->_incomeCategoryModel->findListByRoomId($_roomId);
     }
 
-    public function insertIncome(array $_registData, Authenticatable $_user)
+    public function insertIncome(array $_registData, Authenticatable $_user): void
     {
         $this->_incomeModel->insert($_registData, $_user);
 
