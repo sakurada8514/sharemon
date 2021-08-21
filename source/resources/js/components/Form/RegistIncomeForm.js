@@ -85,12 +85,11 @@ export default function RegistIncomeForm(props) {
                     <TextField
                         variant="outlined"
                         id="comment"
-                        label="コメント"
+                        label="利用場所/用途"
                         multiline
                         rows={5}
                         value={props.comment}
                         onChange={props.handleChangeComment}
-                        // variant="filled"
                         fullWidth
                         margin="normal"
                         error={typeof props.errors.comment !== "undefined"}
@@ -117,7 +116,7 @@ export default function RegistIncomeForm(props) {
                             size={"large"}
                             className={classes.button}
                         >
-                            支出作成
+                            収入作成
                         </Button>
                     </Grid>
                 </div>

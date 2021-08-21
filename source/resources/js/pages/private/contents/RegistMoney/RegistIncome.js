@@ -1,11 +1,12 @@
 import React from "react";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 
 import RegistIncomeForm from "../../../../components/Form/RegistIncomeForm";
 import { OK, VALIDATION } from "../../../../Const/constant";
 
 import { getCategoryList as getCategoryListApi } from "../../../../api/Income/category";
+import { registIncome as registIncomeApi } from "../../../../api/Income/regist";
 
 export default function RegistIncome(props) {
     const history = useHistory();
@@ -51,7 +52,7 @@ export default function RegistIncome(props) {
 
         if (response.status === OK) {
             props.handleAlertOpen();
-            props.setAlertMessage("正常に支出を作成しました");
+            props.setAlertMessage("正常に収入を作成しました");
             setIncome("");
             setDate(new Date());
             setCategory(1);

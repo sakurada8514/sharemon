@@ -2,7 +2,6 @@ export function setRequestParams(formData) {
     const params = new FormData();
     for (let key in formData) {
         params.append(key, formData[key]);
-        console.log(key, formData[key]);
     }
     return params;
 }

@@ -32660,7 +32660,6 @@ function setRequestParams(formData) {
 
   for (var key in formData) {
     params.append(key, formData[key]);
-    console.log(key, formData[key]);
   }
 
   return params;
@@ -32847,6 +32846,70 @@ function _getCategoryList() {
     }, _callee);
   }));
   return _getCategoryList.apply(this, arguments);
+}
+
+/***/ }),
+
+/***/ "./resources/js/api/Income/regist.js":
+/*!*******************************************!*\
+  !*** ./resources/js/api/Income/regist.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "registIncome": () => (/* binding */ registIncome)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Core_BaseApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Core/BaseApi */ "./resources/js/api/Core/BaseApi.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+function registIncome(_x, _x2, _x3, _x4, _x5) {
+  return _registIncome.apply(this, arguments);
+}
+
+function _registIncome() {
+  _registIncome = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(income, regist_date, category_id, comment, repetition_flg) {
+    var formData, params, response;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            formData = {
+              income: income,
+              regist_date: (0,_Core_BaseApi__WEBPACK_IMPORTED_MODULE_2__.formatDate)(regist_date, "yyyy-MM-dd HH:mm:ss"),
+              category_id: category_id,
+              comment: comment,
+              repetition_flg: repetition_flg ? 1 : 0
+            };
+            params = (0,_Core_BaseApi__WEBPACK_IMPORTED_MODULE_2__.setRequestParams)(formData);
+            _context.next = 4;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/income/regist", params)["catch"](function (err) {
+              return err.response;
+            });
+
+          case 4:
+            response = _context.sent;
+            return _context.abrupt("return", response);
+
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _registIncome.apply(this, arguments);
 }
 
 /***/ }),
@@ -33452,12 +33515,11 @@ function RegistExpenseForm(props) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
           variant: "outlined",
           id: "comment",
-          label: "\u30B3\u30E1\u30F3\u30C8",
+          label: "\u5229\u7528\u5834\u6240/\u7528\u9014",
           multiline: true,
           rows: 5,
           value: props.comment,
-          onChange: props.handleChangeComment // variant="filled"
-          ,
+          onChange: props.handleChangeComment,
           fullWidth: true,
           margin: "normal",
           error: typeof props.errors.comment !== "undefined",
@@ -33862,12 +33924,11 @@ function RegistIncomeForm(props) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
           variant: "outlined",
           id: "comment",
-          label: "\u30B3\u30E1\u30F3\u30C8",
+          label: "\u5229\u7528\u5834\u6240/\u7528\u9014",
           multiline: true,
           rows: 5,
           value: props.comment,
-          onChange: props.handleChangeComment // variant="filled"
-          ,
+          onChange: props.handleChangeComment,
           fullWidth: true,
           margin: "normal",
           error: typeof props.errors.comment !== "undefined",
@@ -33892,7 +33953,7 @@ function RegistIncomeForm(props) {
             color: "secondary",
             size: "large",
             className: classes.button,
-            children: "\u652F\u51FA\u4F5C\u6210"
+            children: "\u53CE\u5165\u4F5C\u6210"
           })
         })]
       })
@@ -36988,11 +37049,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _components_Form_RegistIncomeForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../components/Form/RegistIncomeForm */ "./resources/js/components/Form/RegistIncomeForm.js");
 /* harmony import */ var _Const_constant__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../Const/constant */ "./resources/js/Const/constant.js");
 /* harmony import */ var _api_Income_category__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../api/Income/category */ "./resources/js/api/Income/category.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _api_Income_regist__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../api/Income/regist */ "./resources/js/api/Income/regist.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -37018,8 +37080,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function RegistIncome(props) {
-  var history = (0,react_router__WEBPACK_IMPORTED_MODULE_6__.useHistory)();
+  var history = (0,react_router__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
@@ -37127,14 +37190,14 @@ function RegistIncome(props) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return registIncomeApi(income, date, category, comment, repetition);
+              return (0,_api_Income_regist__WEBPACK_IMPORTED_MODULE_5__.registIncome)(income, date, category, comment, repetition);
 
             case 2:
               response = _context2.sent;
 
               if (response.status === _Const_constant__WEBPACK_IMPORTED_MODULE_3__.OK) {
                 props.handleAlertOpen();
-                props.setAlertMessage("正常に支出を作成しました");
+                props.setAlertMessage("正常に収入を作成しました");
                 setIncome("");
                 setDate(new Date());
                 setCategory(1);
@@ -37159,7 +37222,7 @@ function RegistIncome(props) {
     return _registIncome.apply(this, arguments);
   }
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_Form_RegistIncomeForm__WEBPACK_IMPORTED_MODULE_2__.default, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Form_RegistIncomeForm__WEBPACK_IMPORTED_MODULE_2__.default, {
     registIncome: registIncome,
     income: income,
     date: date,
@@ -37279,7 +37342,11 @@ function RegistMoney(props) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(TabPanel, {
       value: tabValue,
       index: 1,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_RegistIncome__WEBPACK_IMPORTED_MODULE_3__.default, {})
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_RegistIncome__WEBPACK_IMPORTED_MODULE_3__.default, {
+        handleAlertOpen: props.handleAlertOpen,
+        setAlertSeverity: props.setAlertSeverity,
+        setAlertMessage: props.setAlertMessage
+      })
     })]
   });
 }

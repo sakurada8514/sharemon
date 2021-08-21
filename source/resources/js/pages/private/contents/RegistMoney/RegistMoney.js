@@ -52,7 +52,11 @@ export default function RegistMoney(props) {
                 />
             </TabPanel>
             <TabPanel value={tabValue} index={1}>
-                <RegistIncome />
+                <RegistIncome
+                    handleAlertOpen={props.handleAlertOpen}
+                    setAlertSeverity={props.setAlertSeverity}
+                    setAlertMessage={props.setAlertMessage}
+                />
             </TabPanel>
         </div>
     );

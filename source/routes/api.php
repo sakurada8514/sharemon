@@ -41,4 +41,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/expense/regist', [ExpenseController::class, 'registExpense']);
 
     Route::get('/income/category/list', [IncomeController::class, 'getIncomeCategoryList']);
+    Route::post('/income/regist', [IncomeController::class, 'registIncome']);
 });
