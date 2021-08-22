@@ -1,11 +1,13 @@
 import { React, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 import { setUser } from "../../stores/auth";
 import { login as loginApi } from "../../api/Auth/login";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../Const/constant";
 import LoginForm from "../../components/Form/LoginForm";
+import TransitionMotion from "../../components/Route/Motion";
 
 export default function Login() {
     const history = useHistory();
@@ -40,17 +42,21 @@ export default function Login() {
     }
 
     return (
-        <LoginForm
-            login={login}
-            email={email}
-            password={password}
-            remember={remember}
-            errors={errors}
-            handleChangeEmail={handleChangeEmail}
-            handleChangePassword={handleChangePassword}
-            handleChangeRemember={handleChangeRemember}
-            pushRegist={pushRegist}
-            pushPasswordReset={pushPasswordReset}
+        <TransitionMotion
+            contents={
+                <LoginForm
+                    login={login}
+                    email={email}
+                    password={password}
+                    remember={remember}
+                    errors={errors}
+                    handleChangeEmail={handleChangeEmail}
+                    handleChangePassword={handleChangePassword}
+                    handleChangeRemember={handleChangeRemember}
+                    pushRegist={pushRegist}
+                    pushPasswordReset={pushPasswordReset}
+                />
+            }
         />
     );
 }

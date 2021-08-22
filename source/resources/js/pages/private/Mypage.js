@@ -9,8 +9,8 @@ import clsx from "clsx";
 import SideMenu from "../../components/SideMenu/SideMenu";
 import Header from "../../components/Header/Header";
 import MyAlert from "../../components/Parts/MyAlert";
-import Top from "../Top";
-import RegistMoney from "./contents/RegistMoney/RegistMoney";
+import TransitionMotion from "../../components/Route/Motion";
+import MypageRouters from "./router";
 
 import { BACK_COLOR_GREEN } from "../../Const/styleConstant";
 import { OK } from "../../Const/constant";
@@ -108,67 +108,58 @@ export default function Mypage() {
     }
 
     return (
-        <div className={classes.root}>
-            <BrowserRouter>
-                <Header
-                    sideMenuOpen={sideMenuOpen}
-                    settingMenuOpen={settingMenuOpen}
-                    inviteMenuOpen={inviteMenuOpen}
-                    handleSideMenuOpen={handleSideMenuOpen}
-                    handleSettingMenuOpen={handleSettingMenuOpen}
-                    handleSettingMenuClose={handleSettingMenuClose}
-                    handleInviteMenuOpen={handleInviteMenuOpen}
-                    handleInviteMenuClose={handleInviteMenuClose}
-                    InviteUrlCopy={InviteUrlCopy}
-                    logout={logout}
-                />
-                <SideMenu
-                    sideMenuOpen={sideMenuOpen}
-                    accountBookMenuOpen={accountBookMenuOpen}
-                    handleSideMenuOpen={handleSideMenuOpen}
-                    handleSideMenuClose={handleSideMenuClose}
-                    handleAccountBookMenu={handleAccountBookMenu}
-                />
-                <main className={classes.content}>
-                    <div className={classes.appBarSpacer} />
+        <TransitionMotion
+            contents={
+                <div className={classes.root}>
+                    <BrowserRouter>
+                        <Header
+                            sideMenuOpen={sideMenuOpen}
+                            settingMenuOpen={settingMenuOpen}
+                            inviteMenuOpen={inviteMenuOpen}
+                            handleSideMenuOpen={handleSideMenuOpen}
+                            handleSettingMenuOpen={handleSettingMenuOpen}
+                            handleSettingMenuClose={handleSettingMenuClose}
+                            handleInviteMenuOpen={handleInviteMenuOpen}
+                            handleInviteMenuClose={handleInviteMenuClose}
+                            InviteUrlCopy={InviteUrlCopy}
+                            logout={logout}
+                        />
+                        <SideMenu
+                            sideMenuOpen={sideMenuOpen}
+                            accountBookMenuOpen={accountBookMenuOpen}
+                            handleSideMenuOpen={handleSideMenuOpen}
+                            handleSideMenuClose={handleSideMenuClose}
+                            handleAccountBookMenu={handleAccountBookMenu}
+                        />
+                        <main className={classes.content}>
+                            <div className={classes.appBarSpacer} />
 
-                    <MyAlert
-                        alertOpen={alertOpen}
-                        severity={alertSeverity}
-                        alertMessage={alertMessage}
-                        handleAlert={handleAlertClose}
-                    />
+                            <MyAlert
+                                alertOpen={alertOpen}
+                                severity={alertSeverity}
+                                alertMessage={alertMessage}
+                                handleAlert={handleAlertClose}
+                            />
 
-                    <div
-                        className={clsx(
-                            classes.container,
-                            sideMenuOpen
-                                ? classes.openPadding
-                                : classes.closePadding
-                        )}
-                    >
-                        <Switch>
-                            <Route
-                                exact
-                                path="/mypage/home"
-                                children={<Top />}
-                            />
-                            <Route
-                                exact
-                                path="/mypage/regist"
-                                children={
-                                    <RegistMoney
-                                        handleAlertOpen={handleAlertOpen}
-                                        setAlertSeverity={setAlertSeverity}
-                                        setAlertMessage={setAlertMessage}
-                                    />
-                                }
-                            />
-                        </Switch>
-                    </div>
-                </main>
-            </BrowserRouter>
-        </div>
+                            <div
+                                className={clsx(
+                                    classes.container,
+                                    sideMenuOpen
+                                        ? classes.openPadding
+                                        : classes.closePadding
+                                )}
+                            >
+                                <MypageRouters
+                                    handleAlertOpen={handleAlertOpen}
+                                    setAlertSeverity={setAlertSeverity}
+                                    setAlertMessage={setAlertMessage}
+                                />
+                            </div>
+                        </main>
+                    </BrowserRouter>
+                </div>
+            }
+        />
     );
 }
 

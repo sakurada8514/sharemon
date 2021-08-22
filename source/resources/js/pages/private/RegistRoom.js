@@ -8,6 +8,7 @@ import { createRoom as createRoomApi } from "../../api/Room/room";
 import { setUser } from "../../stores/auth";
 import { OK, VALIDATION } from "../../Const/constant";
 import RegistRoomForm from "../../components/Form/RegistRoomForm";
+import TransitionMotion from "../../components/Route/Motion";
 
 export default function RegistRoom() {
     const history = useHistory();
@@ -40,13 +41,17 @@ export default function RegistRoom() {
     }
 
     return (
-        <RegistRoomForm
-            createRoom={createRoom}
-            roomName={roomName}
-            handleChangeRoomName={handleChangeRoomName}
-            modalShow={modalShow}
-            handleClickLink={handleModalOpen}
-            handleModalClose={handleModalClose}
+        <TransitionMotion
+            contents={
+                <RegistRoomForm
+                    createRoom={createRoom}
+                    roomName={roomName}
+                    handleChangeRoomName={handleChangeRoomName}
+                    modalShow={modalShow}
+                    handleClickLink={handleModalOpen}
+                    handleModalClose={handleModalClose}
+                />
+            }
         />
     );
 }

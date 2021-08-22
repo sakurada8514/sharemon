@@ -1,12 +1,17 @@
 import React from "react";
 import NavBar from "../components/Parts/NavBar";
+import TransitionMotion from "../components/Route/Motion";
 
 const Top = () => {
     return (
-        <div>
-            <NavBar></NavBar>
-            Top
-        </div>
+        <TransitionMotion
+            contents={
+                <div>
+                    <NavBar></NavBar>
+                    Top
+                </div>
+            }
+        />
     );
 };
 

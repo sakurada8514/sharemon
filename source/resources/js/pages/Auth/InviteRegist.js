@@ -8,6 +8,7 @@ import { OK, UNAUTHORIZED, VALIDATION } from "../../Const/constant";
 import { BACK_COLOR_WHITE } from "../../Const/styleConstant";
 import RegistForm from "../../components/Form/RegistForm";
 import MyModal from "../../components/Parts/MyModal";
+import TransitionMotion from "../../components/Route/Motion";
 
 let inviteeData = null;
 if (typeof laravelInviteeData !== "undefined") {
@@ -59,21 +60,25 @@ export default function InviteRegist() {
 
     return (
         <>
-            <RegistForm
-                regist={regist}
-                name={name}
-                email={email}
-                password={password}
-                password_confirmation={password_confirmation}
-                errors={errors}
-                isInvite={true}
-                handleChangeName={handleChangeName}
-                handleChangeEmail={handleChangeEmail}
-                handleChangePassword={handleChangePassword}
-                handleChangePasswordConfirmation={
-                    handleChangePasswordConfirmation
+            <TransitionMotion
+                contents={
+                    <RegistForm
+                        regist={regist}
+                        name={name}
+                        email={email}
+                        password={password}
+                        password_confirmation={password_confirmation}
+                        errors={errors}
+                        isInvite={true}
+                        handleChangeName={handleChangeName}
+                        handleChangeEmail={handleChangeEmail}
+                        handleChangePassword={handleChangePassword}
+                        handleChangePasswordConfirmation={
+                            handleChangePasswordConfirmation
+                        }
+                        pushLogin={pushLogin}
+                    />
                 }
-                pushLogin={pushLogin}
             />
             <MyModal
                 show={modalShow}

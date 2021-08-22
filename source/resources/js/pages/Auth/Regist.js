@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 import { setUser } from "../../stores/auth";
 import { regist as registApi } from "../../api/Auth/regist";
@@ -47,19 +48,36 @@ export default function Regist() {
     }
 
     return (
-        <RegistForm
-            regist={regist}
-            name={name}
-            email={email}
-            password={password}
-            password_confirmation={password_confirmation}
-            errors={errors}
-            isInvite={false}
-            handleChangeName={handleChangeName}
-            handleChangeEmail={handleChangeEmail}
-            handleChangePassword={handleChangePassword}
-            handleChangePasswordConfirmation={handleChangePasswordConfirmation}
-            pushLogin={pushLogin}
-        />
+        <motion.div
+            animate={{
+                opacity: 1,
+            }}
+            initial={{
+                opacity: 0,
+            }}
+            exit={{
+                opacity: 0,
+            }}
+            transition={{
+                duration: 0.2,
+            }}
+        >
+            <RegistForm
+                regist={regist}
+                name={name}
+                email={email}
+                password={password}
+                password_confirmation={password_confirmation}
+                errors={errors}
+                isInvite={false}
+                handleChangeName={handleChangeName}
+                handleChangeEmail={handleChangeEmail}
+                handleChangePassword={handleChangePassword}
+                handleChangePasswordConfirmation={
+                    handleChangePasswordConfirmation
+                }
+                pushLogin={pushLogin}
+            />
+        </motion.div>
     );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router";
+import { motion } from "framer-motion";
 
 import RegistExpenseForm from "../../../../components/Form/RegistExpenseForm";
 import { OK, VALIDATION } from "../../../../Const/constant";

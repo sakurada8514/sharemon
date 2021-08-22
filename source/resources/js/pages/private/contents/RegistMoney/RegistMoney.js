@@ -6,6 +6,7 @@ import { AppBar, Tabs, Tab } from "@material-ui/core";
 
 import RegistExpense from "./RegistExpenxe";
 import RegistIncome from "./RegistIncome";
+import TransitionMotion from "../../../../components/Route/Motion";
 import {
     TEXT_COLOR_BLACK,
     BACK_COLOR_GREEN,
@@ -20,40 +21,46 @@ export default function RegistMoney(props) {
     };
 
     return (
-        <div className={classes.root}>
-            <AppBar position="static" className={classes.tabVar}>
-                <Tabs
-                    value={tabValue}
-                    onChange={handleTabChange}
-                    aria-label="regist money"
-                >
-                    <Tab
-                        className={classes.tab}
-                        label="支出"
-                        {...a11yProps(0)}
-                    />
-                    <Tab
-                        className={classes.tab}
-                        label="収入"
-                        {...a11yProps(1)}
-                    />
-                </Tabs>
-            </AppBar>
-            <TabPanel value={tabValue} index={0}>
-                <RegistExpense
-                    handleAlertOpen={props.handleAlertOpen}
-                    setAlertSeverity={props.setAlertSeverity}
-                    setAlertMessage={props.setAlertMessage}
-                />
-            </TabPanel>
-            <TabPanel value={tabValue} index={1}>
-                <RegistIncome
-                    handleAlertOpen={props.handleAlertOpen}
-                    setAlertSeverity={props.setAlertSeverity}
-                    setAlertMessage={props.setAlertMessage}
-                />
-            </TabPanel>
-        </div>
+        <TransitionMotion
+            contents={
+                <div className={classes.root}>
+                    <AppBar position="static" className={classes.tabVar}>
+                        <Tabs
+                            value={tabValue}
+                            onChange={handleTabChange}
+                            aria-label="regist money"
+                        >
+                            <Tab
+                                className={classes.tab}
+                                label="支出"
+                                {...a11yProps(0)}
+                            />
+                            <Tab
+                                className={classes.tab}
+                                label="収入"
+                                {...a11yProps(1)}
+                            />
+                        </Tabs>
+                    </AppBar>
+
+                    <TabPanel value={tabValue} index={0}>
+                        <RegistExpense
+                            handleAlertOpen={props.handleAlertOpen}
+                            setAlertSeverity={props.setAlertSeverity}
+                            setAlertMessage={props.setAlertMessage}
+                        />
+                    </TabPanel>
+
+                    <TabPanel value={tabValue} index={1}>
+                        <RegistIncome
+                            handleAlertOpen={props.handleAlertOpen}
+                            setAlertSeverity={props.setAlertSeverity}
+                            setAlertMessage={props.setAlertMessage}
+                        />
+                    </TabPanel>
+                </div>
+            }
+        />
     );
 }
 

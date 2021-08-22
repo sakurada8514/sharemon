@@ -6,6 +6,7 @@ import { Button } from "@material-ui/core";
 
 import MyModal from "../../components/Parts/MyModal";
 import ReregistPasswordForm from "../../components/Form/ReregistPasswordForm";
+import TransitionMotion from "../../components/Route/Motion";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../Const/constant";
 import { BACK_COLOR_WHITE } from "../../Const/styleConstant";
 
@@ -50,16 +51,20 @@ export default function ReregistPassword() {
 
     return (
         <>
-            <ReregistPasswordForm
-                reregistPassword={reregistPassword}
-                password={password}
-                password_confirmation={password_confirmation}
-                errors={errors}
-                handleChangePassword={handleChangePassword}
-                handleChangePasswordConfirmation={
-                    handleChangePasswordConfirmation
+            <TransitionMotion
+                contents={
+                    <ReregistPasswordForm
+                        reregistPassword={reregistPassword}
+                        password={password}
+                        password_confirmation={password_confirmation}
+                        errors={errors}
+                        handleChangePassword={handleChangePassword}
+                        handleChangePasswordConfirmation={
+                            handleChangePasswordConfirmation
+                        }
+                        pushLogin={pushLogin}
+                    />
                 }
-                pushLogin={pushLogin}
             />
             <MyModal
                 show={modalShow}
