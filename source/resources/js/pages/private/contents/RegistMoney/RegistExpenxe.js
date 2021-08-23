@@ -32,7 +32,7 @@ export default function RegistExpense(props) {
                 setCategoryList(response.data.categoryList);
                 setCategory(1);
             } else {
-                history.push("/error");
+                window.location.href("/error");
             }
         }
         getCategoryList();

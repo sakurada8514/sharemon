@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 import { Route, Switch } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
-import Top from "../Top";
+import Home from "./contents/Home";
 import RegistMoney from "./contents/RegistMoney/RegistMoney";
 
 export default function MypageRouters(props) {
@@ -12,7 +12,7 @@ export default function MypageRouters(props) {
     return (
         <AnimatePresence exitBeforeEnter initial={false}>
             <Switch location={location} key={rootPath}>
-                <Route exact path="/mypage/home" children={<Top />} />
+                <Route exact path="/mypage/home" children={<Home />} />
                 <Route
                     exact
                     path="/mypage/regist"
