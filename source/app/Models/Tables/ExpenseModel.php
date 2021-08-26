@@ -24,15 +24,20 @@ class ExpenseModel extends BaseModel
         $this->_s3ImageModel = $_s3ImageModel;
     }
 
-    public function insert(array $_registData, string $_s3ImgUrl, Authenticatable $_user): void
+    public function insert(array $_registData, Authenticatable $_user, ?string $_s3ImgUrl = null): void
     {
+        if (isset($_s3ImgUrl)) {
+            $this->_s3ImageModel->insert($_s3ImgUrl);
+
+            $_registData['s3_image_id'] = DB::getPdo()->lastInsertId();
+        }
+
+
         $_insert = $this->_createInsertUpdateData($this->_addUserData($_registData, $_user), $this->_getBaseDefaultInsertDataWithDelFlg());
 
         DB::table($this->table)->insert($_insert);
 
-        $_insertExpenseId = DB::getPdo()->lastInsertId();
 
-        $this->_s3ImageModel->insert($_s3ImgUrl, $_user, $_insertExpenseId);
 
         return;
     }

@@ -53,11 +53,11 @@ export default function Mypage() {
 
     const handleAlertClose = () => setAlertOpen(false);
 
-    const handleAlertOpen = () => {
+    const handleAlertOpen = (closedTime = 3000) => {
         setAlertOpen(true);
         window.setTimeout(function () {
             setAlertOpen(false);
-        }, 3000);
+        }, closedTime);
     };
 
     async function InviteUrlCopy() {

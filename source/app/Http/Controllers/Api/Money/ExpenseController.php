@@ -37,7 +37,7 @@ class ExpenseController extends Controller
 
         $_s3ImgUrl = $this->_s3Service->setDirName()->upload($request->file('receipt_img'));
 
-        $this->_expenseService->insertExpense($_registData, $_s3ImgUrl, $_user);
+        $this->_expenseService->insertExpense($_registData, $_user, $_s3ImgUrl);
 
         return response()->json([]);
     }

@@ -23,9 +23,9 @@ class ExpenseService extends BaseService
         return $this->_expenseCategoryModel->findListByRoomId($_roomId);
     }
 
-    public function insertExpense(array $_registData, ?string $_s3ImgUrl, Authenticatable $_user): void
+    public function insertExpense(array $_registData, Authenticatable $_user, ?string $_s3ImgUrl): void
     {
-        $this->_expenseModel->virtualMethodTransaction('insert', [$_registData, $_s3ImgUrl, $_user]);
+        $this->_expenseModel->virtualMethodTransaction('insert', [$_registData, $_user, $_s3ImgUrl]);
 
         return;
     }

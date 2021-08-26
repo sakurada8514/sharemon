@@ -33,7 +33,7 @@ class S3Service extends BaseService
         return $this;
     }
 
-    public function upload($_img): string
+    public function upload($_img): ?string
     {
         if (is_null($_img)) {
             return null;

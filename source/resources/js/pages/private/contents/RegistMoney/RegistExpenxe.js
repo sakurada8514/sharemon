@@ -91,7 +91,7 @@ export default function RegistExpense(props) {
         } else if (response.status === VALIDATION) {
             setErrors(response.data.errors);
         } else {
-            props.setAlertOpen(true);
+            props.handleAlertOpen(6000);
             props.setAlertSeverity("error");
             props.setAlertMessage(
                 "何かしらのエラーが発生しました。時間をおいてから再度お試しください。"
