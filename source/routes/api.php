@@ -34,6 +34,7 @@ Route::get('/room', [RoomController::class, "currentRoom"]);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/room/create', [RoomController::class, "createRoom"]);
+    Route::get('/room/member', [RoomController::class, "findMemberList"]);
 
     Route::get('/regist/url', [RoomController::class, "createInviteUrl"]);
 

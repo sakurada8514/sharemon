@@ -14,7 +14,7 @@ class CreateS3ImagesTable extends Migration
     public function up()
     {
         Schema::create('s3_images', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('s3_image_id');
             $table->text('img_url');
             $table->integer('del_flg');
             $table->timestamps();

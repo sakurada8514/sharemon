@@ -1,9 +1,31 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { Grid, Button, Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+
+import { getMember as getMemberApi } from "../../../api/Room/room";
+
+import { OK } from "../../../Const/constant";
+
 export default function Home() {
     const classes = useStyles();
+    const [member, setMember] = useState([]);
+
+    useEffect(() => {
+        async function getMemberList() {
+            const response = await getMemberApi();
+
+            if (response.status === OK) {
+                setMember(response.data.memberList);
+            } else {
+                window.location.href("/error");
+            }
+        }
+        getMemberList();
+    }, []);
     return (
         <div>
             <Grid container>
@@ -38,6 +60,24 @@ export default function Home() {
                     <Typography variant="h5" gutterBottom>
                         ルームメンバー
                     </Typography>
+                    <Box display="flex" flexWrap="wrap">
+                        {member.map((data) => {
+                            return (
+                                <Box
+                                    display="flex"
+                                    alignItems="center"
+                                    key={data.name}
+                                >
+                                    <AccountCircleIcon />
+                                    <p>
+                                        {data.nickname === null
+                                            ? data.name
+                                            : data.nikcname}
+                                    </p>
+                                </Box>
+                            );
+                        })}
+                    </Box>
                 </Grid>
             </Grid>
             <Grid container>

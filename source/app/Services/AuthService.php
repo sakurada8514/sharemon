@@ -43,7 +43,7 @@ class AuthService extends BaseService
     {
         $_data['password'] = Hash::make($_data['password']);
 
-        $this->_userModel->updateDataByEmail($_data);
+        $this->_userModel->updateByEmail($_data);
 
         return;
     }

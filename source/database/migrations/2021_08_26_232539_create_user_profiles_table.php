@@ -14,15 +14,14 @@ class CreateUserProfilesTable extends Migration
     public function up()
     {
         Schema::create('user_profiles', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigIncrements('user_id');
             $table->bigInteger('s3_image_id')->unsigned();
             $table->date('birthday')->nullable();
             $table->text('nickname');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('s3_image_id')->references('id')->on('s3_images')->onDelete('cascade');
+            $table->foreign('s3_image_id')->references('s3_image_id')->on('s3_images')->onDelete('cascade');
         });
     }
 

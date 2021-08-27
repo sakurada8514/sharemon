@@ -11,3 +11,10 @@ export async function createRoom(room_name) {
         .catch((err) => err.response);
     return response;
 }
+
+export async function getMember() {
+    const response = await axios
+        .get("/api/room/member")
+        .catch((err) => err.response);
+    return response;
+}

@@ -29,7 +29,7 @@ class CreateExpensesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('room_id')->references('room_id')->on('rooms')->onDelete('cascade');
             $table->foreign('category_id')->references('category_id')->on('expense_categories')->onDelete('cascade');
-            $table->foreign('s3_image_id')->references('id')->on('s3_images')->onDelete('cascade');
+            $table->foreign('s3_image_id')->references('s3_image_id')->on('s3_images')->onDelete('cascade');
         });
     }
 

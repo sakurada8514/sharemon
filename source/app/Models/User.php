@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
+use function PHPUnit\Framework\returnSelf;
+
 class User extends UserBaseModel
 {
     use HasFactory, Notifiable, HasApiTokens;
@@ -59,7 +61,7 @@ class User extends UserBaseModel
         return;
     }
 
-    public function updateDataByEmail(array $_data): void
+    public function updateByEmail(array $_data): void
     {
         $_update = $this->_createInsertUpdateData($_data, $this->_getBaseDefaultUpdateData());
 
@@ -83,5 +85,17 @@ class User extends UserBaseModel
             ->count();
 
         return $_ret;
+    }
+
+    public function findListByRoomId(string $_roomId): array
+    {
+        $_ret = DB::table('users')
+            ->where('room_id', $_roomId)
+            ->leftJoin('user_profiles as up', 'users.id', '=', 'up.user_id')
+            ->leftJoin('s3_images as si', 'up.s3_image_id', '=', 'si.s3_image_id')
+            ->select('users.name', 'up.nickname', 'si.img_url')
+            ->get();
+
+        return $this->_convertArray($_ret);
     }
 }

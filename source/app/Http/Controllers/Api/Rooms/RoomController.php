@@ -42,4 +42,13 @@ class RoomController extends Controller
 
         return response()->json(['url' => $_url]);
     }
+
+    public function findMemberList()
+    {
+        $_roomId = Auth::user()->room_id;
+
+        $_res = $this->_roomService->findMemberList($_roomId);
+
+        return response()->json(['memberList' => $_res]);
+    }
 }
