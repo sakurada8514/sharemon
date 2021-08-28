@@ -3,7 +3,7 @@ services:
   app:
     build: ./infra/php
     volumes:
-      - ./source:/work
+      - ./backend:/work
     environment:
       TZ: Asia/Tokyo
 
@@ -12,7 +12,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./source:/work
+      - ./backend:/work
       - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
     working_dir: /work
 
