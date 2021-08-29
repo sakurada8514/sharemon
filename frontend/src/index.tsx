@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@material-ui/core";
+import { CssBaseline } from "@material-ui/core";
 
 import store from "./stores/index";
 import { setCurrentUser } from "./stores/auth";
@@ -36,14 +37,14 @@ function App() {
   );
 }
 
-if (document.getElementById("root")) {
-  ReactDOM.render(<App />, document.getElementById("root"));
-}
-// store.dispatch(setCurrentUser()).then(() => {
-// if (document.getElementById("invite_app")) {
-//   ReactDOM.render(<InviteRegistApp />, document.getElementById("invite_app"));
-// }
-// });
+store.dispatch(setCurrentUser()).then(() => {
+  if (document.getElementById("root")) {
+    ReactDOM.render(<App />, document.getElementById("root"));
+  }
+  // if (document.getElementById("invite_app")) {
+  //   ReactDOM.render(<InviteRegistApp />, document.getElementById("invite_app"));
+  // }
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
