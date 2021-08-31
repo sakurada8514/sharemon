@@ -1,5 +1,5 @@
 //共通使用関数
-export function setRequestParams(formData: any) {
+export function setRequestParams(formData: any): FormData {
   const params = new FormData();
   for (let key in formData) {
     params.append(key, formData[key]);
@@ -7,8 +7,8 @@ export function setRequestParams(formData: any) {
   return params;
 }
 
-export function formatDate(date: any, format: string) {
-  format = format.replace(/yyyy/g, date.getFullYear());
+export function formatDate(date: Date, format: string): string {
+  format = format.replace(/yyyy/g, "" + date.getFullYear());
   format = format.replace(/MM/g, ("0" + (date.getMonth() + 1)).slice(-2));
   format = format.replace(/dd/g, ("0" + date.getDate()).slice(-2));
   format = format.replace(/HH/g, ("0" + date.getHours()).slice(-2));

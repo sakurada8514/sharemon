@@ -42,21 +42,19 @@ export default function Login() {
   }
 
   return (
-    <TransitionMotion
-      contents={
-        <LoginForm
-          login={login}
-          email={email}
-          password={password}
-          remember={remember}
-          errors={errors}
-          handleChangeEmail={handleChangeEmail}
-          handleChangePassword={handleChangePassword}
-          handleChangeRemember={handleChangeRemember}
-          pushRegist={pushRegist}
-          pushPasswordReset={pushPasswordReset}
-        />
-      }
-    />
+    <TransitionMotion>
+      <LoginForm
+        login={login}
+        email={email}
+        password={password}
+        remember={remember}
+        errors={errors}
+        handleChangeEmail={handleChangeEmail}
+        handleChangePassword={handleChangePassword}
+        handleChangeRemember={handleChangeRemember}
+        pushRegist={pushRegist}
+        pushPasswordReset={pushPasswordReset}
+      />
+    </TransitionMotion>
   );
 }

@@ -7,7 +7,7 @@ import { inviteRegist as inviteRegistApi } from "../../api/Room/invite";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../utils/constant";
 import { BACK_COLOR_WHITE } from "../../utils/constant";
 import RegistForm from "../../components/Form/RegistForm";
-import MyModal from "../../components/Parts/MyModal";
+import ModalView from "../../components/Atoms/ModalView";
 import TransitionMotion from "../../components/Route/Motion";
 
 let inviteeData = null;
@@ -60,25 +60,24 @@ export default function InviteRegist() {
 
   return (
     <>
-      <TransitionMotion
-        contents={
-          <RegistForm
-            regist={regist}
-            name={name}
-            email={email}
-            password={password}
-            password_confirmation={password_confirmation}
-            errors={errors}
-            isInvite={true}
-            handleChangeName={handleChangeName}
-            handleChangeEmail={handleChangeEmail}
-            handleChangePassword={handleChangePassword}
-            handleChangePasswordConfirmation={handleChangePasswordConfirmation}
-            pushLogin={pushLogin}
-          />
-        }
-      />
-      <MyModal
+      <TransitionMotion>
+        <RegistForm
+          regist={regist}
+          name={name}
+          email={email}
+          password={password}
+          password_confirmation={password_confirmation}
+          errors={errors}
+          isInvite={true}
+          handleChangeName={handleChangeName}
+          handleChangeEmail={handleChangeEmail}
+          handleChangePassword={handleChangePassword}
+          handleChangePasswordConfirmation={handleChangePasswordConfirmation}
+          pushLogin={pushLogin}
+        />
+      </TransitionMotion>
+
+      <ModalView
         show={modalShow}
         handleModalClose={handleModalClose}
         body={modalBody(handleModalClose)}

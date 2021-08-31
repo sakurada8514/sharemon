@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/redis_test', function () {
+    session(['test' => 'test']);
     return session()->all();
 });
 

@@ -39,17 +39,15 @@ export default function RegistRoom() {
   }
 
   return (
-    <TransitionMotion
-      contents={
-        <RegistRoomForm
-          createRoom={createRoom}
-          roomName={roomName}
-          handleChangeRoomName={handleChangeRoomName}
-          modalShow={modalShow}
-          handleClickLink={handleModalOpen}
-          handleModalClose={handleModalClose}
-        />
-      }
-    />
+    <TransitionMotion>
+      <RegistRoomForm
+        createRoom={createRoom}
+        roomName={roomName}
+        handleChangeRoomName={handleChangeRoomName}
+        modalShow={modalShow}
+        handleClickLink={handleModalOpen}
+        handleModalClose={handleModalClose}
+      />
+    </TransitionMotion>
   );
 }

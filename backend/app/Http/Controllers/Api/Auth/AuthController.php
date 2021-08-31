@@ -45,7 +45,7 @@ class AuthController extends Controller
     }
 
     /**
-     * 招待新規登録
+     * 招待新規登録 招待登録改修の必要性有
      *
      * @param InviteRegistRequest $request
      * @return JsonResponse

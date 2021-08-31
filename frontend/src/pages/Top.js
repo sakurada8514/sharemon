@@ -1,17 +1,15 @@
 import React from "react";
-import NavBar from "../components/Parts/NavBar";
+import NavBar from "../components/Atoms/NavBar";
 import TransitionMotion from "../components/Route/Motion";
 
 const Top = () => {
   return (
-    <TransitionMotion
-      contents={
-        <div>
-          <NavBar></NavBar>
-          Top
-        </div>
-      }
-    />
+    <TransitionMotion>
+      <div>
+        <NavBar></NavBar>
+        Top
+      </div>
+    </TransitionMotion>
   );
 };
 

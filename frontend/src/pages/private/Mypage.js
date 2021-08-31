@@ -8,9 +8,9 @@ import clsx from "clsx";
 
 import SideMenu from "../../components/SideMenu/SideMenu";
 import Header from "../../components/Header/Header";
-import MyAlert from "../../components/Parts/MyAlert";
+import AlertMessage from "../../components/Atoms/AlertMessage";
 import TransitionMotion from "../../components/Route/Motion";
-import MypageRouters from "./router";
+import MypageRouters from "./MypageRouters";
 
 import { BACK_COLOR_GREEN } from "../../utils/constant";
 import { OK } from "../../utils/constant";
@@ -108,56 +108,54 @@ export default function Mypage() {
   }
 
   return (
-    <TransitionMotion
-      contents={
-        <div className={classes.root}>
-          <BrowserRouter>
-            <Header
-              sideMenuOpen={sideMenuOpen}
-              settingMenuOpen={settingMenuOpen}
-              inviteMenuOpen={inviteMenuOpen}
-              handleSideMenuOpen={handleSideMenuOpen}
-              handleSettingMenuOpen={handleSettingMenuOpen}
-              handleSettingMenuClose={handleSettingMenuClose}
-              handleInviteMenuOpen={handleInviteMenuOpen}
-              handleInviteMenuClose={handleInviteMenuClose}
-              InviteUrlCopy={InviteUrlCopy}
-              logout={logout}
-            />
-            <SideMenu
-              sideMenuOpen={sideMenuOpen}
-              accountBookMenuOpen={accountBookMenuOpen}
-              handleSideMenuOpen={handleSideMenuOpen}
-              handleSideMenuClose={handleSideMenuClose}
-              handleAccountBookMenu={handleAccountBookMenu}
-            />
-            <main className={classes.content}>
-              <div className={classes.appBarSpacer} />
+    <TransitionMotion>
+      <div className={classes.root}>
+        <BrowserRouter>
+          <Header
+            sideMenuOpen={sideMenuOpen}
+            settingMenuOpen={settingMenuOpen}
+            inviteMenuOpen={inviteMenuOpen}
+            handleSideMenuOpen={handleSideMenuOpen}
+            handleSettingMenuOpen={handleSettingMenuOpen}
+            handleSettingMenuClose={handleSettingMenuClose}
+            handleInviteMenuOpen={handleInviteMenuOpen}
+            handleInviteMenuClose={handleInviteMenuClose}
+            InviteUrlCopy={InviteUrlCopy}
+            logout={logout}
+          />
+          <SideMenu
+            sideMenuOpen={sideMenuOpen}
+            accountBookMenuOpen={accountBookMenuOpen}
+            handleSideMenuOpen={handleSideMenuOpen}
+            handleSideMenuClose={handleSideMenuClose}
+            handleAccountBookMenu={handleAccountBookMenu}
+          />
+          <main className={classes.content}>
+            <div className={classes.appBarSpacer} />
 
-              <MyAlert
-                alertOpen={alertOpen}
-                severity={alertSeverity}
-                alertMessage={alertMessage}
-                handleAlert={handleAlertClose}
+            <AlertMessage
+              alertOpen={alertOpen}
+              severity={alertSeverity}
+              alertMessage={alertMessage}
+              handleAlert={handleAlertClose}
+            />
+
+            <div
+              className={clsx(
+                classes.container,
+                sideMenuOpen ? classes.openPadding : classes.closePadding
+              )}
+            >
+              <MypageRouters
+                handleAlertOpen={handleAlertOpen}
+                setAlertSeverity={setAlertSeverity}
+                setAlertMessage={setAlertMessage}
               />
-
-              <div
-                className={clsx(
-                  classes.container,
-                  sideMenuOpen ? classes.openPadding : classes.closePadding
-                )}
-              >
-                <MypageRouters
-                  handleAlertOpen={handleAlertOpen}
-                  setAlertSeverity={setAlertSeverity}
-                  setAlertMessage={setAlertMessage}
-                />
-              </div>
-            </main>
-          </BrowserRouter>
-        </div>
-      }
-    />
+            </div>
+          </main>
+        </BrowserRouter>
+      </div>
+    </TransitionMotion>
   );
 }
 

@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
 
 import ResetPasswordForm from "../../components/Form/ResetPasswordForm";
-import MyModal from "../../components/Parts/MyModal";
+import ModalView from "../../components/Atoms/ModalView";
 import TransitionMotion from "../../components/Route/Motion";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../utils/constant";
 import { BACK_COLOR_WHITE } from "../../utils/constant";
@@ -39,18 +39,17 @@ export default function ResetPassword() {
 
   return (
     <>
-      <TransitionMotion
-        contents={
-          <ResetPasswordForm
-            resetPassword={resetPassword}
-            email={email}
-            errors={errors}
-            handleChangeEmail={handleChangeEmail}
-            pushRegist={pushLogin}
-          />
-        }
-      />
-      <MyModal
+      <TransitionMotion>
+        <ResetPasswordForm
+          resetPassword={resetPassword}
+          email={email}
+          errors={errors}
+          handleChangeEmail={handleChangeEmail}
+          pushRegist={pushLogin}
+        />
+      </TransitionMotion>
+
+      <ModalView
         show={modalShow}
         handleModalClose={handleModalToggle}
         body={modalBody(handleModalToggle)}
