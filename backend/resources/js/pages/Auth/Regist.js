@@ -10,7 +10,6 @@ import RegistForm from "../../components/Form/RegistForm";
 
 export default function Regist() {
     const history = useHistory();
-    const dispatch = useDispatch();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");

@@ -45,11 +45,9 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routers />
-        </BrowserRouter>
-      </Provider>
+      <BrowserRouter>
+        <Routers />
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

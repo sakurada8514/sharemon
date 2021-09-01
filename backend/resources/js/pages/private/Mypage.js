@@ -21,7 +21,7 @@ import { logout as logoutApi } from "../../api/Auth/login";
 
 export default function Mypage() {
     const classes = useStyles();
-    const dispatch = useDispatch();
+
     const history = useHistory();
     useEffect(() => {
         if (window.matchMedia("(max-width: 960px)").matches) {

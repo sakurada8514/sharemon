@@ -1,16 +1,14 @@
-import { React, useState } from "react";
+import React, { useState, useGlobal } from "reactn";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import { createRoom as createRoomApi } from "../../api/Room/room";
-import { setUser } from "../../stores/auth";
 import { OK, VALIDATION } from "../../utils/constant";
 import RegistRoomForm from "../../components/Form/RegistRoomForm";
 import TransitionMotion from "../../components/Route/Motion";
 
 export default function RegistRoom() {
   const history = useHistory();
-  const dispatch = useDispatch();
+  const setUser = useGlobal("user")[1];
 
   const [roomName, setRoomName] = useState("");
   const [modalShow, setModalShow] = useState(false);
@@ -28,7 +26,7 @@ export default function RegistRoom() {
     const response = await createRoomApi(roomName);
 
     if (response.status === OK) {
-      dispatch(setUser(response.data.user));
+      setUser(response.data.user);
       history.push("/mypage");
     } else if (response.status === VALIDATION) {
       alert("既にルームを設定済みです。マイページへ移動します。");

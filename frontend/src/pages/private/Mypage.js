@@ -1,9 +1,7 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useGlobal } from "reactn";
 import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import clsx from "clsx";
 
 import SideMenu from "../../components/SideMenu/SideMenu";
@@ -14,15 +12,15 @@ import MypageRouters from "./MypageRouters";
 
 import { BACK_COLOR_GREEN } from "../../utils/constant";
 import { OK } from "../../utils/constant";
-import { setUser } from "../../stores/auth";
 
 import { createInviteUrl as createInviteUrlApi } from "../../api/Room/invite";
 import { logout as logoutApi } from "../../api/Auth/login";
 
 export default function Mypage() {
   const classes = useStyles();
-  const dispatch = useDispatch();
+
   const history = useHistory();
+  const setUser = useGlobal("user")[1];
   useEffect(() => {
     if (window.matchMedia("(max-width: 960px)").matches) {
       setSideMenuOpen(false);
@@ -100,7 +98,7 @@ export default function Mypage() {
     const response = await logoutApi();
 
     if (response === OK) {
-      dispatch(setUser(null));
+      setUser(null);
       history.push("/login");
     } else {
       history.push("/error");

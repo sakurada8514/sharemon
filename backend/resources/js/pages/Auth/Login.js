@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState, useG } from "reactn";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
@@ -11,7 +11,6 @@ import TransitionMotion from "../../components/Route/Motion";
 
 export default function Login() {
     const history = useHistory();
-    const dispatch = useDispatch();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

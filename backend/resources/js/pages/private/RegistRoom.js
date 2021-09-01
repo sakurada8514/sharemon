@@ -12,7 +12,6 @@ import TransitionMotion from "../../components/Route/Motion";
 
 export default function RegistRoom() {
     const history = useHistory();
-    const dispatch = useDispatch();
 
     const [roomName, setRoomName] = useState("");
     const [modalShow, setModalShow] = useState(false);

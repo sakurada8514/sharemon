@@ -1,16 +1,14 @@
-import { React, useState } from "react";
+import React, { useState, useGlobal } from "reactn";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 
-import { setUser } from "../../stores/auth";
 import { regist as registApi } from "../../api/Auth/regist";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../utils/constant";
 import RegistForm from "../../components/Form/RegistForm";
 
 export default function Regist() {
   const history = useHistory();
-  const dispatch = useDispatch();
+  const setUser = useGlobal("user")[1];
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -35,7 +33,7 @@ export default function Regist() {
     );
 
     if (response.status === OK) {
-      dispatch(setUser(response.data.user));
+      setUser(response.data.user);
       history.push("/regist/room");
     } else if (
       response.status === UNAUTHORIZED ||
