@@ -7,6 +7,6 @@ type UserState = {
 
 declare module "reactn/default" {
   export interface State {
-    user: UserState;
+    user: UserState | null;
   }
 }

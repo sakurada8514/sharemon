@@ -18,7 +18,7 @@ class AuthService extends BaseService
         $this->_userModel = $_userModel;
     }
 
-    public function login(array $_data, bool $_remember): Authenticatable
+    public function login(array $_data, bool $_remember): ?Authenticatable
     {
         $_loginData = $this->_convateLoginData($_data);
 

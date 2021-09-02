@@ -34,7 +34,10 @@ function App() {
         const user = await currentUserApi();
         setUser(user);
         setFirstAuthLoading(false);
-      } catch (err) {}
+      } catch (err) {
+        setUser(null);
+        setFirstAuthLoading(false);
+      }
     }
     getCurrentUser();
   }, [setUser]);
