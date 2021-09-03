@@ -1,28 +1,16 @@
 import React, { useGlobal, useEffect, useState } from "reactn";
 import { BrowserRouter } from "react-router-dom";
 
-import { Provider } from "react-redux";
 import { ThemeProvider } from "@material-ui/core";
 
-import store from "./stores/index";
-import { setCurrentUser } from "./stores/auth";
 import Routers from "./Routers";
 import { currentUser as currentUserApi } from "./api/Auth/login";
 import { theme } from "./theme";
 // import InviteRegistApp from "./InviteRegistApp";
 import ReactDOM from "react-dom";
-// import "./index.css";
-// import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
-
-// require("./bootstrap");
+import { CircularProgress, Box } from "@material-ui/core";
+import Loading from "./components/Atoms/Loading";
 
 function App() {
   const [firstAuthLoading, setFirstAuthLoading] = useState(true);
@@ -43,7 +31,7 @@ function App() {
   }, [setUser]);
 
   if (firstAuthLoading) {
-    return <span>Authenticating...</span>;
+    return <Loading />;
   }
 
   return (

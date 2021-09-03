@@ -1,15 +1,15 @@
-import axios from "axios";
+import { apiClient } from "../../utils/api";
 
 import { setRequestParams, formatDate } from "../../utils/handy";
 
 export async function registExpense(
-  expense,
-  regist_date,
-  category_id,
-  comment,
-  repetition_flg,
-  receipt_img
-) {
+  expense: string,
+  regist_date: Date,
+  category_id: number,
+  comment: string,
+  repetition_flg: boolean,
+  receipt_img: File
+): Promise<any> {
   const formData = {
     expense: expense,
     regist_date: formatDate(regist_date, "yyyy-MM-dd HH:mm:ss"),
@@ -19,8 +19,8 @@ export async function registExpense(
     receipt_img: receipt_img,
   };
   const params = setRequestParams(formData);
-  const response = await axios
-    .post("/api/expense/regist", params)
+  const response = await apiClient
+    .post("/expense/regist", params)
     .catch((err) => err.response);
 
   return response;
