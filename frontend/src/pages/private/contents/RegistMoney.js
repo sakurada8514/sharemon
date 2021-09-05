@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Tabs, Tab } from "@material-ui/core";
 
-import RegistExpense from "./RegistExpenxe";
-import RegistIncome from "./RegistIncome";
-import TransitionMotion from "../../../../components/Route/Motion";
-import { TEXT_COLOR_BLACK, BACK_COLOR_GREEN } from "../../../../utils/constant";
+import RegistExpense from "../../../components/Contents/RegistExpenxe";
+import RegistIncome from "../../../components/Contents/RegistIncome";
+import TransitionMotion from "../../../components/Route/Motion";
+import { TEXT_COLOR_BLACK, BACK_COLOR_GREEN } from "../../../utils/constant";
 
 export default function RegistMoney(props) {
   const classes = useStyles();

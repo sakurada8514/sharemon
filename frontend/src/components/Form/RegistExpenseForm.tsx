@@ -13,19 +13,23 @@ import {
   Grid,
   InputAdornment,
   Typography,
+  Box,
 } from "@material-ui/core";
 
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import ClearIcon from "@material-ui/icons/Clear";
 
 import MyDatePicker from "../Atoms/Form/DatePicker";
-export default function RegistExpenseForm(props) {
+import LoadingButton from "../Atoms/Buttons/LoadingButton";
+import type { RegistExpenseFormProps } from "../../types/components/Form";
+
+export default function RegistExpenseForm(props: RegistExpenseFormProps) {
   const classes = useStyles();
 
   return (
     <Grid container>
       <Grid item xs={12} md={6}>
-        <div noValidate>
+        <Box>
           <Typography className={classes.instructions}>*は必須です</Typography>
           <TextField
             variant="outlined"
@@ -67,7 +71,7 @@ export default function RegistExpenseForm(props) {
               onChange={props.handleChangeCategory}
               label="カテゴリー"
             >
-              {props.categoryList.map((data) => {
+              {props.categoryList.map((data: any) => {
                 return (
                   <MenuItem key={data.category_id} value={data.category_id}>
                     {data.category_name}
@@ -89,7 +93,7 @@ export default function RegistExpenseForm(props) {
             error={typeof props.errors.comment !== "undefined"}
             helperText={props.errors.comment}
           />
-          <div>
+          <Box>
             <FormControlLabel
               control={
                 <Switch
@@ -100,25 +104,21 @@ export default function RegistExpenseForm(props) {
               label="繰り返し登録（固定費等）"
               labelPlacement="start"
             />
-          </div>
+          </Box>
           <MediaQuery query="(min-width: 960px)">
             <Grid item xs={12} className={classes.buttonArea}>
-              <Button
-                onClick={props.registExpense}
-                type="submit"
-                variant="contained"
-                color="secondary"
-                size={"large"}
-                className={classes.button}
-              >
-                支出作成
-              </Button>
+              <LoadingButton
+                handleButtonClick={props.registExpense}
+                loading={props.loading}
+                text={"支出作成"}
+                color={"secondary"}
+              />
             </Grid>
           </MediaQuery>
-        </div>
+        </Box>
       </Grid>
       <Grid item xs={12} md={6} className={classes.receiptImageArea}>
-        <div>
+        <Box>
           <input
             id="myInput"
             type="file"
@@ -138,10 +138,10 @@ export default function RegistExpenseForm(props) {
           >
             レシートアップロード
           </Button>
-        </div>
-        <div className={classes.imgArea}>
+        </Box>
+        <Box className={classes.imgArea}>
           <img src={props.receiptImgPreview} />
-        </div>
+        </Box>
         {props.receiptImgPreview && (
           <Button
             variant="outlined"
@@ -159,7 +159,6 @@ export default function RegistExpenseForm(props) {
         <Grid item xs={12} className={classes.buttonArea}>
           <Button
             onClick={props.registExpense}
-            type="submit"
             variant="contained"
             color="secondary"
             size={"large"}

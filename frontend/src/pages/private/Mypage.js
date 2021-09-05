@@ -2,6 +2,7 @@ import React, { useState, useEffect, useGlobal } from "reactn";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router";
 import { BrowserRouter } from "react-router-dom";
+import { Box } from "@material-ui/core";
 import clsx from "clsx";
 
 import SideMenu from "../../components/SideMenu/SideMenu";
@@ -107,7 +108,7 @@ export default function Mypage() {
 
   return (
     <TransitionMotion>
-      <div className={classes.root}>
+      <Box className={classes.root}>
         <BrowserRouter>
           <Header
             sideMenuOpen={sideMenuOpen}
@@ -129,7 +130,7 @@ export default function Mypage() {
             handleAccountBookMenu={handleAccountBookMenu}
           />
           <main className={classes.content}>
-            <div className={classes.appBarSpacer} />
+            <Box className={classes.appBarSpacer} />
 
             <AlertMessage
               alertOpen={alertOpen}
@@ -138,7 +139,7 @@ export default function Mypage() {
               handleAlert={handleAlertClose}
             />
 
-            <div
+            <Box
               className={clsx(
                 classes.container,
                 sideMenuOpen ? classes.openPadding : classes.closePadding
@@ -149,10 +150,10 @@ export default function Mypage() {
                 setAlertSeverity={setAlertSeverity}
                 setAlertMessage={setAlertMessage}
               />
-            </div>
+            </Box>
           </main>
         </BrowserRouter>
-      </div>
+      </Box>
     </TransitionMotion>
   );
 }

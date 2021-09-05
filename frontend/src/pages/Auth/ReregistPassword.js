@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 import { makeStyles } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
 
-import ModalView from "../../components/Atoms/ModalView";
+import ModalTemplate from "../../components/Modal/ModalTemplate";
 import ReregistPasswordForm from "../../components/Form/ReregistPasswordForm";
 import TransitionMotion from "../../components/Route/Motion";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../utils/constant";
@@ -62,7 +62,7 @@ export default function ReregistPassword() {
           pushLogin={pushLogin}
         />
       </TransitionMotion>
-      <ModalView
+      <ModalTemplate
         show={modalShow}
         handleModalClose={pushLogin}
         body={modalBody(pushLogin)}

@@ -5,20 +5,20 @@ import { AnimatePresence } from "framer-motion";
 
 import List from "./contents/AccountBook/List";
 import Home from "./contents/Home";
-import RegistMoney from "./contents/RegistMoney/RegistMoney";
+import RegistMoney from "./contents/RegistMoney";
 
 import type { MypageRoutersProps } from "../../types/pages/private/Mypage";
 
 export default function MypageRouters(props: MypageRoutersProps) {
   const location = useLocation();
   const [esc, rootPath] = location.pathname.split("/");
+
   return (
     <AnimatePresence exitBeforeEnter initial={false}>
       <Switch location={location} key={rootPath}>
-        <Route exact path="/mypage/home" children={<Home />} />
-        <Route exact path="/mypage/list" children={<List />} />
+        <Route exact path="/mypage" children={<Home />} />
+        <Route path="/mypage/list" children={<List />} />
         <Route
-          exact
           path="/mypage/regist"
           children={
             <RegistMoney

@@ -1,0 +1,21 @@
+export type RegistExpenseFormProps = {
+  registExpense: () => Promise<void>;
+  expense: string;
+  date: Date;
+  category: number;
+  comment: string;
+  repetition: boolean;
+  fileInput: React.MutableRefObject<null>;
+  receiptImgPreview: string;
+  categoryList: any;
+  errors: any;
+  loading: boolean;
+  setDate: React.Dispatch<React.SetStateAction<Date>>;
+  handleChangeExpense: (e: any) => void;
+  handleChangeCategory: (e: any) => void;
+  handleChangeComment: (e: any) => void;
+  handleToggleRepetition: () => void;
+  handleChangeFile: (e) => void;
+  handleClickFileInput: () => void;
+  handleFileReset: () => void;
+};

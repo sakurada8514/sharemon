@@ -35,7 +35,7 @@ export function MainListItems(props) {
         </ListItem>
       </NavLink>
       <Divider />
-      <NavLink to="/mypage/home" activeClassName={classes.activeNav} exact>
+      <NavLink to="/mypage" activeClassName={classes.activeNav} exact>
         <ListItem button>
           <ListItemIcon>
             <HomeIcon />

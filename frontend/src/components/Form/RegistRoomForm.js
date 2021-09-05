@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
-import ModalView from "../Atoms/ModalView";
+import ModalTemplate from "../Modal/ModalTemplate";
 
 export default function RegistRoomForm(props) {
   const classes = useStyles();
@@ -63,7 +63,7 @@ export default function RegistRoomForm(props) {
           </form>
         </div>
       </Container>
-      <ModalView
+      <ModalTemplate
         show={props.modalShow}
         handleModalClose={props.handleModalClose}
         body={<p>ppp</p>}

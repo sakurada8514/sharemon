@@ -11,15 +11,20 @@ import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import { CircularProgress, Box } from "@material-ui/core";
 import Loading from "./components/Atoms/Loading";
+import ModalTemplate from "./components/Modal/ModalTemplate";
+import ErrorModal from "./components/Modal/ErrorModal";
 
 function App() {
   const [firstAuthLoading, setFirstAuthLoading] = useState(true);
   const setUser = useGlobal("user")[1];
+  const [error, setError] = useGlobal("error");
 
   useEffect(() => {
     async function getCurrentUser() {
       try {
         const user = await currentUserApi();
+        console.log(user);
+
         setUser(user);
         setFirstAuthLoading(false);
       } catch (err) {
@@ -28,7 +33,12 @@ function App() {
       }
     }
     getCurrentUser();
+    setError(false);
   }, [setUser]);
+
+  function reload() {
+    window.location.reload();
+  }
 
   if (firstAuthLoading) {
     return <Loading />;
@@ -39,6 +49,11 @@ function App() {
       <BrowserRouter>
         <Routers />
       </BrowserRouter>
+      <ModalTemplate
+        show={error}
+        handleModalClose={reload}
+        body={<ErrorModal handleButtonClick={reload} />}
+      />
     </ThemeProvider>
   );
 }

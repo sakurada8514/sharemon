@@ -7,7 +7,7 @@ import { inviteRegist as inviteRegistApi } from "../../api/Room/invite";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../utils/constant";
 import { BACK_COLOR_WHITE } from "../../utils/constant";
 import RegistForm from "../../components/Form/RegistForm";
-import ModalView from "../../components/Atoms/ModalView";
+import ModalTemplate from "../../components/Modal/ModalTemplate";
 import TransitionMotion from "../../components/Route/Motion";
 
 let inviteeData = null;
@@ -77,7 +77,7 @@ export default function InviteRegist() {
         />
       </TransitionMotion>
 
-      <ModalView
+      <ModalTemplate
         show={modalShow}
         handleModalClose={handleModalClose}
         body={modalBody(handleModalClose)}

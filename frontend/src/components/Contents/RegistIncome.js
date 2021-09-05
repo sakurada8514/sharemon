@@ -2,11 +2,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 
-import RegistIncomeForm from "../../../../components/Form/RegistIncomeForm";
-import { OK, VALIDATION } from "../../../../utils/constant";
+import RegistIncomeForm from "../Form/RegistIncomeForm";
+import { OK, VALIDATION } from "../../utils/constant";
 
-import { getCategoryList as getCategoryListApi } from "../../../../api/Income/category";
-import { registIncome as registIncomeApi } from "../../../../api/Income/regist";
+import { getCategoryList as getCategoryListApi } from "../../api/Income/category";
+import { registIncome as registIncomeApi } from "../../api/Income/regist";
 
 export default function RegistIncome(props) {
   const history = useHistory();

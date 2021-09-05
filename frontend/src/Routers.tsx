@@ -31,7 +31,7 @@ export default function Routers() {
         />
         <GuestRoute exact path="/regist" children={<Regist />} />
         <PrivateRoute path="/mypage" children={<Mypage />} />
-        <RoomRegistRoute path="/regist/room" children={<RegistRoom />} />
+        <RoomRegistRoute exact path="/regist/room" children={<RegistRoom />} />
       </Switch>
     </AnimatePresence>
   );

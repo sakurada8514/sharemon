@@ -1,26 +1,26 @@
-import React from "react";
-import { useRef, useState, useEffect } from "react";
+import React, { useGlobal, useRef, useState, useEffect } from "reactn";
 import { useHistory } from "react-router";
-import { motion } from "framer-motion";
 
-import RegistExpenseForm from "../../../../components/Form/RegistExpenseForm";
-import { OK, VALIDATION } from "../../../../utils/constant";
+import RegistExpenseForm from "../Form/RegistExpenseForm";
+import { OK, VALIDATION } from "../../utils/constant";
 
-import { getCategoryList as getCategoryListApi } from "../../../../api/Expense/category";
-import { registExpense as registExpenseApi } from "../../../../api/Expense/regist";
+import { getCategoryList as getCategoryListApi } from "../../api/Expense/category";
+import { registExpense as registExpenseApi } from "../../api/Expense/regist";
 
 export default function RegistExpense(props) {
   const history = useHistory();
+  const setError = useGlobal("error")[1];
 
   const [expense, setExpense] = useState("");
   const [date, setDate] = useState(new Date());
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(1);
   const [repetition, setRepetition] = useState(false);
   const [comment, setComment] = useState("");
   const [receiptImg, setReceiptImg] = useState("");
   const [receiptImgPreview, setReceiptImgPreview] = useState("");
   const [errors, setErrors] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fileInput = useRef(null);
 
@@ -32,7 +32,8 @@ export default function RegistExpense(props) {
         setCategoryList(response.data.categoryList);
         setCategory(1);
       } else {
-        window.location.href("/error");
+        // history.push("/error");
+        setError(true);
       }
     }
     getCategoryList();
@@ -69,6 +70,7 @@ export default function RegistExpense(props) {
   };
 
   async function registExpense() {
+    setLoading(true);
     const response = await registExpenseApi(
       expense,
       date,
@@ -97,6 +99,7 @@ export default function RegistExpense(props) {
         "何かしらのエラーが発生しました。時間をおいてから再度お試しください。"
       );
     }
+    setLoading(false);
   }
 
   return (
@@ -111,6 +114,7 @@ export default function RegistExpense(props) {
       receiptImgPreview={receiptImgPreview}
       categoryList={categoryList}
       errors={errors}
+      loading={loading}
       setDate={setDate}
       handleChangeExpense={handleChangeExpense}
       handleChangeCategory={handleChangeCategory}

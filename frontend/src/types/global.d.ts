@@ -1,12 +1,7 @@
 import "reactn";
-
-type UserState = {
-  name: string;
-  room_id: number;
-};
-
 declare module "reactn/default" {
   export interface State {
-    user: UserState | null;
+    user: { name: string; room_id: number } | null;
+    error: boolean;
   }
 }
