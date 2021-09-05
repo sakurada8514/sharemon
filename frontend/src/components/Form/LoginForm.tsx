@@ -3,6 +3,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -11,8 +13,20 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
+import type { LoginFormProps } from "../../types/components/Form";
 
-export default function RegistForm(props) {
+const LoginForm: React.FC<LoginFormProps> = ({
+  email,
+  password,
+  remember,
+  errors,
+  handleChangeEmail,
+  handleChangePassword,
+  login,
+  handleChangeRemember,
+  pushRegist,
+  pushPasswordReset,
+}) => {
   const classes = useStyles();
 
   return (
@@ -24,24 +38,9 @@ export default function RegistForm(props) {
             <LockOutlinedIcon className={classes.icon} />
           </Avatar>
           <Typography component="h1" variant="h5">
-            ユーザー登録
+            ログイン
           </Typography>
-          <form className={classes.form} onSubmit={props.regist} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="name"
-              label="ユーザー名"
-              name="name"
-              autoComplete="name"
-              autoFocus
-              value={props.name}
-              onChange={props.handleChangeName}
-              error={typeof props.errors.name !== "undefined"}
-              helperText={props.errors.name}
-            />
+          <form className={classes.form} onSubmit={login} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
@@ -51,10 +50,14 @@ export default function RegistForm(props) {
               label="メールアドレス"
               name="email"
               autoComplete="email"
-              value={props.email}
-              onChange={props.handleChangeEmail}
-              error={typeof props.errors.email !== "undefined"}
-              helperText={props.errors.email}
+              autoFocus
+              value={email}
+              onChange={handleChangeEmail}
+              error={
+                typeof errors.email !== "undefined" ||
+                typeof errors.auth !== "undefined"
+              }
+              helperText={errors.email}
             />
             <TextField
               variant="outlined"
@@ -66,23 +69,23 @@ export default function RegistForm(props) {
               type="password"
               id="password"
               autoComplete="current-password"
-              value={props.password}
-              onChange={props.handleChangePassword}
-              error={typeof props.errors.password !== "undefined"}
-              helperText={props.errors.password}
+              value={password}
+              onChange={handleChangePassword}
+              error={
+                typeof errors.password !== "undefined" ||
+                typeof errors.auth !== "undefined"
+              }
+              helperText={errors.password || errors.auth}
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password_confirmation"
-              label="パスワード確認"
-              type="password"
-              id="password_confirmation"
-              autoComplete="current-password_confirmation"
-              value={props.password_confirmation}
-              onChange={props.handleChangePasswordConfirmation}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  value={remember}
+                  color="primary"
+                  onClick={handleChangeRemember}
+                />
+              }
+              label="ログインを維持する"
             />
             <Button
               type="submit"
@@ -91,16 +94,24 @@ export default function RegistForm(props) {
               color="primary"
               className={classes.submit}
             >
-              登録
+              ログイン
             </Button>
-            <Box display="flex" justifyContent="center">
+            <Box className={classes.linkArea}>
               <Link
                 color="secondary"
                 variant="body2"
-                onClick={props.pushLogin}
-                className={props.isInvite ? classes.linkNone : classes.link}
+                onClick={pushRegist}
+                className={classes.link}
               >
-                {"ログイン"}
+                {"ユーザー登録"}
+              </Link>
+              <Link
+                color="secondary"
+                variant="body2"
+                onClick={pushPasswordReset}
+                className={classes.link}
+              >
+                {"パスワードリセット"}
               </Link>
             </Box>
           </form>
@@ -108,7 +119,7 @@ export default function RegistForm(props) {
       </Container>
     </div>
   );
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -137,11 +148,14 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
   },
+  linkArea: {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "0 24px",
+  },
   link: {
     cursor: "pointer",
   },
-  linkNone: {
-    cursor: "pointer",
-    display: "none",
-  },
 }));
+
+export default LoginForm;

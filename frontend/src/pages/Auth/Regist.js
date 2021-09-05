@@ -15,6 +15,7 @@ export default function Regist() {
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleChangeName = (e) => setName(e.target.value);
   const handleChangeEmail = (e) => setEmail(e.target.value);
@@ -25,6 +26,7 @@ export default function Regist() {
 
   async function regist(e) {
     e.preventDefault();
+    setLoading(true);
     const response = await registApi(
       name,
       email,
@@ -39,6 +41,7 @@ export default function Regist() {
       response.status === UNAUTHORIZED ||
       response.status === VALIDATION
     ) {
+      setLoading(false);
       setErrors(response.data.errors);
     } else {
       history.push("/error");
@@ -73,6 +76,7 @@ export default function Regist() {
         handleChangePassword={handleChangePassword}
         handleChangePasswordConfirmation={handleChangePasswordConfirmation}
         pushLogin={pushLogin}
+        loading={loading}
       />
     </motion.div>
   );

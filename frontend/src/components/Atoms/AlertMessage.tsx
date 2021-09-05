@@ -1,35 +1,47 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Alert from "@material-ui/lab/Alert";
-import IconButton from "@material-ui/core/IconButton";
-import Collapse from "@material-ui/core/Collapse";
+import { Alert, AlertProps } from "@material-ui/lab";
+
+import { IconButton, IconButtonProps, Collapse } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 
-export default function AlertMessage(props) {
+type AlertMessageProps = {
+  alertOpen: boolean;
+  alertMessage: string;
+  severity: AlertProps["severity"];
+  handleAlert: IconButtonProps["onClick"];
+};
+
+const AlertMessage: React.FC<AlertMessageProps> = ({
+  alertOpen,
+  alertMessage,
+  severity,
+  handleAlert,
+}) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Collapse in={props.alertOpen}>
+      <Collapse in={alertOpen}>
         <Alert
-          severity={props.severity}
+          severity={severity}
           action={
             <IconButton
               aria-label="close"
               color="inherit"
               size="small"
-              onClick={props.handleAlert}
+              onClick={handleAlert}
             >
               <CloseIcon fontSize="inherit" />
             </IconButton>
           }
         >
-          {props.alertMessage}
+          {alertMessage}
         </Alert>
       </Collapse>
     </div>
   );
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,3 +54,5 @@ const useStyles = makeStyles((theme) => ({
     right: "10px",
   },
 }));
+
+export default AlertMessage;

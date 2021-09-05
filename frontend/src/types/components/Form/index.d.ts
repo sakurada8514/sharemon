@@ -19,3 +19,31 @@ export type RegistExpenseFormProps = {
   handleClickFileInput: () => void;
   handleFileReset: () => void;
 };
+
+type AuthFormProps = {
+  email: string;
+  password: string;
+  handleChangeEmail: (e: any) => void;
+  handleChangePassword: (e: any) => void;
+  loading: boolean;
+};
+
+export type LoginFormProps = {
+  login: (e: any) => Promise<void>;
+  remember: boolean;
+  errors: any;
+  handleChangeRemember: (e: any) => void;
+  pushRegist: () => void;
+  pushPasswordReset: () => void;
+} & AuthFormProps;
+
+export type RegistFormProps = {
+  regist: (e: any) => Promise<void>;
+  name: string;
+  password_confirmation: string;
+  errors: any;
+  isInvite: boolean;
+  handleChangeName: (e: any) => void;
+  handleChangePasswordConfirmation: (e: any) => void;
+  pushLogin: (e) => void;
+} & AuthFormProps;

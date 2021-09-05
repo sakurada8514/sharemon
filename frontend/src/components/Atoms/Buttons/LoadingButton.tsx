@@ -6,11 +6,12 @@ import clsx from "clsx";
 import { SUB_COLOR_GREEN } from "../../../utils/constant";
 
 type props = {
-  handleButtonClick: () => any;
+  handleButtonClick: (e?: any) => any;
   text: string;
   loading: boolean;
   color?: ButtonProps["color"];
   variant?: ButtonProps["variant"];
+  fullWidth?: ButtonProps["fullWidth"];
 };
 
 const LoadingButton: React.FC<props> = ({
@@ -19,6 +20,7 @@ const LoadingButton: React.FC<props> = ({
   loading,
   color = "primary",
   variant = "contained",
+  fullWidth = false,
 }) => {
   const classes = styles();
 
@@ -30,6 +32,7 @@ const LoadingButton: React.FC<props> = ({
         disabled={loading}
         onClick={handleButtonClick}
         className={classes.button}
+        fullWidth={fullWidth}
       >
         {text}
       </Button>
