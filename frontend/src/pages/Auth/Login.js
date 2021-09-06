@@ -14,15 +14,17 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleChangeEmail = (e) => setEmail(e.target.value);
   const handleChangePassword = (e) => setPassword(e.target.value);
   const handleChangeRemember = (e) => setRemember(!remember);
   const pushRegist = () => history.push("/regist");
-  const pushPasswordReset = () => history.push("/password/reset");
+  const pushPasswordReset = () => history.push("/password/reset/mail");
 
   async function login(e) {
     e.preventDefault();
+    setLoading(true);
     const response = await loginApi(email, password, remember);
 
     if (response.status === OK) {
@@ -32,6 +34,7 @@ export default function Login() {
       response.status === UNAUTHORIZED ||
       response.status === VALIDATION
     ) {
+      setLoading(false);
       setErrors(response.data.errors);
     } else {
       history.push("/error");
@@ -46,6 +49,7 @@ export default function Login() {
         password={password}
         remember={remember}
         errors={errors}
+        loading={loading}
         handleChangeEmail={handleChangeEmail}
         handleChangePassword={handleChangePassword}
         handleChangeRemember={handleChangeRemember}

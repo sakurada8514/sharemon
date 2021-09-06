@@ -23,10 +23,14 @@ export default function Routers() {
         <Route exact path="/" children={<Top />} />
         <Route path="/error" children={<Error />} />
         <GuestRoute exact path="/login" children={<Login />} />
-        <GuestRoute exact path="/password/reset" children={<ResetPassword />} />
         <GuestRoute
           exact
-          path="/password/reset/form"
+          path="/password/reset/mail"
+          children={<ResetPassword />}
+        />
+        <GuestRoute
+          exact
+          path="/password/reset"
           children={<ReregistPassword />}
         />
         <GuestRoute exact path="/regist" children={<Regist />} />

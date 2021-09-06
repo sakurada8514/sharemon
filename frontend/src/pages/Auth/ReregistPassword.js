@@ -1,6 +1,5 @@
 import { React, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useLocation } from "react-router";
 import { makeStyles } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
 
@@ -9,6 +8,7 @@ import ReregistPasswordForm from "../../components/Form/ReregistPasswordForm";
 import TransitionMotion from "../../components/Route/Motion";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../utils/constant";
 import { BACK_COLOR_WHITE } from "../../utils/constant";
+import useQuery from "../../utils/hooks/useQuery";
 
 import { reregistPassword as reregistPasswordApi } from "../../api/Auth/login";
 
@@ -19,16 +19,17 @@ export default function ReregistPassword() {
   const [password_confirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChangePassword = (e) => setPassword(e.target.value);
   const handleChangePasswordConfirmation = (e) =>
     setPasswordConfirmation(e.target.value);
   const pushLogin = () => history.push("/login");
 
-  const useQuery = () => new URLSearchParams(useLocation().search);
   const query = useQuery();
 
   async function reregistPassword(e) {
+    setLoading(true);
     e.preventDefault();
 
     const response = await reregistPasswordApi(
@@ -38,11 +39,13 @@ export default function ReregistPassword() {
     );
 
     if (response.status === OK) {
+      setLoading(false);
       setModalShow(true);
     } else if (
       response.status === UNAUTHORIZED ||
       response.status === VALIDATION
     ) {
+      setLoading(false);
       setErrors(response.data.errors);
     } else {
       history.push("/error");
@@ -60,6 +63,7 @@ export default function ReregistPassword() {
           handleChangePassword={handleChangePassword}
           handleChangePasswordConfirmation={handleChangePasswordConfirmation}
           pushLogin={pushLogin}
+          loading={loading}
         />
       </TransitionMotion>
       <ModalTemplate

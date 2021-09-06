@@ -17,20 +17,24 @@ export default function ResetPassword() {
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChangeEmail = (e) => setEmail(e.target.value);
   const handleModalToggle = () => setModalShow(!modalShow);
   const pushLogin = () => history.push("/login");
 
   async function resetPassword(e) {
+    setLoading(true);
     e.preventDefault();
     const response = await resetPasswordApi(email);
     if (response.status === OK) {
+      setLoading(false);
       setModalShow(true);
     } else if (
       response.status === UNAUTHORIZED ||
       response.status === VALIDATION
     ) {
+      setLoading(false);
       setErrors(response.data.errors);
     } else {
       history.push("/error");
@@ -44,8 +48,9 @@ export default function ResetPassword() {
           resetPassword={resetPassword}
           email={email}
           errors={errors}
+          loading={loading}
           handleChangeEmail={handleChangeEmail}
-          pushRegist={pushLogin}
+          pushLogin={pushLogin}
         />
       </TransitionMotion>
 

@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
+import LoadingButton from "../Atoms/Buttons/LoadingButton";
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
 import type { LoginFormProps } from "../../types/components/Form";
 
@@ -20,6 +21,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   password,
   remember,
   errors,
+  loading,
   handleChangeEmail,
   handleChangePassword,
   login,
@@ -40,7 +42,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           <Typography component="h1" variant="h5">
             ログイン
           </Typography>
-          <form className={classes.form} onSubmit={login} noValidate>
+          <form className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -87,15 +89,12 @@ const LoginForm: React.FC<LoginFormProps> = ({
               }
               label="ログインを維持する"
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              ログイン
-            </Button>
+            <LoadingButton
+              handleButtonClick={login}
+              text={"ログイン"}
+              loading={loading}
+              fullWidth={true}
+            />
             <Box className={classes.linkArea}>
               <Link
                 color="secondary"
@@ -135,10 +134,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: SUB_COLOR_GREEN,
-  },
   icon: {
     backgroundColor: SUB_COLOR_GREEN,
   },
@@ -152,6 +147,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     padding: "0 24px",
+    marginTop: theme.spacing(2),
   },
   link: {
     cursor: "pointer",

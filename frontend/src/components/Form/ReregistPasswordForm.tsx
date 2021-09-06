@@ -11,8 +11,19 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
+import LoadingButton from "../Atoms/Buttons/LoadingButton";
+import type { ReregistPasswordFormProps } from "../../types/components/Form";
 
-export default function ResetPasswordForm(props) {
+const ReregistPasswordForm: React.FC<ReregistPasswordFormProps> = ({
+  password,
+  errors,
+  password_confirmation,
+  loading,
+  reregistPassword,
+  handleChangePassword,
+  handleChangePasswordConfirmation,
+  pushLogin,
+}) => {
   const classes = useStyles();
 
   return (
@@ -24,45 +35,56 @@ export default function ResetPasswordForm(props) {
             <LockOutlinedIcon className={classes.icon} />
           </Avatar>
           <Typography component="h1" variant="h5">
-            パスワードリセット
+            パスワード再設定
           </Typography>
-          <form
-            className={classes.form}
-            onSubmit={props.resetPassword}
-            noValidate
-          >
+          <form className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="メールアドレス"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              value={props.email}
-              onChange={props.handleChangeEmail}
-              error={typeof props.errors.email !== "undefined"}
-              helperText={props.errors.email}
+              name="password"
+              label="パスワード"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={handleChangePassword}
+              error={typeof errors.password !== "undefined"}
+              helperText={errors.password}
             />
-            <Button
-              type="submit"
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
               fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
+              name="password_confirmation"
+              label="パスワード確認"
+              type="password"
+              id="password_confirmation"
+              autoComplete="current-password_confirmation"
+              value={password_confirmation}
+              onChange={handleChangePasswordConfirmation}
+              className={classes.lastTextField}
+            />
+            <LoadingButton
+              handleButtonClick={reregistPassword}
+              text={"パスワード再設定"}
+              loading={loading}
+              fullWidth={true}
+            />
+            <Box
+              display="flex"
+              justifyContent="center"
+              className={classes.linkArea}
             >
-              リセットメール送信
-            </Button>
-            <Box className={classes.linkArea}>
               <Link
                 color="secondary"
                 variant="body2"
-                onClick={props.pushRegist}
+                onClick={pushLogin}
                 className={classes.link}
               >
-                {"ログインへ戻る"}
+                {"ログイン"}
               </Link>
             </Box>
           </form>
@@ -70,7 +92,7 @@ export default function ResetPasswordForm(props) {
       </Container>
     </div>
   );
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -86,9 +108,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: SUB_COLOR_GREEN,
+  linkArea: {
+    marginTop: theme.spacing(2),
   },
   icon: {
     backgroundColor: SUB_COLOR_GREEN,
@@ -99,11 +120,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
   },
-  linkArea: {
-    display: "flex",
-    justifyContent: "center",
-  },
   link: {
     cursor: "pointer",
   },
+  lastTextField: {
+    marginBottom: theme.spacing(3),
+  },
 }));
+
+export default ReregistPasswordForm;

@@ -11,8 +11,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
+import LoadingButton from "../Atoms/Buttons/LoadingButton";
+import { ResetPasswordFormProps } from "../../types/components/Form";
 
-export default function ReregistPasswordForm(props) {
+const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
+  email,
+  errors,
+  loading,
+  resetPassword,
+  handleChangeEmail,
+  pushLogin,
+}) => {
   const classes = useStyles();
 
   return (
@@ -24,58 +33,39 @@ export default function ReregistPasswordForm(props) {
             <LockOutlinedIcon className={classes.icon} />
           </Avatar>
           <Typography component="h1" variant="h5">
-            パスワード再設定
+            パスワードリセット
           </Typography>
-          <form
-            className={classes.form}
-            onSubmit={props.reregistPassword}
-            noValidate
-          >
+          <form className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="パスワード"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={props.password}
-              onChange={props.handleChangePassword}
-              error={typeof props.errors.password !== "undefined"}
-              helperText={props.errors.password}
+              id="email"
+              label="メールアドレス"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              value={email}
+              onChange={handleChangeEmail}
+              error={typeof errors.email !== "undefined"}
+              helperText={errors.email}
+              className={classes.lastTextField}
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password_confirmation"
-              label="パスワード確認"
-              type="password"
-              id="password_confirmation"
-              autoComplete="current-password_confirmation"
-              value={props.password_confirmation}
-              onChange={props.handleChangePasswordConfirmation}
+            <LoadingButton
+              handleButtonClick={resetPassword}
+              text={"リセットメール送信"}
+              loading={loading}
+              fullWidth={true}
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              パスワード再設定
-            </Button>
-            <Box display="flex" justifyContent="center">
+            <Box className={classes.linkArea}>
               <Link
                 color="secondary"
                 variant="body2"
-                onClick={props.pushLogin}
+                onClick={pushLogin}
                 className={classes.link}
               >
-                {"ログイン"}
+                {"ログインへ戻る"}
               </Link>
             </Box>
           </form>
@@ -83,7 +73,7 @@ export default function ReregistPasswordForm(props) {
       </Container>
     </div>
   );
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -99,10 +89,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: SUB_COLOR_GREEN,
-  },
   icon: {
     backgroundColor: SUB_COLOR_GREEN,
   },
@@ -112,7 +98,17 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
   },
+  linkArea: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: theme.spacing(2),
+  },
   link: {
     cursor: "pointer",
   },
+  lastTextField: {
+    marginBottom: theme.spacing(3),
+  },
 }));
+
+export default ResetPasswordForm;

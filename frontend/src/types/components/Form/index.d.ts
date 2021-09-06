@@ -26,12 +26,12 @@ type AuthFormProps = {
   handleChangeEmail: (e: any) => void;
   handleChangePassword: (e: any) => void;
   loading: boolean;
+  errors: any;
 };
 
 export type LoginFormProps = {
   login: (e: any) => Promise<void>;
   remember: boolean;
-  errors: any;
   handleChangeRemember: (e: any) => void;
   pushRegist: () => void;
   pushPasswordReset: () => void;
@@ -41,9 +41,23 @@ export type RegistFormProps = {
   regist: (e: any) => Promise<void>;
   name: string;
   password_confirmation: string;
-  errors: any;
   isInvite: boolean;
   handleChangeName: (e: any) => void;
   handleChangePasswordConfirmation: (e: any) => void;
   pushLogin: (e) => void;
 } & AuthFormProps;
+
+export type ReregistPasswordFormProps = {
+  password_confirmation: string;
+  reregistPassword: (e: any) => Promise<void>;
+  handleChangePasswordConfirmation: (e: any) => void;
+  pushLogin: (e) => void;
+} & Pick<
+  AuthFormProps,
+  "password" | "handleChangePassword" | "errors" | "loading"
+>;
+
+export type ResetPasswordFormProps = {
+  resetPassword: (e: any) => Promise<void>;
+  pushLogin: (e) => void;
+} & Pick<AuthFormProps, "email" | "handleChangeEmail" | "errors" | "loading">;
