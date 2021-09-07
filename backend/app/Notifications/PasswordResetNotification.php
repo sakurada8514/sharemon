@@ -11,7 +11,12 @@ use Illuminate\Support\Facades\URL;
 class PasswordResetNotification extends ResetPassword
 {
     use Queueable;
+    public $token;
 
+    public function __construct($token)
+    {
+        $this->token = $token;
+    }
     /**
      * Get the mail representation of the notification.
      *
@@ -27,7 +32,7 @@ class PasswordResetNotification extends ResetPassword
         return (new MailMessage)
             ->subject('パスワードリセット通知')
             ->view('emails.passwordReset', [
-                'reset_url' => 'http://localhost:3000/password/reset?email=' . $notifiable->getEmailForPasswordReset()
+                'reset_url' => 'http://localhost:3000/password/reset?token=' . $this->token . '&email=' . $notifiable->getEmailForPasswordReset()
             ]);
     }
 }

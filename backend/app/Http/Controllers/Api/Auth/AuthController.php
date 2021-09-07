@@ -89,7 +89,7 @@ class AuthController extends Controller
         return $this->_authResponse($_user);
     }
 
-    public function resetPassword(ResetPasswordRequest $request): JsonResponse
+    public function sendResetPasswordMail(ResetPasswordRequest $request): JsonResponse
     {
         $_response = $this->broker()->sendResetLink(
             $this->credentials($request)
@@ -102,9 +102,13 @@ class AuthController extends Controller
 
     public function reregistPassword(ReregistPasswordRequest $request): JsonResponse
     {
-        $_data = $request->only('email', 'password');
+        $_data = $request->only('email', 'password', 'token');
 
-        $this->_authService->reregistPassword($_data);
+        $resetPasswordStatus = $this->_authService->reregistPassword($_data);
+
+        if ($resetPasswordStatus == Password::INVALID_TOKEN) {
+            return ['success' => false]; // トークンが異なる場合の処理追加
+        }
 
         return response()->json([]);
     }

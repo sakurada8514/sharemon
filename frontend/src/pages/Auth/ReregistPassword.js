@@ -33,6 +33,7 @@ export default function ReregistPassword() {
     e.preventDefault();
 
     const response = await reregistPasswordApi(
+      query.get("token"),
       query.get("email"),
       password,
       password_confirmation

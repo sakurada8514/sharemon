@@ -33,6 +33,7 @@ export async function resetPassword(email: string): Promise<any> {
 }
 
 export async function reregistPassword(
+  token: string,
   email: string,
   password: string,
   password_confirmation: string
@@ -40,6 +41,7 @@ export async function reregistPassword(
   const response = await apiClient
     .post("/password/reregist", {
       email,
+      token,
       password,
       password_confirmation,
     })

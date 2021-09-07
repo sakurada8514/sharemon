@@ -23,7 +23,7 @@ Route::post('/regist/invite', [AuthController::class, "inviteRegist"]);
 
 Route::post('/login', [AuthController::class, "login"]);
 
-Route::post('/password/reset', [AuthController::class, "resetPassword"]);
+Route::post('/password/reset', [AuthController::class, "sendResetPasswordMail"]);
 Route::post('/password/reregist', [AuthController::class, "reregistPassword"]);
 
 Route::get('/logout', [AuthController::class, "logout"]);

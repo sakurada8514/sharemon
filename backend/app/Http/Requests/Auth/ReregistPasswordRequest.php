@@ -25,8 +25,8 @@ class ReregistPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            "email"    => ["required", "email", new ResetPasswordRule],
-            "password" => ["required", "min:8", "confirmed"],
+            'password' => ['required', 'min:8', 'confirmed'],
+            'token'    => ['required', 'string']
         ];
     }
 }
