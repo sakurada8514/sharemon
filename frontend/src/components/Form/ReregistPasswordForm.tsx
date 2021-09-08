@@ -50,8 +50,11 @@ const ReregistPasswordForm: React.FC<ReregistPasswordFormProps> = ({
               autoComplete="current-password"
               value={password}
               onChange={handleChangePassword}
-              error={typeof errors.password !== "undefined"}
-              helperText={errors.password}
+              error={
+                typeof errors.password !== "undefined" ||
+                typeof errors.auth !== "undefined"
+              }
+              helperText={errors.password || errors.auth}
             />
             <TextField
               variant="outlined"
@@ -66,6 +69,8 @@ const ReregistPasswordForm: React.FC<ReregistPasswordFormProps> = ({
               value={password_confirmation}
               onChange={handleChangePasswordConfirmation}
               className={classes.lastTextField}
+              error={typeof errors.auth !== "undefined"}
+              helperText={errors.auth}
             />
             <LoadingButton
               handleButtonClick={reregistPassword}

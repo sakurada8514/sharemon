@@ -107,7 +107,9 @@ class AuthController extends Controller
         $resetPasswordStatus = $this->_authService->reregistPassword($_data);
 
         if ($resetPasswordStatus == Password::INVALID_TOKEN) {
-            return ['success' => false]; // トークンが異なる場合の処理追加
+            return response()->json([
+                'errors' => config('Const.webApp.ERROR_MESSAGE.RESET_PASSWORD')
+            ], Response::HTTP_UNAUTHORIZED); // トークンが異なる場合の処理追加
         }
 
         return response()->json([]);
