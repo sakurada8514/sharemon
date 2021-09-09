@@ -6,8 +6,13 @@ import { OK, VALIDATION } from "../../utils/constant";
 
 import { getCategoryList as getCategoryListApi } from "../../api/Expense/category";
 import { registExpense as registExpenseApi } from "../../api/Expense/regist";
+import type { RegistMoneyProps } from "../../types/components/Contents";
 
-export default function RegistExpense(props) {
+const RegistExpense: React.FC<RegistMoneyProps> = ({
+  handleAlertOpen,
+  setAlertSeverity,
+  setAlertMessage,
+}) => {
   const history = useHistory();
   const setError = useGlobal("error")[1];
 
@@ -17,7 +22,9 @@ export default function RegistExpense(props) {
   const [repetition, setRepetition] = useState(false);
   const [comment, setComment] = useState("");
   const [receiptImg, setReceiptImg] = useState("");
-  const [receiptImgPreview, setReceiptImgPreview] = useState("");
+  const [receiptImgPreview, setReceiptImgPreview] = useState<
+    string | ArrayBuffer | null
+  >("");
   const [errors, setErrors] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -39,9 +46,9 @@ export default function RegistExpense(props) {
     getCategoryList();
   }, []);
 
-  const handleChangeExpense = (e) => setExpense(e.target.value);
-  const handleChangeCategory = (e) => setCategory(e.target.value);
-  const handleChangeComment = (e) => setComment(e.target.value);
+  const handleChangeExpense = (e: any) => setExpense(e.target.value);
+  const handleChangeCategory = (e: any) => setCategory(e.target.value);
+  const handleChangeComment = (e: any) => setComment(e.target.value);
   const handleToggleRepetition = () => {
     setRepetition(!repetition);
   };
@@ -49,7 +56,7 @@ export default function RegistExpense(props) {
   const handleClickFileInput = () => {
     fileInput.current.click();
   };
-  const handleChangeFile = (e) => {
+  const handleChangeFile = (e: any) => {
     const files = e.target.files;
 
     if (files.length > 0) {
@@ -81,8 +88,8 @@ export default function RegistExpense(props) {
     );
 
     if (response.status === OK) {
-      props.handleAlertOpen();
-      props.setAlertMessage("正常に支出を作成しました");
+      handleAlertOpen();
+      setAlertMessage("正常に支出を作成しました");
       setExpense("");
       setDate(new Date());
       setCategory(1);
@@ -93,9 +100,9 @@ export default function RegistExpense(props) {
     } else if (response.status === VALIDATION) {
       setErrors(response.data.errors);
     } else {
-      props.handleAlertOpen(6000);
-      props.setAlertSeverity("error");
-      props.setAlertMessage(
+      handleAlertOpen(6000);
+      setAlertSeverity("error");
+      setAlertMessage(
         "何かしらのエラーが発生しました。時間をおいてから再度お試しください。"
       );
     }
@@ -125,4 +132,5 @@ export default function RegistExpense(props) {
       handleFileReset={handleFileReset}
     />
   );
-}
+};
+export default RegistExpense;

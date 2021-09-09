@@ -8,7 +8,7 @@ export async function registExpense(
   category_id: number,
   comment: string,
   repetition_flg: boolean,
-  receipt_img: File
+  receipt_img: any
 ): Promise<any> {
   const formData = {
     expense: expense,

@@ -6,7 +6,7 @@ export type RegistExpenseFormProps = {
   comment: string;
   repetition: boolean;
   fileInput: React.MutableRefObject<null>;
-  receiptImgPreview: string;
+  receiptImgPreview: any;
   categoryList: any;
   errors: any;
   loading: boolean;
