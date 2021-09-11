@@ -12,22 +12,36 @@ import Container from "@material-ui/core/Container";
 
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
 import LoadingButton from "../Atoms/Buttons/LoadingButton";
-import type { RegistFormProps } from "../../types/components/Form";
 
+type RegistFormProps = {
+  email: string;
+  password: string;
+  name: string;
+  password_confirmation: string;
+  isInvite: boolean;
+  loading: boolean;
+  errors: any;
+  regist: (e: any) => Promise<void>;
+  handleChangeEmail: (e: any) => void;
+  handleChangePassword: (e: any) => void;
+  handleChangeName: (e: any) => void;
+  handleChangePasswordConfirmation: (e: any) => void;
+  pushLogin: (e: any) => void;
+};
 const RegistForm: React.FC<RegistFormProps> = ({
   email,
   password,
+  name,
+  password_confirmation,
+  isInvite,
+  loading,
+  errors,
   handleChangeEmail,
   handleChangePassword,
   regist,
-  name,
-  password_confirmation,
-  errors,
-  isInvite,
   handleChangeName,
   handleChangePasswordConfirmation,
   pushLogin,
-  loading,
 }) => {
   const classes = useStyles();
 

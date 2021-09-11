@@ -22,7 +22,16 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 import { SUB_COLOR_BLUE } from "../../utils/constant";
 
-export function MainListItems(props) {
+type MainListItemsProps = {
+  sideMenuOpen: boolean;
+  handleAccountBookMenu: () => void;
+  accountBookMenuOpen: boolean;
+};
+const MainListItems: React.FC<MainListItemsProps> = ({
+  sideMenuOpen,
+  handleAccountBookMenu,
+  accountBookMenuOpen,
+}) => {
   const classes = useStyles();
   return (
     <div>
@@ -43,37 +52,28 @@ export function MainListItems(props) {
           <ListItemText primary="ホーム" />
         </ListItem>
       </NavLink>
-      <ListItem button onClick={props.handleAccountBookMenu}>
+      <ListItem button onClick={handleAccountBookMenu}>
         <ListItemIcon>
           <MenuBookIcon />
         </ListItemIcon>
         <ListItemText primary="家計簿" />
-        {props.accountBookMenuOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        {accountBookMenuOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </ListItem>
-      <Collapse in={props.accountBookMenuOpen} timeout="auto" unmountOnExit>
+      <Collapse in={accountBookMenuOpen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem
-            button
-            className={props.sideMenuOpen ? classes.nestMenu : ""}
-          >
+          <ListItem button className={sideMenuOpen ? classes.nestMenu : ""}>
             <ListItemIcon>
               <ListAltIcon />
             </ListItemIcon>
             <ListItemText primary="一覧" />
           </ListItem>
-          <ListItem
-            button
-            className={props.sideMenuOpen ? classes.nestMenu : ""}
-          >
+          <ListItem button className={sideMenuOpen ? classes.nestMenu : ""}>
             <ListItemIcon>
               <PieChartIcon />
             </ListItemIcon>
             <ListItemText primary="グラフ" />
           </ListItem>
-          <ListItem
-            button
-            className={props.sideMenuOpen ? classes.nestMenu : ""}
-          >
+          <ListItem button className={sideMenuOpen ? classes.nestMenu : ""}>
             <ListItemIcon>
               <MoneyIcon />
             </ListItemIcon>
@@ -83,10 +83,9 @@ export function MainListItems(props) {
       </Collapse>
     </div>
   );
-}
+};
 
-export function SecondaryListItems(props) {
-  const classes = useStyles();
+const SecondaryListItems = () => {
   return (
     <div>
       <ListItem button>
@@ -109,7 +108,7 @@ export function SecondaryListItems(props) {
       </ListItem>
     </div>
   );
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   nestMenu: {
@@ -129,3 +128,4 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+export { MainListItems, SecondaryListItems };

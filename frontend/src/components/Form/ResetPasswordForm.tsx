@@ -12,8 +12,15 @@ import Container from "@material-ui/core/Container";
 
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
 import LoadingButton from "../Atoms/Buttons/LoadingButton";
-import { ResetPasswordFormProps } from "../../types/components/Form";
 
+type ResetPasswordFormProps = {
+  email: string;
+  errors: any;
+  loading: boolean;
+  resetPassword: (e: any) => Promise<void>;
+  handleChangeEmail: (e: any) => void;
+  pushLogin: (e: any) => void;
+};
 const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
   email,
   errors,

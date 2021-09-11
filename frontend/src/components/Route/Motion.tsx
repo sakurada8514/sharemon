@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
+import React from "react";
 
-export default function TransitionMotion(props) {
+const TransitionMotion: React.FC<{ children: JSX.Element }> = (props) => {
   return (
     <motion.div
       animate={{
@@ -19,4 +20,5 @@ export default function TransitionMotion(props) {
       {props.children}
     </motion.div>
   );
-}
+};
+export default TransitionMotion;

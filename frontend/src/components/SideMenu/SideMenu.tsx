@@ -11,7 +11,20 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { MainListItems, SecondaryListItems } from "./ListItems";
 import { BACK_COLOR_WHITE } from "../../utils/constant";
 
-export default function SideMenu(props) {
+type SideMenuProps = {
+  sideMenuOpen: boolean;
+  accountBookMenuOpen: boolean;
+  handleSideMenuOpen: () => void;
+  handleSideMenuClose: () => void;
+  handleAccountBookMenu: () => void;
+};
+const SideMenu: React.FC<SideMenuProps> = ({
+  sideMenuOpen,
+  accountBookMenuOpen,
+  handleSideMenuOpen,
+  handleSideMenuClose,
+  handleAccountBookMenu,
+}) => {
   const classes = useStyles();
 
   return (
@@ -20,35 +33,31 @@ export default function SideMenu(props) {
       classes={{
         paper: clsx(
           classes.drawerPaper,
-          !props.sideMenuOpen && classes.drawerPaperClose
+          !sideMenuOpen && classes.drawerPaperClose
         ),
       }}
-      open={props.sideMenuOpen}
+      open={sideMenuOpen}
     >
       <div className={classes.toolbarIcon}>
-        <IconButton onClick={props.handleSideMenuClose}>
+        <IconButton onClick={handleSideMenuClose}>
           <ChevronLeftIcon />
         </IconButton>
       </div>
       <Divider />
       <List>
         <MainListItems
-          sideMenuOpen={props.sideMenuOpen}
-          handleAccountBookMenu={props.handleAccountBookMenu}
-          accountBookMenuOpen={props.accountBookMenuOpen}
+          sideMenuOpen={sideMenuOpen}
+          handleAccountBookMenu={handleAccountBookMenu}
+          accountBookMenuOpen={accountBookMenuOpen}
         />
       </List>
       <Divider />
       <List>
-        <SecondaryListItems
-          sideMenuOpen={props.sideMenuOpen}
-          handleAccountBookMenu={props.handleAccountBookMenu}
-          accountBookMenuOpen={props.accountBookMenuOpen}
-        />
+        <SecondaryListItems />
       </List>
     </Drawer>
   );
-}
+};
 
 const drawerWidth = 220;
 
@@ -91,3 +100,4 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
 }));
+export default SideMenu;

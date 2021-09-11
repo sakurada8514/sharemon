@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Tabs, Tab } from "@material-ui/core";
 
-import RegistExpense from "../../../components/Contents/RegistExpenxe";
+import RegistExpense from "../../../components/Contents/RegistExpense";
 import RegistIncome from "../../../components/Contents/RegistIncome";
 import TransitionMotion from "../../../components/Route/Motion";
 import { TEXT_COLOR_BLACK, BACK_COLOR_GREEN } from "../../../utils/constant";

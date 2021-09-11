@@ -1,9 +1,7 @@
 import React, { useGlobal } from "reactn";
-import { Redirect, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { isAuthSelector } from "../../stores/auth";
+import { Redirect, Route, RouteProps } from "react-router-dom";
 
-export default function RegistRoomRoute(props) {
+const RegistRoomRoute: React.FC<RouteProps> = (props) => {
   const user = useGlobal("user")[0];
 
   const roomId = user ? user.room_id : null;
@@ -16,4 +14,5 @@ export default function RegistRoomRoute(props) {
   } else {
     return <Redirect to="/login" />;
   }
-}
+};
+export default RegistRoomRoute;

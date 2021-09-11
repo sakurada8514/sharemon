@@ -13,7 +13,22 @@ import Container from "@material-ui/core/Container";
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
 import ModalTemplate from "../Modal/ModalTemplate";
 
-export default function RegistRoomForm(props) {
+type RegistRoomFormProps = {
+  createRoom: (e: any) => Promise<void>;
+  roomName: string;
+  handleChangeRoomName: (e: any) => void;
+  modalShow: boolean;
+  handleClickLink: (e: any) => void;
+  handleModalClose: () => void;
+};
+const RegistRoomForm: React.FC<RegistRoomFormProps> = ({
+  createRoom,
+  roomName,
+  handleChangeRoomName,
+  modalShow,
+  handleClickLink,
+  handleModalClose,
+}) => {
   const classes = useStyles();
 
   return (
@@ -27,7 +42,7 @@ export default function RegistRoomForm(props) {
           <Typography component="h1" variant="h5">
             ルーム作成
           </Typography>
-          <form className={classes.form} onSubmit={props.createRoom} noValidate>
+          <form className={classes.form} onSubmit={createRoom} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
@@ -38,8 +53,8 @@ export default function RegistRoomForm(props) {
               name="roomName"
               autoComplete="roomName"
               autoFocus
-              value={props.roomName}
-              onChange={props.handleChangeRoomName}
+              value={roomName}
+              onChange={handleChangeRoomName}
             />
             <Button
               type="submit"
@@ -54,7 +69,7 @@ export default function RegistRoomForm(props) {
               <Link
                 color="secondary"
                 variant="body2"
-                onClick={props.handleClickLink}
+                onClick={handleClickLink}
                 className={classes.link}
               >
                 {"ルームとは？"}
@@ -64,13 +79,13 @@ export default function RegistRoomForm(props) {
         </div>
       </Container>
       <ModalTemplate
-        show={props.modalShow}
-        handleModalClose={props.handleModalClose}
+        show={modalShow}
+        handleModalClose={handleModalClose}
         body={<p>ppp</p>}
       />
     </div>
   );
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -103,3 +118,4 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
   },
 }));
+export default RegistRoomForm;

@@ -15,15 +15,57 @@ import {
   Typography,
   Box,
 } from "@material-ui/core";
+import { DatePickerProps } from "@material-ui/pickers";
 
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import ClearIcon from "@material-ui/icons/Clear";
 
 import MyDatePicker from "../Atoms/Form/DatePicker";
 import LoadingButton from "../Atoms/Buttons/LoadingButton";
-import type { RegistExpenseFormProps } from "../../types/components/Form";
 
-export default function RegistExpenseForm(props: RegistExpenseFormProps) {
+type RegistExpenseFormProps = {
+  registExpense: () => Promise<void>;
+  expense: string;
+  date: Date;
+  category: number;
+  comment: string;
+  repetition: boolean;
+  fileInput: React.MutableRefObject<null>;
+  receiptImgPreview: any;
+  categoryList: any;
+  errors: any;
+  loading: boolean;
+  setDate: DatePickerProps["onChange"];
+  handleChangeExpense: (e: any) => void;
+  handleChangeCategory: (e: any) => void;
+  handleChangeComment: (e: any) => void;
+  handleToggleRepetition: () => void;
+  handleChangeFile: (e: any) => void;
+  handleClickFileInput: () => void;
+  handleFileReset: () => void;
+};
+
+const RegistExpenseForm: React.FC<RegistExpenseFormProps> = ({
+  registExpense,
+  expense,
+  date,
+  category,
+  comment,
+  repetition,
+  fileInput,
+  receiptImgPreview,
+  categoryList,
+  errors,
+  loading,
+  setDate,
+  handleChangeExpense,
+  handleChangeCategory,
+  handleChangeComment,
+  handleToggleRepetition,
+  handleChangeFile,
+  handleClickFileInput,
+  handleFileReset,
+}) => {
   const classes = useStyles();
 
   return (
@@ -41,37 +83,33 @@ export default function RegistExpenseForm(props: RegistExpenseFormProps) {
             name="expense"
             autoComplete="expense"
             autoFocus
-            value={props.expense}
-            onChange={props.handleChangeExpense}
-            error={typeof props.errors.expense !== "undefined"}
-            helperText={props.errors.expense}
+            value={expense}
+            onChange={handleChangeExpense}
+            error={typeof errors.expense !== "undefined"}
+            helperText={errors.expense}
             InputProps={{
               endAdornment: <InputAdornment position="end">円</InputAdornment>,
             }}
           />
 
-          <MyDatePicker
-            date={props.date}
-            setDate={props.setDate}
-            errors={props.errors}
-          />
+          <MyDatePicker date={date} setDate={setDate} errors={errors} />
           <FormControl
             variant="outlined"
             // className={classes.formControl}
             fullWidth
             required
             margin="normal"
-            error={typeof props.errors.category_id !== "undefined"}
+            error={typeof errors.category_id !== "undefined"}
           >
             <InputLabel id="select-outlined-label">カテゴリー</InputLabel>
             <Select
               labelId="select-outlined-label"
               id="select-outlined"
-              value={props.category}
-              onChange={props.handleChangeCategory}
+              value={category}
+              onChange={handleChangeCategory}
               label="カテゴリー"
             >
-              {props.categoryList.map((data: any) => {
+              {categoryList.map((data: any) => {
                 return (
                   <MenuItem key={data.category_id} value={data.category_id}>
                     {data.category_name}
@@ -86,19 +124,19 @@ export default function RegistExpenseForm(props: RegistExpenseFormProps) {
             label="利用場所/用途"
             multiline
             rows={5}
-            value={props.comment}
-            onChange={props.handleChangeComment}
+            value={comment}
+            onChange={handleChangeComment}
             fullWidth
             margin="normal"
-            error={typeof props.errors.comment !== "undefined"}
-            helperText={props.errors.comment}
+            error={typeof errors.comment !== "undefined"}
+            helperText={errors.comment}
           />
           <Box>
             <FormControlLabel
               control={
                 <Switch
-                  checked={props.repetition}
-                  onChange={props.handleToggleRepetition}
+                  checked={repetition}
+                  onChange={handleToggleRepetition}
                 />
               }
               label="繰り返し登録（固定費等）"
@@ -108,8 +146,8 @@ export default function RegistExpenseForm(props: RegistExpenseFormProps) {
           <MediaQuery query="(min-width: 960px)">
             <Grid item xs={12} className={classes.buttonArea}>
               <LoadingButton
-                handleButtonClick={props.registExpense}
-                loading={props.loading}
+                handleButtonClick={registExpense}
+                loading={loading}
                 text={"支出作成"}
                 color={"secondary"}
               />
@@ -123,9 +161,9 @@ export default function RegistExpenseForm(props: RegistExpenseFormProps) {
             id="myInput"
             type="file"
             accept="image/*"
-            ref={props.fileInput}
+            ref={fileInput}
             style={{ display: "none" }}
-            onChange={props.handleChangeFile}
+            onChange={handleChangeFile}
           />
           <Button
             variant="outlined"
@@ -134,22 +172,22 @@ export default function RegistExpenseForm(props: RegistExpenseFormProps) {
             fullWidth
             startIcon={<ReceiptIcon />}
             className={classes.receiptButton}
-            onClick={props.handleClickFileInput}
+            onClick={handleClickFileInput}
           >
             レシートアップロード
           </Button>
         </Box>
         <Box className={classes.imgArea}>
-          <img src={props.receiptImgPreview} />
+          <img src={receiptImgPreview} />
         </Box>
-        {props.receiptImgPreview && (
+        {receiptImgPreview && (
           <Button
             variant="outlined"
             color="inherit"
             size={"small"}
             startIcon={<ClearIcon />}
             className={classes.fileResetButton}
-            onClick={props.handleFileReset}
+            onClick={handleFileReset}
           >
             リセット
           </Button>
@@ -157,20 +195,17 @@ export default function RegistExpenseForm(props: RegistExpenseFormProps) {
       </Grid>
       <MediaQuery query="(max-width: 960px)">
         <Grid item xs={12} className={classes.buttonArea}>
-          <Button
-            onClick={props.registExpense}
-            variant="contained"
-            color="secondary"
-            size={"large"}
-            className={classes.button}
-          >
-            支出作成
-          </Button>
+          <LoadingButton
+            handleButtonClick={registExpense}
+            loading={loading}
+            text={"支出作成"}
+            color={"secondary"}
+          />
         </Grid>
       </MediaQuery>
     </Grid>
   );
-}
+};
 const useStyles = makeStyles((thema) => ({
   buttonArea: {
     display: "flex",
@@ -210,3 +245,5 @@ const useStyles = makeStyles((thema) => ({
     marginTop: "16px",
   },
 }));
+
+export default RegistExpenseForm;

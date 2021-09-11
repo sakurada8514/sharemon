@@ -7,9 +7,17 @@ import List from "./contents/AccountBook/List";
 import Home from "./contents/Home";
 import RegistMoney from "./contents/RegistMoney";
 
-import type { MypageRoutersProps } from "../../types/pages/private/Mypage";
+export type MypageRoutersProps = {
+  handleAlertOpen: (closedTime?: number) => void;
+  setAlertSeverity: React.Dispatch<React.SetStateAction<string>>;
+  setAlertMessage: React.Dispatch<React.SetStateAction<string>>;
+};
 
-export default function MypageRouters(props: MypageRoutersProps) {
+const MypageRouters: React.FC<MypageRoutersProps> = ({
+  handleAlertOpen,
+  setAlertSeverity,
+  setAlertMessage,
+}) => {
   const location = useLocation();
   const [esc, rootPath] = location.pathname.split("/");
 
@@ -22,13 +30,14 @@ export default function MypageRouters(props: MypageRoutersProps) {
           path="/mypage/regist"
           children={
             <RegistMoney
-              handleAlertOpen={props.handleAlertOpen}
-              setAlertSeverity={props.setAlertSeverity}
-              setAlertMessage={props.setAlertMessage}
+              handleAlertOpen={handleAlertOpen}
+              setAlertSeverity={setAlertSeverity}
+              setAlertMessage={setAlertMessage}
             />
           }
         />
       </Switch>
     </AnimatePresence>
   );
-}
+};
+export default MypageRouters;

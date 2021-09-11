@@ -12,12 +12,21 @@ import Container from "@material-ui/core/Container";
 
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
 import LoadingButton from "../Atoms/Buttons/LoadingButton";
-import type { ReregistPasswordFormProps } from "../../types/components/Form";
 
+type ReregistPasswordFormProps = {
+  password: string;
+  password_confirmation: string;
+  errors: any;
+  loading: boolean;
+  reregistPassword: (e: any) => Promise<void>;
+  handleChangePasswordConfirmation: (e: any) => void;
+  handleChangePassword: (e: any) => void;
+  pushLogin: (e: any) => void;
+};
 const ReregistPasswordForm: React.FC<ReregistPasswordFormProps> = ({
   password,
-  errors,
   password_confirmation,
+  errors,
   loading,
   reregistPassword,
   handleChangePassword,

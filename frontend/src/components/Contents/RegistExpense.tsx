@@ -1,19 +1,24 @@
 import React, { useGlobal, useRef, useState, useEffect } from "reactn";
-import { useHistory } from "react-router";
+import { DatePickerProps } from "@material-ui/pickers";
 
 import RegistExpenseForm from "../Form/RegistExpenseForm";
 import { OK, VALIDATION } from "../../utils/constant";
 
 import { getCategoryList as getCategoryListApi } from "../../api/Expense/category";
 import { registExpense as registExpenseApi } from "../../api/Expense/regist";
-import type { RegistMoneyProps } from "../../types/components/Contents";
+import { Dispatch, SetStateAction } from "react";
+
+type RegistMoneyProps = {
+  handleAlertOpen: (closedTime?: number) => void;
+  setAlertSeverity: Dispatch<SetStateAction<string>>;
+  setAlertMessage: Dispatch<SetStateAction<string>>;
+};
 
 const RegistExpense: React.FC<RegistMoneyProps> = ({
   handleAlertOpen,
   setAlertSeverity,
   setAlertMessage,
 }) => {
-  const history = useHistory();
   const setError = useGlobal("error")[1];
 
   const [expense, setExpense] = useState("");
@@ -39,7 +44,6 @@ const RegistExpense: React.FC<RegistMoneyProps> = ({
         setCategoryList(response.data.categoryList);
         setCategory(1);
       } else {
-        // history.push("/error");
         setError(true);
       }
     }
@@ -52,7 +56,9 @@ const RegistExpense: React.FC<RegistMoneyProps> = ({
   const handleToggleRepetition = () => {
     setRepetition(!repetition);
   };
-
+  const handleChangeDate: DatePickerProps["onChange"] = (date: any) => {
+    setDate(date);
+  };
   const handleClickFileInput = () => {
     fileInput.current.click();
   };
@@ -63,7 +69,9 @@ const RegistExpense: React.FC<RegistMoneyProps> = ({
       const file = files[0];
       const reader = new FileReader();
       reader.onload = (e) => {
-        setReceiptImgPreview(e.target.result);
+        if (e.target) {
+          setReceiptImgPreview(e.target.result);
+        }
       };
       reader.readAsDataURL(file);
 

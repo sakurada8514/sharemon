@@ -12,16 +12,52 @@ import {
   Grid,
   InputAdornment,
   Typography,
+  Box,
 } from "@material-ui/core";
+import { DatePickerProps } from "@material-ui/pickers";
 
 import MyDatePicker from "../Atoms/Form/DatePicker";
-export default function RegistIncomeForm(props) {
+import LoadingButton from "../Atoms/Buttons/LoadingButton";
+
+type RegistIncomeFormProps = {
+  registIncome: () => Promise<void>;
+  income: string;
+  date: Date;
+  category: number;
+  comment: string;
+  repetition: boolean;
+  categoryList: any;
+  errors: any;
+  loading: boolean;
+  setDate: DatePickerProps["onChange"];
+  handleChangeIncome: (e: any) => void;
+  handleChangeCategory: (e: any) => void;
+  handleChangeComment: (e: any) => void;
+  handleToggleRepetition: () => void;
+};
+
+const RegistIncomeForm: React.FC<RegistIncomeFormProps> = ({
+  registIncome,
+  income,
+  date,
+  category,
+  comment,
+  repetition,
+  categoryList,
+  errors,
+  loading,
+  setDate,
+  handleChangeIncome,
+  handleChangeCategory,
+  handleChangeComment,
+  handleToggleRepetition,
+}) => {
   const classes = useStyles();
 
   return (
     <Grid container>
       <Grid item xs={12} md={6}>
-        <div noValidate>
+        <Box>
           <Typography className={classes.instructions}>*は必須です</Typography>
           <TextField
             variant="outlined"
@@ -33,42 +69,40 @@ export default function RegistIncomeForm(props) {
             name="income"
             autoComplete="income"
             autoFocus
-            value={props.income}
-            onChange={props.handleChangeIncome}
-            error={typeof props.errors.income !== "undefined"}
-            helperText={props.errors.income}
+            value={income}
+            onChange={handleChangeIncome}
+            error={typeof errors.income !== "undefined"}
+            helperText={errors.income}
             InputProps={{
               endAdornment: <InputAdornment position="end">円</InputAdornment>,
             }}
           />
 
-          <MyDatePicker
-            date={props.date}
-            setDate={props.setDate}
-            errors={props.errors}
-          />
+          <MyDatePicker date={date} setDate={setDate} errors={errors} />
           <FormControl
             variant="outlined"
             fullWidth
             required
             margin="normal"
-            error={typeof props.errors.category_id !== "undefined"}
+            error={typeof errors.category_id !== "undefined"}
           >
             <InputLabel id="select-outlined-label">カテゴリー</InputLabel>
             <Select
               labelId="select-outlined-label"
               id="select-outlined"
-              value={props.category}
-              onChange={props.handleChangeCategory}
+              value={category}
+              onChange={handleChangeCategory}
               label="カテゴリー"
             >
-              {props.categoryList.map((data) => {
-                return (
-                  <MenuItem key={data.category_id} value={data.category_id}>
-                    {data.category_name}
-                  </MenuItem>
-                );
-              })}
+              {categoryList.map(
+                (data: { category_id: string; category_name: string }) => {
+                  return (
+                    <MenuItem key={data.category_id} value={data.category_id}>
+                      {data.category_name}
+                    </MenuItem>
+                  );
+                }
+              )}
             </Select>
           </FormControl>
           <TextField
@@ -77,42 +111,38 @@ export default function RegistIncomeForm(props) {
             label="利用場所/用途"
             multiline
             rows={5}
-            value={props.comment}
-            onChange={props.handleChangeComment}
+            value={comment}
+            onChange={handleChangeComment}
             fullWidth
             margin="normal"
-            error={typeof props.errors.comment !== "undefined"}
-            helperText={props.errors.comment}
+            error={typeof errors.comment !== "undefined"}
+            helperText={errors.comment}
           />
-          <div>
+          <Box>
             <FormControlLabel
               control={
                 <Switch
-                  checked={props.repetition}
-                  onChange={props.handleToggleRepetition}
+                  checked={repetition}
+                  onChange={handleToggleRepetition}
                 />
               }
               label="繰り返し登録（固定収入等）"
               labelPlacement="start"
             />
-          </div>
+          </Box>
           <Grid item xs={12} className={classes.buttonArea}>
-            <Button
-              onClick={props.registIncome}
-              type="submit"
-              variant="contained"
-              color="secondary"
-              size={"large"}
-              className={classes.button}
-            >
-              収入作成
-            </Button>
+            <LoadingButton
+              handleButtonClick={registIncome}
+              loading={loading}
+              text={"支出作成"}
+              color={"secondary"}
+            />
           </Grid>
-        </div>
+        </Box>
       </Grid>
     </Grid>
   );
-}
+};
 const useStyles = makeStyles((thema) => ({
   buttonArea: {
     display: "flex",
@@ -152,3 +182,4 @@ const useStyles = makeStyles((thema) => ({
     marginTop: "16px",
   },
 }));
+export default RegistIncomeForm;

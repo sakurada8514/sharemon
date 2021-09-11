@@ -14,7 +14,20 @@ import Container from "@material-ui/core/Container";
 
 import LoadingButton from "../Atoms/Buttons/LoadingButton";
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
-import type { LoginFormProps } from "../../types/components/Form";
+
+type LoginFormProps = {
+  email: string;
+  password: string;
+  remember: boolean;
+  loading: boolean;
+  errors: any;
+  login: (e: any) => Promise<void>;
+  handleChangeEmail: (e: any) => void;
+  handleChangePassword: (e: any) => void;
+  handleChangeRemember: (e: any) => void;
+  pushRegist: () => void;
+  pushPasswordReset: () => void;
+};
 
 const LoginForm: React.FC<LoginFormProps> = ({
   email,

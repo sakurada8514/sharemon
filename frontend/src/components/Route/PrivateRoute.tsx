@@ -1,10 +1,7 @@
 import React, { useGlobal } from "reactn";
-import { Redirect, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { isAuthSelector } from "../../stores/auth";
-import RoomRegist from "../../pages/private/RegistRoom";
+import { Redirect, Route, RouteProps } from "react-router-dom";
 
-export default function PrivateRoute(props) {
+const PrivateRoute: React.FC<RouteProps> = (props) => {
   const user = useGlobal("user")[0];
   const roomId = user ? user.room_id : null;
 
@@ -17,4 +14,5 @@ export default function PrivateRoute(props) {
   } else {
     return <Redirect to="/login" />;
   }
-}
+};
+export default PrivateRoute;
