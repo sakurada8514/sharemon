@@ -78,7 +78,7 @@ class User extends UserBaseModel
         return $this->_convertArray($_ret);
     }
 
-    public function findCountByEmail(string $_email): int
+    public function countByEmail(string $_email): int
     {
         $_ret = DB::table('users')
             ->where('email', $_email)

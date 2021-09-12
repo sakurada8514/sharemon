@@ -18,7 +18,7 @@ class UserUniqueRule implements Rule
     public function passes($attribute, $value): bool
     {
         $_userModel = new User();
-        return $_userModel->findCountByEmail($value) > 0 ? false : true;
+        return $_userModel->countByEmail($value) > 0 ? false : true;
     }
 
     /**

@@ -52,7 +52,8 @@ class AuthController extends Controller
      */
     public function inviteRegist(InviteRegistRequest $request): JsonResponse
     {
-        $_userData = $request->only('name', 'email', 'password', 'room_id');
+
+        $_userData = $request->only('name', 'email', 'password', 'invite_id');
 
         $this->_authService->regist($_userData);
 

@@ -27,7 +27,7 @@ class ResetPasswordRule implements Rule
     public function passes($attribute, $value)
     {
         $_userModel = new User();
-        return $_userModel->findCountByEmail($value) == 1;
+        return $_userModel->countByEmail($value) == 1;
     }
 
     /**

@@ -32,7 +32,7 @@ class PasswordResetNotification extends ResetPassword
         return (new MailMessage)
             ->subject('パスワードリセット通知')
             ->view('emails.passwordReset', [
-                'reset_url' => 'http://localhost:3000/password/reset?token=' . $this->token . '&email=' . $notifiable->getEmailForPasswordReset()
+                'reset_url' => env('FRONT_APP_URL') . '/password/reset?token=' . $this->token . '&email=' . $notifiable->getEmailForPasswordReset()
             ]);
     }
 }
