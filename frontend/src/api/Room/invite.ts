@@ -12,7 +12,8 @@ export async function inviteRegist(
   email: string,
   password: string,
   password_confirmation: string,
-  room_id: number
+  room_id: number,
+  token: string
 ): Promise<any> {
   await apiClient.get("/sanctum/csrf-cookie");
   const response = await apiClient
@@ -22,6 +23,7 @@ export async function inviteRegist(
       password,
       password_confirmation,
       room_id,
+      token,
     })
     .catch((err) => err.response);
   return response;

@@ -69,7 +69,10 @@ const RegistForm: React.FC<RegistFormProps> = ({
               autoFocus
               value={name}
               onChange={handleChangeName}
-              error={typeof errors.name !== "undefined"}
+              error={
+                typeof errors.name !== "undefined" ||
+                typeof errors.auth !== "undefined"
+              }
               helperText={errors.name}
             />
             <TextField
@@ -83,7 +86,10 @@ const RegistForm: React.FC<RegistFormProps> = ({
               autoComplete="email"
               value={email}
               onChange={handleChangeEmail}
-              error={typeof errors.email !== "undefined"}
+              error={
+                typeof errors.email !== "undefined" ||
+                typeof errors.auth !== "undefined"
+              }
               helperText={errors.email}
             />
             <TextField
@@ -98,7 +104,10 @@ const RegistForm: React.FC<RegistFormProps> = ({
               autoComplete="current-password"
               value={password}
               onChange={handleChangePassword}
-              error={typeof errors.password !== "undefined"}
+              error={
+                typeof errors.password !== "undefined" ||
+                typeof errors.auth !== "undefined"
+              }
               helperText={errors.password}
             />
             <TextField
@@ -114,6 +123,8 @@ const RegistForm: React.FC<RegistFormProps> = ({
               value={password_confirmation}
               onChange={handleChangePasswordConfirmation}
               className={classes.lastTextField}
+              error={typeof errors.auth !== "undefined"}
+              helperText={errors.auth}
             />
             <LoadingButton
               handleButtonClick={regist}

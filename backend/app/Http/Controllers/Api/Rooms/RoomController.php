@@ -36,9 +36,9 @@ class RoomController extends Controller
 
     public function createInviteUrl(): JsonResponse
     {
-        $_userId = Auth::id();
+        $_inviteRoomId = Auth::user()->room_id;
 
-        $_url = $this->_roomService->createInvite($_userId);
+        $_url = $this->_roomService->createInvite($_inviteRoomId);
 
         return response()->json(['url' => $_url]);
     }

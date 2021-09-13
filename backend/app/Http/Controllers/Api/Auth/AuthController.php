@@ -9,6 +9,7 @@ use App\Http\Requests\Auth\RegistRequest;
 use App\Http\Requests\Auth\ReregistPasswordRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Services\AuthService;
+use App\Services\InviteAccessTokenService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\JsonResponse;
@@ -21,10 +22,12 @@ class AuthController extends Controller
     use SendsPasswordResetEmails;
 
     private ?AuthService $_authService = null;
+    private ?InviteAccessTokenService $_inviteAccessTokenService;
 
-    public function __construct(AuthService $_authService)
+    public function __construct(AuthService $_authService, InviteAccessTokenService $_inviteAccessTokenService)
     {
         $this->_authService = $_authService;
+        $this->_inviteAccessTokenService = $_inviteAccessTokenService;
     }
 
     /**
@@ -52,9 +55,13 @@ class AuthController extends Controller
      */
     public function inviteRegist(InviteRegistRequest $request): JsonResponse
     {
+        if (!$this->_inviteAccessTokenService->existsToken($request->token)) {
+            return response()->json(['errors' => config('Const.webApp.ERROR_MESSAGE.INVITE_REGIST')], Response::HTTP_FORBIDDEN);
+        }
 
-        $_userData = $request->only('name', 'email', 'password', 'invite_id');
+        $_userData = $request->only('name', 'email', 'password', 'room_id');
 
+        // TODO:: token削除処理 バッチ
         $this->_authService->regist($_userData);
 
         $_user = $this->_authService->login($_userData, false);

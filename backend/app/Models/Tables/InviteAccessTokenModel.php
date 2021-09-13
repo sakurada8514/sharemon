@@ -21,13 +21,12 @@ class InviteAccessTokenModel extends BaseModel
         return;
     }
 
-    public function coustBytoken(string $_inviteId, string $_token): int
+    public function coustBytoken(string $_token): int
     {
         return DB::table($this->table)
             ->where([
-                ['invite_id', $_inviteId],
                 ['token', $_token],
-                ['token_limit_date', '<', now()]
+                ['token_limit_date', '>', now()]
             ])->count();
     }
 }

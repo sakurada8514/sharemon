@@ -1,6 +1,7 @@
 export const OK = 200;
 export const UNAUTHORIZED = 401;
 export const VALIDATION = 422;
+export const FORBIDDEN = 403;
 
 export const BACK_COLOR_GREEN = "#fcfffb";
 export const BACK_COLOR_WHITE = "#fdfdfd";

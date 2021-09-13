@@ -33,17 +33,17 @@ class RoomService extends BaseService
         return $this->_roomModel->findInfoByUserId($_roomId);
     }
 
-    public function createInvite(string $_inviteId): string
+    public function createInvite(string $_inviteRoomId): string
     {
         $_insertData = [
-            'invite_id'        => $_inviteId,
+            'invite_id'        => $_inviteRoomId,
             'token'            => Str::random(32),
             'token_limit_date' => date("Y-m-d H:i:s", strtotime("+30 minute"))
         ];
 
         $this->_inviteAccessTokenModel->insert($_insertData);
 
-        return env('FRONT_APP_URL') . '/invite/regist?invitee=' . $_inviteId . '&token=' . $_insertData['token'];
+        return env('FRONT_APP_URL') . '/invite/regist?invitee=' . $_inviteRoomId . '&token=' . $_insertData['token'];
         // return URL::temporarySignedRoute('regist.invite', now()->addMinutes(30), ['invitee' => $_userId]);
     }
 

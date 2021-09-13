@@ -45,11 +45,6 @@ class AuthService extends BaseService
 
     public function reregistPassword(array $_data)
     {
-        // $_data['email'] = $this->_passwordResetModel->findEmailByToken($_data['token'])['email'];
-        // $_data['password'] = Hash::make($_data['password']);
-
-        // $this->_userModel->updateByEmail($_data);
-
         return Password::reset($_data, function ($user, $password) {
             $user->password = bcrypt($password);
             $user->save();

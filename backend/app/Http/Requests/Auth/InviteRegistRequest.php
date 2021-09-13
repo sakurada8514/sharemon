@@ -25,10 +25,11 @@ class InviteRegistRequest extends FormRequest
     public function rules()
     {
         return [
-            "email"    => ["required", "email", new UserUniqueRule],
-            "password" => ["required", "min:8", "confirmed"],
-            "name"     => ["required"],
-            "room_id"  => ["required", "integer"]
+            'email'    => ['required', 'email', new UserUniqueRule],
+            'password' => ['required', 'min:8', 'confirmed'],
+            'name'     => ['required'],
+            'room_id'  => ['required', 'integer'],
+            'token'    => ['required']
         ];
     }
 }

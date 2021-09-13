@@ -13,6 +13,7 @@ import GuestRoute from "./components/Route/GuestRoute";
 import PrivateRoute from "./components/Route/PrivateRoute";
 import RoomRegistRoute from "./components/Route/RegistRoomRoute";
 import RegistRoom from "./pages/private/RegistRoom";
+import InviteRegist from "./pages/Auth/InviteRegist";
 
 export default function Routers() {
   const location = useLocation();
@@ -34,6 +35,7 @@ export default function Routers() {
           children={<ReregistPassword />}
         />
         <GuestRoute exact path="/regist" children={<Regist />} />
+        <GuestRoute exact path="/invite/regist" children={<InviteRegist />} />
         <PrivateRoute path="/mypage" children={<Mypage />} />
         <RoomRegistRoute exact path="/regist/room" children={<RegistRoom />} />
       </Switch>

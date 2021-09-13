@@ -1,22 +1,21 @@
-import { React, useState } from "react";
+import { React, useState, useGlobal } from "reactn";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
 
 import { inviteRegist as inviteRegistApi } from "../../api/Room/invite";
-import { OK, UNAUTHORIZED, VALIDATION } from "../../utils/constant";
+import { OK, UNAUTHORIZED, VALIDATION, FORBIDDEN } from "../../utils/constant";
 import { BACK_COLOR_WHITE } from "../../utils/constant";
 import RegistForm from "../../components/Form/RegistForm";
 import ModalTemplate from "../../components/Modal/ModalTemplate";
 import TransitionMotion from "../../components/Route/Motion";
-
-let inviteeData = null;
-if (typeof laravelInviteeData !== "undefined") {
-  inviteeData = laravelInviteeData;
-}
+import useQuery from "../../utils/hooks/useQuery";
 
 export default function InviteRegist() {
+  const setUser = useGlobal("user")[1];
+  const setError = useGlobal("error")[1];
   const history = useHistory();
+  const query = useQuery();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,6 +23,7 @@ export default function InviteRegist() {
   const [password_confirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
   const [modalShow, setModalShow] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const handleChangeName = (e) => setName(e.target.value);
   const handleChangeEmail = (e) => setEmail(e.target.value);
@@ -35,27 +35,29 @@ export default function InviteRegist() {
 
   async function regist(e) {
     e.preventDefault();
-
-    const roomId = inviteeData.room_id;
-
+    setLoading(true);
     const response = await inviteRegistApi(
       name,
       email,
       password,
       password_confirmation,
-      roomId
+      query.get("invitee"),
+      query.get("token")
     );
 
     if (response.status === OK) {
-      window.location.href = "/mypage";
+      setUser(response.data.user);
+      history.push("/mypage");
     } else if (
       response.status === UNAUTHORIZED ||
-      response.status === VALIDATION
+      response.status === VALIDATION ||
+      response.status === FORBIDDEN
     ) {
       setErrors(response.data.errors);
     } else {
-      history.push("/error");
+      setError(true);
     }
+    setLoading(false);
   }
 
   return (
@@ -69,6 +71,7 @@ export default function InviteRegist() {
           password_confirmation={password_confirmation}
           errors={errors}
           isInvite={true}
+          loading={loading}
           handleChangeName={handleChangeName}
           handleChangeEmail={handleChangeEmail}
           handleChangePassword={handleChangePassword}
@@ -88,11 +91,11 @@ export default function InviteRegist() {
 
 //モーダル
 function modalBody(handleModalClose) {
-  const classes = useModalStyles();
+  const classes = modalStyles();
 
   return (
     <div className={classes.root}>
-      <h1>{inviteeData.name}さんからルーム招待が届いています。</h1>
+      <h1>ルーム招待が届いています。</h1>
       <p>新規登録してルームに参加しましょう！</p>
       <Button variant="contained" color="secondary" onClick={handleModalClose}>
         閉じる
@@ -101,7 +104,7 @@ function modalBody(handleModalClose) {
   );
 }
 
-const useModalStyles = makeStyles(() => ({
+const modalStyles = makeStyles(() => ({
   root: {
     width: "90%",
     maxWidth: "400px",
