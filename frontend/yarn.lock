@@ -1957,6 +1957,13 @@
   resolved "https://registry.npmjs.org/@types/q/-/q-1.5.4.tgz"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
 
+"@types/react-calendar@^3.4.3":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@types/react-calendar/-/react-calendar-3.4.3.tgz#f2475519b44a1495562c526556074df947ce5bc6"
+  integrity sha512-k56OS9d62/g3OCTepULEpNoClVUKuWxHBBuKS4hX8/qNiNup+Gf1Qn0SXHakbqBGWEfdLK93RlIRy5XOA4+Iaw==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-dom@^17.0.0":
   version "17.0.9"
   resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-17.0.9.tgz"
@@ -9792,7 +9799,7 @@ react@^17.0.2:
 
 reactn@^2.2.7:
   version "2.2.7"
-  resolved "https://registry.yarnpkg.com/reactn/-/reactn-2.2.7.tgz#4d9a94ab0d8a540062666408e4bf1fae6892cecc"
+  resolved "https://registry.npmjs.org/reactn/-/reactn-2.2.7.tgz"
   integrity sha512-cqnt23kWN/ABqEZhW3OlpqI1DgTaaNDeHpSHtyd81qk0H1jd32zPTzJ69Hpzti2WakwNYveGFPIgI6i7E7nXOA==
   dependencies:
     use-force-update "^1.0.5"
@@ -11623,7 +11630,7 @@ url@^0.11.0:
 
 use-force-update@^1.0.5:
   version "1.0.7"
-  resolved "https://registry.yarnpkg.com/use-force-update/-/use-force-update-1.0.7.tgz#f5e672633f5a398b25c33b2287150918bcb3526b"
+  resolved "https://registry.npmjs.org/use-force-update/-/use-force-update-1.0.7.tgz"
   integrity sha512-k5dppYhO+I5X/cd7ildbrzeMZJkWwdAh5adaIk0qKN2euh7J0h2GBGBcB4QZ385eyHHnp7LIygvebdRx3XKdwA==
 
 use@^3.1.0:

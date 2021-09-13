@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
@@ -21,14 +21,14 @@ export default function ReregistPassword() {
   const [modalShow, setModalShow] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleChangePassword = (e) => setPassword(e.target.value);
-  const handleChangePasswordConfirmation = (e) =>
+  const handleChangePassword = (e: any) => setPassword(e.target.value);
+  const handleChangePasswordConfirmation = (e: any) =>
     setPasswordConfirmation(e.target.value);
   const pushLogin = () => history.push("/login");
 
   const query = useQuery();
 
-  async function reregistPassword(e) {
+  async function reregistPassword(e: any) {
     setLoading(true);
     e.preventDefault();
 
@@ -76,7 +76,7 @@ export default function ReregistPassword() {
   );
 }
 //モーダル
-function modalBody(handleModalToggle) {
+function modalBody(handleModalToggle: () => void) {
   const classes = styles();
 
   return (

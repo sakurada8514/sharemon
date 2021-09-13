@@ -1,4 +1,4 @@
-import { React, useState, useGlobal } from "reactn";
+import { useState, useGlobal } from "reactn";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
@@ -11,7 +11,7 @@ import ModalTemplate from "../../components/Modal/ModalTemplate";
 import TransitionMotion from "../../components/Route/Motion";
 import useQuery from "../../utils/hooks/useQuery";
 
-export default function InviteRegist() {
+const InviteRegist = () => {
   const setUser = useGlobal("user")[1];
   const setError = useGlobal("error")[1];
   const history = useHistory();
@@ -25,15 +25,15 @@ export default function InviteRegist() {
   const [modalShow, setModalShow] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  const handleChangeName = (e) => setName(e.target.value);
-  const handleChangeEmail = (e) => setEmail(e.target.value);
-  const handleChangePassword = (e) => setPassword(e.target.value);
-  const handleChangePasswordConfirmation = (e) =>
+  const handleChangeName = (e: any) => setName(e.target.value);
+  const handleChangeEmail = (e: any) => setEmail(e.target.value);
+  const handleChangePassword = (e: any) => setPassword(e.target.value);
+  const handleChangePasswordConfirmation = (e: any) =>
     setPasswordConfirmation(e.target.value);
   const handleModalClose = () => setModalShow(false);
   const pushLogin = () => history.push("/login");
 
-  async function regist(e) {
+  async function regist(e: any) {
     e.preventDefault();
     setLoading(true);
     const response = await inviteRegistApi(
@@ -87,10 +87,10 @@ export default function InviteRegist() {
       />
     </>
   );
-}
+};
 
 //モーダル
-function modalBody(handleModalClose) {
+function modalBody(handleModalClose: () => void) {
   const classes = modalStyles();
 
   return (
@@ -126,3 +126,5 @@ const modalStyles = makeStyles(() => ({
     },
   },
 }));
+
+export default InviteRegist;

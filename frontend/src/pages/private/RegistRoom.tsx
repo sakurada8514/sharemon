@@ -13,15 +13,15 @@ export default function RegistRoom() {
   const [roomName, setRoomName] = useState("");
   const [modalShow, setModalShow] = useState(false);
 
-  const handleChangeRoomName = (e) => setRoomName(e.target.value);
-  const handleModalOpen = (e) => {
+  const handleChangeRoomName = (e: any) => setRoomName(e.target.value);
+  const handleModalOpen = (e: any) => {
     e.preventDefault();
     setModalShow(true);
   };
 
   const handleModalClose = () => setModalShow(false);
 
-  async function createRoom(e) {
+  async function createRoom(e: any) {
     e.preventDefault();
     const response = await createRoomApi(roomName);
 

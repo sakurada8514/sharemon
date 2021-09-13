@@ -16,13 +16,13 @@ export default function Login() {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const handleChangeEmail = (e) => setEmail(e.target.value);
-  const handleChangePassword = (e) => setPassword(e.target.value);
-  const handleChangeRemember = (e) => setRemember(!remember);
+  const handleChangeEmail = (e: any) => setEmail(e.target.value);
+  const handleChangePassword = (e: any) => setPassword(e.target.value);
+  const handleChangeRemember = () => setRemember(!remember);
   const pushRegist = () => history.push("/regist");
   const pushPasswordReset = () => history.push("/password/reset/mail");
 
-  async function login(e) {
+  async function login(e: any) {
     e.preventDefault();
     setLoading(true);
     const response = await loginApi(email, password, remember);

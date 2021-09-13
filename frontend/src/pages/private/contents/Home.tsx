@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useGlobal } from "reactn";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Grid, Button, Box, Typography } from "@material-ui/core";
@@ -12,6 +12,8 @@ import { OK } from "../../../utils/constant";
 
 export default function Home() {
   const classes = useStyles();
+  const setError = useGlobal("error")[1];
+
   const [member, setMember] = useState([]);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ export default function Home() {
       if (response.status === OK) {
         setMember(response.data.memberList);
       } else {
-        window.location.href("/error");
+        setError(true);
       }
     }
     getMemberList();
@@ -44,7 +46,6 @@ export default function Home() {
               variant="contained"
               color="secondary"
               size={"large"}
-              className={classes.button}
             >
               目標設定
             </Button>
@@ -59,11 +60,11 @@ export default function Home() {
             ルームメンバー
           </Typography>
           <Box display="flex" flexWrap="wrap">
-            {member.map((data) => {
+            {member.map((data: { name: string; nickname: string }) => {
               return (
                 <Box display="flex" alignItems="center" key={data.name}>
                   <AccountCircleIcon />
-                  <p>{data.nickname === null ? data.name : data.nikcname}</p>
+                  <p>{data.nickname === null ? data.name : data.nickname}</p>
                 </Box>
               );
             })}

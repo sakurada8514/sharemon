@@ -33,8 +33,8 @@ export async function resetPassword(email: string): Promise<any> {
 }
 
 export async function reregistPassword(
-  token: string,
-  email: string,
+  token: string | null, // TODO:: nullにならないように処理追加
+  email: string | null,
   password: string,
   password_confirmation: string
 ): Promise<any> {

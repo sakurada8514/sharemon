@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
@@ -19,11 +19,11 @@ export default function ResetPassword() {
   const [modalShow, setModalShow] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleChangeEmail = (e) => setEmail(e.target.value);
+  const handleChangeEmail = (e: any) => setEmail(e.target.value);
   const handleModalToggle = () => setModalShow(!modalShow);
   const pushLogin = () => history.push("/login");
 
-  async function resetPassword(e) {
+  async function resetPassword(e: any) {
     setLoading(true);
     e.preventDefault();
     const response = await resetPasswordApi(email);
@@ -63,7 +63,7 @@ export default function ResetPassword() {
   );
 }
 //モーダル
-function modalBody(handleModalToggle) {
+function modalBody(handleModalToggle: () => void) {
   const classes = styles();
 
   return (

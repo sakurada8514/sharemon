@@ -24,7 +24,7 @@ export default function List() {
   const [date, setDate] = useState(new Date());
 
   // state の日付と同じ表記に変換
-  function getFormatDate(date) {
+  function getFormatDate(date: Date) {
     return `${date.getFullYear()}${("0" + (date.getMonth() + 1)).slice(-2)}${(
       "0" + date.getDate()
     ).slice(-2)}`;

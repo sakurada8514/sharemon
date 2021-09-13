@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import clsx from "clsx";
+import { AlertProps } from "@material-ui/lab";
 
 import SideMenu from "../../components/SideMenu/SideMenu";
 import Header from "../../components/Header/Header";
@@ -18,7 +19,7 @@ import { createInviteUrl as createInviteUrlApi } from "../../api/Room/invite";
 import { logout as logoutApi } from "../../api/Auth/login";
 
 export default function Mypage() {
-  const classes = useStyles();
+  const classes = styles();
 
   const history = useHistory();
   const setUser = useGlobal("user")[1];
@@ -33,7 +34,8 @@ export default function Mypage() {
   const [settingMenuOpen, setSettingMenuOpen] = useState(null);
   const [inviteMenuOpen, setInviteMenuOpen] = useState(null);
   const [alertOpen, setAlertOpen] = useState(false);
-  const [alertSeverity, setAlertSeverity] = useState("success");
+  const [alertSeverity, setAlertSeverity] =
+    useState<AlertProps["severity"]>("success");
   const [alertMessage, setAlertMessage] = useState("");
 
   const handleSideMenuOpen = () => setSideMenuOpen(true);
@@ -42,12 +44,10 @@ export default function Mypage() {
   const handleAccountBookMenu = () =>
     setAccountBookMenuOpen(!accountBookMenuOpen);
 
-  const handleSettingMenuOpen = (event) =>
-    setSettingMenuOpen(event.currentTarget);
+  const handleSettingMenuOpen = (e: any) => setSettingMenuOpen(e.currentTarget);
   const handleSettingMenuClose = () => setSettingMenuOpen(null);
 
-  const handleInviteMenuOpen = (event) =>
-    setInviteMenuOpen(event.currentTarget);
+  const handleInviteMenuOpen = (e: any) => setInviteMenuOpen(e.currentTarget);
   const handleInviteMenuClose = () => setInviteMenuOpen(null);
 
   const handleAlertClose = () => setAlertOpen(false);
@@ -158,7 +158,7 @@ export default function Mypage() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
+const styles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },

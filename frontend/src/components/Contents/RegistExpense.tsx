@@ -1,5 +1,6 @@
 import React, { useGlobal, useRef, useState, useEffect } from "reactn";
 import { DatePickerProps } from "@material-ui/pickers";
+import { AlertProps } from "@material-ui/lab";
 
 import RegistExpenseForm from "../Form/RegistExpenseForm";
 import { OK, VALIDATION } from "../../utils/constant";
@@ -10,7 +11,9 @@ import { Dispatch, SetStateAction } from "react";
 
 type RegistMoneyProps = {
   handleAlertOpen: (closedTime?: number) => void;
-  setAlertSeverity: Dispatch<SetStateAction<string>>;
+  setAlertSeverity: React.Dispatch<
+    React.SetStateAction<AlertProps["severity"]>
+  >;
   setAlertMessage: Dispatch<SetStateAction<string>>;
 };
 
@@ -130,7 +133,7 @@ const RegistExpense: React.FC<RegistMoneyProps> = ({
       categoryList={categoryList}
       errors={errors}
       loading={loading}
-      setDate={setDate}
+      setDate={handleChangeDate}
       handleChangeExpense={handleChangeExpense}
       handleChangeCategory={handleChangeCategory}
       handleChangeComment={handleChangeComment}

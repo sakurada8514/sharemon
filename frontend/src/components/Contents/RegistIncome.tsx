@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { DatePickerProps } from "@material-ui/pickers";
+import { AlertProps } from "@material-ui/lab";
 
 import RegistIncomeForm from "../Form/RegistIncomeForm";
 import { OK, VALIDATION } from "../../utils/constant";
@@ -11,7 +12,9 @@ import { registIncome as registIncomeApi } from "../../api/Income/regist";
 
 type RegistIncomeProps = {
   handleAlertOpen: (closedTime?: number) => void;
-  setAlertSeverity: Dispatch<SetStateAction<string>>;
+  setAlertSeverity: React.Dispatch<
+    React.SetStateAction<AlertProps["severity"]>
+  >;
   setAlertMessage: Dispatch<SetStateAction<string>>;
 };
 
