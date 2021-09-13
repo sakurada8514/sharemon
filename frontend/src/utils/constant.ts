@@ -3,7 +3,7 @@ export const UNAUTHORIZED = 401;
 export const VALIDATION = 422;
 export const FORBIDDEN = 403;
 
-export const BACK_COLOR_GREEN = "#fcfffb";
+export const BACK_COLOR_GREEN = "#f0f5f1";
 export const BACK_COLOR_WHITE = "#fdfdfd";
 export const BACK_COLOR_GRAY = "#f2f2f2";
 export const SUB_COLOR_GREEN = "#3EBA2B";
