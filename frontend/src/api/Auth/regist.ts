@@ -6,7 +6,7 @@ export async function regist(
   password: string,
   password_confirmation: string
 ) {
-  await apiClient.get("/sanctum/csrf-cookie");
+  await apiClient.get("/csrf-cookie");
   const response = await apiClient
     .post("/regist", { name, email, password, password_confirmation })
     .catch((err) => err.response);

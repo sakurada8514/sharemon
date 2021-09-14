@@ -6,7 +6,7 @@ export async function login(
   remember: boolean
 ): Promise<any> {
   // ログイン時にCSRFトークンを初期化
-  await apiClient.get("/sanctum/csrf-cookie");
+  await apiClient.get("/csrf-cookie");
   const response = await apiClient
     .post("/login", { email, password, remember })
     .catch((err) => err.response);

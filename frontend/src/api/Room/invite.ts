@@ -15,7 +15,7 @@ export async function inviteRegist(
   room_id: string | null, // TODO:: nullにならないように処理追加
   token: string | null
 ): Promise<any> {
-  await apiClient.get("/sanctum/csrf-cookie");
+  await apiClient.get("/csrf-cookie");
   const response = await apiClient
     .post("/regist/invite", {
       name,
