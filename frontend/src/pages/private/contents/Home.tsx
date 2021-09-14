@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button, Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Skeleton } from "@material-ui/lab";
+import { Avatar } from "@material-ui/core";
 
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { BACK_COLOR_WHITE } from "../../../utils/constant";
@@ -96,8 +97,10 @@ export default function Home() {
                     className={classes.member}
                     key={data.name}
                   >
-                    <AccountCircleIcon className={classes.memberIcon} />
-                    <Typography variant="h6">
+                    <Avatar className={classes.memberIcon}>
+                      <AccountCircleIcon className={classes.memberIcon} />
+                    </Avatar>
+                    <Typography variant="subtitle1">
                       {data.nickname === null ? data.name : data.nickname}
                     </Typography>
                   </Box>
@@ -168,9 +171,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(0.5),
   },
   memberIcon: {
-    width: "45px",
-    height: "45px",
-    marginRight: theme.spacing(1),
+    width: "35px",
+    height: "35px",
+    // marginRight: theme.spacing(1),
   },
   recentlyArea: {
     width: "49%",
