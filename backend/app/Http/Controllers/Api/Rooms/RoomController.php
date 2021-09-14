@@ -21,7 +21,11 @@ class RoomController extends Controller
         $this->_userService = $_userService;
     }
 
-    public function createRoom(RoomCreateRequest $request): JsonResponse
+    public function index()
+    {
+    }
+
+    public function store(RoomCreateRequest $request): JsonResponse
     {
         $_data = ['room_name' => $request->room_name];
 
@@ -34,6 +38,17 @@ class RoomController extends Controller
         return response()->json(['user' => $_user]);
     }
 
+    public function show()
+    {
+    }
+    public function update()
+    {
+    }
+    public function destroy()
+    {
+    }
+
+
     public function createInviteUrl(): JsonResponse
     {
         $_inviteRoomId = Auth::user()->room_id;
@@ -41,14 +56,5 @@ class RoomController extends Controller
         $_url = $this->_roomService->createInvite($_inviteRoomId);
 
         return response()->json(['url' => $_url]);
-    }
-
-    public function findMemberList()
-    {
-        $_roomId = Auth::user()->room_id;
-
-        $_res = $this->_roomService->findMemberList($_roomId);
-
-        return response()->json(['memberList' => $_res]);
     }
 }

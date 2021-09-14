@@ -18,7 +18,7 @@ export async function registIncome(
   };
   const params = setRequestParams(formData);
   const response = await apiClient
-    .post("/income/regist", params)
+    .post("/income", params)
     .catch((err) => err.response);
 
   return response;

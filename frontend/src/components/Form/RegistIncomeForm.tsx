@@ -18,6 +18,7 @@ import { DatePickerProps } from "@material-ui/pickers";
 
 import MyDatePicker from "../Atoms/Form/DatePicker";
 import LoadingButton from "../Atoms/Buttons/LoadingButton";
+import { BACK_COLOR_GREEN } from "../../utils/constant";
 
 type RegistIncomeFormProps = {
   registIncome: () => Promise<void>;
@@ -55,7 +56,7 @@ const RegistIncomeForm: React.FC<RegistIncomeFormProps> = ({
   const classes = useStyles();
 
   return (
-    <Grid container>
+    <Grid container className={classes.root}>
       <Grid item xs={12} md={6}>
         <Box>
           <Typography className={classes.instructions}>*は必須です</Typography>
@@ -144,6 +145,9 @@ const RegistIncomeForm: React.FC<RegistIncomeFormProps> = ({
   );
 };
 const useStyles = makeStyles((thema) => ({
+  root: {
+    backgroundColor: BACK_COLOR_GREEN,
+  },
   buttonArea: {
     display: "flex",
     justifyContent: "center",

@@ -48,7 +48,7 @@ class AuthController extends Controller
     }
 
     /**
-     * 招待新規登録 招待登録改修の必要性有
+     * 招待新規登録
      *
      * @param InviteRegistRequest $request
      * @return JsonResponse
@@ -56,7 +56,7 @@ class AuthController extends Controller
     public function inviteRegist(InviteRegistRequest $request): JsonResponse
     {
         if (!$this->_inviteAccessTokenService->existsToken($request->token)) {
-            return response()->json(['errors' => config('Const.webApp.ERROR_MESSAGE.INVITE_REGIST')], Response::HTTP_FORBIDDEN);
+            return $this->jsonResponse([], 'Auth.Errors.InviteError', Response::HTTP_FORBIDDEN);
         }
 
         $_userData = $request->only('name', 'email', 'password', 'room_id');
@@ -115,9 +115,7 @@ class AuthController extends Controller
         $resetPasswordStatus = $this->_authService->reregistPassword($_data);
 
         if ($resetPasswordStatus == Password::INVALID_TOKEN) {
-            return response()->json([
-                'errors' => config('Const.webApp.ERROR_MESSAGE.RESET_PASSWORD')
-            ], Response::HTTP_UNAUTHORIZED); // トークンが異なる場合の処理追加
+            return $this->jsonResponse([], 'Auth.Errors.ResetPasswordError', Response::HTTP_UNAUTHORIZED);
         }
 
         return response()->json([]);
@@ -143,12 +141,7 @@ class AuthController extends Controller
     private function _authResponse(?Authenticatable $_user): JsonResponse
     {
         if (is_null($_user)) {
-            return response()->json(
-                [
-                    'errors' => config('Const.webApp.ERROR_MESSAGE.AUTH')
-                ],
-                Response::HTTP_UNAUTHORIZED
-            );
+            return $this->jsonResponse([], 'Auth.Errors.AuthError', Response::HTTP_UNAUTHORIZED);
         }
 
         $_user = json_decode(json_encode($_user), true);

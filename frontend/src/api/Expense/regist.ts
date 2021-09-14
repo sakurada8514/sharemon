@@ -20,7 +20,7 @@ export async function registExpense(
   };
   const params = setRequestParams(formData);
   const response = await apiClient
-    .post("/expense/regist", params)
+    .post("/expense", params)
     .catch((err) => err.response);
 
   return response;

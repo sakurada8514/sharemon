@@ -194,7 +194,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     "& span": {
       width: "48%",
-      height: "25px",
+      height: "30px",
       margin: theme.spacing(1.5),
     },
   },

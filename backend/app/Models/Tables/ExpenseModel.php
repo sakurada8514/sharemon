@@ -32,12 +32,9 @@ class ExpenseModel extends BaseModel
             $_registData['s3_image_id'] = DB::getPdo()->lastInsertId();
         }
 
-
         $_insert = $this->_createInsertUpdateData($this->_addUserData($_registData, $_user), $this->_getBaseDefaultInsertDataWithDelFlg());
 
         DB::table($this->table)->insert($_insert);
-
-
 
         return;
     }

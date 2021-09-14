@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
-use App\Http\Controllers\Api\Money\ExpenseController;
-use App\Http\Controllers\Api\Money\IncomeController;
+use App\Http\Controllers\Api\Expense\ExpenseCategoryController;
+use App\Http\Controllers\Api\Expense\ExpenseController;
+use App\Http\Controllers\Api\Income\IncomeCategoryController;
+use App\Http\Controllers\Api\Income\IncomeController;
+use App\Http\Controllers\Api\Rooms\MemberController;
 use App\Http\Controllers\Api\Rooms\RoomController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,30 +20,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/** Auth */
 Route::post('/regist', [AuthController::class, "regist"]);
-
 Route::post('/regist/invite', [AuthController::class, "inviteRegist"]);
-
 Route::post('/login', [AuthController::class, "login"]);
-
 Route::post('/password/reset', [AuthController::class, "sendResetPasswordMail"]);
 Route::post('/password/reregist', [AuthController::class, "reregistPassword"]);
-
 Route::get('/logout', [AuthController::class, "logout"]);
-
 Route::get('/user', [AuthController::class, "authUser"]);
 
-Route::get('/room', [RoomController::class, "currentRoom"]);
-
+/** プライベートページ */
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/room/create', [RoomController::class, "createRoom"]);
-    Route::get('/room/member', [RoomController::class, "findMemberList"]);
+    Route::apiResource('room', RoomController::class);
+    Route::get('/room/invite/url', [RoomController::class, "createInviteUrl"]);
 
-    Route::get('/regist/url', [RoomController::class, "createInviteUrl"]);
+    Route::apiResource('member', MemberController::class);
 
-    Route::get('/expense/category/list', [ExpenseController::class, 'getExpenseCategoryList']);
-    Route::post('/expense/regist', [ExpenseController::class, 'registExpense']);
+    Route::apiResource('expense', ExpenseController::class);
 
-    Route::get('/income/category/list', [IncomeController::class, 'getIncomeCategoryList']);
-    Route::post('/income/regist', [IncomeController::class, 'registIncome']);
+    Route::apiResource('expensecategory', ExpenseCategoryController::class);
+
+    Route::apiResource('income', IncomeController::class);
+
+    Route::apiResource('incomecategory', IncomeCategoryController::class);
 });

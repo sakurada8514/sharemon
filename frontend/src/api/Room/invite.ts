@@ -2,7 +2,7 @@ import { apiClient } from "../../utils/api";
 
 export async function createInviteUrl(): Promise<any> {
   const response = await apiClient
-    .get("/regist/url")
+    .get("/room/invite/url")
     .catch((err) => err.response);
   return response;
 }
