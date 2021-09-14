@@ -6,13 +6,12 @@ import { ThemeProvider } from "@material-ui/core";
 import Routers from "./Routers";
 import { currentUser as currentUserApi } from "./api/Auth/login";
 import { theme } from "./theme";
-// import InviteRegistApp from "./InviteRegistApp";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
-import { CircularProgress, Box } from "@material-ui/core";
 import Loading from "./components/Atoms/Loading";
 import ModalTemplate from "./components/Modal/ModalTemplate";
 import ErrorModal from "./components/Modal/ErrorModal";
+import "./tailwind.css";
 
 function App() {
   const [firstAuthLoading, setFirstAuthLoading] = useState(true);

@@ -5,7 +5,7 @@ import TransitionMotion from "../components/Route/Motion";
 const Top = () => {
   return (
     <TransitionMotion>
-      <div>
+      <div className="bg-gray-800">
         <NavBar></NavBar>
         Top
       </div>
