@@ -12,12 +12,12 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected function jsonResponse(array $data = [], string $viewModel = null, int $statusCode = 200)
+    protected function jsonResponse(array $_data = [], string $viewModel = null, int $statusCode = 200)
     {
         if ($viewModel) {
             $_viewModelInstance = $this->_doViewModelInstance($viewModel);
 
-            $_data = $_viewModelInstance->apply($data);
+            $_data = $_viewModelInstance->apply($_data);
         }
         return response()->json($_data, $statusCode);
     }

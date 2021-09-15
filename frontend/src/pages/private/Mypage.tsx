@@ -16,18 +16,15 @@ import { BACK_COLOR_GREEN } from "../../utils/constant";
 import { OK } from "../../utils/constant";
 
 import { createInviteUrl as createInviteUrlApi } from "../../api/Room/invite";
+import { getRoomDetail as getRoomDetailApi } from "../../api/Room/room";
 import { logout as logoutApi } from "../../api/Auth/login";
 
 export default function Mypage() {
   const classes = styles();
 
   const history = useHistory();
-  const setUser = useGlobal("user")[1];
-  useEffect(() => {
-    if (window.matchMedia("(max-width: 960px)").matches) {
-      setSideMenuOpen(false);
-    }
-  }, []);
+  const [user, setUser] = useGlobal("user");
+  const setError = useGlobal("error")[1];
 
   const [sideMenuOpen, setSideMenuOpen] = useState(true);
   const [accountBookMenuOpen, setAccountBookMenuOpen] = useState(true);
@@ -37,6 +34,15 @@ export default function Mypage() {
   const [alertSeverity, setAlertSeverity] =
     useState<AlertProps["severity"]>("success");
   const [alertMessage, setAlertMessage] = useState("");
+  const [roomName, setRoomName] = useState("");
+
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 960px)").matches) {
+      setSideMenuOpen(false);
+    }
+
+    getRoomName();
+  }, []);
 
   const handleSideMenuOpen = () => setSideMenuOpen(true);
   const handleSideMenuClose = () => setSideMenuOpen(false);
@@ -58,6 +64,17 @@ export default function Mypage() {
       setAlertOpen(false);
     }, closedTime);
   };
+
+  async function getRoomName() {
+    const response = await getRoomDetailApi(user.room_id);
+
+    if (response.status === OK) {
+      setRoomName(response.data.detail.room_name);
+      console.log(response.data.detail.room_name);
+    } else {
+      setError(true);
+    }
+  }
 
   async function InviteUrlCopy() {
     const response = await createInviteUrlApi();
@@ -114,6 +131,7 @@ export default function Mypage() {
             sideMenuOpen={sideMenuOpen}
             settingMenuOpen={settingMenuOpen}
             inviteMenuOpen={inviteMenuOpen}
+            roomName={roomName}
             handleSideMenuOpen={handleSideMenuOpen}
             handleSettingMenuOpen={handleSettingMenuOpen}
             handleSettingMenuClose={handleSettingMenuClose}

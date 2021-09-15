@@ -6,59 +6,89 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 
 import SettingButton from "./Menu/SettingMenuButton";
 import InviteMenuButton from "./Menu/InviteMenuButton";
+import { setRoomName } from "../../stores/room";
 
-export default function Header(props) {
+type HeaderProps = {
+  sideMenuOpen: boolean;
+  settingMenuOpen: null;
+  inviteMenuOpen: null;
+  roomName: string;
+  handleSideMenuOpen: () => void;
+  handleSettingMenuOpen: (e: any) => void;
+  handleSettingMenuClose: () => void;
+  handleInviteMenuOpen: (e: any) => void;
+  handleInviteMenuClose: () => void;
+  InviteUrlCopy: () => Promise<void>;
+  logout: () => Promise<void>;
+};
+
+const Header: React.FC<HeaderProps> = ({
+  sideMenuOpen,
+  settingMenuOpen,
+  inviteMenuOpen,
+  roomName,
+  handleSideMenuOpen,
+  handleSettingMenuOpen,
+  handleSettingMenuClose,
+  handleInviteMenuOpen,
+  handleInviteMenuClose,
+  InviteUrlCopy,
+  logout,
+}) => {
   const classes = useStyles();
   return (
     <AppBar
       color={"primary"}
       position="absolute"
-      className={clsx(
-        classes.appBar,
-        props.sideMenuOpen && classes.appBarShift
-      )}
+      className={clsx(classes.appBar, sideMenuOpen && classes.appBarShift)}
     >
-      <Toolbar className={classes.toolbar}>
+      <Toolbar>
         <IconButton
           edge="start"
           color="inherit"
           aria-label="open drawer"
-          onClick={props.handleSideMenuOpen}
+          onClick={handleSideMenuOpen}
           className={clsx(
             classes.menuButton,
-            props.sideMenuOpen && classes.menuButtonHidden
+            sideMenuOpen && classes.menuButtonHidden
           )}
         >
           <MenuIcon />
         </IconButton>
-        <Typography
-          component="h1"
-          variant="h6"
-          color="inherit"
-          noWrap
-          className={classes.title}
-        >
-          Sharemon
-        </Typography>
+        <Box display="flex" className={classes.title}>
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            className="mr-20 text-3xl"
+          >
+            Sharemon
+          </Typography>
+          <div className="flex items-end">
+            <p className="text-xl font-light">{roomName}</p>
+          </div>
+        </Box>
         <InviteMenuButton
-          inviteMenuOpen={props.inviteMenuOpen}
-          handleInviteMenuOpen={props.handleInviteMenuOpen}
-          handleInviteMenuClose={props.handleInviteMenuClose}
-          InviteUrlCopy={props.InviteUrlCopy}
+          inviteMenuOpen={inviteMenuOpen}
+          handleInviteMenuOpen={handleInviteMenuOpen}
+          handleInviteMenuClose={handleInviteMenuClose}
+          InviteUrlCopy={InviteUrlCopy}
         />
         <SettingButton
-          settingMenuOpen={props.settingMenuOpen}
-          handleSettingMenuOpen={props.handleSettingMenuOpen}
-          handleSettingMenuClose={props.handleSettingMenuClose}
-          logout={props.logout}
+          settingMenuOpen={settingMenuOpen}
+          handleSettingMenuOpen={handleSettingMenuOpen}
+          handleSettingMenuClose={handleSettingMenuClose}
+          logout={logout}
         />
       </Toolbar>
     </AppBar>
   );
-}
+};
 
 const drawerWidth = 220;
 
@@ -88,7 +118,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-  appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     height: "100vh",
@@ -99,3 +128,5 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(4),
   },
 }));
+
+export default Header;

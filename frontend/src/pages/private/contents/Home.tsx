@@ -17,22 +17,22 @@ export default function Home() {
   const classes = useStyles();
   const setError = useGlobal("error")[1];
 
-  const [member, setMember] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [member, setMember] = useState(null);
 
   useEffect(() => {
-    async function getMemberList() {
-      const response = await getMemberApi();
-
-      if (response.status === OK) {
-        setMember(response.data.memberList);
-      } else {
-        setError(true);
-      }
-      setLoading(false);
-    }
     getMemberList();
   }, []);
+
+  async function getMemberList() {
+    const response = await getMemberApi();
+
+    if (response.status === OK) {
+      setMember(response.data.memberList);
+    } else {
+      setError(true);
+    }
+  }
+
   return (
     <div>
       <Box
@@ -67,28 +67,15 @@ export default function Home() {
             ルームメンバー
           </Typography>
           <Box display="flex" flexWrap="wrap" justifyContent="space-between">
-            {loading ? (
+            {member === null && (
               <>
-                <Box
-                  className={classes.skeletonArea}
-                  display="flex"
-                  justifyContent="space-between"
-                  flexWrap="warp"
-                >
-                  <Skeleton />
-                  <Skeleton />
-                </Box>
-                <Box
-                  className={classes.skeletonArea}
-                  display="flex"
-                  justifyContent="space-between"
-                  flexWrap="warp"
-                >
-                  <Skeleton />
-                  <Skeleton />
+                <Box className="w-full justify-between flex-wrap">
+                  <Skeleton className="w-full h-12 mb-2" />
+                  <Skeleton className="w-full h-12" />
                 </Box>
               </>
-            ) : (
+            )}
+            {member &&
               member.map((data: { name: string; nickname: string }) => {
                 return (
                   <Box
@@ -97,16 +84,15 @@ export default function Home() {
                     className={classes.member}
                     key={data.name}
                   >
-                    <Avatar className={classes.memberIcon}>
-                      <AccountCircleIcon className={classes.memberIcon} />
+                    <Avatar className="w-8 h-8 mr-3">
+                      <AccountCircleIcon className="w-8 h-8" />
                     </Avatar>
                     <Typography variant="subtitle1">
                       {data.nickname === null ? data.name : data.nickname}
                     </Typography>
                   </Box>
                 );
-              })
-            )}
+              })}
             {/* {member.map((data: { name: string; nickname: string }) => {
               return (
                 <Box
@@ -136,6 +122,11 @@ export default function Home() {
             グラフ
           </Typography>
         </Box>
+      </Box>
+      <Box className="mt-6 bg-white p-3 w-full h-20 rounded-md">
+        <Typography variant="h5" gutterBottom>
+          今月の収支
+        </Typography>
       </Box>
     </div>
   );
@@ -167,8 +158,8 @@ const useStyles = makeStyles((theme) => ({
   },
   member: {
     width: "49%",
-    marginTop: theme.spacing(0.5),
-    marginBottom: theme.spacing(0.5),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
   memberIcon: {
     width: "35px",

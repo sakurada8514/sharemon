@@ -38,8 +38,11 @@ class RoomController extends Controller
         return response()->json(['user' => $_user]);
     }
 
-    public function show()
+    public function show(string $id)
     {
+        $_ret = $this->_roomService->findDetailByRoomId($id);
+
+        return $this->jsonResponse(['detail' => $_ret]);
     }
     public function update()
     {

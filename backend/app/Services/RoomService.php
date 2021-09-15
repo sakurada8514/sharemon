@@ -28,9 +28,9 @@ class RoomService extends BaseService
         return;
     }
 
-    public function findRoomInfoByRoomId(string $_roomId): array
+    public function findDetailByRoomId(string $_roomId): array
     {
-        return $this->_roomModel->findInfoByUserId($_roomId);
+        return $this->_roomModel->findByRoomId($_roomId);
     }
 
     public function createInvite(string $_inviteRoomId): string
