@@ -7,6 +7,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core";
 import { Box } from "@material-ui/core";
+import MediaQuery from "react-responsive";
 
 import SettingButton from "./Menu/SettingMenuButton";
 import InviteMenuButton from "./Menu/InviteMenuButton";
@@ -43,35 +44,38 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <AppBar
       color={"primary"}
-      position="absolute"
       className={clsx(classes.appBar, sideMenuOpen && classes.appBarShift)}
     >
       <Toolbar>
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleSideMenuOpen}
-          className={clsx(
-            classes.menuButton,
-            sideMenuOpen && classes.menuButtonHidden
-          )}
-        >
-          <MenuIcon />
-        </IconButton>
+        <MediaQuery query="(min-width: 768px)">
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleSideMenuOpen}
+            className={clsx(
+              classes.menuButton,
+              sideMenuOpen && classes.menuButtonHidden
+            )}
+          >
+            <MenuIcon />
+          </IconButton>
+        </MediaQuery>
         <Box display="flex" className={classes.title}>
           <Typography
             component="h1"
             variant="h6"
             color="inherit"
             noWrap
-            className="mr-20 text-3xl"
+            className="mr-20 text-2xl md:text-3xl"
           >
             Sharemon
           </Typography>
-          <div className="flex items-end">
-            <p className="text-xl font-light">{roomName}</p>
-          </div>
+          <MediaQuery query="(min-width: 768px)">
+            <div className="flex items-end">
+              <p className="text-xl font-light">{roomName}</p>
+            </div>
+          </MediaQuery>
         </Box>
         <InviteMenuButton
           inviteMenuOpen={inviteMenuOpen}

@@ -7,10 +7,12 @@ import clsx from "clsx";
 import { AlertProps } from "@material-ui/lab";
 
 import SideMenu from "../../components/SideMenu/SideMenu";
+import BottomAppBar from "../../components/SideMenu/BottomAppBar";
 import Header from "../../components/Header/Header";
 import AlertMessage from "../../components/Atoms/AlertMessage";
 import TransitionMotion from "../../components/Route/Motion";
 import MypageRouters from "./MypageRouters";
+import MediaQuery from "react-responsive";
 
 import { BACK_COLOR_GREEN } from "../../utils/constant";
 import { OK } from "../../utils/constant";
@@ -125,7 +127,7 @@ export default function Mypage() {
 
   return (
     <TransitionMotion>
-      <Box className={classes.root}>
+      <Box className="flex">
         <BrowserRouter>
           <Header
             sideMenuOpen={sideMenuOpen}
@@ -140,15 +142,17 @@ export default function Mypage() {
             InviteUrlCopy={InviteUrlCopy}
             logout={logout}
           />
-          <SideMenu
-            sideMenuOpen={sideMenuOpen}
-            accountBookMenuOpen={accountBookMenuOpen}
-            handleSideMenuOpen={handleSideMenuOpen}
-            handleSideMenuClose={handleSideMenuClose}
-            handleAccountBookMenu={handleAccountBookMenu}
-          />
-          <main className={classes.content}>
-            <Box className={classes.appBarSpacer} />
+          <MediaQuery query="(min-width: 768px)">
+            <SideMenu
+              sideMenuOpen={sideMenuOpen}
+              accountBookMenuOpen={accountBookMenuOpen}
+              handleSideMenuOpen={handleSideMenuOpen}
+              handleSideMenuClose={handleSideMenuClose}
+              handleAccountBookMenu={handleAccountBookMenu}
+            />
+          </MediaQuery>
+          <main className="flex-grow min-h-screen bg-gray-50 transition">
+            <Box className="h-14" />
 
             <AlertMessage
               alertOpen={alertOpen}
@@ -158,10 +162,11 @@ export default function Mypage() {
             />
 
             <Box
-              className={clsx(
-                classes.container,
-                sideMenuOpen ? classes.openPadding : classes.closePadding
-              )}
+              // className={clsx(
+              //   classes.container,
+              //   sideMenuOpen ? classes.openPadding : classes.closePadding
+              // )}
+              className="p-3 transition"
             >
               <MypageRouters
                 handleAlertOpen={handleAlertOpen}
@@ -170,6 +175,9 @@ export default function Mypage() {
               />
             </Box>
           </main>
+          <MediaQuery query="(max-width: 768px)">
+            <BottomAppBar />
+          </MediaQuery>
         </BrowserRouter>
       </Box>
     </TransitionMotion>
@@ -177,19 +185,6 @@ export default function Mypage() {
 }
 
 const styles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    minHeight: "100vh",
-    backgroundColor: BACK_COLOR_GREEN,
-    transition: theme.transitions.create(["all"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
   container: {
     padding: theme.spacing(3),
     transition: theme.transitions.create(["all"], {
