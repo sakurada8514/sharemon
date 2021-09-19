@@ -43,20 +43,17 @@ const RegistForm: React.FC<RegistFormProps> = ({
   handleChangePasswordConfirmation,
   pushLogin,
 }) => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.allWrapper}>
+    <div className="flex items-center bg-gray-50 min-h-screen">
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon className={classes.icon} />
+        <div className="flex flex-col items-center">
+          <Avatar className="bg-green-500 m-2">
+            <LockOutlinedIcon className="bg-green-500" />
           </Avatar>
           <Typography component="h1" variant="h5">
             ユーザー登録
           </Typography>
-          <form className={classes.form}>
+          <form className="w-full mt-2">
             <TextField
               variant="outlined"
               margin="normal"
@@ -122,7 +119,7 @@ const RegistForm: React.FC<RegistFormProps> = ({
               autoComplete="current-password_confirmation"
               value={password_confirmation}
               onChange={handleChangePasswordConfirmation}
-              className={classes.lastTextField}
+              className="mb-6"
               error={typeof errors.auth !== "undefined"}
               helperText={errors.auth}
             />
@@ -132,19 +129,17 @@ const RegistForm: React.FC<RegistFormProps> = ({
               loading={loading}
               fullWidth={true}
             />
-            <Box
-              display="flex"
-              justifyContent="center"
-              className={classes.linkArea}
-            >
-              <Link
-                color="secondary"
-                variant="body2"
-                onClick={pushLogin}
-                className={isInvite ? classes.linkNone : classes.link}
-              >
-                {"ログイン"}
-              </Link>
+            <Box display="flex" justifyContent="center" className="mt-4">
+              {!isInvite && (
+                <Link
+                  color="secondary"
+                  variant="body2"
+                  onClick={pushLogin}
+                  className="cursor-pointer"
+                >
+                  {"ログイン"}
+                </Link>
+              )}
             </Box>
           </form>
         </div>
@@ -152,43 +147,5 @@ const RegistForm: React.FC<RegistFormProps> = ({
     </div>
   );
 };
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: SUB_COLOR_GREEN,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  linkArea: {
-    marginTop: theme.spacing(2),
-  },
-  icon: {
-    backgroundColor: SUB_COLOR_GREEN,
-  },
-  allWrapper: {
-    height: "100vh",
-    backgroundColor: BACK_COLOR_GREEN,
-    display: "flex",
-    alignItems: "center",
-  },
-  link: {
-    cursor: "pointer",
-  },
-  linkNone: {
-    cursor: "pointer",
-    display: "none",
-  },
-  lastTextField: {
-    marginBottom: theme.spacing(3),
-  },
-}));
 
 export default RegistForm;

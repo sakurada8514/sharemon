@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import clsx from "clsx";
 import { AlertProps } from "@material-ui/lab";
+import { Drawer } from "@mui/material";
 
 import SideMenu from "../../components/SideMenu/SideMenu";
 import BottomAppBar from "../../components/SideMenu/BottomAppBar";
@@ -14,7 +15,6 @@ import TransitionMotion from "../../components/Route/Motion";
 import MypageRouters from "./MypageRouters";
 import MediaQuery from "react-responsive";
 
-import { BACK_COLOR_GREEN } from "../../utils/constant";
 import { OK } from "../../utils/constant";
 
 import { createInviteUrl as createInviteUrlApi } from "../../api/Room/invite";
@@ -22,14 +22,12 @@ import { getRoomDetail as getRoomDetailApi } from "../../api/Room/room";
 import { logout as logoutApi } from "../../api/Auth/login";
 
 export default function Mypage() {
-  const classes = styles();
-
   const history = useHistory();
   const [user, setUser] = useGlobal("user");
   const setError = useGlobal("error")[1];
 
   const [sideMenuOpen, setSideMenuOpen] = useState(true);
-  const [accountBookMenuOpen, setAccountBookMenuOpen] = useState(true);
+  const [mobileSideMenuOpen, setMobileSideMenuOpen] = useState(false);
   const [settingMenuOpen, setSettingMenuOpen] = useState(null);
   const [inviteMenuOpen, setInviteMenuOpen] = useState(null);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -48,9 +46,8 @@ export default function Mypage() {
 
   const handleSideMenuOpen = () => setSideMenuOpen(true);
   const handleSideMenuClose = () => setSideMenuOpen(false);
-
-  const handleAccountBookMenu = () =>
-    setAccountBookMenuOpen(!accountBookMenuOpen);
+  const handleMobileSideMenuOpen = () => setMobileSideMenuOpen(true);
+  const handleMobileSideMenuClose = () => setMobileSideMenuOpen(false);
 
   const handleSettingMenuOpen = (e: any) => setSettingMenuOpen(e.currentTarget);
   const handleSettingMenuClose = () => setSettingMenuOpen(null);
@@ -145,22 +142,16 @@ export default function Mypage() {
           <MediaQuery query="(min-width: 768px)">
             <SideMenu
               sideMenuOpen={sideMenuOpen}
-              accountBookMenuOpen={accountBookMenuOpen}
-              handleSideMenuOpen={handleSideMenuOpen}
               handleSideMenuClose={handleSideMenuClose}
-              handleAccountBookMenu={handleAccountBookMenu}
             />
           </MediaQuery>
-          <main className="flex-grow min-h-screen bg-gray-50 transition">
-            <Box className="h-14" />
-
+          <main className="flex-grow min-h-screen bg-gray-50 transition pt-14 pb-20">
             <AlertMessage
               alertOpen={alertOpen}
               severity={alertSeverity}
               alertMessage={alertMessage}
               handleAlert={handleAlertClose}
             />
-
             <Box
               // className={clsx(
               //   classes.container,
@@ -176,7 +167,16 @@ export default function Mypage() {
             </Box>
           </main>
           <MediaQuery query="(max-width: 768px)">
-            <BottomAppBar />
+            <BottomAppBar handleMobileSideMenuOpen={handleMobileSideMenuOpen} />
+            <Drawer
+              open={mobileSideMenuOpen}
+              onClick={handleMobileSideMenuClose}
+            >
+              <SideMenu
+                sideMenuOpen={true}
+                handleSideMenuClose={handleSideMenuClose}
+              />
+            </Drawer>
           </MediaQuery>
         </BrowserRouter>
       </Box>
@@ -185,13 +185,6 @@ export default function Mypage() {
 }
 
 const styles = makeStyles((theme) => ({
-  container: {
-    padding: theme.spacing(3),
-    transition: theme.transitions.create(["all"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
   openPadding: {
     paddingLeft: "244px",
   },

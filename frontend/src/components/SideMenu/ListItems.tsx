@@ -24,14 +24,8 @@ import { SUB_COLOR_BLUE } from "../../utils/constant";
 
 type MainListItemsProps = {
   sideMenuOpen: boolean;
-  handleAccountBookMenu: () => void;
-  accountBookMenuOpen: boolean;
 };
-const MainListItems: React.FC<MainListItemsProps> = ({
-  sideMenuOpen,
-  handleAccountBookMenu,
-  accountBookMenuOpen,
-}) => {
+const MainListItems: React.FC<MainListItemsProps> = ({ sideMenuOpen }) => {
   const classes = useStyles();
   return (
     <div>
@@ -52,35 +46,33 @@ const MainListItems: React.FC<MainListItemsProps> = ({
           <ListItemText primary="ホーム" />
         </ListItem>
       </NavLink>
-      <ListItem button onClick={handleAccountBookMenu}>
+      <ListItem>
         <ListItemIcon>
           <MenuBookIcon />
         </ListItemIcon>
         <ListItemText primary="家計簿" />
-        {accountBookMenuOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        <ExpandMoreIcon />
       </ListItem>
-      <Collapse in={accountBookMenuOpen} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem button className={sideMenuOpen ? classes.nestMenu : ""}>
-            <ListItemIcon>
-              <ListAltIcon />
-            </ListItemIcon>
-            <ListItemText primary="一覧" />
-          </ListItem>
-          <ListItem button className={sideMenuOpen ? classes.nestMenu : ""}>
-            <ListItemIcon>
-              <PieChartIcon />
-            </ListItemIcon>
-            <ListItemText primary="グラフ" />
-          </ListItem>
-          <ListItem button className={sideMenuOpen ? classes.nestMenu : ""}>
-            <ListItemIcon>
-              <MoneyIcon />
-            </ListItemIcon>
-            <ListItemText primary="予算" />
-          </ListItem>
-        </List>
-      </Collapse>
+      <List component="div" disablePadding>
+        <ListItem button className={sideMenuOpen ? classes.nestMenu : ""}>
+          <ListItemIcon>
+            <ListAltIcon />
+          </ListItemIcon>
+          <ListItemText primary="一覧" />
+        </ListItem>
+        <ListItem button className={sideMenuOpen ? classes.nestMenu : ""}>
+          <ListItemIcon>
+            <PieChartIcon />
+          </ListItemIcon>
+          <ListItemText primary="グラフ" />
+        </ListItem>
+        <ListItem button className={sideMenuOpen ? classes.nestMenu : ""}>
+          <ListItemIcon>
+            <MoneyIcon />
+          </ListItemIcon>
+          <ListItemText primary="予算" />
+        </ListItem>
+      </List>
     </div>
   );
 };

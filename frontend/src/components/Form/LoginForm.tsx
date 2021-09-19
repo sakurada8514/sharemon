@@ -42,20 +42,17 @@ const LoginForm: React.FC<LoginFormProps> = ({
   pushRegist,
   pushPasswordReset,
 }) => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.allWrapper}>
+    <div className="flex items-center bg-gray-50 min-h-screen">
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon className={classes.icon} />
+        <div className="flex flex-col items-center">
+          <Avatar className="bg-green-500 m-2">
+            <LockOutlinedIcon className="bg-green-500" />
           </Avatar>
           <Typography component="h1" variant="h5">
             ログイン
           </Typography>
-          <form className={classes.form}>
+          <form className="w-full mt-2">
             <TextField
               variant="outlined"
               margin="normal"
@@ -108,12 +105,12 @@ const LoginForm: React.FC<LoginFormProps> = ({
               loading={loading}
               fullWidth={true}
             />
-            <Box className={classes.linkArea}>
+            <Box className="flex justify-between px-6 mt-4">
               <Link
                 color="secondary"
                 variant="body2"
                 onClick={pushRegist}
-                className={classes.link}
+                className="cursor-pointer"
               >
                 {"ユーザー登録"}
               </Link>
@@ -121,7 +118,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                 color="secondary"
                 variant="body2"
                 onClick={pushPasswordReset}
-                className={classes.link}
+                className="cursor-pointer"
               >
                 {"パスワードリセット"}
               </Link>
@@ -132,39 +129,5 @@ const LoginForm: React.FC<LoginFormProps> = ({
     </div>
   );
 };
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: SUB_COLOR_GREEN,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  icon: {
-    backgroundColor: SUB_COLOR_GREEN,
-  },
-  allWrapper: {
-    height: "100vh",
-    backgroundColor: BACK_COLOR_GREEN,
-    display: "flex",
-    alignItems: "center",
-  },
-  linkArea: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "0 24px",
-    marginTop: theme.spacing(2),
-  },
-  link: {
-    cursor: "pointer",
-  },
-}));
 
 export default LoginForm;

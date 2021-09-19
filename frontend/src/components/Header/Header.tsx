@@ -48,20 +48,19 @@ const Header: React.FC<HeaderProps> = ({
     >
       <Toolbar>
         <MediaQuery query="(min-width: 768px)">
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleSideMenuOpen}
-            className={clsx(
-              classes.menuButton,
-              sideMenuOpen && classes.menuButtonHidden
-            )}
-          >
-            <MenuIcon />
-          </IconButton>
+          {!sideMenuOpen && (
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleSideMenuOpen}
+              className="mr-9"
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
         </MediaQuery>
-        <Box display="flex" className={classes.title}>
+        <Box display="flex" className="flex-grow">
           <Typography
             component="h1"
             variant="h6"
@@ -112,24 +111,6 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-  },
-  menuButton: {
-    marginRight: 36,
-  },
-  menuButtonHidden: {
-    display: "none",
-  },
-  title: {
-    flexGrow: 1,
-  },
-  content: {
-    flexGrow: 1,
-    height: "100vh",
-    overflow: "auto",
-  },
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
   },
 }));
 

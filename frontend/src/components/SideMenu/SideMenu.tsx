@@ -13,17 +13,12 @@ import { BACK_COLOR_WHITE } from "../../utils/constant";
 
 type SideMenuProps = {
   sideMenuOpen: boolean;
-  accountBookMenuOpen: boolean;
-  handleSideMenuOpen: () => void;
+
   handleSideMenuClose: () => void;
-  handleAccountBookMenu: () => void;
 };
 const SideMenu: React.FC<SideMenuProps> = ({
   sideMenuOpen,
-  accountBookMenuOpen,
-  handleSideMenuOpen,
   handleSideMenuClose,
-  handleAccountBookMenu,
 }) => {
   const classes = useStyles();
 
@@ -45,11 +40,7 @@ const SideMenu: React.FC<SideMenuProps> = ({
       </div>
       <Divider />
       <List>
-        <MainListItems
-          sideMenuOpen={sideMenuOpen}
-          handleAccountBookMenu={handleAccountBookMenu}
-          accountBookMenuOpen={accountBookMenuOpen}
-        />
+        <MainListItems sideMenuOpen={sideMenuOpen} />
       </List>
       <Divider />
       <List>

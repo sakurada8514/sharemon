@@ -25,19 +25,22 @@ const LoadingButton: React.FC<props> = ({
   const classes = styles();
 
   return (
-    <div className={classes.wrapper}>
+    <div className="relative">
       <Button
         variant={variant}
         color={color}
         disabled={loading}
         onClick={handleButtonClick}
-        className={classes.button}
+        className="px-14 py-1"
         fullWidth={fullWidth}
       >
         {text}
       </Button>
       {loading && (
-        <CircularProgress size={24} className={classes.buttonProgress} />
+        <CircularProgress
+          size={24}
+          className="text-green-500 absolute top-1/2 left-1/2 -mt-3 -ml-3"
+        />
       )}
     </div>
   );

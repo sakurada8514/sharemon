@@ -42,7 +42,7 @@ const RegistRoomForm: React.FC<RegistRoomFormProps> = ({
           <Typography component="h1" variant="h5">
             ルーム作成
           </Typography>
-          <form className={classes.form} onSubmit={createRoom} noValidate>
+          <form className="w-full mt-2" onSubmit={createRoom} noValidate>
             <TextField
               variant="outlined"
               margin="normal"

@@ -29,20 +29,17 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
   handleChangeEmail,
   pushLogin,
 }) => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.allWrapper}>
+    <div className="flex items-center bg-gray-50 min-h-screen">
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon className={classes.icon} />
+        <div className="flex flex-col items-center">
+          <Avatar className="bg-green-500 m-2">
+            <LockOutlinedIcon className="bg-green-500" />
           </Avatar>
           <Typography component="h1" variant="h5">
             パスワードリセット
           </Typography>
-          <form className={classes.form}>
+          <form className="w-full mt-2">
             <TextField
               variant="outlined"
               margin="normal"
@@ -57,7 +54,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
               onChange={handleChangeEmail}
               error={typeof errors.email !== "undefined"}
               helperText={errors.email}
-              className={classes.lastTextField}
+              className="mb-6"
             />
             <LoadingButton
               handleButtonClick={resetPassword}
@@ -65,12 +62,12 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
               loading={loading}
               fullWidth={true}
             />
-            <Box className={classes.linkArea}>
+            <Box className="flex justify-center mt-4">
               <Link
                 color="secondary"
                 variant="body2"
                 onClick={pushLogin}
-                className={classes.link}
+                className="cursor-pointer"
               >
                 {"ログインへ戻る"}
               </Link>
@@ -81,41 +78,5 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
     </div>
   );
 };
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: SUB_COLOR_GREEN,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  icon: {
-    backgroundColor: SUB_COLOR_GREEN,
-  },
-  allWrapper: {
-    height: "100vh",
-    backgroundColor: BACK_COLOR_GREEN,
-    display: "flex",
-    alignItems: "center",
-  },
-  linkArea: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: theme.spacing(2),
-  },
-  link: {
-    cursor: "pointer",
-  },
-  lastTextField: {
-    marginBottom: theme.spacing(3),
-  },
-}));
 
 export default ResetPasswordForm;

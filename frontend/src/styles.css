@@ -3,7 +3,3 @@
 @tailwind components;
 
 @tailwind utilities;
-
-.bg-white {
-  background-color: #fdfdfd;
-}
