@@ -3,4 +3,4 @@
 /infra/redis/temp-1.rdb
 .vscode
 
-/frontend/src/tailwind.css
+tailwind.css
