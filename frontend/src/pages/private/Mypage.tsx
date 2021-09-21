@@ -166,7 +166,7 @@ export default function Mypage() {
               />
             </Box>
           </main>
-          <MediaQuery query="(max-width: 768px)">
+          <MediaQuery query="(max-width: 767px)">
             <BottomAppBar handleMobileSideMenuOpen={handleMobileSideMenuOpen} />
             <Drawer
               open={mobileSideMenuOpen}
