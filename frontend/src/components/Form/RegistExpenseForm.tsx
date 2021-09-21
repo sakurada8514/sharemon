@@ -10,7 +10,6 @@ import {
   FormControlLabel,
   Switch,
   Button,
-  Grid,
   InputAdornment,
   Typography,
   Box,
@@ -66,13 +65,11 @@ const RegistExpenseForm: React.FC<RegistExpenseFormProps> = ({
   handleClickFileInput,
   handleFileReset,
 }) => {
-  const classes = useStyles();
-
   return (
-    <Grid container>
-      <Grid item xs={12} md={6}>
+    <Box className="bg-gray-50">
+      <Box>
         <Box>
-          <Typography className={classes.instructions}>*は必須です</Typography>
+          <Typography className="pt-4 text-gray-400">*は必須です</Typography>
           <TextField
             variant="outlined"
             margin="normal"
@@ -144,19 +141,19 @@ const RegistExpenseForm: React.FC<RegistExpenseFormProps> = ({
             />
           </Box>
           <MediaQuery query="(min-width: 960px)">
-            <Grid item xs={12} className={classes.buttonArea}>
+            <Box className="flex justify-center mt-6">
               <LoadingButton
                 handleButtonClick={registExpense}
                 loading={loading}
                 text={"支出作成"}
                 color={"secondary"}
               />
-            </Grid>
+            </Box>
           </MediaQuery>
         </Box>
-      </Grid>
-      <Grid item xs={12} md={6} className={classes.receiptImageArea}>
-        <Box>
+      </Box>
+      <Box className="flex flex-col items-center w-full mt-4">
+        <Box className="w-full">
           <input
             id="myInput"
             type="file"
@@ -171,14 +168,14 @@ const RegistExpenseForm: React.FC<RegistExpenseFormProps> = ({
             size={"large"}
             fullWidth
             startIcon={<ReceiptIcon />}
-            className={classes.receiptButton}
+            className="py-1 px-12 text-lg w-full"
             onClick={handleClickFileInput}
           >
             レシートアップロード
           </Button>
         </Box>
-        <Box className={classes.imgArea}>
-          <img src={receiptImgPreview} />
+        <Box className="w-full mt-4 flex justify-center">
+          <img className="w-4/5 h-auto" src={receiptImgPreview} />
         </Box>
         {receiptImgPreview && (
           <Button
@@ -186,64 +183,26 @@ const RegistExpenseForm: React.FC<RegistExpenseFormProps> = ({
             color="inherit"
             size={"small"}
             startIcon={<ClearIcon />}
-            className={classes.fileResetButton}
+            className="mt-4"
             onClick={handleFileReset}
           >
             リセット
           </Button>
         )}
-      </Grid>
+      </Box>
       <MediaQuery query="(max-width: 960px)">
-        <Grid item xs={12} className={classes.buttonArea}>
+        <Box className="mt-6 w-full">
           <LoadingButton
             handleButtonClick={registExpense}
             loading={loading}
             text={"支出作成"}
             color={"secondary"}
+            fullWidth={true}
           />
-        </Grid>
+        </Box>
       </MediaQuery>
-    </Grid>
+    </Box>
   );
 };
-const useStyles = makeStyles((thema) => ({
-  buttonArea: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "24px",
-  },
-  button: {
-    padding: "2px 56px",
-    fontSize: "1.25em",
-  },
-  receiptImageArea: {
-    padding: "16px 10px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  receiptButton: {
-    padding: "2px 56px",
-    fontSize: "1.25em",
-    height: "56px",
-  },
-  instructions: {
-    marginTop: "16px",
-    color: "#ababab",
-  },
-  imgArea: {
-    width: "100%",
-    marginTop: "16px",
-    display: "flex",
-    justifyContent: "center",
-    "& > img": {
-      width: "80%",
-      height: "auto",
-    },
-  },
-  fileResetButton: {
-    marginTop: "16px",
-  },
-}));
 
 export default RegistExpenseForm;

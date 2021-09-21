@@ -33,14 +33,18 @@ const RegistMoney: React.FC<RegistMoneyProps> = ({
   return (
     <TransitionMotion>
       <div className={classes.root}>
-        <AppBar position="static" className={classes.tabVar}>
+        <AppBar
+          position="static"
+          className="bg-gray-50 text-black shadow-none "
+        >
           <Tabs
             value={tabValue}
             onChange={handleTabChange}
             aria-label="regist money"
+            className="flex justify-center"
           >
-            <Tab className={classes.tab} label="支出" {...a11yProps(0)} />
-            <Tab className={classes.tab} label="収入" {...a11yProps(1)} />
+            <Tab className="text-xl w-1/2" label="支出" {...a11yProps(0)} />
+            <Tab className="text-xl w-1/2" label="収入" {...a11yProps(1)} />
           </Tabs>
         </AppBar>
 
@@ -97,11 +101,6 @@ const styles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-  },
-  tabVar: {
-    backgroundColor: BACK_COLOR_GREEN,
-    color: TEXT_COLOR_BLACK,
-    boxShadow: "none",
   },
   tab: {
     fontSize: "1.25em",

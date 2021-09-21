@@ -8,8 +8,6 @@ import {
   FormControl,
   FormControlLabel,
   Switch,
-  Button,
-  Grid,
   InputAdornment,
   Typography,
   Box,
@@ -53,13 +51,11 @@ const RegistIncomeForm: React.FC<RegistIncomeFormProps> = ({
   handleChangeComment,
   handleToggleRepetition,
 }) => {
-  const classes = useStyles();
-
   return (
-    <Grid container className={classes.root}>
-      <Grid item xs={12} md={6}>
+    <Box className="bg-gray-50">
+      <Box>
         <Box>
-          <Typography className={classes.instructions}>*は必須です</Typography>
+          <Typography className="pt-4 text-gray-400">*は必須です</Typography>
           <TextField
             variant="outlined"
             margin="normal"
@@ -131,59 +127,19 @@ const RegistIncomeForm: React.FC<RegistIncomeFormProps> = ({
               labelPlacement="start"
             />
           </Box>
-          <Grid item xs={12} className={classes.buttonArea}>
+          <Box className="mt-6 w-full">
             <LoadingButton
               handleButtonClick={registIncome}
               loading={loading}
               text={"支出作成"}
               color={"secondary"}
+              fullWidth={true}
             />
-          </Grid>
+          </Box>
         </Box>
-      </Grid>
-    </Grid>
+      </Box>
+    </Box>
   );
 };
-const useStyles = makeStyles((thema) => ({
-  root: {
-    backgroundColor: BACK_COLOR_GREEN,
-  },
-  buttonArea: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "24px",
-  },
-  button: {
-    padding: "2px 56px",
-    fontSize: "1.25em",
-  },
-  receiptImageArea: {
-    padding: "16px 10px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  receiptButton: {
-    padding: "2px 56px",
-    fontSize: "1.25em",
-    height: "56px",
-  },
-  instructions: {
-    marginTop: "16px",
-    color: "#ababab",
-  },
-  imgArea: {
-    width: "100%",
-    marginTop: "16px",
-    display: "flex",
-    justifyContent: "center",
-    "& > img": {
-      width: "80%",
-      height: "auto",
-    },
-  },
-  fileResetButton: {
-    marginTop: "16px",
-  },
-}));
+
 export default RegistIncomeForm;

@@ -25,13 +25,13 @@ const LoadingButton: React.FC<props> = ({
   const classes = styles();
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <Button
         variant={variant}
         color={color}
         disabled={loading}
         onClick={handleButtonClick}
-        className="px-14 py-1"
+        className="px-14 py-2"
         fullWidth={fullWidth}
       >
         {text}

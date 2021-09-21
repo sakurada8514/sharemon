@@ -34,96 +34,65 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        className={classes.topArea}
-      >
-        <Box className={classes.objectiveArea}>
-          <Typography variant="h5" gutterBottom>
-            目標
-          </Typography>
-          <Box
-          // className={classes.objectiveArea}
-          >
-            <Button
-              // onClick={props.registExpense}
-              type="button"
-              variant="contained"
-              color="secondary"
-              size={"large"}
-            >
-              目標設定
-            </Button>
-            <div>
-              <p>目標を設定できます。</p>
-              <p>目標を設定しモチベーションを向上させましょう。</p>
-            </div>
-          </Box>
-        </Box>
-        <Box className={classes.membersArea}>
-          <Typography variant="h5" gutterBottom>
-            ルームメンバー
-          </Typography>
-          <Box display="flex" flexWrap="wrap" justifyContent="space-between">
-            {member === null && (
-              <>
-                <Box className="w-full justify-between flex-wrap">
-                  <Skeleton className="w-full h-12 mb-2" />
-                  <Skeleton className="w-full h-12" />
-                </Box>
-              </>
-            )}
-            {member &&
-              member.map((data: { name: string; nickname: string }) => {
-                return (
-                  <Box
-                    display="flex"
-                    alignItems="center"
-                    className={classes.member}
-                    key={data.name}
-                  >
-                    <Avatar className="w-8 h-8 mr-3">
-                      <AccountCircleIcon className="w-8 h-8" />
-                    </Avatar>
-                    <Typography variant="subtitle1">
-                      {data.nickname === null ? data.name : data.nickname}
-                    </Typography>
-                  </Box>
-                );
-              })}
-            {/* {member.map((data: { name: string; nickname: string }) => {
+    <div className="pt-3">
+      <Box className="w-full bg-white p-3 rounded shadow mb-6">
+        <Typography variant="h5" gutterBottom>
+          ルームメンバー
+        </Typography>
+        <Box display="flex" flexWrap="wrap" justifyContent="space-between">
+          {member === null && (
+            <>
+              <Box className="w-full justify-between flex-wrap">
+                <Skeleton className="w-full h-9 mb-2" />
+                <Skeleton className="w-full h-9" />
+              </Box>
+            </>
+          )}
+          {member &&
+            member.map((data: { name: string; nickname: string }) => {
               return (
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  className={classes.member}
-                  key={data.name}
-                >
-                  <AccountCircleIcon className={classes.memberIcon} />
-                  <Typography variant="h6">
+                <Box className="w-1/2 my-1 flex items-center" key={data.name}>
+                  <Avatar className="w-8 h-8 mr-3">
+                    <AccountCircleIcon className="w-8 h-8" />
+                  </Avatar>
+                  <Typography variant="subtitle1">
                     {data.nickname === null ? data.name : data.nickname}
                   </Typography>
                 </Box>
               );
-            })} */}
-          </Box>
+            })}
+        </Box>
+      </Box>
+      <Box className="w-full bg-white p-3 rounded shadow mb-6">
+        <Typography variant="h5" gutterBottom>
+          目標
+        </Typography>
+        <Box>
+          <Button
+            // onClick={props.registExpense}
+            type="button"
+            variant="contained"
+            color="secondary"
+            size={"large"}
+            className="mb-3"
+          >
+            目標設定
+          </Button>
+          <div>
+            <p>
+              節約目標を設定することで毎月の予算から節約額を自動で算出します。
+            </p>
+          </div>
         </Box>
       </Box>
       <Box display="flex" justifyContent="space-between">
-        <Box className={classes.recentlyArea}>
-          <Typography variant="h5" gutterBottom>
-            最近の記録
-          </Typography>
-        </Box>
-        <Box className={classes.graphArea}>
+        <Box className="w-full bg-white p-3 rounded shadow mb-6">
           <Typography variant="h5" gutterBottom>
             グラフ
           </Typography>
         </Box>
       </Box>
-      <Box className="mt-6 bg-white p-3 w-full h-20 rounded-md">
+      <Box className="w-full bg-white p-3 rounded shadow mb-6">
         <Typography variant="h5" gutterBottom>
           今月の収支
         </Typography>

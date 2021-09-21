@@ -145,7 +145,7 @@ export default function Mypage() {
               handleSideMenuClose={handleSideMenuClose}
             />
           </MediaQuery>
-          <main className="flex-grow min-h-screen bg-gray-50 transition pt-14 pb-20">
+          <main className="flex-grow min-h-screen bg-gray-50 transition pt-14 pb-24">
             <AlertMessage
               alertOpen={alertOpen}
               severity={alertSeverity}
