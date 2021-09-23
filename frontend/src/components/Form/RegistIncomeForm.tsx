@@ -91,15 +91,16 @@ const RegistIncomeForm: React.FC<RegistIncomeFormProps> = ({
               onChange={handleChangeCategory}
               label="カテゴリー"
             >
-              {categoryList.map(
-                (data: { category_id: string; category_name: string }) => {
-                  return (
-                    <MenuItem key={data.category_id} value={data.category_id}>
-                      {data.category_name}
-                    </MenuItem>
-                  );
-                }
-              )}
+              {categoryList &&
+                categoryList.map(
+                  (data: { category_id: string; category_name: string }) => {
+                    return (
+                      <MenuItem key={data.category_id} value={data.category_id}>
+                        {data.category_name}
+                      </MenuItem>
+                    );
+                  }
+                )}
             </Select>
           </FormControl>
           <TextField

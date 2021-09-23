@@ -7,9 +7,9 @@ export async function createRoom(room_name: string): Promise<any> {
   return response;
 }
 
-export async function getRoomName(url: string): Promise<any> {
+export async function getRoomName(url: string, roomId: string): Promise<any> {
   const response = await apiClient
-    .get(url)
+    .get(url + roomId)
     .then((res) => res.data.detail.room_name);
   return response;
 }

@@ -1,5 +1,6 @@
-import React, { Dispatch, SetStateAction } from "react";
-import { useState, useEffect } from "react";
+import React, { useGlobal, useState } from "reactn";
+import { Dispatch, SetStateAction } from "react";
+import useSWR from "swr";
 import { useHistory } from "react-router";
 import { DatePickerProps } from "@material-ui/pickers";
 import { AlertProps } from "@material-ui/lab";
@@ -23,7 +24,7 @@ const RegistIncome: React.FC<RegistIncomeProps> = ({
   setAlertSeverity,
   setAlertMessage,
 }) => {
-  const history = useHistory();
+  const setError = useGlobal("error")[1];
 
   const [income, setIncome] = useState("");
   const [date, setDate] = useState(new Date());
@@ -31,22 +32,15 @@ const RegistIncome: React.FC<RegistIncomeProps> = ({
   const [repetition, setRepetition] = useState(false);
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState([]);
-  const [categoryList, setCategoryList] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function getCategoryList() {
-      const response = await getCategoryListApi();
-
-      if (response.status === OK) {
-        setCategoryList(response.data.categoryList);
-        setCategory(1);
-      } else {
-        history.push("/error");
-      }
-    }
-    getCategoryList();
-  }, []);
+  const { data: categoryList, error: categoryListError } = useSWR(
+    "/incomecategory",
+    getCategoryListApi
+  );
+  if (categoryListError) {
+    setError(true);
+  }
 
   const handleChangeIncome = (e: any) => setIncome(e.target.value);
   const handleChangeCategory = (e: any) => setCategory(e.target.value);

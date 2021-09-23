@@ -11,7 +11,6 @@ import MediaQuery from "react-responsive";
 
 import SettingButton from "./Menu/SettingMenuButton";
 import InviteMenuButton from "./Menu/InviteMenuButton";
-import { setRoomName } from "../../stores/room";
 
 type HeaderProps = {
   sideMenuOpen: boolean;

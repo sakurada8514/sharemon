@@ -14,7 +14,7 @@ export async function login(
 }
 
 export async function logout(): Promise<any> {
-  const response = await apiClient.get("/logout").catch((err) => err.response);
+  const response = await apiClient.post("/logout").catch((err) => err.response);
 
   return response.status;
 }

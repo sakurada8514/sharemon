@@ -106,13 +106,14 @@ const RegistExpenseForm: React.FC<RegistExpenseFormProps> = ({
               onChange={handleChangeCategory}
               label="カテゴリー"
             >
-              {categoryList.map((data: any) => {
-                return (
-                  <MenuItem key={data.category_id} value={data.category_id}>
-                    {data.category_name}
-                  </MenuItem>
-                );
-              })}
+              {categoryList &&
+                categoryList.map((data: any) => {
+                  return (
+                    <MenuItem key={data.category_id} value={data.category_id}>
+                      {data.category_name}
+                    </MenuItem>
+                  );
+                })}
             </Select>
           </FormControl>
           <TextField

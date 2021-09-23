@@ -1,4 +1,5 @@
 import React, { useGlobal, useRef, useState, useEffect } from "reactn";
+import useSWR from "swr";
 import { DatePickerProps } from "@material-ui/pickers";
 import { AlertProps } from "@material-ui/lab";
 
@@ -34,24 +35,31 @@ const RegistExpense: React.FC<RegistMoneyProps> = ({
     string | ArrayBuffer | null
   >("");
   const [errors, setErrors] = useState([]);
-  const [categoryList, setCategoryList] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const { data: categoryList, error: categoryListError } = useSWR(
+    "/expensecategory",
+    getCategoryListApi
+  );
+  if (categoryListError) {
+    setError(true);
+  }
 
   const fileInput = useRef(null);
 
-  useEffect(() => {
-    async function getCategoryList() {
-      const response = await getCategoryListApi();
+  // useEffect(() => {
+  //   async function getCategoryList() {
+  //     const response = await getCategoryListApi();
 
-      if (response.status === OK) {
-        setCategoryList(response.data.categoryList);
-        setCategory(1);
-      } else {
-        setError(true);
-      }
-    }
-    getCategoryList();
-  }, []);
+  //     if (response.status === OK) {
+  //       setCategoryList(response.data.categoryList);
+  //       setCategory(1);
+  //     } else {
+  //       setError(true);
+  //     }
+  //   }
+  //   getCategoryList();
+  // }, []);
 
   const handleChangeExpense = (e: any) => setExpense(e.target.value);
   const handleChangeCategory = (e: any) => setCategory(e.target.value);

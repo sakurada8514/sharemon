@@ -36,9 +36,12 @@ export default function Mypage() {
   const [alertMessage, setAlertMessage] = useState("");
 
   const { data: roomName, error: roomNameError } = useSWR(
-    "/room/" + user.room_id,
+    ["/room/", user.room_id],
     getRoomNameApi
   );
+  if (roomNameError) {
+    setError(true);
+  }
 
   useEffect(() => {
     if (window.matchMedia("(max-width: 960px)").matches) {

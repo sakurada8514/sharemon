@@ -1,9 +1,9 @@
 import { apiClient } from "../../utils/api";
 
-export async function getCategoryList(): Promise<any> {
+export async function getCategoryList(url: string): Promise<any> {
   const response = await apiClient
-    .get("/expensecategory")
-    .catch((err) => err.response);
+    .get(url)
+    .then((res) => res.data.categoryList);
 
   return response;
 }
