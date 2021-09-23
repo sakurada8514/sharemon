@@ -93,7 +93,7 @@ const Header: React.FC<HeaderProps> = ({
   );
 };
 
-const drawerWidth = 220;
+const drawerWidth = 228;
 
 const useStyles = makeStyles((theme) => ({
   appBar: {

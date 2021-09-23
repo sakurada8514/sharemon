@@ -14,12 +14,14 @@ export type MypageRoutersProps = {
     React.SetStateAction<AlertProps["severity"]>
   >;
   setAlertMessage: React.Dispatch<React.SetStateAction<string>>;
+  roomName: string;
 };
 
 const MypageRouters: React.FC<MypageRoutersProps> = ({
   handleAlertOpen,
   setAlertSeverity,
   setAlertMessage,
+  roomName,
 }) => {
   const location = useLocation();
   const [esc, rootPath] = location.pathname.split("/");
@@ -27,7 +29,7 @@ const MypageRouters: React.FC<MypageRoutersProps> = ({
   return (
     <AnimatePresence exitBeforeEnter initial={false}>
       <Switch location={location} key={rootPath}>
-        <Route exact path="/mypage" children={<Home />} />
+        <Route exact path="/mypage" children={<Home roomName={roomName} />} />
         <Route path="/mypage/list" children={<List />} />
         <Route
           path="/mypage/regist"

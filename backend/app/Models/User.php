@@ -93,7 +93,7 @@ class User extends UserBaseModel
             ->where('room_id', $_roomId)
             ->leftJoin('user_profiles as up', 'users.id', '=', 'up.user_id')
             ->leftJoin('s3_images as si', 'up.s3_image_id', '=', 'si.s3_image_id')
-            ->select('users.name', 'up.nickname', 'si.img_url')
+            ->select('users.id', 'users.name', 'up.nickname', 'si.img_url')
             ->get();
 
         return $this->_convertArray($_ret);

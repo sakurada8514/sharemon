@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useGlobal } from "reactn";
-import { makeStyles } from "@material-ui/core/styles";
+import useSWR from "swr";
 import { useHistory } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import { Box } from "@material-ui/core";
@@ -18,7 +18,7 @@ import MediaQuery from "react-responsive";
 import { OK } from "../../utils/constant";
 
 import { createInviteUrl as createInviteUrlApi } from "../../api/Room/invite";
-import { getRoomDetail as getRoomDetailApi } from "../../api/Room/room";
+import { getRoomName as getRoomNameApi } from "../../api/Room/room";
 import { logout as logoutApi } from "../../api/Auth/login";
 
 export default function Mypage() {
@@ -34,14 +34,16 @@ export default function Mypage() {
   const [alertSeverity, setAlertSeverity] =
     useState<AlertProps["severity"]>("success");
   const [alertMessage, setAlertMessage] = useState("");
-  const [roomName, setRoomName] = useState("");
+
+  const { data: roomName, error: roomNameError } = useSWR(
+    "/room/" + user.room_id,
+    getRoomNameApi
+  );
 
   useEffect(() => {
     if (window.matchMedia("(max-width: 960px)").matches) {
       setSideMenuOpen(false);
     }
-
-    getRoomName();
   }, []);
 
   const handleSideMenuOpen = () => setSideMenuOpen(true);
@@ -63,17 +65,6 @@ export default function Mypage() {
       setAlertOpen(false);
     }, closedTime);
   };
-
-  async function getRoomName() {
-    const response = await getRoomDetailApi(user.room_id);
-
-    if (response.status === OK) {
-      setRoomName(response.data.detail.room_name);
-      console.log(response.data.detail.room_name);
-    } else {
-      setError(true);
-    }
-  }
 
   async function InviteUrlCopy() {
     const response = await createInviteUrlApi();
@@ -118,7 +109,7 @@ export default function Mypage() {
       setUser(null);
       history.push("/login");
     } else {
-      history.push("/error");
+      setError(true);
     }
   }
 
@@ -153,16 +144,16 @@ export default function Mypage() {
               handleAlert={handleAlertClose}
             />
             <Box
-              // className={clsx(
-              //   classes.container,
-              //   sideMenuOpen ? classes.openPadding : classes.closePadding
-              // )}
-              className="p-3 transition"
+              className={clsx(
+                "p-3 transition",
+                sideMenuOpen ? "md:pl-60" : "md:pl-24"
+              )}
             >
               <MypageRouters
                 handleAlertOpen={handleAlertOpen}
                 setAlertSeverity={setAlertSeverity}
                 setAlertMessage={setAlertMessage}
+                roomName={roomName}
               />
             </Box>
           </main>
@@ -183,12 +174,3 @@ export default function Mypage() {
     </TransitionMotion>
   );
 }
-
-const styles = makeStyles((theme) => ({
-  openPadding: {
-    paddingLeft: "244px",
-  },
-  closePadding: {
-    paddingLeft: "95px",
-  },
-}));

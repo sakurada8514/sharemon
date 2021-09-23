@@ -50,7 +50,7 @@ const SideMenu: React.FC<SideMenuProps> = ({
   );
 };
 
-const drawerWidth = 220;
+const drawerWidth = 228;
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -79,10 +79,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    width: theme.spacing(7),
-    [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9),
-    },
+    width: "84px",
   },
   paper: {
     padding: theme.spacing(2),

@@ -3,12 +3,11 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import Collapse from "@material-ui/core/Collapse";
 import { makeStyles } from "@material-ui/core/styles";
 import { Divider } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
+import clsx from "clsx";
 
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChatIcon from "@material-ui/icons/Chat";
 import PlaylistAddCheckIcon from "@material-ui/icons/PlaylistAddCheck";
@@ -30,7 +29,7 @@ const MainListItems: React.FC<MainListItemsProps> = ({ sideMenuOpen }) => {
   return (
     <div>
       <NavLink to="/mypage/regist" activeClassName={classes.activeNav} exact>
-        <ListItem button>
+        <ListItem button className="pl-8">
           <ListItemIcon>
             <AddCircleIcon className={classes.icon} />
           </ListItemIcon>
@@ -39,14 +38,14 @@ const MainListItems: React.FC<MainListItemsProps> = ({ sideMenuOpen }) => {
       </NavLink>
       <Divider />
       <NavLink to="/mypage" activeClassName={classes.activeNav} exact>
-        <ListItem button>
+        <ListItem button className="pl-8">
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
           <ListItemText primary="ホーム" />
         </ListItem>
       </NavLink>
-      <ListItem>
+      <ListItem className="pl-8">
         <ListItemIcon>
           <MenuBookIcon />
         </ListItemIcon>
@@ -54,19 +53,19 @@ const MainListItems: React.FC<MainListItemsProps> = ({ sideMenuOpen }) => {
         <ExpandMoreIcon />
       </ListItem>
       <List component="div" disablePadding>
-        <ListItem button className={sideMenuOpen ? classes.nestMenu : ""}>
+        <ListItem button className={sideMenuOpen ? "pl-12 transition" : "pl-8"}>
           <ListItemIcon>
             <ListAltIcon />
           </ListItemIcon>
           <ListItemText primary="一覧" />
         </ListItem>
-        <ListItem button className={sideMenuOpen ? classes.nestMenu : ""}>
+        <ListItem button className={sideMenuOpen ? "pl-12 transition" : "pl-8"}>
           <ListItemIcon>
             <PieChartIcon />
           </ListItemIcon>
           <ListItemText primary="グラフ" />
         </ListItem>
-        <ListItem button className={sideMenuOpen ? classes.nestMenu : ""}>
+        <ListItem button className={sideMenuOpen ? "pl-12 transition" : "pl-8"}>
           <ListItemIcon>
             <MoneyIcon />
           </ListItemIcon>
@@ -80,19 +79,19 @@ const MainListItems: React.FC<MainListItemsProps> = ({ sideMenuOpen }) => {
 const SecondaryListItems = () => {
   return (
     <div>
-      <ListItem button>
+      <ListItem button className="pl-8">
         <ListItemIcon>
           <AnnouncementIcon />
         </ListItemIcon>
         <ListItemText primary="お役立ちニュース" />
       </ListItem>
-      <ListItem button>
+      <ListItem button className="pl-8">
         <ListItemIcon>
           <ChatIcon />
         </ListItemIcon>
         <ListItemText primary="家内掲示板" />
       </ListItem>
-      <ListItem button>
+      <ListItem button className="pl-8">
         <ListItemIcon>
           <PlaylistAddCheckIcon />
         </ListItemIcon>
