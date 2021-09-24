@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\BalanceController;
 use App\Http\Controllers\Api\Expense\ExpenseCategoryController;
 use App\Http\Controllers\Api\Expense\ExpenseController;
 use App\Http\Controllers\Api\Income\IncomeCategoryController;
@@ -43,4 +44,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('income', IncomeController::class);
 
     Route::apiResource('incomecategory', IncomeCategoryController::class);
+
+    Route::get('balance/month', [BalanceController::class, 'getBalanceOfMonth']);
 });

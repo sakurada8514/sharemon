@@ -6,7 +6,7 @@ import { Skeleton } from "@material-ui/lab";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import { getMember as getMemberApi } from "../../../api/Room/room";
-
+import { getBalanceThisMonth as getBalanceThisMonthApi } from "../../../api/Analysis/Balance";
 type HomeProps = {
   roomName: string;
 };
@@ -15,6 +15,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
   const setError = useGlobal("error")[1];
 
   const { data: member, error: memberError } = useSWR("/member", getMemberApi);
+  const { data, error } = useSWR("balance/month", getBalanceThisMonthApi);
 
   if (memberError) {
     setError(true);

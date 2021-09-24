@@ -1,48 +1,46 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import HomeIcon from "@material-ui/icons/Home";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
 import ModalTemplate from "../Modal/ModalTemplate";
+import LoadingButton from "../Atoms/Buttons/LoadingButton";
 
 type RegistRoomFormProps = {
-  createRoom: (e: any) => Promise<void>;
   roomName: string;
-  handleChangeRoomName: (e: any) => void;
   modalShow: boolean;
+  loading: boolean;
+  createRoom: (e: any) => Promise<void>;
+  handleChangeRoomName: (e: any) => void;
   handleClickLink: (e: any) => void;
   handleModalClose: () => void;
 };
 const RegistRoomForm: React.FC<RegistRoomFormProps> = ({
-  createRoom,
   roomName,
-  handleChangeRoomName,
   modalShow,
+  loading,
+  createRoom,
+  handleChangeRoomName,
   handleClickLink,
   handleModalClose,
 }) => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.allWrapper}>
+    <div className="flex items-center bg-gray-50 min-h-screen">
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <HomeIcon className={classes.icon} />
+        <div className="flex flex-col items-center">
+          <Avatar className="bg-green-500 m-2">
+            <HomeIcon className="bg-green-500" />
           </Avatar>
           <Typography component="h1" variant="h5">
             ルーム作成
           </Typography>
-          <form className="w-full mt-2" onSubmit={createRoom} noValidate>
+          <form className="w-full mt-2">
             <TextField
               variant="outlined"
               margin="normal"
@@ -55,22 +53,20 @@ const RegistRoomForm: React.FC<RegistRoomFormProps> = ({
               autoFocus
               value={roomName}
               onChange={handleChangeRoomName}
+              className="mb-6"
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              ルーム作成
-            </Button>
-            <Box display="flex" justifyContent="center">
+            <LoadingButton
+              handleButtonClick={createRoom}
+              text={"ルーム作成"}
+              loading={loading}
+              fullWidth={true}
+            />
+            <Box display="flex" justifyContent="center" className="mt-4">
               <Link
                 color="secondary"
                 variant="body2"
                 onClick={handleClickLink}
-                className={classes.link}
+                className="cursor-pointer"
               >
                 {"ルームとは？"}
               </Link>
@@ -87,35 +83,4 @@ const RegistRoomForm: React.FC<RegistRoomFormProps> = ({
   );
 };
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: SUB_COLOR_GREEN,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: SUB_COLOR_GREEN,
-  },
-  icon: {
-    backgroundColor: SUB_COLOR_GREEN,
-  },
-  allWrapper: {
-    height: "100vh",
-    backgroundColor: BACK_COLOR_GREEN,
-    display: "flex",
-    alignItems: "center",
-  },
-  link: {
-    cursor: "pointer",
-  },
-}));
 export default RegistRoomForm;

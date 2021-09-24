@@ -12,6 +12,7 @@ export default function RegistRoom() {
 
   const [roomName, setRoomName] = useState("");
   const [modalShow, setModalShow] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChangeRoomName = (e: any) => setRoomName(e.target.value);
   const handleModalOpen = (e: any) => {
@@ -22,6 +23,7 @@ export default function RegistRoom() {
   const handleModalClose = () => setModalShow(false);
 
   async function createRoom(e: any) {
+    setLoading(true);
     e.preventDefault();
     const response = await createRoomApi(roomName);
 
@@ -34,6 +36,7 @@ export default function RegistRoom() {
     } else {
       history.push("/error");
     }
+    setLoading(false);
   }
 
   return (
@@ -41,6 +44,7 @@ export default function RegistRoom() {
       <RegistRoomForm
         createRoom={createRoom}
         roomName={roomName}
+        loading={loading}
         handleChangeRoomName={handleChangeRoomName}
         modalShow={modalShow}
         handleClickLink={handleModalOpen}

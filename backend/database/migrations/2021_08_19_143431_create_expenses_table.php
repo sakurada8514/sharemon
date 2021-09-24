@@ -22,7 +22,7 @@ class CreateExpensesTable extends Migration
             $table->bigInteger('expense');
             $table->text('comment')->nullable();
             $table->integer('repetition_flg');
-            $table->dateTime('regist_date');
+            $table->date('regist_date');
             $table->integer('del_flg');
             $table->timestamps();
 

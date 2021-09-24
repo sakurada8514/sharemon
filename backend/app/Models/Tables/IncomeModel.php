@@ -14,6 +14,18 @@ class IncomeModel extends BaseModel
         'user_id', 'room_id', 'category_id', 'income', 'comment', 'repetition_flg', 'regist_date', 'del_flg'
     ];
 
+    public function findTotalOfThisMonth(string $_roomId)
+    {
+        return DB::table($this->table)
+            ->whereYear('regist_date', now()->format('Y'))
+            ->whereMonth('regist_date', now()->format('m'))
+            ->where([
+                ['room_id', $_roomId],
+                ['del_flg', config('Const.webDB.DEL_FLG.OFF')]
+            ])
+            ->sum('income');
+    }
+
     public function insert(array $_registData, Authenticatable $_user): void
     {
         $_insert = $this->_createInsertUpdateData($this->_addUserData($_registData, $_user), $this->_getBaseDefaultInsertDataWithDelFlg());

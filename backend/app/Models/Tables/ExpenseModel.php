@@ -24,6 +24,18 @@ class ExpenseModel extends BaseModel
         $this->_s3ImageModel = $_s3ImageModel;
     }
 
+    public function findTotalOfThisMonth(string $_roomId)
+    {
+        return DB::table($this->table)
+            ->whereYear('regist_date', now()->format('Y'))
+            ->whereMonth('regist_date', now()->format('m'))
+            ->where([
+                ['room_id', $_roomId],
+                ['del_flg', config('Const.webDB.DEL_FLG.OFF')]
+            ])
+            ->sum('expense');
+    }
+
     public function insert(array $_registData, Authenticatable $_user, ?string $_s3ImgUrl = null): void
     {
         if (isset($_s3ImgUrl)) {
