@@ -53,12 +53,17 @@ const MainListItems: React.FC<MainListItemsProps> = ({ sideMenuOpen }) => {
         <ExpandMoreIcon />
       </ListItem>
       <List component="div" disablePadding>
-        <ListItem button className={sideMenuOpen ? "pl-12 transition" : "pl-8"}>
-          <ListItemIcon>
-            <ListAltIcon />
-          </ListItemIcon>
-          <ListItemText primary="一覧" />
-        </ListItem>
+        <NavLink to="/mypage/list" activeClassName={classes.activeNav} exact>
+          <ListItem
+            button
+            className={sideMenuOpen ? "pl-12 transition" : "pl-8"}
+          >
+            <ListItemIcon>
+              <ListAltIcon />
+            </ListItemIcon>
+            <ListItemText primary="履歴" />
+          </ListItem>
+        </NavLink>
         <ListItem button className={sideMenuOpen ? "pl-12 transition" : "pl-8"}>
           <ListItemIcon>
             <PieChartIcon />

@@ -23,7 +23,8 @@ class IncomeModel extends BaseModel
                 ['room_id', $_roomId],
                 ['del_flg', config('Const.webDB.DEL_FLG.OFF')]
             ])
-            ->sum('income');
+            ->selectRaw('sum(income) as total,count(income) as count')
+            ->first();
     }
 
     public function insert(array $_registData, Authenticatable $_user): void

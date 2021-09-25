@@ -26,14 +26,17 @@ class ExpenseModel extends BaseModel
 
     public function findTotalOfThisMonth(string $_roomId)
     {
-        return DB::table($this->table)
+        $_ret = DB::table($this->table)
             ->whereYear('regist_date', now()->format('Y'))
             ->whereMonth('regist_date', now()->format('m'))
             ->where([
                 ['room_id', $_roomId],
                 ['del_flg', config('Const.webDB.DEL_FLG.OFF')]
             ])
-            ->sum('expense');
+            ->selectRaw('sum(expense) as total,count(expense) as count')
+            ->first();
+
+        return $this->_convertArray($_ret);
     }
 
     public function insert(array $_registData, Authenticatable $_user, ?string $_s3ImgUrl = null): void

@@ -17,6 +17,6 @@ class BalanceController extends Controller
     {
         list($_expenseTotal, $_incomeTotal) = $this->_balanceService->getBalanceOfThisMonth();
 
-        return $this->jsonResponse(['expenseTotal' => $_expenseTotal, 'incomeTotal' => $_incomeTotal]);
+        return $this->jsonResponse(['expense' => $_expenseTotal, 'income' => $_incomeTotal]);
     }
 }
