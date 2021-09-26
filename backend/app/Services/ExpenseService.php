@@ -18,6 +18,11 @@ class ExpenseService extends BaseService
         $this->_expenseModel = $_expenseModel;
     }
 
+    public function findListByRoomId(string $_roomId)
+    {
+        return $this->_expenseModel->findListByRoomId($_roomId);
+    }
+
     public function findCategoryList(string $_roomId): array
     {
         return $this->_expenseCategoryModel->findListByRoomId($_roomId);

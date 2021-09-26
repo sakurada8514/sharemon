@@ -29,6 +29,10 @@ class ExpenseController extends Controller
      */
     public function index()
     {
+        $_roomId = Auth::user()->room_id;
+        $_expenseList = $this->_expenseService->findListByRoomId($_roomId);
+
+        return $this->jsonResponse($_expenseList, 'Expense.List');
     }
 
     /**

@@ -148,7 +148,7 @@ export default function Mypage() {
             />
             <Box
               className={clsx(
-                "p-3 transition",
+                "transition",
                 sideMenuOpen ? "md:pl-60" : "md:pl-24"
               )}
             >

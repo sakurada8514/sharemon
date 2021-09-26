@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\ViewModels\Expense;
+
+use App\Http\ViewModels\Core\CommonTrait;
+use App\Http\ViewModels\Core\ViewModel;
+
+class ListViewModel implements ViewModel
+{
+    use CommonTrait;
+    public function apply(array $data): array
+    {
+        array_walk($data['data'], function (&$_data) {
+            $_data['regist_date'] = $this->convertDate($_data['regist_date']);
+        });
+
+        return [
+            'expenseList' => [
+                'list'    => $data['data'],
+                'current_page' => $data['current_page'],
+                'last_page' => $data['last_page']
+            ]
+        ];
+    }
+}

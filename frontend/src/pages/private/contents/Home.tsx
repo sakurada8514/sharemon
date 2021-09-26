@@ -27,7 +27,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
   }
 
   return (
-    <div className="pt-3">
+    <div className="p-3">
       <Box className="w-full bg-white p-3 rounded shadow mb-6">
         {roomName ? (
           <Typography variant="h5" gutterBottom>
@@ -62,28 +62,6 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
           )}
         </Box>
       </Box>
-      {/* <Box className="w-full bg-white p-3 rounded shadow mb-6">
-        <Typography variant="h5" gutterBottom>
-          目標
-        </Typography>
-        <Box>
-          <Button
-            // onClick={props.registExpense}
-            type="button"
-            variant="contained"
-            color="secondary"
-            size={"large"}
-            className="mb-3"
-          >
-            目標設定
-          </Button>
-          <div>
-            <p>
-              節約目標を設定することで毎月の予算から節約額を自動で算出します。
-            </p>
-          </div>
-        </Box>
-      </Box> */}
       <Box className="w-full bg-white p-3 rounded shadow mb-6">
         <Typography variant="h5" gutterBottom>
           {thisMonth}月の収支

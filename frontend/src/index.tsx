@@ -11,7 +11,7 @@ import Loading from "./components/Atoms/Loading";
 import ModalTemplate from "./components/Modal/ModalTemplate";
 import ErrorModal from "./components/Modal/ErrorModal";
 import useAuth from "utils/hooks/useAuth";
-import "./tailwind.css";
+import "./styles/tailwind.css";
 
 function App() {
   const [error, firstAuthLoading] = useAuth();

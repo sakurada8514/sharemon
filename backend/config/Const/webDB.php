@@ -1,13 +1,19 @@
 <?php
 return [
     'DEL_FLG' => [
-        'ON' => 1,
-        'OFF' => 0
+        'OFF' => 0,
+        'ON' => 1
+    ],
+    'EXPENSES' => [
+        'REPETITION_FLG' => [
+            'OFF' => 0,
+            'ON' => 1
+        ]
     ],
     'EXPENSE_CATEGORY' => [
         'ALL_FLG' => [
+            'OFF' => 0,
             'ON' => 1,
-            'OFF' => '0'
         ]
     ]
 ];

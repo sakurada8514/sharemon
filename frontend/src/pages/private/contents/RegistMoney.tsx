@@ -32,7 +32,7 @@ const RegistMoney: React.FC<RegistMoneyProps> = ({
 
   return (
     <TransitionMotion>
-      <div className={classes.root}>
+      <div className="p-3">
         <AppBar
           position="static"
           className="bg-gray-50 text-black shadow-none "

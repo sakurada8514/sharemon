@@ -14,7 +14,7 @@ class ExpenseModel extends BaseModel
     protected $table = 'expenses';
 
     protected $fillable = [
-        'user_id', 'room_id', 'category_id', 'expense', 'comment', 'repetition_flg', 'regist_date', 'del_flg'
+        'user_id', 'room_id', 's3_image_id', 'category_id', 'expense', 'comment', 'repetition_flg', 'regist_date', 'del_flg'
     ];
 
     private ?S3ImageModel $_s3ImageModel = null;
@@ -22,6 +22,25 @@ class ExpenseModel extends BaseModel
     public function __construct(S3ImageModel $_s3ImageModel)
     {
         $this->_s3ImageModel = $_s3ImageModel;
+    }
+
+    public function findListByRoomId(string $_roomId)
+    {
+        $_ret = DB::table("$this->table as e")
+            ->where('e.room_id', $_roomId)
+            ->where(function ($query) {
+                $query->where(function ($query) {
+                    $query->whereYear('e.regist_date', now()->format('Y'))
+                        ->whereMonth('e.regist_date', now()->format('m'));
+                })->orWhere('e.repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON'));
+            })
+            ->where('e.del_flg', config('Const.webDB.DEL_FLG.OFF'))
+            ->join('expense_categories as ec', 'e.category_id', '=', 'ec.category_id')
+            ->orderByDesc('regist_date')
+            ->select('e.expense', 'e.regist_date', 'ec.category_name')
+            ->paginate(20);
+
+        return $this->_convertArray($_ret);
     }
 
     public function findTotalOfThisMonth(string $_roomId)

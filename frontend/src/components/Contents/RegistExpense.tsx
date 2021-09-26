@@ -47,20 +47,6 @@ const RegistExpense: React.FC<RegistMoneyProps> = ({
 
   const fileInput = useRef(null);
 
-  // useEffect(() => {
-  //   async function getCategoryList() {
-  //     const response = await getCategoryListApi();
-
-  //     if (response.status === OK) {
-  //       setCategoryList(response.data.categoryList);
-  //       setCategory(1);
-  //     } else {
-  //       setError(true);
-  //     }
-  //   }
-  //   getCategoryList();
-  // }, []);
-
   const handleChangeExpense = (e: any) => setExpense(e.target.value);
   const handleChangeCategory = (e: any) => setCategory(e.target.value);
   const handleChangeComment = (e: any) => setComment(e.target.value);

@@ -92,7 +92,6 @@ const RegistExpenseForm: React.FC<RegistExpenseFormProps> = ({
           <MyDatePicker date={date} setDate={setDate} errors={errors} />
           <FormControl
             variant="outlined"
-            // className={classes.formControl}
             fullWidth
             required
             margin="normal"

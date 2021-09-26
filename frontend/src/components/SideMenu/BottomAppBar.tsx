@@ -39,7 +39,7 @@ const BottomAppBar: React.FC<BottomAppBarProps> = ({
             </Fab>
           </NavLink>
           <Box sx={{ flexGrow: 1 }} />
-          <NavLink to="/mypage/regist" exact>
+          <NavLink to="/mypage/list" exact>
             <IconButton>
               <ListAltIcon className="w-7 h-7 mr-4" />
             </IconButton>
