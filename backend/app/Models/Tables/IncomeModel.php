@@ -3,6 +3,7 @@
 namespace App\Models\Tables;
 
 use App\Models\Core\BaseModel;
+use DateTime;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\DB;
 
@@ -25,6 +26,25 @@ class IncomeModel extends BaseModel
             ])
             ->selectRaw('sum(income) as total,count(income) as count')
             ->first();
+    }
+
+    public function findIncomeDaily(string $_roomId, ?DateTime $_date = null)
+    {
+        $_query = DB::table($this->table)
+            ->where([
+                ['room_id', $_roomId],
+                ['del_flg', config('Const.webDB.DEL_FLG.OFF')]
+            ])
+            ->orderBy('regist_date')
+            ->groupBy('regist_date')
+            ->selectRaw('sum(income) as daily_total , regist_date');
+
+        $_date = $_date ?? now();
+
+        $_ret = $_query->whereYear('regist_date', $_date->format('Y'))
+            ->whereMonth('regist_date', $_date->format('m'))->get();
+
+        return $this->_convertArray($_ret);
     }
 
     public function insert(array $_registData, Authenticatable $_user): void

@@ -9,23 +9,30 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 import { formatDate } from "utils/handy";
 import { getExpenseList as getExpenseListApi } from "api/Expense";
+import { fetcherApi } from "api/fetcher";
 
 import "../../../../styles/Calendar.css";
 
 export default function List() {
   const setError = useGlobal("error")[1];
-  const [monthDay, setMonthDay] = useState({
-    20210914: { text: "129084" },
-    20210915: { text: "129084" },
-    20210926: { text: "129084" },
-    20210917: { text: "2000" },
-  });
 
-  const { data, error } = useSWR("expense", getExpenseListApi);
+  const { data: dailyTotal, error: dailyTotalError } = useSWR(
+    ["balance/daily", "daily"],
+    fetcherApi
+  );
+
+  const { data: expenseList, error: expenseListError } = useSWR(
+    ["expense", "expenseList"],
+    fetcherApi
+  );
+
+  if (expenseListError || dailyTotalError) {
+    setError(true);
+  }
 
   // state の日付と同じ表記に変換
   function getFormatDate(date: Date) {
-    return `${date.getFullYear()}${("0" + (date.getMonth() + 1)).slice(-2)}${(
+    return `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${(
       "0" + date.getDate()
     ).slice(-2)}`;
   }
@@ -36,9 +43,10 @@ export default function List() {
       return null;
     }
     const day = getFormatDate(date);
+
     return (
       <p className="text-xs text-gray-600 pt-1">
-        {monthDay[day] && monthDay[day].text ? monthDay[day].text + "円" : ""}
+        {dailyTotal[day] ? dailyTotal[day] + "円" : ""}
       </p>
     );
   }
@@ -47,23 +55,25 @@ export default function List() {
 
   return (
     <Box className="pt-3">
-      <Calendar
-        locale="ja-JP"
-        calendarType="US"
-        value={new Date()}
-        formatDay={formatDay}
-        nextLabel={<NavigateNextIcon />}
-        next2Label={null}
-        prevLabel={<NavigateBeforeIcon />}
-        prev2Label={null}
-        tileContent={getTileContent}
-        onClickDay={(value, event) => {
-          console.log(value);
-        }}
-      />
-      {data &&
-        data.map((data: any) => {
-          return <p>{data}</p>;
+      {dailyTotal && (
+        <Calendar
+          locale="ja-JP"
+          calendarType="US"
+          value={new Date()}
+          formatDay={formatDay}
+          nextLabel={<NavigateNextIcon />}
+          next2Label={null}
+          prevLabel={<NavigateBeforeIcon />}
+          prev2Label={null}
+          tileContent={getTileContent}
+          onClickDay={(value, event) => {
+            console.log(value);
+          }}
+        />
+      )}
+      {expenseList &&
+        expenseList.list.map((data: any) => {
+          return <p key={data.id}>{data.expense}</p>;
         })}
     </Box>
   );

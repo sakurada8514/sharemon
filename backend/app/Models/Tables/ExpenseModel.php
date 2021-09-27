@@ -3,6 +3,8 @@
 namespace App\Models\Tables;
 
 use App\Models\Core\BaseModel;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,7 +39,7 @@ class ExpenseModel extends BaseModel
             ->where('e.del_flg', config('Const.webDB.DEL_FLG.OFF'))
             ->join('expense_categories as ec', 'e.category_id', '=', 'ec.category_id')
             ->orderByDesc('regist_date')
-            ->select('e.expense', 'e.regist_date', 'ec.category_name')
+            ->select('e.id', 'e.expense', 'e.regist_date', 'ec.category_name')
             ->paginate(20);
 
         return $this->_convertArray($_ret);
@@ -54,6 +56,25 @@ class ExpenseModel extends BaseModel
             ])
             ->selectRaw('sum(expense) as total,count(expense) as count')
             ->first();
+
+        return $this->_convertArray($_ret);
+    }
+
+    public function findExpenseDaily(string $_roomId, ?DateTime $_date = null)
+    {
+        $_query = DB::table($this->table)
+            ->where([
+                ['room_id', $_roomId],
+                ['del_flg', config('Const.webDB.DEL_FLG.OFF')]
+            ])
+            ->orderBy('regist_date')
+            ->groupBy('regist_date')
+            ->selectRaw('sum(expense) as daily_total , regist_date');
+
+        $_date = $_date ?? now();
+
+        $_ret = $_query->whereYear('regist_date', $_date->format('Y'))
+            ->whereMonth('regist_date', $_date->format('m'))->get();
 
         return $this->_convertArray($_ret);
     }

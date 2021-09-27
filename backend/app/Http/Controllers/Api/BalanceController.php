@@ -19,4 +19,11 @@ class BalanceController extends Controller
 
         return $this->jsonResponse(['expense' => $_expenseTotal, 'income' => $_incomeTotal]);
     }
+
+    public function getBalanceOfDaily()
+    {
+        $_balanceList = $this->_balanceService->getBalanceOfDaily();
+
+        return $this->jsonResponse(['daily' => $_balanceList]);
+    }
 }

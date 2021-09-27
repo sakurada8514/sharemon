@@ -27,4 +27,23 @@ class BalanceService extends BaseService
 
         return [$_expenseTotal, $_incomeTotal];
     }
+
+    public function getBalanceOfDaily()
+    {
+        $_roomId = Auth::user()->room_id;
+        $_expenseDaily = array_column($this->_expenseModel->findExpenseDaily($_roomId), 'daily_total', 'regist_date');
+        $_incomeDaily =  array_column($this->_incomeModel->findIncomeDaily($_roomId), 'daily_total', 'regist_date');
+
+        $_ret = [];
+        foreach ($_expenseDaily as $_expenseKey => $_expenseVal) {
+            foreach ($_incomeDaily as $_incomeKey => $_incomeVal) {
+                if ($_expenseKey === $_incomeKey) {
+                    $_ret[$_expenseKey] = $_incomeVal - $_expenseVal;
+                }
+                $_ret[$_expenseKey] = -$_expenseVal;
+            }
+        }
+
+        return $_ret;
+    }
 }
