@@ -3,6 +3,7 @@
 namespace App\Models\Tables;
 
 use App\Models\Core\BaseModel;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,7 @@ class IncomeModel extends BaseModel
             ->first();
     }
 
-    public function findIncomeDaily(string $_roomId, ?DateTime $_date = null)
+    public function findIncomeDaily(string $_roomId, Carbon $_date)
     {
         $_query = DB::table($this->table)
             ->where([
@@ -38,8 +39,6 @@ class IncomeModel extends BaseModel
             ->orderBy('regist_date')
             ->groupBy('regist_date')
             ->selectRaw('sum(income) as daily_total , regist_date');
-
-        $_date = $_date ?? now();
 
         $_ret = $_query->whereYear('regist_date', $_date->format('Y'))
             ->whereMonth('regist_date', $_date->format('m'))->get();

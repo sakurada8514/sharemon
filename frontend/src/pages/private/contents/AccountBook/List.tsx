@@ -1,5 +1,5 @@
 import React, { useGlobal } from "reactn";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import { useState } from "react";
 import { Box } from "@material-ui/core";
 import Calendar from "react-calendar";
@@ -16,16 +16,24 @@ import "../../../../styles/Calendar.css";
 export default function List() {
   const setError = useGlobal("error")[1];
 
+  const [calendarViewDate, setCalendarViewDate] = useState(new Date());
+
+  const { mutate } = useSWRConfig();
   const { data: dailyTotal, error: dailyTotalError } = useSWR(
-    ["balance/daily", "daily"],
+    ["balance/daily/" + formatDate(calendarViewDate, "yyyy-MM-dd"), "daily"],
     fetcherApi
   );
 
   const { data: expenseList, error: expenseListError } = useSWR(
-    ["expense", "expenseList"],
+    [
+      "expense?date=" + formatDate(calendarViewDate, "yyyy-MM-dd"),
+      "expenseList",
+    ],
     fetcherApi
   );
-
+  // "expense",
+  // "expenseList",
+  // { date: formatDate(calendarViewDate, "yyyy-MM-dd") },
   if (expenseListError || dailyTotalError) {
     setError(true);
   }
@@ -59,7 +67,7 @@ export default function List() {
         <Calendar
           locale="ja-JP"
           calendarType="US"
-          value={new Date()}
+          value={calendarViewDate}
           formatDay={formatDay}
           nextLabel={<NavigateNextIcon />}
           next2Label={null}
@@ -68,6 +76,12 @@ export default function List() {
           tileContent={getTileContent}
           onClickDay={(value, event) => {
             console.log(value);
+          }}
+          onClickMonth={(value, event) => {
+            setCalendarViewDate(value);
+          }}
+          onActiveStartDateChange={({ activeStartDate, value, view }) => {
+            setCalendarViewDate(activeStartDate);
           }}
         />
       )}

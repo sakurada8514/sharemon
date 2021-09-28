@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Tables\ExpenseCategoryModel;
 use App\Models\Tables\ExpenseModel;
 use App\Services\Core\BaseService;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class ExpenseService extends BaseService
@@ -18,9 +19,9 @@ class ExpenseService extends BaseService
         $this->_expenseModel = $_expenseModel;
     }
 
-    public function findListByRoomId(string $_roomId)
+    public function findListByRoomId(string $_roomId, string $_date)
     {
-        return $this->_expenseModel->findListByRoomId($_roomId);
+        return $this->_expenseModel->findListByRoomId($_roomId, new Carbon($_date));
     }
 
     public function findCategoryList(string $_roomId): array

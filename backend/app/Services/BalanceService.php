@@ -6,6 +6,7 @@ use App\Models\Tables\ExpenseCategoryModel;
 use App\Models\Tables\ExpenseModel;
 use App\Models\Tables\IncomeModel;
 use App\Services\Core\BaseService;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,11 +29,12 @@ class BalanceService extends BaseService
         return [$_expenseTotal, $_incomeTotal];
     }
 
-    public function getBalanceOfDaily()
+    public function getBalanceOfDaily(string $_date)
     {
         $_roomId = Auth::user()->room_id;
-        $_expenseDaily = array_column($this->_expenseModel->findExpenseDaily($_roomId), 'daily_total', 'regist_date');
-        $_incomeDaily =  array_column($this->_incomeModel->findIncomeDaily($_roomId), 'daily_total', 'regist_date');
+
+        $_expenseDaily = array_column($this->_expenseModel->findExpenseDaily($_roomId, new Carbon($_date)), 'daily_total', 'regist_date');
+        $_incomeDaily =  array_column($this->_incomeModel->findIncomeDaily($_roomId, new Carbon($_date)), 'daily_total', 'regist_date');
 
         $_ret = [];
         foreach ($_expenseDaily as $_expenseKey => $_expenseVal) {

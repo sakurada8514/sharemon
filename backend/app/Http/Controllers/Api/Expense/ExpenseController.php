@@ -27,10 +27,11 @@ class ExpenseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $_date = $request->date;
         $_roomId = Auth::user()->room_id;
-        $_expenseList = $this->_expenseService->findListByRoomId($_roomId);
+        $_expenseList = $this->_expenseService->findListByRoomId($_roomId, $_date);
 
         return $this->jsonResponse($_expenseList, 'Expense.List');
     }
