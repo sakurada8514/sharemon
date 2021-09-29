@@ -25,8 +25,8 @@ class ExpenseModel extends BaseModel
     {
         $this->_s3ImageModel = $_s3ImageModel;
     }
-
-    public function findListByRoomId(string $_roomId, Carbon $_date)
+    // TODO::繰り返し登録関連
+    public function findListByRoomId(string $_roomId, string $_userId, Carbon $_date)
     {
         $_ret = DB::table("$this->table as e")
             ->where('e.room_id', $_roomId)
@@ -38,13 +38,18 @@ class ExpenseModel extends BaseModel
             })
             ->where('e.del_flg', config('Const.webDB.DEL_FLG.OFF'))
             ->join('expense_categories as ec', 'e.category_id', '=', 'ec.category_id')
-            ->orderByDesc('regist_date')
-            ->select('e.id', 'e.expense', 'e.regist_date', 'ec.category_name')
+            ->leftJoin('expense_already_read_users as ru', function ($join) use ($_userId) {
+                $join->on('e.id', '=', 'ru.expense_id')
+                    ->where('ru.user_id', '=', $_userId);
+            })
+            ->orderByDesc('e.regist_date')
+            ->select('e.id', 'e.expense', 'e.regist_date', 'e.repetition_flg', 'ec.category_name', 'ru.id as read_flg')
             ->paginate(20);
 
         return $this->_convertArray($_ret);
     }
 
+    // TODO::繰り返し登録関連
     public function findTotalOfThisMonth(string $_roomId)
     {
         $_ret = DB::table($this->table)

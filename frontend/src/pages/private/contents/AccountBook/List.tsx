@@ -8,8 +8,8 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 import { formatDate } from "utils/handy";
-import { getExpenseList as getExpenseListApi } from "api/Expense";
 import { fetcherApi } from "api/fetcher";
+import { expenseListfetcher } from "api/Expense";
 
 import "../../../../styles/Calendar.css";
 
@@ -18,22 +18,16 @@ export default function List() {
 
   const [calendarViewDate, setCalendarViewDate] = useState(new Date());
 
-  const { mutate } = useSWRConfig();
   const { data: dailyTotal, error: dailyTotalError } = useSWR(
     ["balance/daily/" + formatDate(calendarViewDate, "yyyy-MM-dd"), "daily"],
     fetcherApi
   );
 
   const { data: expenseList, error: expenseListError } = useSWR(
-    [
-      "expense?date=" + formatDate(calendarViewDate, "yyyy-MM-dd"),
-      "expenseList",
-    ],
-    fetcherApi
+    ["expense", formatDate(calendarViewDate, "yyyy-MM-dd")],
+    expenseListfetcher
   );
-  // "expense",
-  // "expenseList",
-  // { date: formatDate(calendarViewDate, "yyyy-MM-dd") },
+
   if (expenseListError || dailyTotalError) {
     setError(true);
   }
@@ -59,15 +53,15 @@ export default function List() {
     );
   }
 
-  const formatDay = (locale, date) => formatDate(date, "dd").replace(/0/g, "");
+  const formatDay = (locale, date) => formatDate(date, "dd").replace(/^0/, "");
 
   return (
     <Box className="pt-3">
-      {dailyTotal && (
+      {dailyTotal ? (
         <Calendar
           locale="ja-JP"
           calendarType="US"
-          value={calendarViewDate}
+          value={new Date()}
           formatDay={formatDay}
           nextLabel={<NavigateNextIcon />}
           next2Label={null}
@@ -84,10 +78,40 @@ export default function List() {
             setCalendarViewDate(activeStartDate);
           }}
         />
+      ) : (
+        <Calendar
+          locale="ja-JP"
+          calendarType="US"
+          value={new Date()}
+          formatDay={formatDay}
+          nextLabel={<NavigateNextIcon />}
+          next2Label={null}
+          prevLabel={<NavigateBeforeIcon />}
+          prev2Label={null}
+        />
       )}
       {expenseList &&
         expenseList.list.map((data: any) => {
-          return <p key={data.id}>{data.expense}</p>;
+          return (
+            <div key={data.id} className="flex justify-between p-4 border-b">
+              <div>
+                <p className="text-xl">{data.category_name}</p>
+                {data.repetition_flg === 0 ? (
+                  <p className="text-gray-500">{data.regist_date}</p>
+                ) : (
+                  <p className="text-gray-500">繰り返し登録</p>
+                )}
+              </div>
+              <div className="text-right flex flex-col items-end">
+                <p className="text-xl mb-1">{data.expense}円</p>
+                {!data.read_flg && (
+                  <p className="text-white text-center font-light text-xs bg-red-500 rounded-2xl px-1 w-10">
+                    new
+                  </p>
+                )}
+              </div>
+            </div>
+          );
         })}
     </Box>
   );

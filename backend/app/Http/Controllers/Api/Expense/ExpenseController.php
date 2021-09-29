@@ -30,8 +30,8 @@ class ExpenseController extends Controller
     public function index(Request $request)
     {
         $_date = $request->date;
-        $_roomId = Auth::user()->room_id;
-        $_expenseList = $this->_expenseService->findListByRoomId($_roomId, $_date);
+        $_user = Auth::user();
+        $_expenseList = $this->_expenseService->findListByRoomId($_user->room_id, $_user->id, $_date);
 
         return $this->jsonResponse($_expenseList, 'Expense.List');
     }

@@ -19,9 +19,9 @@ class ExpenseService extends BaseService
         $this->_expenseModel = $_expenseModel;
     }
 
-    public function findListByRoomId(string $_roomId, string $_date)
+    public function findListByRoomId(string $_roomId, string $_userId, string $_date)
     {
-        return $this->_expenseModel->findListByRoomId($_roomId, new Carbon($_date));
+        return $this->_expenseModel->findListByRoomId($_roomId, $_userId, new Carbon($_date));
     }
 
     public function findCategoryList(string $_roomId): array

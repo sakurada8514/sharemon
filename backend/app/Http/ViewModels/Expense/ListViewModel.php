@@ -12,6 +12,7 @@ class ListViewModel implements ViewModel
     {
         array_walk($data['data'], function (&$_data) {
             $_data['regist_date'] = $this->convertDate($_data['regist_date']);
+            $_data['read_flg'] = is_null($_data['read_flg']) ? false : true;
         });
 
         return [
