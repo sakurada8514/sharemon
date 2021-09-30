@@ -1,15 +1,16 @@
 import React, { useGlobal } from "reactn";
-import useSWR, { useSWRConfig } from "swr";
+import useSWR from "swr";
 import { useState } from "react";
 import { Box } from "@material-ui/core";
 import Calendar from "react-calendar";
+import { Skeleton } from "@mui/material";
 
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 import { formatDate } from "utils/handy";
 import { fetcherApi } from "api/fetcher";
-import { expenseListfetcher } from "api/Expense";
+import useSWRExpenseList from "utils/hooks/useSWRExpenseList";
 
 import "../../../../styles/Calendar.css";
 
@@ -23,12 +24,10 @@ export default function List() {
     fetcherApi
   );
 
-  const { data: expenseList, error: expenseListError } = useSWR(
-    ["expense", formatDate(calendarViewDate, "yyyy-MM-dd")],
-    expenseListfetcher
-  );
+  const { expenseList, expenseError, isLast, loadMore } =
+    useSWRExpenseList(calendarViewDate);
 
-  if (expenseListError || dailyTotalError) {
+  if (expenseError || dailyTotalError) {
     setError(true);
   }
 
@@ -90,8 +89,8 @@ export default function List() {
           prev2Label={null}
         />
       )}
-      {expenseList &&
-        expenseList.list.map((data: any) => {
+      {expenseList ? (
+        expenseList.map((data: any) => {
           return (
             <div key={data.id} className="flex justify-between p-4 border-b">
               <div>
@@ -112,7 +111,16 @@ export default function List() {
               </div>
             </div>
           );
-        })}
+        })
+      ) : (
+        <div className="p-4">
+          <Skeleton className="h-20 pb-2" />
+          <Skeleton className="h-20 pb-2" />
+          <Skeleton className="h-20 pb-2" />
+          <Skeleton className="h-20 pb-2" />
+        </div>
+      )}
+      {!isLast && <button onClick={loadMore}>読み込む</button>}
     </Box>
   );
 }

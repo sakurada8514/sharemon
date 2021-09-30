@@ -16,11 +16,7 @@ class ListViewModel implements ViewModel
         });
 
         return [
-            'expenseList' => [
-                'list'    => $data['data'],
-                'current_page' => $data['current_page'],
-                'last_page' => $data['last_page']
-            ]
+            'expenseList' =>  $data['data']
         ];
     }
 }
