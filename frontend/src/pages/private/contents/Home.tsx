@@ -14,7 +14,7 @@ type HomeProps = {
 
 const Home: React.FC<HomeProps> = ({ roomName }) => {
   const setError = useGlobal("error")[1];
-  const thisMonth = formatDate(new Date(), "MM").replace(/0/g, "");
+  const thisMonth = formatDate(new Date(), "MM").replace(/^0/g, "");
 
   const { data: member, error: memberError } = useSWR("/member", getMemberApi);
   const { data: balance, error: balanceError } = useSWR(

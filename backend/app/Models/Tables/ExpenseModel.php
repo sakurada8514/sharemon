@@ -25,7 +25,7 @@ class ExpenseModel extends BaseModel
     {
         $this->_s3ImageModel = $_s3ImageModel;
     }
-    // TODO::繰り返し登録関連
+
     public function findListByRoomId(string $_roomId, string $_userId, Carbon $_date)
     {
         $_ret = DB::table("$this->table as e")
@@ -49,12 +49,16 @@ class ExpenseModel extends BaseModel
         return $this->_convertArray($_ret);
     }
 
-    // TODO::繰り返し登録関連
+
     public function findTotalOfThisMonth(string $_roomId)
     {
         $_ret = DB::table($this->table)
-            ->whereYear('regist_date', now()->format('Y'))
-            ->whereMonth('regist_date', now()->format('m'))
+            ->where(function ($query) {
+                $query->where(function ($query) {
+                    $query->whereYear('regist_date', now()->format('Y'))
+                        ->whereMonth('regist_date', now()->format('m'));
+                })->orWhere('repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON'));
+            })
             ->where([
                 ['room_id', $_roomId],
                 ['del_flg', config('Const.webDB.DEL_FLG.OFF')]
@@ -67,17 +71,18 @@ class ExpenseModel extends BaseModel
 
     public function findExpenseDaily(string $_roomId, Carbon $_date)
     {
-        $_query = DB::table($this->table)
+        $_ret = DB::table($this->table)
             ->where([
                 ['room_id', $_roomId],
-                ['del_flg', config('Const.webDB.DEL_FLG.OFF')]
+                ['del_flg', config('Const.webDB.DEL_FLG.OFF')],
+                ['repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.OFF')]
             ])
+            ->whereYear('regist_date', $_date->format('Y'))
+            ->whereMonth('regist_date', $_date->format('m'))
             ->orderBy('regist_date')
             ->groupBy('regist_date')
-            ->selectRaw('sum(expense) as daily_total , regist_date');
-
-        $_ret = $_query->whereYear('regist_date', $_date->format('Y'))
-            ->whereMonth('regist_date', $_date->format('m'))->get();
+            ->selectRaw('sum(expense) as daily_total , regist_date')
+            ->get();
 
         return $this->_convertArray($_ret);
     }
