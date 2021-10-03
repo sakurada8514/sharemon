@@ -13,13 +13,14 @@ import TabPanel from "components/Atoms/TabPanel";
 import { formatDate } from "utils/handy";
 import { fetcherApi } from "api/fetcher";
 import useSWRExpenseList from "utils/hooks/useSWRExpenseList";
+import useSWRIncomeList from "utils/hooks/useSWRIncomeList";
 
 import "../../../../styles/Calendar.css";
 
 export default function List() {
   const setError = useGlobal("error")[1];
-  const [tabValue, setTabValue] = useState(0);
 
+  const [tabValue, setTabValue] = useState(0);
   const [calendarViewDate, setCalendarViewDate] = useState(new Date());
 
   const { data: dailyTotal, error: dailyTotalError } = useSWR(
@@ -27,11 +28,16 @@ export default function List() {
     fetcherApi
   );
 
-  const { expenseList, expenseError, isLast, loadMore } =
+  const { expenseList, expenseError, isExpenseLast, loadMoreExpense } =
     useSWRExpenseList(calendarViewDate);
 
-  if (expenseError || dailyTotalError) {
-    setError(true);
+  const { incomeList, incomeError, isIncomeLast, loadMoreIncome } =
+    useSWRIncomeList(calendarViewDate);
+
+  if (expenseError || incomeError || dailyTotalError) {
+    console.log("e");
+
+    // setError(true);
   }
   const handleTabChange = (event: any, newValue: any) => {
     setTabValue(newValue);
@@ -53,11 +59,11 @@ export default function List() {
 
     return (
       <>
-        <p className="text-xs text-gray-600">
-          {dailyTotal[day] ? dailyTotal[day] + "円" : ""}
+        <p className="text-xs text-red-400 h-4">
+          {dailyTotal["expense"][day] ? "-" + dailyTotal["expense"][day] : ""}
         </p>
-        <p className="text-xs text-gray-600">
-          {dailyTotal[day] ? dailyTotal[day] + "円" : ""}
+        <p className="text-xs text-blue-400 h-4">
+          {dailyTotal["income"][day] ? dailyTotal["income"][day] : " "}
         </p>
       </>
     );
@@ -124,33 +130,37 @@ export default function List() {
       <TabPanel value={tabValue} index={0}>
         <>
           {expenseList ? (
-            expenseList.map((data: any) => {
-              return (
-                <div
-                  key={data.id}
-                  className="flex justify-between p-4 border-b"
-                >
-                  <div>
-                    <p className="text-xl">{data.category_name}</p>
-                    {data.repetition_flg === 0 ? (
-                      <p className="text-gray-500">{data.regist_date}</p>
-                    ) : (
-                      <p className="text-gray-500">
-                        {data.regist_date}から毎月繰り返し
-                      </p>
-                    )}
+            expenseList.length > 0 ? (
+              expenseList.map((data: any) => {
+                return (
+                  <div
+                    key={data.id}
+                    className="flex justify-between px-4 py-2 border-b"
+                  >
+                    <div>
+                      <p className="text-xl">{data.category_name}</p>
+                      {data.repetition_flg === 0 ? (
+                        <p className="text-gray-500">{data.regist_date}</p>
+                      ) : (
+                        <p className="text-gray-500">
+                          {data.regist_date}から毎月繰り返し
+                        </p>
+                      )}
+                    </div>
+                    <div className="text-right flex flex-col items-end">
+                      <p className="text-xl mb-1">{data.expense}円</p>
+                      {!data.read_flg && (
+                        <p className="text-white text-center font-light text-xs bg-red-500 rounded-2xl px-1 w-10">
+                          new
+                        </p>
+                      )}
+                    </div>
                   </div>
-                  <div className="text-right flex flex-col items-end">
-                    <p className="text-xl mb-1">{data.expense}円</p>
-                    {!data.read_flg && (
-                      <p className="text-white text-center font-light text-xs bg-red-500 rounded-2xl px-1 w-10">
-                        new
-                      </p>
-                    )}
-                  </div>
-                </div>
-              );
-            })
+                );
+              })
+            ) : (
+              <p>登録なし</p>
+            )
           ) : (
             <div className="p-4">
               <Skeleton className="h-20 pb-2" />
@@ -159,12 +169,72 @@ export default function List() {
               <Skeleton className="h-20 pb-2" />
             </div>
           )}
-          {!isLast && <button onClick={loadMore}>読み込む</button>}
+          {!isExpenseLast && (
+            <div className="flex justify-center">
+              <button
+                className="text-gray-500 text-sm py-4"
+                onClick={loadMoreExpense}
+              >
+                さらに読み込む…
+              </button>
+            </div>
+          )}
         </>
       </TabPanel>
 
       <TabPanel value={tabValue} index={1}>
-        <p>income</p>
+        <>
+          {incomeList ? (
+            incomeList.length > 0 ? (
+              incomeList.map((data: any) => {
+                return (
+                  <div
+                    key={data.id}
+                    className="flex justify-between px-4 py-2 border-b"
+                  >
+                    <div>
+                      <p className="text-xl">{data.category_name}</p>
+                      {data.repetition_flg === 0 ? (
+                        <p className="text-gray-500">{data.regist_date}</p>
+                      ) : (
+                        <p className="text-gray-500">
+                          {data.regist_date}から毎月繰り返し
+                        </p>
+                      )}
+                    </div>
+                    <div className="text-right flex flex-col items-end">
+                      <p className="text-xl mb-1">{data.income}円</p>
+                      {!data.read_flg && (
+                        <p className="text-white text-center font-light text-xs bg-red-500 rounded-2xl px-1 w-10">
+                          new
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <p className="text-gray-500 text-center pt-4">登録なし</p>
+            )
+          ) : (
+            <div className="p-4">
+              <Skeleton className="h-20 pb-2" />
+              <Skeleton className="h-20 pb-2" />
+              <Skeleton className="h-20 pb-2" />
+              <Skeleton className="h-20 pb-2" />
+            </div>
+          )}
+          {!isIncomeLast && (
+            <div className="flex justify-center">
+              <button
+                className="text-gray-500 text-sm py-4"
+                onClick={loadMoreIncome}
+              >
+                さらに読み込む…
+              </button>
+            </div>
+          )}
+        </>
       </TabPanel>
     </Box>
   );

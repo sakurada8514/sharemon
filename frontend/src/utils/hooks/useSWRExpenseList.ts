@@ -20,17 +20,17 @@ const useSWRExpenseList = (calendarViewDate: Date) => {
     setSize,
   } = useSWRInfinite(getExpenseListKey, expenseListfetcher);
 
-  const loadMore = () => {
+  const loadMoreExpense = () => {
     setSize(size + 1);
   };
 
-  const isLast = data
-    ? data.filter((list) => list.length < 20).length > 0
+  const isExpenseLast = data
+    ? data.filter((list) => list.length < 30).length > 0
     : true;
 
   const expenseList = data ? data.flat() : null;
 
-  return { expenseList, expenseError, isLast, loadMore };
+  return { expenseList, expenseError, isExpenseLast, loadMoreExpense };
 };
 
 export default useSWRExpenseList;

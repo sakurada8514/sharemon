@@ -17,23 +17,18 @@ class IncomeController extends Controller
     {
         $this->_incomeService = $_incomeService;
     }
-
-    public function getIncomeCategoryList(): JsonResponse
-    {
-        $_roomId = Auth::user()->room_id;
-
-        $_res = $this->_incomeService->findCategoryList($_roomId);
-
-        return response()->json(['categoryList' => $_res]);
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $_date = $request->date;
+        $_user = Auth::user();
+        $_incomeList = $this->_incomeService->findListByRoomId($_user->room_id, $_user->id, $_date);
+
+        return $this->jsonResponse($_incomeList, 'Income.List');
     }
 
     /**

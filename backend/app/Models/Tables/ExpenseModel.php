@@ -26,6 +26,7 @@ class ExpenseModel extends BaseModel
         $this->_s3ImageModel = $_s3ImageModel;
     }
 
+    //TODO 繰り返し　登録日より前の場合表示しないように
     public function findListByRoomId(string $_roomId, string $_userId, Carbon $_date)
     {
         $_ret = DB::table("$this->table as e")
@@ -44,7 +45,7 @@ class ExpenseModel extends BaseModel
             })
             ->orderByDesc('e.regist_date')
             ->select('e.id', 'e.expense', 'e.regist_date', 'e.repetition_flg', 'ec.category_name', 'ru.id as read_flg')
-            ->paginate(20);
+            ->paginate(30);
 
         return $this->_convertArray($_ret);
     }

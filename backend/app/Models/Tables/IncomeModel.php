@@ -16,6 +16,29 @@ class IncomeModel extends BaseModel
         'user_id', 'room_id', 'category_id', 'income', 'comment', 'repetition_flg', 'regist_date', 'del_flg'
     ];
 
+    public function findListByRoomId(string $_roomId, string $_userId, Carbon $_date)
+    {
+        $_ret = DB::table("$this->table as i")
+            ->where('i.room_id', $_roomId)
+            ->where(function ($query) use ($_date) {
+                $query->where(function ($query) use ($_date) {
+                    $query->whereYear('i.regist_date', $_date->format('Y'))
+                        ->whereMonth('i.regist_date', $_date->format('m'));
+                })->orWhere('i.repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON'));
+            })
+            ->where('i.del_flg', config('Const.webDB.DEL_FLG.OFF'))
+            ->join('income_categories as ic', 'i.category_id', '=', 'ic.category_id')
+            ->leftJoin('income_already_read_users as ru', function ($join) use ($_userId) {
+                $join->on('i.id', '=', 'ru.income_id')
+                    ->where('ru.user_id', '=', $_userId);
+            })
+            ->orderByDesc('i.regist_date')
+            ->select('i.id', 'i.income', 'i.regist_date', 'i.repetition_flg', 'ic.category_name', 'ru.id as read_flg')
+            ->paginate(30);
+
+        return $this->_convertArray($_ret);
+    }
+
     public function findTotalOfThisMonth(string $_roomId)
     {
         return DB::table($this->table)

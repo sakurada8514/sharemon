@@ -36,18 +36,6 @@ class BalanceService extends BaseService
         $_expenseDaily = array_column($this->_expenseModel->findExpenseDaily($_roomId, new Carbon($_date)), 'daily_total', 'regist_date');
         $_incomeDaily =  array_column($this->_incomeModel->findIncomeDaily($_roomId, new Carbon($_date)), 'daily_total', 'regist_date');
 
-        //TODO
-        $_ret = [];
-        foreach ($_expenseDaily as $_expenseKey => $_expenseVal) {
-            foreach ($_incomeDaily as $_incomeKey => $_incomeVal) {
-                if ($_expenseKey === $_incomeKey) {
-                    $_ret[$_expenseKey] = $_incomeVal - $_expenseVal;
-                    continue;
-                }
-            }
-            $_ret[$_expenseKey] = -$_expenseVal;
-        }
-
-        return $_ret;
+        return ['expense' => $_expenseDaily, 'income' => $_incomeDaily];
     }
 }

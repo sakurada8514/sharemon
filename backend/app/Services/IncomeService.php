@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Tables\IncomeCategoryModel;
 use App\Models\Tables\IncomeModel;
 use App\Services\Core\BaseService;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class IncomeService extends BaseService
@@ -28,5 +29,10 @@ class IncomeService extends BaseService
         $this->_incomeModel->insert($_registData, $_user);
 
         return;
+    }
+
+    public function findListByRoomId(string $_roomId, string $_userId, string $_date)
+    {
+        return $this->_incomeModel->findListByRoomId($_roomId, $_userId, new Carbon($_date));
     }
 }
