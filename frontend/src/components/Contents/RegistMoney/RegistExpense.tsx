@@ -3,11 +3,11 @@ import useSWR from "swr";
 import { DatePickerProps } from "@material-ui/pickers";
 import { AlertProps } from "@material-ui/lab";
 
-import RegistExpenseForm from "../Form/RegistExpenseForm";
-import { OK, VALIDATION } from "../../utils/constant";
+import RegistExpenseForm from "../../Form/RegistExpenseForm";
+import { OK, VALIDATION } from "../../../utils/constant";
 
-import { getCategoryList as getCategoryListApi } from "../../api/Expense/category";
-import { registExpense as registExpenseApi } from "../../api/Expense/regist";
+import { getCategoryList as getCategoryListApi } from "../../../api/Expense/category";
+import { registExpense as registExpenseApi } from "../../../api/Expense/regist";
 import { Dispatch, SetStateAction } from "react";
 
 type RegistMoneyProps = {

@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import { AppBar, Tabs, Tab } from "@material-ui/core";
 import { AlertProps } from "@material-ui/lab";
 
-import RegistExpense from "../../../components/Contents/RegistExpense";
-import RegistIncome from "../../../components/Contents/RegistIncome";
+import RegistExpense from "../../../components/Contents/RegistMoney/RegistExpense";
+import RegistIncome from "../../../components/Contents/RegistMoney/RegistIncome";
 import TransitionMotion from "../../../components/Route/Motion";
 import TabPanel from "../../../components/Atoms/TabPanel";
 

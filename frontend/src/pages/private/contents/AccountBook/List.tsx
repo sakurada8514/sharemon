@@ -9,6 +9,8 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 import TabPanel from "components/Atoms/TabPanel";
+import ExpenseList from "components/Contents/AccountBook/List/ExpenseList";
+import IncomeList from "components/Contents/AccountBook/List/IncomeList";
 
 import { formatDate } from "utils/handy";
 import { fetcherApi } from "api/fetcher";
@@ -128,113 +130,19 @@ export default function List() {
       </AppBar>
 
       <TabPanel value={tabValue} index={0}>
-        <>
-          {expenseList ? (
-            expenseList.length > 0 ? (
-              expenseList.map((data: any) => {
-                return (
-                  <div
-                    key={data.id}
-                    className="flex justify-between px-4 py-2 border-b"
-                  >
-                    <div>
-                      <p className="text-xl">{data.category_name}</p>
-                      {data.repetition_flg === 0 ? (
-                        <p className="text-gray-500">{data.regist_date}</p>
-                      ) : (
-                        <p className="text-gray-500">
-                          {data.regist_date}から毎月繰り返し
-                        </p>
-                      )}
-                    </div>
-                    <div className="text-right flex flex-col items-end">
-                      <p className="text-xl mb-1">{data.expense}円</p>
-                      {!data.read_flg && (
-                        <p className="text-white text-center font-light text-xs bg-red-500 rounded-2xl px-1 w-10">
-                          new
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                );
-              })
-            ) : (
-              <p>登録なし</p>
-            )
-          ) : (
-            <div className="p-4">
-              <Skeleton className="h-20 pb-2" />
-              <Skeleton className="h-20 pb-2" />
-              <Skeleton className="h-20 pb-2" />
-              <Skeleton className="h-20 pb-2" />
-            </div>
-          )}
-          {!isExpenseLast && (
-            <div className="flex justify-center">
-              <button
-                className="text-gray-500 text-sm py-4"
-                onClick={loadMoreExpense}
-              >
-                さらに読み込む…
-              </button>
-            </div>
-          )}
-        </>
+        <ExpenseList
+          expenseList={expenseList}
+          isExpenseLast={isExpenseLast}
+          loadMoreExpense={loadMoreExpense}
+        />
       </TabPanel>
 
       <TabPanel value={tabValue} index={1}>
-        <>
-          {incomeList ? (
-            incomeList.length > 0 ? (
-              incomeList.map((data: any) => {
-                return (
-                  <div
-                    key={data.id}
-                    className="flex justify-between px-4 py-2 border-b"
-                  >
-                    <div>
-                      <p className="text-xl">{data.category_name}</p>
-                      {data.repetition_flg === 0 ? (
-                        <p className="text-gray-500">{data.regist_date}</p>
-                      ) : (
-                        <p className="text-gray-500">
-                          {data.regist_date}から毎月繰り返し
-                        </p>
-                      )}
-                    </div>
-                    <div className="text-right flex flex-col items-end">
-                      <p className="text-xl mb-1">{data.income}円</p>
-                      {!data.read_flg && (
-                        <p className="text-white text-center font-light text-xs bg-red-500 rounded-2xl px-1 w-10">
-                          new
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                );
-              })
-            ) : (
-              <p className="text-gray-500 text-center pt-4">登録なし</p>
-            )
-          ) : (
-            <div className="p-4">
-              <Skeleton className="h-20 pb-2" />
-              <Skeleton className="h-20 pb-2" />
-              <Skeleton className="h-20 pb-2" />
-              <Skeleton className="h-20 pb-2" />
-            </div>
-          )}
-          {!isIncomeLast && (
-            <div className="flex justify-center">
-              <button
-                className="text-gray-500 text-sm py-4"
-                onClick={loadMoreIncome}
-              >
-                さらに読み込む…
-              </button>
-            </div>
-          )}
-        </>
+        <IncomeList
+          incomeList={incomeList}
+          isIncomeLast={isIncomeLast}
+          loadMoreIncome={loadMoreIncome}
+        />
       </TabPanel>
     </Box>
   );

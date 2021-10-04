@@ -5,11 +5,11 @@ import { useHistory } from "react-router";
 import { DatePickerProps } from "@material-ui/pickers";
 import { AlertProps } from "@material-ui/lab";
 
-import RegistIncomeForm from "../Form/RegistIncomeForm";
-import { OK, VALIDATION } from "../../utils/constant";
+import RegistIncomeForm from "../../Form/RegistIncomeForm";
+import { OK, VALIDATION } from "../../../utils/constant";
 
-import { getCategoryList as getCategoryListApi } from "../../api/Income/category";
-import { registIncome as registIncomeApi } from "../../api/Income/regist";
+import { getCategoryList as getCategoryListApi } from "../../../api/Income/category";
+import { registIncome as registIncomeApi } from "../../../api/Income/regist";
 
 type RegistIncomeProps = {
   handleAlertOpen: (closedTime?: number) => void;
