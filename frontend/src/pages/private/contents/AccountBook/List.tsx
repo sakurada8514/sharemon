@@ -1,9 +1,19 @@
 import React, { useGlobal } from "reactn";
 import useSWR from "swr";
 import { useState } from "react";
-import { Box, AppBar, Tab, Tabs } from "@material-ui/core";
+import {
+  Box,
+  AppBar,
+  Tab,
+  Tabs,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormControlLabel,
+  Switch,
+} from "@material-ui/core";
 import Calendar from "react-calendar";
-import { Skeleton } from "@mui/material";
 
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
@@ -24,6 +34,8 @@ export default function List() {
 
   const [tabValue, setTabValue] = useState(0);
   const [calendarViewDate, setCalendarViewDate] = useState(new Date());
+  const [sort, setSort] = useState("");
+  const [isCalendarShow, setIsCalendarShow] = useState(true);
 
   const { data: dailyTotal, error: dailyTotalError } = useSWR(
     ["balance/daily/" + formatDate(calendarViewDate, "yyyy-MM-dd"), "daily"],
@@ -43,6 +55,12 @@ export default function List() {
   }
   const handleTabChange = (event: any, newValue: any) => {
     setTabValue(newValue);
+  };
+  const handleSortChange = (event: any) => {
+    setSort(event.target.value);
+  };
+  const handleCalendarShowChange = () => {
+    setIsCalendarShow(!isCalendarShow);
   };
 
   // state の日付と同じ表記に変換
@@ -74,40 +92,66 @@ export default function List() {
   const formatDay = (locale, date) => formatDate(date, "dd").replace(/^0/, "");
 
   return (
-    <Box className="pt-3">
-      {dailyTotal ? (
-        <Calendar
-          locale="ja-JP"
-          calendarType="US"
-          value={new Date()}
-          formatDay={formatDay}
-          nextLabel={<NavigateNextIcon />}
-          next2Label={null}
-          prevLabel={<NavigateBeforeIcon />}
-          prev2Label={null}
-          tileContent={getTileContent}
-          onClickDay={(value, event) => {
-            // console.log(value);
-          }}
-          onClickMonth={(value, event) => {
-            setCalendarViewDate(value);
-          }}
-          onActiveStartDateChange={({ activeStartDate, value, view }) => {
-            setCalendarViewDate(activeStartDate);
-          }}
+    <Box className="pt-1">
+      <div className="flex pb-2">
+        <FormControl className="w-1/2 ml-1">
+          <InputLabel id="sort_select">ソート</InputLabel>
+          <Select
+            labelId="sort_select"
+            id="demo-simple-select"
+            value={sort}
+            onChange={handleSortChange}
+          >
+            <MenuItem value={0}>新しい順</MenuItem>
+            <MenuItem value={1}>古い順</MenuItem>
+            <MenuItem value={2}>金額多い順</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={isCalendarShow}
+              onChange={handleCalendarShowChange}
+            />
+          }
+          label="カレンダー表示"
+          labelPlacement="start"
         />
-      ) : (
-        <Calendar
-          locale="ja-JP"
-          calendarType="US"
-          value={new Date()}
-          formatDay={formatDay}
-          nextLabel={<NavigateNextIcon />}
-          next2Label={null}
-          prevLabel={<NavigateBeforeIcon />}
-          prev2Label={null}
-        />
-      )}
+      </div>
+      {isCalendarShow &&
+        (dailyTotal ? (
+          <Calendar
+            locale="ja-JP"
+            calendarType="US"
+            value={new Date()}
+            formatDay={formatDay}
+            nextLabel={<NavigateNextIcon />}
+            next2Label={null}
+            prevLabel={<NavigateBeforeIcon />}
+            prev2Label={null}
+            tileContent={getTileContent}
+            onClickDay={(value, event) => {
+              // console.log(value);
+            }}
+            onClickMonth={(value, event) => {
+              setCalendarViewDate(value);
+            }}
+            onActiveStartDateChange={({ activeStartDate, value, view }) => {
+              setCalendarViewDate(activeStartDate);
+            }}
+          />
+        ) : (
+          <Calendar
+            locale="ja-JP"
+            calendarType="US"
+            value={new Date()}
+            formatDay={formatDay}
+            nextLabel={<NavigateNextIcon />}
+            next2Label={null}
+            prevLabel={<NavigateBeforeIcon />}
+            prev2Label={null}
+          />
+        ))}
       <AppBar position="static" className="bg-gray-50 text-black shadow-none ">
         <Tabs
           value={tabValue}
