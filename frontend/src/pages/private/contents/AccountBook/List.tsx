@@ -85,7 +85,7 @@ export default function List() {
           prev2Label={null}
           tileContent={getTileContent}
           onClickDay={(value, event) => {
-            console.log(value);
+            // console.log(value);
           }}
           onClickMonth={(value, event) => {
             setCalendarViewDate(value);
