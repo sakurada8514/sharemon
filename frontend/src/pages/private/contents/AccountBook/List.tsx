@@ -34,7 +34,7 @@ export default function List() {
 
   const [tabValue, setTabValue] = useState(0);
   const [calendarViewDate, setCalendarViewDate] = useState(new Date());
-  const [sort, setSort] = useState("");
+  const [sort, setSort] = useState(0);
   const [isCalendarShow, setIsCalendarShow] = useState(true);
 
   const { data: dailyTotal, error: dailyTotalError } = useSWR(
@@ -43,10 +43,10 @@ export default function List() {
   );
 
   const { expenseList, expenseError, isExpenseLast, loadMoreExpense } =
-    useSWRExpenseList(calendarViewDate);
+    useSWRExpenseList(calendarViewDate, sort);
 
   const { incomeList, incomeError, isIncomeLast, loadMoreIncome } =
-    useSWRIncomeList(calendarViewDate);
+    useSWRIncomeList(calendarViewDate, sort);
 
   if (expenseError || incomeError || dailyTotalError) {
     console.log("e");
@@ -104,7 +104,8 @@ export default function List() {
           >
             <MenuItem value={0}>新しい順</MenuItem>
             <MenuItem value={1}>古い順</MenuItem>
-            <MenuItem value={2}>金額多い順</MenuItem>
+            <MenuItem value={2}>金額少ない順</MenuItem>
+            <MenuItem value={3}>金額多い順</MenuItem>
           </Select>
         </FormControl>
         <FormControlLabel

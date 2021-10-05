@@ -43,7 +43,7 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <AppBar
       color={"primary"}
-      className={clsx(classes.appBar, sideMenuOpen && classes.appBarShift)}
+      className={clsx("z-10 transition", sideMenuOpen && classes.appBarShift)}
     >
       <Toolbar>
         <MediaQuery query="(min-width: 768px)">

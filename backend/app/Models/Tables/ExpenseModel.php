@@ -27,9 +27,9 @@ class ExpenseModel extends BaseModel
     }
 
     //TODO 繰り返し　登録日より前の場合表示しないように
-    public function findListByRoomId(string $_roomId, string $_userId, Carbon $_date)
+    public function findListByRoomId(string $_roomId, string $_userId, Carbon $_date, int $_sort)
     {
-        $_ret = DB::table("$this->table as e")
+        $_query = DB::table("$this->table as e")
             ->where('e.room_id', $_roomId)
             ->where(function ($query) use ($_date) {
                 $query->where(function ($query) use ($_date) {
@@ -43,9 +43,10 @@ class ExpenseModel extends BaseModel
                 $join->on('e.id', '=', 'ru.expense_id')
                     ->where('ru.user_id', '=', $_userId);
             })
-            ->orderByDesc('e.regist_date')
-            ->select('e.id', 'e.expense', 'e.regist_date', 'e.repetition_flg', 'ec.category_name', 'ru.id as read_flg')
-            ->paginate(30);
+            ->select('e.id', 'e.expense', 'e.regist_date', 'e.repetition_flg', 'ec.category_name', 'ru.id as read_flg');
+
+        $_query = $this->_addSortQuery($_query, $_sort);
+        $_ret = $_query->paginate(30);
 
         return $this->_convertArray($_ret);
     }
@@ -101,5 +102,22 @@ class ExpenseModel extends BaseModel
         DB::table($this->table)->insert($_insert);
 
         return;
+    }
+
+    private function _addSortQuery(object $_query, int $_sort)
+    {
+        switch ($_sort) {
+            case config('Const.webDB.EXPENSE_SORT.DATE_DESC'):
+                return $_query->orderByDesc('e.regist_date');
+
+            case config('Const.webDB.EXPENSE_SORT.DATE_ASC'):
+                return $_query->orderBy('e.regist_date');
+
+            case config('Const.webDB.EXPENSE_SORT.EXPENSE_ASC'):
+                return $_query->orderBy('e.expense');
+
+            case config('Const.webDB.EXPENSE_SORT.EXPENSE_DESC'):
+                return $_query->orderByDesc('e.expense');
+        }
     }
 }

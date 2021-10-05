@@ -31,8 +31,8 @@ class IncomeService extends BaseService
         return;
     }
 
-    public function findListByRoomId(string $_roomId, string $_userId, string $_date)
+    public function findListByRoomId(string $_roomId, string $_userId, string $_date, int $_sort)
     {
-        return $this->_incomeModel->findListByRoomId($_roomId, $_userId, new Carbon($_date));
+        return $this->_incomeModel->findListByRoomId($_roomId, $_userId, new Carbon($_date), $_sort);
     }
 }

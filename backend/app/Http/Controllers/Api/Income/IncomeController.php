@@ -25,8 +25,9 @@ class IncomeController extends Controller
     public function index(Request $request)
     {
         $_date = $request->date;
+        $_sort = $request->sort;
         $_user = Auth::user();
-        $_incomeList = $this->_incomeService->findListByRoomId($_user->room_id, $_user->id, $_date);
+        $_incomeList = $this->_incomeService->findListByRoomId($_user->room_id, $_user->id, $_date, $_sort);
 
         return $this->jsonResponse($_incomeList, 'Income.List');
     }

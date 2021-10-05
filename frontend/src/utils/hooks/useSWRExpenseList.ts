@@ -2,13 +2,14 @@ import useSWRInfinite from "swr/infinite";
 import { expenseListfetcher } from "api/Expense";
 import { formatDate } from "utils/handy";
 
-const useSWRExpenseList = (calendarViewDate: Date) => {
+const useSWRExpenseList = (calendarViewDate: Date, sort: number) => {
   const getExpenseListKey = (pageIndex: number, previousPageData: any[]) => {
     if (previousPageData && !previousPageData.length) return null; // 最後のページに到達した
 
     return [
       "expense",
       formatDate(calendarViewDate, "yyyy-MM-dd"),
+      sort,
       pageIndex + 1,
     ];
   };

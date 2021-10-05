@@ -21,7 +21,7 @@ const AlertMessage: React.FC<AlertMessageProps> = ({
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className="w-full lg:fixed lg:right-3 lg:top-20">
       <Collapse in={alertOpen}>
         <Alert
           severity={severity}
