@@ -1,5 +1,6 @@
 import React, { useGlobal, useEffect, useState } from "reactn";
 import useSWR from "swr";
+import { useHistory } from "react-router";
 import { Box, Typography, Avatar } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 
@@ -13,7 +14,7 @@ type HomeProps = {
 };
 
 const Home: React.FC<HomeProps> = ({ roomName }) => {
-  const setError = useGlobal("error")[1];
+  const history = useHistory();
   const thisMonth = formatDate(new Date(), "MM").replace(/^0/g, "");
 
   const { data: member, error: memberError } = useSWR("/member", getMemberApi);
@@ -23,7 +24,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
   );
 
   if (memberError || balanceError) {
-    setError(true);
+    history.push("/error");
   }
 
   return (
@@ -40,7 +41,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
           {!member ? (
             <>
               <Box className="w-full justify-between flex-wrap">
-                <Skeleton className="w-full h-8" />
+                <Skeleton className="w-full h-10" />
                 {/* <Skeleton className="w-full h-9" /> */}
               </Box>
             </>

@@ -24,7 +24,7 @@ const RegistIncome: React.FC<RegistIncomeProps> = ({
   setAlertSeverity,
   setAlertMessage,
 }) => {
-  const setError = useGlobal("error")[1];
+  const history = useHistory();
 
   const [income, setIncome] = useState("");
   const [date, setDate] = useState(new Date());
@@ -39,7 +39,7 @@ const RegistIncome: React.FC<RegistIncomeProps> = ({
     getCategoryListApi
   );
   if (categoryListError) {
-    setError(true);
+    history.push("/error");
   }
 
   const handleChangeIncome = (e: any) => setIncome(e.target.value);

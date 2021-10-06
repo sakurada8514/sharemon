@@ -2,13 +2,18 @@ import useSWRInfinite from "swr/infinite";
 import { incomeListfetcher } from "api/Income";
 import { formatDate } from "utils/handy";
 
-const useSWRIncomeList = (calendarViewDate: Date, sort: number) => {
+const useSWRIncomeList = (
+  calendarViewDate: Date,
+  selectDay: Date | null,
+  sort: number
+) => {
   const getIncomeListKey = (pageIndex: number, previousPageData: any[]) => {
     if (previousPageData && !previousPageData.length) return null; // 最後のページに到達した
 
     return [
       "income",
       formatDate(calendarViewDate, "yyyy-MM-dd"),
+      selectDay,
       sort,
       pageIndex + 1,
     ];

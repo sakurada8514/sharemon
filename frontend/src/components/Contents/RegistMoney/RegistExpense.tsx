@@ -1,5 +1,6 @@
 import React, { useGlobal, useRef, useState, useEffect } from "reactn";
 import useSWR from "swr";
+import { useHistory } from "react-router";
 import { DatePickerProps } from "@material-ui/pickers";
 import { AlertProps } from "@material-ui/lab";
 
@@ -23,7 +24,7 @@ const RegistExpense: React.FC<RegistMoneyProps> = ({
   setAlertSeverity,
   setAlertMessage,
 }) => {
-  const setError = useGlobal("error")[1];
+  const history = useHistory();
 
   const [expense, setExpense] = useState("");
   const [date, setDate] = useState(new Date());
@@ -42,7 +43,7 @@ const RegistExpense: React.FC<RegistMoneyProps> = ({
     getCategoryListApi
   );
   if (categoryListError) {
-    setError(true);
+    history.push("/error");
   }
 
   const fileInput = useRef(null);

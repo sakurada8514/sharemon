@@ -55,7 +55,7 @@ const InviteRegist = () => {
     ) {
       setErrors(response.data.errors);
     } else {
-      setError(true);
+      history.push("/error");
     }
     setLoading(false);
   }

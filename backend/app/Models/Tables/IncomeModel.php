@@ -16,15 +16,18 @@ class IncomeModel extends BaseModel
         'user_id', 'room_id', 'category_id', 'income', 'comment', 'repetition_flg', 'regist_date', 'del_flg'
     ];
 
-    public function findListByRoomId(string $_roomId, string $_userId, Carbon $_date, int $_sort)
+    public function findListByRoomId(string $_roomId, string $_userId, array $_option)
     {
         $_query = DB::table("$this->table as i")
             ->where('i.room_id', $_roomId)
-            ->where(function ($query) use ($_date) {
-                $query->where(function ($query) use ($_date) {
-                    $query->whereYear('i.regist_date', $_date->format('Y'))
-                        ->whereMonth('i.regist_date', $_date->format('m'));
-                })->orWhere('i.repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON'));
+            ->where(function ($query) use ($_option) {
+                $query->where(function ($query) use ($_option) {
+                    $query->whereYear('i.regist_date', $_option['date']->format('Y'))
+                        ->whereMonth('i.regist_date', $_option['date']->format('m'));
+                })->orWhere(function ($query) use ($_option) {
+                    $query->where('i.repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON'))
+                        ->where('i.regist_date', '<', $_option['date']);
+                });
             })
             ->where('i.del_flg', config('Const.webDB.DEL_FLG.OFF'))
             ->join('income_categories as ic', 'i.category_id', '=', 'ic.category_id')
@@ -34,7 +37,10 @@ class IncomeModel extends BaseModel
             })
             ->select('i.id', 'i.income', 'i.regist_date', 'i.repetition_flg', 'ic.category_name', 'ru.id as read_flg');
 
-        $_query = $this->_addSortQuery($_query, $_sort);
+        if (!is_null($_option['select_day'])) {
+            $_query->whereDay('i.regist_date', $_option['select_day']);
+        }
+        $_query = $this->_addSortQuery($_query, $_option['sort']);
 
         $_ret = $_query->paginate(30);
 
@@ -44,8 +50,15 @@ class IncomeModel extends BaseModel
     public function findTotalOfThisMonth(string $_roomId)
     {
         return DB::table($this->table)
-            ->whereYear('regist_date', now()->format('Y'))
-            ->whereMonth('regist_date', now()->format('m'))
+            ->where(function ($query) {
+                $query->where(function ($query) {
+                    $query->whereYear('regist_date', now()->format('Y'))
+                        ->whereMonth('regist_date', now()->format('m'));
+                })->orWhere(function ($query) {
+                    $query->where('repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON'))
+                        ->where('regist_date', '<', now());
+                });
+            })
             ->where([
                 ['room_id', $_roomId],
                 ['del_flg', config('Const.webDB.DEL_FLG.OFF')]

@@ -7,6 +7,7 @@ import { AlertProps } from "@material-ui/lab";
 import List from "./contents/AccountBook/List";
 import Home from "./contents/Home";
 import RegistMoney from "./contents/RegistMoney";
+import Error from "pages/Error";
 
 export type MypageRoutersProps = {
   handleAlertOpen: (closedTime?: number) => void;
@@ -31,6 +32,7 @@ const MypageRouters: React.FC<MypageRoutersProps> = ({
       <Switch location={location} key={rootPath}>
         <Route exact path="/mypage" children={<Home roomName={roomName} />} />
         <Route path="/mypage/list" children={<List />} />
+        <Route path="/error" children={<Error />} />
         <Route
           path="/mypage/regist"
           children={

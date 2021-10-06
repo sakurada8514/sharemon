@@ -1,4 +1,5 @@
 import React, { useGlobal } from "reactn";
+import { useHistory } from "react-router";
 import useSWR from "swr";
 import { useState } from "react";
 import {
@@ -30,10 +31,11 @@ import useSWRIncomeList from "utils/hooks/useSWRIncomeList";
 import "../../../../styles/Calendar.css";
 
 export default function List() {
-  const setError = useGlobal("error")[1];
+  const history = useHistory();
 
   const [tabValue, setTabValue] = useState(0);
   const [calendarViewDate, setCalendarViewDate] = useState(new Date());
+  const [selectDay, setSelectDay] = useState(null);
   const [sort, setSort] = useState(0);
   const [isCalendarShow, setIsCalendarShow] = useState(true);
 
@@ -43,15 +45,13 @@ export default function List() {
   );
 
   const { expenseList, expenseError, isExpenseLast, loadMoreExpense } =
-    useSWRExpenseList(calendarViewDate, sort);
+    useSWRExpenseList(calendarViewDate, selectDay, sort);
 
   const { incomeList, incomeError, isIncomeLast, loadMoreIncome } =
-    useSWRIncomeList(calendarViewDate, sort);
+    useSWRIncomeList(calendarViewDate, selectDay, sort);
 
   if (expenseError || incomeError || dailyTotalError) {
-    console.log("e");
-
-    // setError(true);
+    history.push("/error");
   }
   const handleTabChange = (event: any, newValue: any) => {
     setTabValue(newValue);
@@ -61,6 +61,16 @@ export default function List() {
   };
   const handleCalendarShowChange = () => {
     setIsCalendarShow(!isCalendarShow);
+  };
+
+  const handleDayClick = (value, event) => {
+    setSelectDay(value);
+  };
+  const handleMonthClick = (value, event) => {
+    setCalendarViewDate(value);
+  };
+  const handleActiveStartDateChange = ({ activeStartDate, value, view }) => {
+    setCalendarViewDate(activeStartDate);
   };
 
   // state の日付と同じ表記に変換
@@ -131,15 +141,9 @@ export default function List() {
             prevLabel={<NavigateBeforeIcon />}
             prev2Label={null}
             tileContent={getTileContent}
-            onClickDay={(value, event) => {
-              // console.log(value);
-            }}
-            onClickMonth={(value, event) => {
-              setCalendarViewDate(value);
-            }}
-            onActiveStartDateChange={({ activeStartDate, value, view }) => {
-              setCalendarViewDate(activeStartDate);
-            }}
+            onClickDay={handleDayClick}
+            onClickMonth={handleMonthClick}
+            onActiveStartDateChange={handleActiveStartDateChange}
           />
         ) : (
           <Calendar

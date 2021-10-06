@@ -18,8 +18,6 @@ const AlertMessage: React.FC<AlertMessageProps> = ({
   severity,
   handleAlert,
 }) => {
-  const classes = useStyles();
-
   return (
     <div className="w-full lg:fixed lg:right-3 lg:top-20">
       <Collapse in={alertOpen}>
@@ -42,17 +40,5 @@ const AlertMessage: React.FC<AlertMessageProps> = ({
     </div>
   );
 };
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "30%",
-    "& > * + *": {
-      marginTop: theme.spacing(2),
-    },
-    position: "fixed",
-    top: "70px",
-    right: "10px",
-  },
-}));
 
 export default AlertMessage;

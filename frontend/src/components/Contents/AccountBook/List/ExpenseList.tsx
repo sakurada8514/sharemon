@@ -46,7 +46,7 @@ const ExpenseList: React.FC<ExpemseListProps> = ({
             );
           })
         ) : (
-          <p>登録なし</p>
+          <p className="text-gray-500 text-center pt-4">登録なし</p>
         )
       ) : (
         <div className="p-4">

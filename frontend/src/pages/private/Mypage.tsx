@@ -24,7 +24,6 @@ import { logout as logoutApi } from "../../api/Auth/login";
 export default function Mypage() {
   const history = useHistory();
   const [user, setUser] = useGlobal("user");
-  const setError = useGlobal("error")[1];
 
   const [sideMenuOpen, setSideMenuOpen] = useState(true);
   const [mobileSideMenuOpen, setMobileSideMenuOpen] = useState(false);
@@ -39,8 +38,9 @@ export default function Mypage() {
     ["/room/", user.room_id],
     getRoomNameApi
   );
+
   if (roomNameError) {
-    setError(true);
+    history.push("/error");
   }
 
   useEffect(() => {
@@ -112,7 +112,7 @@ export default function Mypage() {
       setUser(null);
       history.push("/login");
     } else {
-      setError(true);
+      history.push("/error");
     }
   }
 

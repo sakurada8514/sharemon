@@ -27,15 +27,18 @@ class ExpenseModel extends BaseModel
     }
 
     //TODO 繰り返し　登録日より前の場合表示しないように
-    public function findListByRoomId(string $_roomId, string $_userId, Carbon $_date, int $_sort)
+    public function findListByRoomId(string $_roomId, string $_userId, array $_option)
     {
         $_query = DB::table("$this->table as e")
             ->where('e.room_id', $_roomId)
-            ->where(function ($query) use ($_date) {
-                $query->where(function ($query) use ($_date) {
-                    $query->whereYear('e.regist_date', $_date->format('Y'))
-                        ->whereMonth('e.regist_date', $_date->format('m'));
-                })->orWhere('e.repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON'));
+            ->where(function ($query) use ($_option) {
+                $query->where(function ($query) use ($_option) {
+                    $query->whereYear('e.regist_date', $_option['date']->format('Y'))
+                        ->whereMonth('e.regist_date', $_option['date']->format('m'));
+                })->orWhere(function ($query) use ($_option) {
+                    $query->where('e.repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON'))
+                        ->where('e.regist_date', '<', $_option['date']);
+                });
             })
             ->where('e.del_flg', config('Const.webDB.DEL_FLG.OFF'))
             ->join('expense_categories as ec', 'e.category_id', '=', 'ec.category_id')
@@ -45,7 +48,11 @@ class ExpenseModel extends BaseModel
             })
             ->select('e.id', 'e.expense', 'e.regist_date', 'e.repetition_flg', 'ec.category_name', 'ru.id as read_flg');
 
-        $_query = $this->_addSortQuery($_query, $_sort);
+        if (!is_null($_option['select_day'])) {
+            $_query->whereDay('e.regist_date', $_option['select_day']);
+        }
+
+        $_query = $this->_addSortQuery($_query, $_option['sort']);
         $_ret = $_query->paginate(30);
 
         return $this->_convertArray($_ret);
@@ -59,7 +66,10 @@ class ExpenseModel extends BaseModel
                 $query->where(function ($query) {
                     $query->whereYear('regist_date', now()->format('Y'))
                         ->whereMonth('regist_date', now()->format('m'));
-                })->orWhere('repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON'));
+                })->orWhere(function ($query) {
+                    $query->where('repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON'))
+                        ->where('regist_date', '<', now());
+                });
             })
             ->where([
                 ['room_id', $_roomId],

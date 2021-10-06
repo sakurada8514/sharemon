@@ -29,10 +29,10 @@ class ExpenseController extends Controller
      */
     public function index(Request $request)
     {
-        $_date = $request->date;
-        $_sort = $request->sort;
+        $_option = $request->only('date', 'select_day', 'sort');
+
         $_user = Auth::user();
-        $_expenseList = $this->_expenseService->findListByRoomId($_user->room_id, $_user->id, $_date, $_sort);
+        $_expenseList = $this->_expenseService->findListByRoomId($_user->room_id, $_user->id, $_option);
 
         return $this->jsonResponse($_expenseList, 'Expense.List');
     }
