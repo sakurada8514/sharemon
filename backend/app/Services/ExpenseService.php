@@ -22,8 +22,12 @@ class ExpenseService extends BaseService
     public function findListByRoomId(string $_roomId, string $_userId, array $_option)
     {
         $_option['date'] = new Carbon($_option['date']);
-        $_option['select_day'] = !isset($_option['select_day']) ? null : new Carbon($_option['select_day']);
         return $this->_expenseModel->findListByRoomId($_roomId, $_userId, $_option);
+    }
+
+    public function findDetail(int $_expenseId)
+    {
+        return $this->_expenseModel->findByExpenseId($_expenseId);
     }
 
     public function findCategoryList(string $_roomId): array
@@ -36,5 +40,10 @@ class ExpenseService extends BaseService
         $this->_expenseModel->virtualMethodTransaction('insert', [$_registData, $_user, $_s3ImgUrl]);
 
         return;
+    }
+
+    public function setReadFlg(int $_expenseId, int $_userId)
+    {
+        // 既読フラグ
     }
 }

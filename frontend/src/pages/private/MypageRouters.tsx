@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import { AlertProps } from "@material-ui/lab";
 
 import List from "./contents/AccountBook/List";
+import ExpenseDetail from "./contents/AccountBook/ExpenseDetail";
 import Home from "./contents/Home";
 import RegistMoney from "./contents/RegistMoney";
 import Error from "pages/Error";
@@ -32,6 +33,7 @@ const MypageRouters: React.FC<MypageRoutersProps> = ({
       <Switch location={location} key={rootPath}>
         <Route exact path="/mypage" children={<Home roomName={roomName} />} />
         <Route path="/mypage/list" children={<List />} />
+        <Route path="/mypage/expense/:id" children={<ExpenseDetail />} />
         <Route path="/error" children={<Error />} />
         <Route
           path="/mypage/regist"

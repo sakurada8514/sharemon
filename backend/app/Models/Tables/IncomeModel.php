@@ -37,9 +37,6 @@ class IncomeModel extends BaseModel
             })
             ->select('i.id', 'i.income', 'i.regist_date', 'i.repetition_flg', 'ic.category_name', 'ru.id as read_flg');
 
-        if (!is_null($_option['select_day'])) {
-            $_query->whereDay('i.regist_date', $_option['select_day']);
-        }
         $_query = $this->_addSortQuery($_query, $_option['sort']);
 
         $_ret = $_query->paginate(30);

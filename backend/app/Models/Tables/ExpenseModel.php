@@ -26,7 +26,6 @@ class ExpenseModel extends BaseModel
         $this->_s3ImageModel = $_s3ImageModel;
     }
 
-    //TODO 繰り返し　登録日より前の場合表示しないように
     public function findListByRoomId(string $_roomId, string $_userId, array $_option)
     {
         $_query = DB::table("$this->table as e")
@@ -48,9 +47,6 @@ class ExpenseModel extends BaseModel
             })
             ->select('e.id', 'e.expense', 'e.regist_date', 'e.repetition_flg', 'ec.category_name', 'ru.id as read_flg');
 
-        if (!is_null($_option['select_day'])) {
-            $_query->whereDay('e.regist_date', $_option['select_day']);
-        }
 
         $_query = $this->_addSortQuery($_query, $_option['sort']);
         $_ret = $_query->paginate(30);
@@ -58,6 +54,27 @@ class ExpenseModel extends BaseModel
         return $this->_convertArray($_ret);
     }
 
+    public function findByExpenseId(int $_expenseId)
+    {
+        $_ret = DB::table("$this->table as e")
+            ->join('users as u', 'e.user_id', 'u.id')
+            ->join('expense_categories as ec', 'e.category_id', 'ec.category_id')
+            ->leftJoin('s3_images as si', 'e.s3_image_id', 'si.s3_image_id')
+            ->where('e.id', $_expenseId)
+            ->select(
+                'e.id',
+                'e.expense',
+                'comment',
+                'e.regist_date',
+                'e.repetition_flg',
+                'u.name',
+                'ec.category_name',
+                'si.img_url'
+            )
+            ->first();
+
+        return $this->_convertArray($_ret);
+    }
 
     public function findTotalOfThisMonth(string $_roomId)
     {

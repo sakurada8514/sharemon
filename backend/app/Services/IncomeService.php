@@ -34,7 +34,6 @@ class IncomeService extends BaseService
     public function findListByRoomId(string $_roomId, string $_userId, array $_option)
     {
         $_option['date'] = new Carbon($_option['date']);
-        $_option['select_day'] = !isset($_option['select_day']) ? null : new Carbon($_option['select_day']);
         return $this->_incomeModel->findListByRoomId($_roomId, $_userId, $_option);
     }
 }

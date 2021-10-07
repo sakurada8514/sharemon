@@ -29,7 +29,7 @@ class ExpenseController extends Controller
      */
     public function index(Request $request)
     {
-        $_option = $request->only('date', 'select_day', 'sort');
+        $_option = $request->only('date',  'sort');
 
         $_user = Auth::user();
         $_expenseList = $this->_expenseService->findListByRoomId($_user->room_id, $_user->id, $_option);
@@ -61,9 +61,11 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
-        //
+        $_detail = $this->_expenseService->findDetail($id);
+        $this->_expenseService->setReadFlg($id, Auth::id());
+        return $this->jsonResponse($_detail, 'Expense.Detail');
     }
 
     /**

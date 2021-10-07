@@ -1,4 +1,4 @@
-import React, { useGlobal } from "reactn";
+import React from "react";
 import { useHistory } from "react-router";
 import useSWR from "swr";
 import { useState } from "react";
@@ -35,7 +35,6 @@ export default function List() {
 
   const [tabValue, setTabValue] = useState(0);
   const [calendarViewDate, setCalendarViewDate] = useState(new Date());
-  const [selectDay, setSelectDay] = useState(null);
   const [sort, setSort] = useState(0);
   const [isCalendarShow, setIsCalendarShow] = useState(true);
 
@@ -45,10 +44,10 @@ export default function List() {
   );
 
   const { expenseList, expenseError, isExpenseLast, loadMoreExpense } =
-    useSWRExpenseList(calendarViewDate, selectDay, sort);
+    useSWRExpenseList(calendarViewDate, sort);
 
   const { incomeList, incomeError, isIncomeLast, loadMoreIncome } =
-    useSWRIncomeList(calendarViewDate, selectDay, sort);
+    useSWRIncomeList(calendarViewDate, sort);
 
   if (expenseError || incomeError || dailyTotalError) {
     history.push("/error");
@@ -63,9 +62,6 @@ export default function List() {
     setIsCalendarShow(!isCalendarShow);
   };
 
-  const handleDayClick = (value, event) => {
-    setSelectDay(value);
-  };
   const handleMonthClick = (value, event) => {
     setCalendarViewDate(value);
   };
@@ -141,7 +137,6 @@ export default function List() {
             prevLabel={<NavigateBeforeIcon />}
             prev2Label={null}
             tileContent={getTileContent}
-            onClickDay={handleDayClick}
             onClickMonth={handleMonthClick}
             onActiveStartDateChange={handleActiveStartDateChange}
           />

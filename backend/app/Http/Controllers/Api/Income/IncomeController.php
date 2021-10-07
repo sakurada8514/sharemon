@@ -24,7 +24,7 @@ class IncomeController extends Controller
      */
     public function index(Request $request)
     {
-        $_option = $request->only('date', 'select_day', 'sort');
+        $_option = $request->only('date',  'sort');
         $_user = Auth::user();
         $_incomeList = $this->_incomeService->findListByRoomId($_user->room_id, $_user->id, $_option);
 
