@@ -17,7 +17,7 @@ const ExpenseDetail = () => {
   );
   return (
     <div>
-      <p>{detail.name}</p>
+      <p>{detail && detail.name}</p>
     </div>
   );
 };

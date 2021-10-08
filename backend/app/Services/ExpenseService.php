@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Tables\ExpenseAlreadyReadUserModel;
 use App\Models\Tables\ExpenseCategoryModel;
 use App\Models\Tables\ExpenseModel;
 use App\Services\Core\BaseService;
@@ -12,11 +13,16 @@ class ExpenseService extends BaseService
 {
     private ?ExpenseCategoryModel $_expenseCategoryModel = null;
     private ?ExpenseModel $_expenseModel = null;
+    private ?ExpenseAlreadyReadUserModel $_expenseAlreadyReadUserModel = null;
 
-    public function __construct(ExpenseCategoryModel $_expenseCategoryModel, ExpenseModel $_expenseModel)
-    {
+    public function __construct(
+        ExpenseCategoryModel $_expenseCategoryModel,
+        ExpenseModel $_expenseModel,
+        ExpenseAlreadyReadUserModel $_expenseAlreadyReadUserModel
+    ) {
         $this->_expenseCategoryModel = $_expenseCategoryModel;
         $this->_expenseModel = $_expenseModel;
+        $this->_expenseAlreadyReadUserModel = $_expenseAlreadyReadUserModel;
     }
 
     public function findListByRoomId(string $_roomId, string $_userId, array $_option)
@@ -44,6 +50,14 @@ class ExpenseService extends BaseService
 
     public function setReadFlg(int $_expenseId, int $_userId)
     {
-        // 既読フラグ
+        if ($this->_expenseAlreadyReadUserModel->exists($_expenseId, $_userId)) {
+            return;
+        }
+
+        $_data = [
+            'expense_id' => $_expenseId,
+            'user_id'    => $_userId
+        ];
+        $this->_expenseAlreadyReadUserModel->insert($_data);
     }
 }

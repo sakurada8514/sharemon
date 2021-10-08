@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Tables\IncomeAlreadyReadUserModel;
 use App\Models\Tables\IncomeCategoryModel;
 use App\Models\Tables\IncomeModel;
 use App\Services\Core\BaseService;
@@ -12,11 +13,16 @@ class IncomeService extends BaseService
 {
     private ?IncomeCategoryModel $_incomeCategoryModel = null;
     private ?IncomeModel         $_incomeModel         = null;
+    private ?IncomeAlreadyReadUserModel $_incomeAlreadyReadUserModel = null;
 
-    public function __construct(IncomeCategoryModel $_incomeCategoryModel, IncomeModel $_incomeModel)
-    {
+    public function __construct(
+        IncomeCategoryModel $_incomeCategoryModel,
+        IncomeModel $_incomeModel,
+        IncomeAlreadyReadUserModel $_incomeAlreadyReadUserModel
+    ) {
         $this->_incomeCategoryModel = $_incomeCategoryModel;
         $this->_incomeModel         = $_incomeModel;
+        $this->_incomeAlreadyReadUserModel = $_incomeAlreadyReadUserModel;
     }
 
     public function findCategoryList(string $_roomId): array
@@ -35,5 +41,19 @@ class IncomeService extends BaseService
     {
         $_option['date'] = new Carbon($_option['date']);
         return $this->_incomeModel->findListByRoomId($_roomId, $_userId, $_option);
+    }
+
+
+    public function setReadFlg(int $_incomeId, int $_userId)
+    {
+        if ($this->_incomeAlreadyReadUserModel->exists($_incomeId, $_userId)) {
+            return;
+        }
+
+        $_data = [
+            'income_id' => $_incomeId,
+            'user_id'    => $_userId
+        ];
+        $this->_incomeAlreadyReadUserModel->insert($_data);
     }
 }
