@@ -55,7 +55,9 @@ class IncomeController extends Controller
      */
     public function show($id)
     {
-        //
+        $_detail = $this->_incomeService->findDetail($id);
+        $this->_incomeService->setReadFlg($id, Auth::id());
+        return $this->jsonResponse($_detail, 'Income.Detail');
     }
 
     /**

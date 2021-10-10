@@ -6,6 +6,7 @@ import { AlertProps } from "@material-ui/lab";
 
 import List from "./contents/AccountBook/List";
 import ExpenseDetail from "./contents/AccountBook/ExpenseDetail";
+import IncomeDetail from "./contents/AccountBook/IncomeDetail";
 import Home from "./contents/Home";
 import RegistMoney from "./contents/RegistMoney";
 import Error from "pages/Error";
@@ -34,6 +35,7 @@ const MypageRouters: React.FC<MypageRoutersProps> = ({
         <Route exact path="/mypage" children={<Home roomName={roomName} />} />
         <Route path="/mypage/list" children={<List />} />
         <Route path="/mypage/expense/:id" children={<ExpenseDetail />} />
+        <Route path="/mypage/income/:id" children={<IncomeDetail />} />
         <Route path="/error" children={<Error />} />
         <Route
           path="/mypage/regist"

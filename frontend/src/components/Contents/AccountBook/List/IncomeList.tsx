@@ -1,5 +1,6 @@
 import React from "react";
 import { Skeleton } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 import LoadMoreButton from "../../../Atoms/Buttons/LoadMoreButton";
 
@@ -20,29 +21,28 @@ const IncomeList: React.FC<IncomeListProps> = ({
         incomeList.length > 0 ? (
           incomeList.map((data: any) => {
             return (
-              <div
-                key={data.id}
-                className="flex justify-between px-4 py-2 border-b"
-              >
-                <div>
-                  <p className="text-xl">{data.category_name}</p>
-                  {data.repetition_flg === 0 ? (
-                    <p className="text-gray-500">{data.regist_date}</p>
-                  ) : (
-                    <p className="text-gray-500">
-                      {data.regist_date}から毎月繰り返し
-                    </p>
-                  )}
+              <NavLink key={data.id} to={"/mypage/income/" + data.id}>
+                <div className="flex justify-between px-4 py-2 border-b">
+                  <div>
+                    <p className="text-xl">{data.category_name}</p>
+                    {data.repetition_flg === 0 ? (
+                      <p className="text-gray-500">{data.regist_date}</p>
+                    ) : (
+                      <p className="text-gray-500">
+                        {data.regist_date}から毎月繰り返し
+                      </p>
+                    )}
+                  </div>
+                  <div className="text-right flex flex-col items-end">
+                    <p className="text-xl mb-1">{data.income}円</p>
+                    {!data.read_flg && (
+                      <p className="text-white text-center font-light text-xs bg-red-500 rounded-2xl px-1 w-10">
+                        new
+                      </p>
+                    )}
+                  </div>
                 </div>
-                <div className="text-right flex flex-col items-end">
-                  <p className="text-xl mb-1">{data.income}円</p>
-                  {!data.read_flg && (
-                    <p className="text-white text-center font-light text-xs bg-red-500 rounded-2xl px-1 w-10">
-                      new
-                    </p>
-                  )}
-                </div>
-              </div>
+              </NavLink>
             );
           })
         ) : (

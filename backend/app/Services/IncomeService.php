@@ -43,6 +43,11 @@ class IncomeService extends BaseService
         return $this->_incomeModel->findListByRoomId($_roomId, $_userId, $_option);
     }
 
+    public function findDetail(int $_incomeId)
+    {
+        return $this->_incomeModel->findByIncomeId($_incomeId);
+    }
+
 
     public function setReadFlg(int $_incomeId, int $_userId)
     {

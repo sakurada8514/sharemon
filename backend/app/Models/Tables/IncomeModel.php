@@ -44,6 +44,26 @@ class IncomeModel extends BaseModel
         return $this->_convertArray($_ret);
     }
 
+    public function findByIncomeId(int $_incomeId)
+    {
+        $_ret = DB::table("$this->table as i")
+            ->join('users as u', 'i.user_id', 'u.id')
+            ->join('income_categories as ic', 'i.category_id', 'ic.category_id')
+            ->where('i.id', $_incomeId)
+            ->select(
+                'i.id',
+                'i.income',
+                'comment',
+                'i.regist_date',
+                'i.repetition_flg',
+                'u.name',
+                'ic.category_name',
+            )
+            ->first();
+
+        return $this->_convertArray($_ret);
+    }
+
     public function findTotalOfThisMonth(string $_roomId)
     {
         return DB::table($this->table)
