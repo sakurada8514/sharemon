@@ -31,17 +31,17 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
     <div className="p-3">
       <Box className="w-full bg-white p-3 rounded shadow mb-6">
         {roomName ? (
-          <Typography variant="h5" gutterBottom>
+          <Typography variant="h5" className="mb-2">
             {roomName}
           </Typography>
         ) : (
-          <Skeleton className="w-1/2 h-10 mb-2" />
+          <Skeleton className="w-1/2 h-8 mb-2" />
         )}
         <Box display="flex" flexWrap="wrap" justifyContent="space-between">
           {!member ? (
             <>
               <Box className="w-full justify-between flex-wrap">
-                <Skeleton className="w-full h-10" />
+                <Skeleton className="w-full h-8 my-1" />
                 {/* <Skeleton className="w-full h-9" /> */}
               </Box>
             </>
