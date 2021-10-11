@@ -29,12 +29,9 @@ const BottomAppBar: React.FC<BottomAppBarProps> = ({
               <HomeIcon className="w-7 h-7" />
             </IconButton>
           </NavLink>
+          <Box sx={{ flexGrow: 1 }} />
           <NavLink to="/mypage/regist" exact>
-            <Fab
-              color="primary"
-              aria-label="add"
-              className="absolute -top-5 left-0 right-0 my-0 z-10 mx-auto"
-            >
+            <Fab color="primary" aria-label="add" className="w-12 h-12">
               <AddIcon />
             </Fab>
           </NavLink>

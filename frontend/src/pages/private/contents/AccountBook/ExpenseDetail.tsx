@@ -1,24 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import useSWR from "swr";
 import { IconButton, Skeleton } from "@mui/material";
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
+import { AlertProps } from "@material-ui/lab";
 
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { fetcherApi } from "api/fetcher";
+import { deleteExpenseApi } from "api/Expense";
+import { OK } from "../../../../utils/constant";
+import AjaxLoading from "components/Atoms/Loading/AjaxLoading";
 
 type ExpenseDetailRouteParams = {
   id: string;
 };
-
-const ExpenseDetail = () => {
+type ExpenseDetailProps = {
+  handleAlertOpen: (closedTime?: number) => void;
+  setAlertSeverity: React.Dispatch<
+    React.SetStateAction<AlertProps["severity"]>
+  >;
+  setAlertMessage: React.Dispatch<React.SetStateAction<string>>;
+};
+const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
+  handleAlertOpen,
+  setAlertSeverity,
+  setAlertMessage,
+}) => {
   const classes = style();
   const history = useHistory();
   const { id } = useParams<ExpenseDetailRouteParams>();
+
+  const [loading, setLoading] = useState(false);
 
   const { data: detail, error } = useSWR(
     ["expense/" + id, "detail"],
@@ -30,6 +46,19 @@ const ExpenseDetail = () => {
   }
 
   const handleBackClick = () => [history.goBack()];
+
+  const handleDeleteButtonClick = async () => {
+    setLoading(true);
+    const response = await deleteExpenseApi(detail.id);
+
+    if (response === OK) {
+      handleAlertOpen();
+      setAlertMessage("正常に支出を削除しました");
+      history.push("/mypage/list");
+    } else {
+      history.push("/error");
+    }
+  };
   return (
     <div className="px-2 py-2">
       <div className="flex justify-between">
@@ -41,7 +70,11 @@ const ExpenseDetail = () => {
           <IconButton aria-label="edit" size="large" color="primary">
             <EditIcon fontSize="inherit" />
           </IconButton>
-          <IconButton aria-label="delete" size="large">
+          <IconButton
+            aria-label="delete"
+            size="large"
+            onClick={handleDeleteButtonClick}
+          >
             <DeleteIcon fontSize="inherit" className="text-red-500" />
           </IconButton>
         </div>
@@ -96,7 +129,7 @@ const ExpenseDetail = () => {
         {detail ? (
           <p
             className={clsx(
-              "mt-2 p-2 rounded-md border border-blue-100 whitespace-pre-wrap",
+              "mt-2 p-2 rounded-md border bg-blue-50 border-blue-100 whitespace-pre-wrap",
               classes.comment
             )}
           >
@@ -122,6 +155,7 @@ const ExpenseDetail = () => {
           <Skeleton variant="rectangular" className="h-48 w-full" />
         )}
       </div>
+      {loading && <AjaxLoading />}
     </div>
   );
 };

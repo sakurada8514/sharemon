@@ -7,7 +7,7 @@ import Routers from "./Routers";
 import { theme } from "./theme";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
-import Loading from "./components/Atoms/Loading";
+import Loading from "./components/Atoms/Loading/Loading";
 import ModalTemplate from "./components/Modal/ModalTemplate";
 import ErrorModal from "./components/Modal/ErrorModal";
 import useAuth from "utils/hooks/useAuth";

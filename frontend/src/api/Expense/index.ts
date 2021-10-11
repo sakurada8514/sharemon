@@ -18,3 +18,11 @@ export async function expenseListfetcher(
 
   return response;
 }
+
+export async function deleteExpenseApi(id: number) {
+  const response = await apiClient
+    .delete("/expense/" + id)
+    .catch((err) => err.response);
+
+  return response.status;
+}

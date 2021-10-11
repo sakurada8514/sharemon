@@ -18,3 +18,11 @@ export async function incomeListfetcher(
 
   return response;
 }
+
+export async function deleteIncomeApi(id: number) {
+  const response = await apiClient
+    .delete("/income/" + id)
+    .catch((err) => err.response);
+
+  return response.status;
+}

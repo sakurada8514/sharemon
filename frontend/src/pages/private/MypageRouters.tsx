@@ -34,8 +34,26 @@ const MypageRouters: React.FC<MypageRoutersProps> = ({
       <Switch location={location} key={rootPath}>
         <Route exact path="/mypage" children={<Home roomName={roomName} />} />
         <Route path="/mypage/list" children={<List />} />
-        <Route path="/mypage/expense/:id" children={<ExpenseDetail />} />
-        <Route path="/mypage/income/:id" children={<IncomeDetail />} />
+        <Route
+          path="/mypage/expense/:id"
+          children={
+            <ExpenseDetail
+              handleAlertOpen={handleAlertOpen}
+              setAlertSeverity={setAlertSeverity}
+              setAlertMessage={setAlertMessage}
+            />
+          }
+        />
+        <Route
+          path="/mypage/income/:id"
+          children={
+            <IncomeDetail
+              handleAlertOpen={handleAlertOpen}
+              setAlertSeverity={setAlertSeverity}
+              setAlertMessage={setAlertMessage}
+            />
+          }
+        />
         <Route path="/error" children={<Error />} />
         <Route
           path="/mypage/regist"

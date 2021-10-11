@@ -19,7 +19,7 @@ const AlertMessage: React.FC<AlertMessageProps> = ({
   handleAlert,
 }) => {
   return (
-    <div className="w-full lg:fixed lg:right-3 lg:top-20">
+    <div className="w-full bottom-14 fixed lg:right-3 lg:top-20">
       <Collapse in={alertOpen}>
         <Alert
           severity={severity}
