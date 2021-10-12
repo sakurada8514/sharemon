@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, NavLink } from "react-router-dom";
 import useSWR from "swr";
 import { IconButton, Skeleton } from "@mui/material";
 import { makeStyles } from "@material-ui/styles";
@@ -59,6 +59,10 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
       history.push("/error");
     }
   };
+
+  const handleEditButtonClick = () => {
+    history.push("/mypage/expense/edit/" + detail.id);
+  };
   return (
     <div className="px-2 py-2">
       <div className="flex justify-between">
@@ -67,7 +71,12 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
           <span className="text-lg">戻る</span>
         </button>
         <div>
-          <IconButton aria-label="edit" size="large" color="primary">
+          <IconButton
+            aria-label="edit"
+            size="large"
+            color="primary"
+            onClick={handleEditButtonClick}
+          >
             <EditIcon fontSize="inherit" />
           </IconButton>
           <IconButton

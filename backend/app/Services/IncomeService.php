@@ -61,4 +61,13 @@ class IncomeService extends BaseService
         ];
         $this->_incomeAlreadyReadUserModel->insert($_data);
     }
+
+    public function delete(int $_incomeId)
+    {
+        $_data = [
+            'id' => $_incomeId,
+            'del_flg' => config('Const.webDB.DEL_FLG.ON')
+        ];
+        $this->_incomeModel->updateData($_data);
+    }
 }

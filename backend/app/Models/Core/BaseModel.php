@@ -38,6 +38,13 @@ class BaseModel extends Model
         ];
     }
 
+    protected function _getBaseDefaultUpdateData(): array
+    {
+        return [
+            'updated_at' => now()
+        ];
+    }
+
     protected function _getBaseDefaultInsertDataWithDelFlg(): array
     {
         return [

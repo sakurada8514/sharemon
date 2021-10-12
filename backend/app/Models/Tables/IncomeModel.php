@@ -110,6 +110,12 @@ class IncomeModel extends BaseModel
         return;
     }
 
+    public function updateData(array $_date)
+    {
+        $_update = $this->_createInsertUpdateData($_date, $this->_getBaseDefaultUpdateData());
+        DB::table($this->table)->where('id', $_date['id'])->update($_update);
+    }
+
     private function _addSortQuery(object $_query, int $_sort)
     {
         switch ($_sort) {

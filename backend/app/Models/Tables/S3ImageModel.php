@@ -13,10 +13,9 @@ class S3ImageModel extends BaseModel
         'expense_id', 'img_url', 'del_flg'
     ];
 
-    public function insert(string $_imgUrl): void
+    public function insert(string $_imgUrl): int
     {
         $_insert = $this->_createInsertUpdateData(['img_url' => $_imgUrl], $this->_getBaseDefaultInsertDataWithDelFlg());
-        DB::table($this->table)->insert($_insert);
-        return;
+        return DB::table($this->table)->insertGetId($_insert);
     }
 }

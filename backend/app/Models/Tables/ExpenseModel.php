@@ -119,9 +119,7 @@ class ExpenseModel extends BaseModel
     public function insert(array $_registData, Authenticatable $_user, ?string $_s3ImgUrl = null): void
     {
         if (isset($_s3ImgUrl)) {
-            $this->_s3ImageModel->insert($_s3ImgUrl);
-
-            $_registData['s3_image_id'] = DB::getPdo()->lastInsertId();
+            $_registData['s3_image_id'] = $this->_s3ImageModel->insert($_s3ImgUrl);
         }
 
         $_insert = $this->_createInsertUpdateData($this->_addUserData($_registData, $_user), $this->_getBaseDefaultInsertDataWithDelFlg());
@@ -129,6 +127,12 @@ class ExpenseModel extends BaseModel
         DB::table($this->table)->insert($_insert);
 
         return;
+    }
+
+    public function updateData(array $_date)
+    {
+        $_update = $this->_createInsertUpdateData($_date, $this->_getBaseDefaultUpdateData());
+        DB::table($this->table)->where('id', $_date['id'])->update($_update);
     }
 
     private function _addSortQuery(object $_query, int $_sort)

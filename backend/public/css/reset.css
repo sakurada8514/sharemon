@@ -499,18 +499,24 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
-/* スクロールの幅の設定 */
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 10px;
-    height: 10px;
-} */
-
-/* スクロールの背景の設定 */
-
-/* スクロールのつまみ部分の設定 */
-/* ::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-} */
-html {
-    overflow: overlay;
 }
+
+/*スクロールバーの軌道*/
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+/*スクロールバーの動く部分*/
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 50, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+html {
+    overflow: auto;
+}
+
+/* overflow: overlay; */

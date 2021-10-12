@@ -60,4 +60,13 @@ class ExpenseService extends BaseService
         ];
         $this->_expenseAlreadyReadUserModel->insert($_data);
     }
+
+    public function delete(int $_expenseId)
+    {
+        $_data = [
+            'id' => $_expenseId,
+            'del_flg' => config('Const.webDB.DEL_FLG.ON')
+        ];
+        $this->_expenseModel->updateData($_data);
+    }
 }
