@@ -1,17 +1,19 @@
 import React, { useGlobal, useRef, useState, useEffect } from "reactn";
 import useSWR from "swr";
-import { useHistory } from "react-router";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { DatePickerProps } from "@material-ui/pickers";
 import { AlertProps } from "@material-ui/lab";
+import { Dispatch, SetStateAction } from "react";
 
-import RegistExpenseForm from "components/Form/RegistExpenseForm";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+
+import ExpenseForm from "components/Form/ExpenseForm";
+import AjaxLoading from "components/Atoms/Loading/AjaxLoading";
 import { OK, VALIDATION } from "utils/constant";
 
 import { getCategoryList as getCategoryListApi } from "api/Expense/category";
 import { registExpense as registExpenseApi } from "api/Expense/regist";
 import { fetcherApi } from "api/fetcher";
-import { Dispatch, SetStateAction } from "react";
 
 type EditExpenseProps = {
   handleAlertOpen: (closedTime?: number) => void;
@@ -42,24 +44,30 @@ const EditExpense: React.FC<EditExpenseProps> = ({
   >("");
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [ajaxLoading, setAjaxLoading] = useState(true);
 
   const { data: categoryList, error: categoryListError } = useSWR(
     "/expensecategory",
     getCategoryListApi
   );
-  const { data: detail, error } = useSWR(
-    ["expense/" + id, "detail"],
-    fetcherApi,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    }
-  );
-  if (detail) {
-    console.log(detail);
-  }
-  if (categoryListError || error) {
+
+  useEffect(() => {
+    getExpenseDetail();
+  }, []);
+
+  const getExpenseDetail = async () => {
+    const response = await fetcherApi("/expense/" + id, "detail");
+
+    setExpense(response.expense);
+    setDate(response.regist_date);
+    setCategory(response.category_id);
+    setComment(response.comment ? response.comment : "");
+    setRepetition(response.repetition_flg);
+    setReceiptImgPreview(response.img_url);
+    setAjaxLoading(false);
+  };
+
+  if (categoryListError) {
     history.push("/error");
   }
 
@@ -131,10 +139,15 @@ const EditExpense: React.FC<EditExpenseProps> = ({
     }
     setLoading(false);
   }
+  const handleBackClick = () => [history.goBack()];
 
   return (
-    <div className="px-3">
-      <RegistExpenseForm
+    <div className="px-2 pt-2">
+      <button className="flex items-center py-2" onClick={handleBackClick}>
+        <NavigateBeforeIcon className="w-7 h-7" />
+        <span className="text-lg">戻る</span>
+      </button>
+      <ExpenseForm
         registExpense={registExpense}
         expense={expense}
         date={date}
@@ -146,6 +159,7 @@ const EditExpense: React.FC<EditExpenseProps> = ({
         categoryList={categoryList}
         errors={errors}
         loading={loading}
+        buttonText="支出編集"
         setDate={handleChangeDate}
         handleChangeExpense={handleChangeExpense}
         handleChangeCategory={handleChangeCategory}
@@ -155,6 +169,7 @@ const EditExpense: React.FC<EditExpenseProps> = ({
         handleClickFileInput={handleClickFileInput}
         handleFileReset={handleFileReset}
       />
+      {ajaxLoading && <AjaxLoading />}
     </div>
   );
 };

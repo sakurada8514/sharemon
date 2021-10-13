@@ -57,6 +57,7 @@ class IncomeModel extends BaseModel
                 'i.regist_date',
                 'i.repetition_flg',
                 'u.name',
+                'ic.category_id',
                 'ic.category_name',
             )
             ->first();

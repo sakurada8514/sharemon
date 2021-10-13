@@ -64,7 +64,7 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
     history.push("/mypage/expense/edit/" + detail.id);
   };
   return (
-    <div className="px-2 py-2">
+    <div className="px-4 py-2">
       <div className="flex justify-between">
         <button className="flex items-center py-2" onClick={handleBackClick}>
           <NavigateBeforeIcon className="w-7 h-7" />

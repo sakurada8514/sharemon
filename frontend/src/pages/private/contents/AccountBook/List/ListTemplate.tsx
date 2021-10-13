@@ -20,17 +20,17 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 import TabPanel from "components/Atoms/TabPanel";
-import ExpenseList from "components/Contents/AccountBook/List/ExpenseList";
-import IncomeList from "components/Contents/AccountBook/List/IncomeList";
+import ExpenseList from "pages/private/contents/AccountBook/List/ExpenseList";
+import IncomeList from "pages/private/contents/AccountBook/List/IncomeList";
 
 import { formatDate } from "utils/handy";
 import { fetcherApi } from "api/fetcher";
 import useSWRExpenseList from "utils/hooks/useSWRExpenseList";
 import useSWRIncomeList from "utils/hooks/useSWRIncomeList";
 
-import "../../../../styles/Calendar.css";
+import "../../../../../styles/Calendar.css";
 
-export default function List() {
+export default function ListTemplate() {
   const history = useHistory();
 
   const [tabValue, setTabValue] = useState(0);

@@ -68,6 +68,7 @@ class ExpenseModel extends BaseModel
                 'e.regist_date',
                 'e.repetition_flg',
                 'u.name',
+                'ec.category_id',
                 'ec.category_name',
                 'si.img_url'
             )

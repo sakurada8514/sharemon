@@ -1,17 +1,17 @@
-import React, { useGlobal, useRef, useState, useEffect } from "reactn";
+import React, { useGlobal, useState } from "reactn";
+import { Dispatch, SetStateAction } from "react";
 import useSWR from "swr";
 import { useHistory } from "react-router";
 import { DatePickerProps } from "@material-ui/pickers";
 import { AlertProps } from "@material-ui/lab";
 
-import RegistExpenseForm from "../../Form/RegistExpenseForm";
-import { OK, VALIDATION } from "../../../utils/constant";
+import IncomeForm from "components/Form/IncomeForm";
+import { OK, VALIDATION } from "utils/constant";
 
-import { getCategoryList as getCategoryListApi } from "../../../api/Expense/category";
-import { registExpense as registExpenseApi } from "../../../api/Expense/regist";
-import { Dispatch, SetStateAction } from "react";
+import { getCategoryList as getCategoryListApi } from "api/Income/category";
+import { registIncome as registIncomeApi } from "api/Income/regist";
 
-type RegistMoneyProps = {
+type EditIncomeProps = {
   handleAlertOpen: (closedTime?: number) => void;
   setAlertSeverity: React.Dispatch<
     React.SetStateAction<AlertProps["severity"]>
@@ -19,36 +19,30 @@ type RegistMoneyProps = {
   setAlertMessage: Dispatch<SetStateAction<string>>;
 };
 
-const RegistExpense: React.FC<RegistMoneyProps> = ({
+const EditIncome: React.FC<EditIncomeProps> = ({
   handleAlertOpen,
   setAlertSeverity,
   setAlertMessage,
 }) => {
   const history = useHistory();
 
-  const [expense, setExpense] = useState("");
+  const [income, setIncome] = useState("");
   const [date, setDate] = useState(new Date());
   const [category, setCategory] = useState(1);
   const [repetition, setRepetition] = useState(false);
   const [comment, setComment] = useState("");
-  const [receiptImg, setReceiptImg] = useState("");
-  const [receiptImgPreview, setReceiptImgPreview] = useState<
-    string | ArrayBuffer | null
-  >("");
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const { data: categoryList, error: categoryListError } = useSWR(
-    "/expensecategory",
+    "/incomecategory",
     getCategoryListApi
   );
   if (categoryListError) {
     history.push("/error");
   }
 
-  const fileInput = useRef(null);
-
-  const handleChangeExpense = (e: any) => setExpense(e.target.value);
+  const handleChangeIncome = (e: any) => setIncome(e.target.value);
   const handleChangeCategory = (e: any) => setCategory(e.target.value);
   const handleChangeComment = (e: any) => setComment(e.target.value);
   const handleToggleRepetition = () => {
@@ -57,56 +51,30 @@ const RegistExpense: React.FC<RegistMoneyProps> = ({
   const handleChangeDate: DatePickerProps["onChange"] = (date: any) => {
     setDate(date);
   };
-  const handleClickFileInput = () => {
-    fileInput.current.click();
-  };
-  const handleChangeFile = (e: any) => {
-    const files = e.target.files;
 
-    if (files.length > 0) {
-      const file = files[0];
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        if (e.target) {
-          setReceiptImgPreview(e.target.result);
-        }
-      };
-      reader.readAsDataURL(file);
-
-      setReceiptImg(file);
-    }
-  };
-  const handleFileReset = () => {
-    fileInput.current.value = "";
-    setReceiptImg("");
-    setReceiptImgPreview("");
-  };
-
-  async function registExpense() {
+  async function registIncome() {
     setLoading(true);
-    const response = await registExpenseApi(
-      expense,
+    const response = await registIncomeApi(
+      income,
       date,
       category,
       comment,
-      repetition,
-      receiptImg
+      repetition
     );
 
     if (response.status === OK) {
       handleAlertOpen();
-      setAlertMessage("正常に支出を作成しました");
-      setExpense("");
+      setAlertMessage("正常に収入を作成しました");
+      setIncome("");
       setDate(new Date());
       setCategory(1);
       setComment("");
       setRepetition(false);
       setErrors([]);
-      handleFileReset();
     } else if (response.status === VALIDATION) {
       setErrors(response.data.errors);
     } else {
-      handleAlertOpen(6000);
+      handleAlertOpen();
       setAlertSeverity("error");
       setAlertMessage(
         "何かしらのエラーが発生しました。時間をおいてから再度お試しください。"
@@ -116,27 +84,23 @@ const RegistExpense: React.FC<RegistMoneyProps> = ({
   }
 
   return (
-    <RegistExpenseForm
-      registExpense={registExpense}
-      expense={expense}
+    <IncomeForm
+      registIncome={registIncome}
+      income={income}
       date={date}
       category={category}
       comment={comment}
       repetition={repetition}
-      fileInput={fileInput}
-      receiptImgPreview={receiptImgPreview}
       categoryList={categoryList}
-      errors={errors}
       loading={loading}
+      errors={errors}
+      buttonText="収入編集"
       setDate={handleChangeDate}
-      handleChangeExpense={handleChangeExpense}
+      handleChangeIncome={handleChangeIncome}
       handleChangeCategory={handleChangeCategory}
       handleChangeComment={handleChangeComment}
       handleToggleRepetition={handleToggleRepetition}
-      handleChangeFile={handleChangeFile}
-      handleClickFileInput={handleClickFileInput}
-      handleFileReset={handleFileReset}
     />
   );
 };
-export default RegistExpense;
+export default EditIncome;

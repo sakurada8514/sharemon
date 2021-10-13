@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/styles";
 import MediaQuery from "react-responsive";
 import {
   Select,
@@ -34,6 +33,7 @@ type RegistExpenseFormProps = {
   categoryList: any;
   errors: any;
   loading: boolean;
+  buttonText: string;
   setDate: DatePickerProps["onChange"];
   handleChangeExpense: (e: any) => void;
   handleChangeCategory: (e: any) => void;
@@ -44,7 +44,7 @@ type RegistExpenseFormProps = {
   handleFileReset: () => void;
 };
 
-const RegistExpenseForm: React.FC<RegistExpenseFormProps> = ({
+const ExpenseForm: React.FC<RegistExpenseFormProps> = ({
   registExpense,
   expense,
   date,
@@ -56,6 +56,7 @@ const RegistExpenseForm: React.FC<RegistExpenseFormProps> = ({
   categoryList,
   errors,
   loading,
+  buttonText,
   setDate,
   handleChangeExpense,
   handleChangeCategory,
@@ -195,7 +196,7 @@ const RegistExpenseForm: React.FC<RegistExpenseFormProps> = ({
           <LoadingButton
             handleButtonClick={registExpense}
             loading={loading}
-            text={"支出作成"}
+            text={buttonText}
             color={"secondary"}
             fullWidth={true}
           />
@@ -205,4 +206,4 @@ const RegistExpenseForm: React.FC<RegistExpenseFormProps> = ({
   );
 };
 
-export default RegistExpenseForm;
+export default ExpenseForm;

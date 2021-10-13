@@ -2,7 +2,7 @@ import React from "react";
 import { Skeleton } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-import LoadMoreButton from "../../../Atoms/Buttons/LoadMoreButton";
+import LoadMoreButton from "../../../../../components/Atoms/Buttons/LoadMoreButton";
 
 type ExpemseListProps = {
   expenseList?: any[];

@@ -18,7 +18,7 @@ import MyDatePicker from "../Atoms/Form/DatePicker";
 import LoadingButton from "../Atoms/Buttons/LoadingButton";
 import { BACK_COLOR_GREEN } from "../../utils/constant";
 
-type RegistIncomeFormProps = {
+type IncomeFormProps = {
   registIncome: () => Promise<void>;
   income: string;
   date: Date;
@@ -28,6 +28,7 @@ type RegistIncomeFormProps = {
   categoryList: any;
   errors: any;
   loading: boolean;
+  buttonText: string;
   setDate: DatePickerProps["onChange"];
   handleChangeIncome: (e: any) => void;
   handleChangeCategory: (e: any) => void;
@@ -35,7 +36,7 @@ type RegistIncomeFormProps = {
   handleToggleRepetition: () => void;
 };
 
-const RegistIncomeForm: React.FC<RegistIncomeFormProps> = ({
+const IncomeForm: React.FC<IncomeFormProps> = ({
   registIncome,
   income,
   date,
@@ -45,6 +46,7 @@ const RegistIncomeForm: React.FC<RegistIncomeFormProps> = ({
   categoryList,
   errors,
   loading,
+  buttonText,
   setDate,
   handleChangeIncome,
   handleChangeCategory,
@@ -132,7 +134,7 @@ const RegistIncomeForm: React.FC<RegistIncomeFormProps> = ({
             <LoadingButton
               handleButtonClick={registIncome}
               loading={loading}
-              text={"支出作成"}
+              text={buttonText}
               color={"secondary"}
               fullWidth={true}
             />
@@ -143,4 +145,4 @@ const RegistIncomeForm: React.FC<RegistIncomeFormProps> = ({
   );
 };
 
-export default RegistIncomeForm;
+export default IncomeForm;

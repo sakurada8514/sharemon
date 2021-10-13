@@ -4,12 +4,12 @@ import { Route, Switch } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { AlertProps } from "@material-ui/lab";
 
-import List from "./contents/AccountBook/List";
+import List from "./contents/AccountBook/List/ListTemplate";
 import ExpenseDetail from "./contents/AccountBook/ExpenseDetail";
 import IncomeDetail from "./contents/AccountBook/IncomeDetail";
 import EditExpense from "./contents/AccountBook/Edit/EditExpense";
 import Home from "./contents/Home";
-import RegistMoney from "./contents/RegistMoney";
+import RegistMoney from "./contents/AccountBook/Regist/RegistTemplate";
 import Error from "pages/Error";
 
 export type MypageRoutersProps = {

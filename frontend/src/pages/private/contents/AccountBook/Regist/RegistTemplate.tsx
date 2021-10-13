@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import { AppBar, Tabs, Tab } from "@material-ui/core";
 import { AlertProps } from "@material-ui/lab";
 
-import RegistExpense from "../../../components/Contents/RegistMoney/RegistExpense";
-import RegistIncome from "../../../components/Contents/RegistMoney/RegistIncome";
-import TransitionMotion from "../../../components/Route/Motion";
-import TabPanel from "../../../components/Atoms/TabPanel";
+import RegistExpense from "./RegistExpense";
+import RegistIncome from "./RegistIncome";
+import TransitionMotion from "components/Route/Motion";
+import TabPanel from "components/Atoms/TabPanel";
 
-type RegistMoneyProps = {
+type RegistTemplateProps = {
   handleAlertOpen: (closedTime?: number) => void;
   setAlertSeverity: React.Dispatch<
     React.SetStateAction<AlertProps["severity"]>
@@ -17,7 +17,7 @@ type RegistMoneyProps = {
   setAlertMessage: Dispatch<SetStateAction<string>>;
 };
 
-const RegistMoney: React.FC<RegistMoneyProps> = ({
+const RegistTemplate: React.FC<RegistTemplateProps> = ({
   handleAlertOpen,
   setAlertSeverity,
   setAlertMessage,
@@ -38,7 +38,7 @@ const RegistMoney: React.FC<RegistMoneyProps> = ({
           <Tabs
             value={tabValue}
             onChange={handleTabChange}
-            aria-label="regist money"
+            aria-label="regist Template"
             className="flex justify-center"
           >
             <Tab
@@ -76,4 +76,4 @@ const RegistMoney: React.FC<RegistMoneyProps> = ({
   );
 };
 
-export default RegistMoney;
+export default RegistTemplate;
