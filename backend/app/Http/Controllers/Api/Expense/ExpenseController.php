@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Expense;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Expense\RegistExpenseRequest;
-use App\Services\ExpenseService;
+use App\Services\Expense\ExpenseService;
 use App\Services\Lib\S3Service;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -75,9 +75,17 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RegistExpenseRequest $request, int $id)
     {
-        //
+        $_user = Auth::user();
+        $_etData = $request->regist_date;
+        $_editData = $request->only('expense', 'regist_date', 'category_id', 'comment', 'repetition_flg');
+
+        $_s3ImgUrl = $this->_s3Service->setDirName()->upload($request->file('receipt_img'));
+
+        $this->_expenseService->editExpense($id, $_editData, $_user, $_s3ImgUrl);
+
+        return response()->json([]);
     }
 
     /**

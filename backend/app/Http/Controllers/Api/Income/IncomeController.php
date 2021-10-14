@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Income;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Income\RegistIncomeRequest;
-use App\Services\IncomeService;
+use App\Services\Income\IncomeService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

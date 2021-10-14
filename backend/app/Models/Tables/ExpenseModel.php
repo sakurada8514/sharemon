@@ -117,21 +117,25 @@ class ExpenseModel extends BaseModel
         return $this->_convertArray($_ret);
     }
 
-    public function insert(array $_registData, Authenticatable $_user, ?string $_s3ImgUrl = null): void
+    public function insert(array $_registData, ?string $_s3ImgUrl = null): void
     {
         if (isset($_s3ImgUrl)) {
             $_registData['s3_image_id'] = $this->_s3ImageModel->insert($_s3ImgUrl);
         }
 
-        $_insert = $this->_createInsertUpdateData($this->_addUserData($_registData, $_user), $this->_getBaseDefaultInsertDataWithDelFlg());
+        $_insert = $this->_createInsertUpdateData($_registData, $this->_getBaseDefaultInsertDataWithDelFlg());
 
         DB::table($this->table)->insert($_insert);
 
         return;
     }
 
-    public function updateData(array $_date)
+    public function updateData(array $_date, ?string $_s3ImgUrl = null)
     {
+        if (isset($_s3ImgUrl)) {
+            $_registData['s3_image_id'] = $this->_s3ImageModel->insert($_s3ImgUrl);
+        }
+
         $_update = $this->_createInsertUpdateData($_date, $this->_getBaseDefaultUpdateData());
         DB::table($this->table)->where('id', $_date['id'])->update($_update);
     }

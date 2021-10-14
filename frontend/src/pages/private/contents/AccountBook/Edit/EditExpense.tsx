@@ -12,7 +12,7 @@ import AjaxLoading from "components/Atoms/Loading/AjaxLoading";
 import { OK, VALIDATION } from "utils/constant";
 
 import { getCategoryList as getCategoryListApi } from "api/Expense/category";
-import { registExpense as registExpenseApi } from "api/Expense/regist";
+import { editExpense as editExpenseApi } from "api/Expense/regist";
 import { fetcherApi } from "api/fetcher";
 
 type EditExpenseProps = {
@@ -107,9 +107,10 @@ const EditExpense: React.FC<EditExpenseProps> = ({
     setReceiptImgPreview("");
   };
 
-  async function registExpense() {
+  async function editExpense() {
     setLoading(true);
-    const response = await registExpenseApi(
+    const response = await editExpenseApi(
+      id,
       expense,
       date,
       category,
@@ -121,13 +122,7 @@ const EditExpense: React.FC<EditExpenseProps> = ({
     if (response.status === OK) {
       handleAlertOpen();
       setAlertMessage("正常に支出を作成しました");
-      setExpense("");
-      setDate(new Date());
-      setCategory(1);
-      setComment("");
-      setRepetition(false);
-      setErrors([]);
-      handleFileReset();
+      history.goBack();
     } else if (response.status === VALIDATION) {
       setErrors(response.data.errors);
     } else {
@@ -139,6 +134,7 @@ const EditExpense: React.FC<EditExpenseProps> = ({
     }
     setLoading(false);
   }
+
   const handleBackClick = () => [history.goBack()];
 
   return (
@@ -148,7 +144,7 @@ const EditExpense: React.FC<EditExpenseProps> = ({
         <span className="text-lg">戻る</span>
       </button>
       <ExpenseForm
-        registExpense={registExpense}
+        apiMethod={editExpense}
         expense={expense}
         date={date}
         category={category}

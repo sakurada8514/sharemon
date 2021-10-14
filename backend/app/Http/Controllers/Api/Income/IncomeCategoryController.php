@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Api\Income;
 
 use App\Http\Controllers\Controller;
-use App\Services\IncomeService;
+use App\Services\Income\IncomeCategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class IncomeCategoryController extends Controller
 {
-    private ?IncomeService $_incomeService = null;
+    private ?IncomeCategoryService $_incomeCategoryService = null;
 
-    public function __construct(IncomeService $_incomeService)
+    public function __construct(IncomeCategoryService $_incomeCategoryService)
     {
-        $this->_incomeService = $_incomeService;
+        $this->_incomeCategoryService = $_incomeCategoryService;
     }
 
     /**
@@ -25,7 +25,7 @@ class IncomeCategoryController extends Controller
     {
         $_roomId = Auth::user()->room_id;
 
-        $_res = $this->_incomeService->findCategoryList($_roomId);
+        $_res = $this->_incomeCategoryService->findCategoryList($_roomId);
 
         return response()->json(['categoryList' => $_res]);
     }

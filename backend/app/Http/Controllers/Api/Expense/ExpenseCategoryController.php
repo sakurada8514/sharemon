@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Api\Expense;
 
 use App\Http\Controllers\Controller;
-use App\Services\ExpenseService;
+use App\Services\Expense\ExpenseCategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ExpenseCategoryController extends Controller
 {
-    private ?ExpenseService $_expenseService = null;
+    private ?ExpenseCategoryService $_expenseCategoryService = null;
 
-    public function __construct(ExpenseService $_expenseService)
+    public function __construct(ExpenseCategoryService $_expenseCategoryService)
     {
-        $this->_expenseService = $_expenseService;
+        $this->_expenseCategoryService = $_expenseCategoryService;
     }
 
     /**
@@ -25,7 +25,7 @@ class ExpenseCategoryController extends Controller
     {
         $_roomId = Auth::user()->room_id;
 
-        $_res = $this->_expenseService->findCategoryList($_roomId);
+        $_res = $this->_expenseCategoryService->findCategoryList($_roomId);
 
         return response()->json(['categoryList' => $_res]);
     }

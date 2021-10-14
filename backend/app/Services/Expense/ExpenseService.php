@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Expense;
 
 use App\Models\Tables\ExpenseAlreadyReadUserModel;
 use App\Models\Tables\ExpenseCategoryModel;
@@ -36,14 +36,17 @@ class ExpenseService extends BaseService
         return $this->_expenseModel->findByExpenseId($_expenseId);
     }
 
-    public function findCategoryList(string $_roomId): array
-    {
-        return $this->_expenseCategoryModel->findListByRoomId($_roomId);
-    }
 
     public function insertExpense(array $_registData, Authenticatable $_user, ?string $_s3ImgUrl): void
     {
-        $this->_expenseModel->virtualMethodTransaction('insert', [$_registData, $_user, $_s3ImgUrl]);
+        $this->_expenseModel->virtualMethodTransaction('insert', [$this->_addUserData($_registData, $_user), $_s3ImgUrl]);
+
+        return;
+    }
+
+    public function editExpense(int $_expenseId, array $_editData, Authenticatable $_user, ?string $_s3ImgUrl)
+    {
+        $this->_expenseModel->virtualMethodTransaction('updateData', [$this->_addUserData(array_merge(['id' => $_expenseId], $_editData), $_user), $_s3ImgUrl]);
 
         return;
     }

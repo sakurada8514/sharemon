@@ -45,7 +45,9 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
     history.push("/error");
   }
 
-  const handleBackClick = () => [history.goBack()];
+  const handleBackClick = () => {
+    history.goBack();
+  };
 
   const handleDeleteButtonClick = async () => {
     setLoading(true);
@@ -61,7 +63,9 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
   };
 
   const handleEditButtonClick = () => {
-    history.push("/mypage/expense/edit/" + detail.id);
+    if (detail) {
+      history.push("/mypage/expense/edit/" + detail.id);
+    }
   };
   return (
     <div className="px-4 py-2">

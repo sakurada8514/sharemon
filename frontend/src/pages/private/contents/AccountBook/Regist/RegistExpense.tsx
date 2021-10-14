@@ -117,7 +117,7 @@ const RegistExpense: React.FC<RegistMoneyProps> = ({
 
   return (
     <ExpenseForm
-      registExpense={registExpense}
+      apiMethod={registExpense}
       expense={expense}
       date={date}
       category={category}

@@ -22,7 +22,7 @@ import MyDatePicker from "../Atoms/Form/DatePicker";
 import LoadingButton from "../Atoms/Buttons/LoadingButton";
 
 type RegistExpenseFormProps = {
-  registExpense: () => Promise<void>;
+  apiMethod: () => Promise<void>;
   expense: string;
   date: Date;
   category: number;
@@ -45,7 +45,7 @@ type RegistExpenseFormProps = {
 };
 
 const ExpenseForm: React.FC<RegistExpenseFormProps> = ({
-  registExpense,
+  apiMethod,
   expense,
   date,
   category,
@@ -144,7 +144,7 @@ const ExpenseForm: React.FC<RegistExpenseFormProps> = ({
           <MediaQuery query="(min-width: 960px)">
             <Box className="flex justify-center mt-6">
               <LoadingButton
-                handleButtonClick={registExpense}
+                handleButtonClick={apiMethod}
                 loading={loading}
                 text={"支出作成"}
                 color={"secondary"}
@@ -194,7 +194,7 @@ const ExpenseForm: React.FC<RegistExpenseFormProps> = ({
       <MediaQuery query="(max-width: 960px)">
         <Box className="mt-6 w-full">
           <LoadingButton
-            handleButtonClick={registExpense}
+            handleButtonClick={apiMethod}
             loading={loading}
             text={buttonText}
             color={"secondary"}

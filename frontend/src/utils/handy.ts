@@ -2,12 +2,16 @@
 export function setRequestParams(formData: any): FormData {
   const params = new FormData();
   for (let key in formData) {
-    params.append(key, formData[key]);
+    console.log(key, formData);
+
+    params.append(`${key}`, formData[key]);
   }
   return params;
 }
 
 export function formatDate(date: Date, format: string): string {
+  console.log(typeof date, date);
+  date = new Date(date);
   format = format.replace(/yyyy/g, "" + date.getFullYear());
   format = format.replace(/MM/g, ("0" + (date.getMonth() + 1)).slice(-2));
   format = format.replace(/dd/g, ("0" + date.getDate()).slice(-2));

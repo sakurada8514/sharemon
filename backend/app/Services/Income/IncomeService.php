@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Income;
 
 use App\Models\Tables\IncomeAlreadyReadUserModel;
 use App\Models\Tables\IncomeCategoryModel;
@@ -23,11 +23,6 @@ class IncomeService extends BaseService
         $this->_incomeCategoryModel = $_incomeCategoryModel;
         $this->_incomeModel         = $_incomeModel;
         $this->_incomeAlreadyReadUserModel = $_incomeAlreadyReadUserModel;
-    }
-
-    public function findCategoryList(string $_roomId): array
-    {
-        return $this->_incomeCategoryModel->findListByRoomId($_roomId);
     }
 
     public function insertIncome(array $_registData, Authenticatable $_user): void

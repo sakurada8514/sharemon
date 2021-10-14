@@ -11,4 +11,12 @@ abstract class BaseService
     {
         return date($_format, strtotime($_date));
     }
+
+    protected function _addUserData(array $_targetArray, Authenticatable $_userData): array
+    {
+        $_targetArray['user_id'] = $_userData->id;
+        $_targetArray['room_id'] = $_userData->room_id;
+
+        return $_targetArray;
+    }
 }
