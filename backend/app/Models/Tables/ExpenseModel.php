@@ -133,7 +133,7 @@ class ExpenseModel extends BaseModel
     public function updateData(array $_date, ?string $_s3ImgUrl = null)
     {
         if (isset($_s3ImgUrl)) {
-            $_registData['s3_image_id'] = $this->_s3ImageModel->insert($_s3ImgUrl);
+            $_date['s3_image_id'] = $this->_s3ImageModel->insert($_s3ImgUrl);
         }
 
         $_update = $this->_createInsertUpdateData($_date, $this->_getBaseDefaultUpdateData());

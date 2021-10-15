@@ -61,7 +61,11 @@ const IncomeDetail: React.FC<IncomeDetailProps> = ({
       history.push("/error");
     }
   };
-
+  const handleEditButtonClick = () => {
+    if (detail) {
+      history.push("/mypage/income/edit/" + detail.id);
+    }
+  };
   return (
     <div className="px-2 py-2">
       <div className="flex justify-between">
@@ -70,7 +74,12 @@ const IncomeDetail: React.FC<IncomeDetailProps> = ({
           <span className="text-lg">戻る</span>
         </button>
         <div>
-          <IconButton aria-label="edit" size="large" color="primary">
+          <IconButton
+            aria-label="edit"
+            size="large"
+            color="primary"
+            onClick={handleEditButtonClick}
+          >
             <EditIcon fontSize="inherit" />
           </IconButton>
           <IconButton
@@ -91,8 +100,8 @@ const IncomeDetail: React.FC<IncomeDetailProps> = ({
           </>
         ) : (
           <>
-            <Skeleton className="h-8 w-1/3" />
-            <Skeleton className="h-8 w-1/3" />
+            <Skeleton variant="rectangular" className="h-8 w-1/3" />
+            <Skeleton variant="rectangular" className="h-8 w-1/3" />
           </>
         )}
       </div>
@@ -102,7 +111,7 @@ const IncomeDetail: React.FC<IncomeDetailProps> = ({
           {detail ? (
             <p className="text-xl">{detail.name}</p>
           ) : (
-            <Skeleton className="h-7 w-full" />
+            <Skeleton variant="rectangular" className="h-7 w-full" />
           )}
         </div>
         <div>
@@ -110,7 +119,7 @@ const IncomeDetail: React.FC<IncomeDetailProps> = ({
           {detail ? (
             <p className="text-xl">{detail.regist_date}</p>
           ) : (
-            <Skeleton className="h-7 w-full" />
+            <Skeleton variant="rectangular" className="h-7 w-full" />
           )}
         </div>
         <div>
@@ -124,7 +133,7 @@ const IncomeDetail: React.FC<IncomeDetailProps> = ({
               )}
             </p>
           ) : (
-            <Skeleton className="h-7 w-full" />
+            <Skeleton variant="rectangular" className="h-7 w-full" />
           )}
         </div>
       </div>

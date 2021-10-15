@@ -27,8 +27,14 @@ class IncomeService extends BaseService
 
     public function insertIncome(array $_registData, Authenticatable $_user): void
     {
-        $this->_incomeModel->insert($_registData, $_user);
+        $this->_incomeModel->insert($this->_addUserData($_registData, $_user));
 
+        return;
+    }
+
+    public function editIncome(int $_incomeId, array $_editData, Authenticatable $_user)
+    {
+        $this->_incomeModel->updateData($this->_addUserData(array_merge(['id' => $_incomeId], $_editData), $_user));
         return;
     }
 

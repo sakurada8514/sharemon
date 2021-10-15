@@ -19,7 +19,7 @@ import LoadingButton from "../Atoms/Buttons/LoadingButton";
 import { BACK_COLOR_GREEN } from "../../utils/constant";
 
 type IncomeFormProps = {
-  registIncome: () => Promise<void>;
+  apiMethod: () => Promise<void>;
   income: string;
   date: Date;
   category: number;
@@ -37,7 +37,7 @@ type IncomeFormProps = {
 };
 
 const IncomeForm: React.FC<IncomeFormProps> = ({
-  registIncome,
+  apiMethod,
   income,
   date,
   category,
@@ -132,7 +132,7 @@ const IncomeForm: React.FC<IncomeFormProps> = ({
           </Box>
           <Box className="mt-6 w-full">
             <LoadingButton
-              handleButtonClick={registIncome}
+              handleButtonClick={apiMethod}
               loading={loading}
               text={buttonText}
               color={"secondary"}

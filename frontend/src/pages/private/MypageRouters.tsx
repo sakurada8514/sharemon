@@ -8,6 +8,7 @@ import List from "./contents/AccountBook/List/ListTemplate";
 import ExpenseDetail from "./contents/AccountBook/ExpenseDetail";
 import IncomeDetail from "./contents/AccountBook/IncomeDetail";
 import EditExpense from "./contents/AccountBook/Edit/EditExpense";
+import EditIncome from "./contents/AccountBook/Edit/EditIncome";
 import Home from "./contents/Home";
 import RegistMoney from "./contents/AccountBook/Regist/RegistTemplate";
 import Error from "pages/Error";
@@ -74,6 +75,17 @@ const MypageRouters: React.FC<MypageRoutersProps> = ({
           path="/mypage/expense/edit/:id"
           children={
             <EditExpense
+              handleAlertOpen={handleAlertOpen}
+              setAlertSeverity={setAlertSeverity}
+              setAlertMessage={setAlertMessage}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/mypage/income/edit/:id"
+          children={
+            <EditIncome
               handleAlertOpen={handleAlertOpen}
               setAlertSeverity={setAlertSeverity}
               setAlertMessage={setAlertMessage}

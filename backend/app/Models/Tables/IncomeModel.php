@@ -102,9 +102,9 @@ class IncomeModel extends BaseModel
         return $this->_convertArray($_ret);
     }
 
-    public function insert(array $_registData, Authenticatable $_user): void
+    public function insert(array $_registData): void
     {
-        $_insert = $this->_createInsertUpdateData($this->_addUserData($_registData, $_user), $this->_getBaseDefaultInsertDataWithDelFlg());
+        $_insert = $this->_createInsertUpdateData($_registData, $this->_getBaseDefaultInsertDataWithDelFlg());
 
         DB::table($this->table)->insert($_insert);
 

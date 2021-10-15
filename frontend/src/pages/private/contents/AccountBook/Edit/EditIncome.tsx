@@ -1,16 +1,23 @@
-import React, { useGlobal, useState } from "reactn";
+import React, { useEffect, useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import useSWR from "swr";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { DatePickerProps } from "@material-ui/pickers";
 import { AlertProps } from "@material-ui/lab";
 
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+
 import IncomeForm from "components/Form/IncomeForm";
+import AjaxLoading from "components/Atoms/Loading/AjaxLoading";
 import { OK, VALIDATION } from "utils/constant";
 
 import { getCategoryList as getCategoryListApi } from "api/Income/category";
-import { registIncome as registIncomeApi } from "api/Income/regist";
+import { editIncome as editIncomeApi } from "api/Income/regist";
+import { fetcherApi } from "api/fetcher";
 
+type IncomeEditRouteParams = {
+  id: string;
+};
 type EditIncomeProps = {
   handleAlertOpen: (closedTime?: number) => void;
   setAlertSeverity: React.Dispatch<
@@ -25,6 +32,7 @@ const EditIncome: React.FC<EditIncomeProps> = ({
   setAlertMessage,
 }) => {
   const history = useHistory();
+  const { id } = useParams<IncomeEditRouteParams>();
 
   const [income, setIncome] = useState("");
   const [date, setDate] = useState(new Date());
@@ -33,6 +41,7 @@ const EditIncome: React.FC<EditIncomeProps> = ({
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [ajaxLoading, setAjaxLoading] = useState(true);
 
   const { data: categoryList, error: categoryListError } = useSWR(
     "/incomecategory",
@@ -41,6 +50,21 @@ const EditIncome: React.FC<EditIncomeProps> = ({
   if (categoryListError) {
     history.push("/error");
   }
+
+  useEffect(() => {
+    getIncomeDetail();
+  }, []);
+
+  const getIncomeDetail = async () => {
+    const response = await fetcherApi("/expense/" + id, "detail");
+
+    setIncome(response.expense);
+    setDate(response.regist_date);
+    setCategory(response.category_id);
+    setComment(response.comment ? response.comment : "");
+    setRepetition(response.repetition_flg);
+    setAjaxLoading(false);
+  };
 
   const handleChangeIncome = (e: any) => setIncome(e.target.value);
   const handleChangeCategory = (e: any) => setCategory(e.target.value);
@@ -54,7 +78,8 @@ const EditIncome: React.FC<EditIncomeProps> = ({
 
   async function registIncome() {
     setLoading(true);
-    const response = await registIncomeApi(
+    const response = await editIncomeApi(
+      id,
       income,
       date,
       category,
@@ -64,13 +89,8 @@ const EditIncome: React.FC<EditIncomeProps> = ({
 
     if (response.status === OK) {
       handleAlertOpen();
-      setAlertMessage("正常に収入を作成しました");
-      setIncome("");
-      setDate(new Date());
-      setCategory(1);
-      setComment("");
-      setRepetition(false);
-      setErrors([]);
+      setAlertMessage("正常に収入を編集しました");
+      history.goBack();
     } else if (response.status === VALIDATION) {
       setErrors(response.data.errors);
     } else {
@@ -82,25 +102,33 @@ const EditIncome: React.FC<EditIncomeProps> = ({
     }
     setLoading(false);
   }
+  const handleBackClick = () => [history.goBack()];
 
   return (
-    <IncomeForm
-      registIncome={registIncome}
-      income={income}
-      date={date}
-      category={category}
-      comment={comment}
-      repetition={repetition}
-      categoryList={categoryList}
-      loading={loading}
-      errors={errors}
-      buttonText="収入編集"
-      setDate={handleChangeDate}
-      handleChangeIncome={handleChangeIncome}
-      handleChangeCategory={handleChangeCategory}
-      handleChangeComment={handleChangeComment}
-      handleToggleRepetition={handleToggleRepetition}
-    />
+    <div className="px-2 pt-2">
+      <button className="flex items-center py-2" onClick={handleBackClick}>
+        <NavigateBeforeIcon className="w-7 h-7" />
+        <span className="text-lg">戻る</span>
+      </button>
+      <IncomeForm
+        apiMethod={registIncome}
+        income={income}
+        date={date}
+        category={category}
+        comment={comment}
+        repetition={repetition}
+        categoryList={categoryList}
+        loading={loading}
+        errors={errors}
+        buttonText="収入編集"
+        setDate={handleChangeDate}
+        handleChangeIncome={handleChangeIncome}
+        handleChangeCategory={handleChangeCategory}
+        handleChangeComment={handleChangeComment}
+        handleToggleRepetition={handleToggleRepetition}
+      />
+      {ajaxLoading && <AjaxLoading />}
+    </div>
   );
 };
 export default EditIncome;

@@ -85,7 +85,7 @@ const RegistIncome: React.FC<RegistIncomeProps> = ({
 
   return (
     <IncomeForm
-      registIncome={registIncome}
+      apiMethod={registIncome}
       income={income}
       date={date}
       category={category}

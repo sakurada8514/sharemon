@@ -46,7 +46,6 @@ export async function editExpense(
   };
   const params = setRequestParams(formData);
   params.append("_method", "put");
-  console.log(params.get("expense"));
   const response = await apiClient
     .post("/expense/" + id, params)
     .catch((err) => err.response);

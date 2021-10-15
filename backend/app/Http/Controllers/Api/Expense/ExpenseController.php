@@ -78,7 +78,7 @@ class ExpenseController extends Controller
     public function update(RegistExpenseRequest $request, int $id)
     {
         $_user = Auth::user();
-        $_etData = $request->regist_date;
+
         $_editData = $request->only('expense', 'regist_date', 'category_id', 'comment', 'repetition_flg');
 
         $_s3ImgUrl = $this->_s3Service->setDirName()->upload($request->file('receipt_img'));

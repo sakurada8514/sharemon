@@ -67,9 +67,14 @@ class IncomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RegistIncomeRequest $request, int $id)
     {
-        //
+        $_user = Auth::user();
+        $_editData = $request->only('income', 'regist_date', 'category_id', 'comment', 'repetition_flg');
+
+        $this->_incomeService->editIncome($id, $_editData, $_user);
+
+        return response()->json([]);
     }
 
     /**

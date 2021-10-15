@@ -97,32 +97,32 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
         {detail ? (
           <p className="text-2xl">{detail.category_name}</p>
         ) : (
-          <Skeleton className="h-8 w-1/3" />
+          <Skeleton variant="rectangular" className="h-8 w-1/3" />
         )}
         {detail ? (
           <p className="text-2xl">{detail.expense}円</p>
         ) : (
-          <Skeleton className="h-8 w-1/3" />
+          <Skeleton variant="rectangular" className="h-8 w-1/3" />
         )}
       </div>
       <div className="flex justify-between py-5 border-b border-blue-100">
-        <div>
+        <div className="w-3/12">
           <p>作成者</p>
           {detail ? (
             <p className="text-xl">{detail.name}</p>
           ) : (
-            <Skeleton className="h-7 w-full" />
+            <Skeleton variant="rectangular" className="h-7 w-full" />
           )}
         </div>
-        <div>
+        <div className="w-3/12">
           <p>作成日</p>
           {detail ? (
             <p className="text-xl">{detail.regist_date}</p>
           ) : (
-            <Skeleton className="h-7 w-full" />
+            <Skeleton variant="rectangular" className="h-7 w-full" />
           )}
         </div>
-        <div>
+        <div className="w-3/12">
           <p>繰り返し</p>
           {detail ? (
             <p className="text-xl">
@@ -133,7 +133,7 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
               )}
             </p>
           ) : (
-            <Skeleton className="h-7 w-full" />
+            <Skeleton variant="rectangular" className="h-7 w-full" />
           )}
         </div>
       </div>
@@ -159,11 +159,15 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
       <div className="py-5">
         <p>レシート</p>
         {detail ? (
-          <img
-            className="pt-2 w-full h-auto"
-            src={detail.img_url}
-            alt="レシート画像"
-          />
+          detail.img_url ? (
+            <img
+              className="pt-2 w-full h-auto"
+              src={detail.img_url}
+              alt="レシート画像"
+            />
+          ) : (
+            <p className="text-gray-400 text-sm">レシート未登録</p>
+          )
         ) : (
           <Skeleton variant="rectangular" className="h-48 w-full" />
         )}
