@@ -64,18 +64,28 @@ const MainListItems: React.FC<MainListItemsProps> = ({ sideMenuOpen }) => {
             <ListItemText primary="履歴" />
           </ListItem>
         </NavLink>
-        <ListItem button className={sideMenuOpen ? "pl-12 transition" : "pl-8"}>
-          <ListItemIcon>
-            <PieChartIcon />
-          </ListItemIcon>
-          <ListItemText primary="グラフ" />
-        </ListItem>
-        <ListItem button className={sideMenuOpen ? "pl-12 transition" : "pl-8"}>
-          <ListItemIcon>
-            <MoneyIcon />
-          </ListItemIcon>
-          <ListItemText primary="予算" />
-        </ListItem>
+        <NavLink to="/mypage/list" activeClassName={classes.activeNav} exact>
+          <ListItem
+            button
+            className={sideMenuOpen ? "pl-12 transition" : "pl-8"}
+          >
+            <ListItemIcon>
+              <PieChartIcon />
+            </ListItemIcon>
+            <ListItemText primary="グラフ" />
+          </ListItem>
+        </NavLink>
+        <NavLink to="/mypage/budget" activeClassName={classes.activeNav} exact>
+          <ListItem
+            button
+            className={sideMenuOpen ? "pl-12 transition" : "pl-8"}
+          >
+            <ListItemIcon>
+              <MoneyIcon />
+            </ListItemIcon>
+            <ListItemText primary="予算" />
+          </ListItem>
+        </NavLink>
       </List>
     </div>
   );

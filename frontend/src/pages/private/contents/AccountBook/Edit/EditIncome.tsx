@@ -45,7 +45,12 @@ const EditIncome: React.FC<EditIncomeProps> = ({
 
   const { data: categoryList, error: categoryListError } = useSWR(
     "/incomecategory",
-    getCategoryListApi
+    getCategoryListApi,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
   if (categoryListError) {
     history.push("/error");

@@ -47,8 +47,13 @@ const EditExpense: React.FC<EditExpenseProps> = ({
   const [ajaxLoading, setAjaxLoading] = useState(true);
 
   const { data: categoryList, error: categoryListError } = useSWR(
-    "/expensecategory",
-    getCategoryListApi
+    ["/expensecategory", "categoryList"],
+    fetcherApi,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
 
   useEffect(() => {

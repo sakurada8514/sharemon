@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useParams, useHistory, NavLink } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import useSWR from "swr";
-import { IconButton, Skeleton } from "@mui/material";
+import { IconButton, Skeleton, CircularProgress } from "@mui/material";
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
 import { AlertProps } from "@material-ui/lab";
@@ -11,33 +11,35 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { fetcherApi } from "api/fetcher";
-import { deleteExpenseApi } from "api/Expense";
-import { OK } from "../../../../utils/constant";
+import { deleteIncomeApi } from "api/Income";
+import { OK } from "utils/constant";
 import AjaxLoading from "components/Atoms/Loading/AjaxLoading";
 
-type ExpenseDetailRouteParams = {
+type IncomeDetailRouteParams = {
   id: string;
 };
-type ExpenseDetailProps = {
+
+type IncomeDetailProps = {
   handleAlertOpen: (closedTime?: number) => void;
   setAlertSeverity: React.Dispatch<
     React.SetStateAction<AlertProps["severity"]>
   >;
   setAlertMessage: React.Dispatch<React.SetStateAction<string>>;
 };
-const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
+
+const IncomeDetail: React.FC<IncomeDetailProps> = ({
   handleAlertOpen,
   setAlertSeverity,
   setAlertMessage,
 }) => {
   const classes = style();
   const history = useHistory();
-  const { id } = useParams<ExpenseDetailRouteParams>();
+  const { id } = useParams<IncomeDetailRouteParams>();
 
   const [loading, setLoading] = useState(false);
 
   const { data: detail, error } = useSWR(
-    ["expense/" + id, "detail"],
+    ["income/" + id, "detail"],
     fetcherApi
   );
 
@@ -45,13 +47,11 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
     history.push("/error");
   }
 
-  const handleBackClick = () => {
-    history.goBack();
-  };
+  const handleBackClick = () => history.goBack();
 
   const handleDeleteButtonClick = async () => {
     setLoading(true);
-    const response = await deleteExpenseApi(detail.id);
+    const response = await deleteIncomeApi(detail.id);
 
     if (response === OK) {
       handleAlertOpen();
@@ -61,14 +61,13 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
       history.push("/error");
     }
   };
-
   const handleEditButtonClick = () => {
     if (detail) {
-      history.push("/mypage/expense/edit/" + detail.id);
+      history.push("/mypage/income/edit/" + detail.id);
     }
   };
   return (
-    <div className="px-4 py-2">
+    <div className="px-2 py-2">
       <div className="flex justify-between">
         <button className="flex items-center py-2" onClick={handleBackClick}>
           <NavigateBeforeIcon className="w-7 h-7" />
@@ -95,18 +94,19 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
 
       <div className="flex justify-between py-5 border-b border-blue-100">
         {detail ? (
-          <p className="text-2xl">{detail.category_name}</p>
+          <>
+            <p className="text-2xl">{detail.category_name}</p>
+            <p className="text-2xl">{detail.income}円</p>
+          </>
         ) : (
-          <Skeleton variant="rectangular" className="h-8 w-1/3" />
-        )}
-        {detail ? (
-          <p className="text-2xl">{detail.expense}円</p>
-        ) : (
-          <Skeleton variant="rectangular" className="h-8 w-1/3" />
+          <>
+            <Skeleton variant="rectangular" className="h-8 w-1/3" />
+            <Skeleton variant="rectangular" className="h-8 w-1/3" />
+          </>
         )}
       </div>
       <div className="flex justify-between py-5 border-b border-blue-100">
-        <div className="w-3/12">
+        <div>
           <p>作成者</p>
           {detail ? (
             <p className="text-xl">{detail.name}</p>
@@ -114,7 +114,7 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
             <Skeleton variant="rectangular" className="h-7 w-full" />
           )}
         </div>
-        <div className="w-3/12">
+        <div>
           <p>作成日</p>
           {detail ? (
             <p className="text-xl">{detail.regist_date}</p>
@@ -122,7 +122,7 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
             <Skeleton variant="rectangular" className="h-7 w-full" />
           )}
         </div>
-        <div className="w-3/12">
+        <div>
           <p>繰り返し</p>
           {detail ? (
             <p className="text-xl">
@@ -156,22 +156,6 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
           <Skeleton variant="rectangular" className="h-32 w-full mt-2" />
         )}
       </div>
-      <div className="py-5">
-        <p>レシート</p>
-        {detail ? (
-          detail.img_url ? (
-            <img
-              className="pt-2 w-full h-auto"
-              src={detail.img_url}
-              alt="レシート画像"
-            />
-          ) : (
-            <p className="text-gray-400 text-sm">レシート未登録</p>
-          )
-        ) : (
-          <Skeleton variant="rectangular" className="h-48 w-full" />
-        )}
-      </div>
       {loading && <AjaxLoading />}
     </div>
   );
@@ -183,4 +167,4 @@ const style = makeStyles(() => ({
   },
 }));
 
-export default ExpenseDetail;
+export default IncomeDetail;

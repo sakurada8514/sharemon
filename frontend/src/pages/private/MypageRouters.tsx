@@ -5,10 +5,12 @@ import { AnimatePresence } from "framer-motion";
 import { AlertProps } from "@material-ui/lab";
 
 import List from "./contents/AccountBook/List/ListTemplate";
-import ExpenseDetail from "./contents/AccountBook/ExpenseDetail";
-import IncomeDetail from "./contents/AccountBook/IncomeDetail";
+import ExpenseDetail from "./contents/AccountBook/Detail/ExpenseDetail";
+import IncomeDetail from "./contents/AccountBook/Detail/IncomeDetail";
 import EditExpense from "./contents/AccountBook/Edit/EditExpense";
 import EditIncome from "./contents/AccountBook/Edit/EditIncome";
+import BudgetList from "./contents/Budget/BudgetList";
+import RegistBudget from "./contents/Budget/RegistBudget";
 import Home from "./contents/Home";
 import RegistMoney from "./contents/AccountBook/Regist/RegistTemplate";
 import Error from "pages/Error";
@@ -92,6 +94,8 @@ const MypageRouters: React.FC<MypageRoutersProps> = ({
             />
           }
         />
+        <Route exact path="/mypage/budget" children={<BudgetList />} />
+        <Route exact path="/mypage/budget/regist" children={<RegistBudget />} />
       </Switch>
     </AnimatePresence>
   );
