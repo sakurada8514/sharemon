@@ -153,7 +153,8 @@ return [
         'expense' => '支出金額',
         'category_id' => 'カテゴリー',
         'income' => '収入金額',
-        'comment' => 'コメント'
+        'comment' => 'コメント',
+        'budget' => '予算'
     ],
 
 ];

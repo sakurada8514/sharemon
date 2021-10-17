@@ -78,13 +78,11 @@ class User extends UserBaseModel
         return $this->_convertArray($_ret);
     }
 
-    public function countByEmail(string $_email): int
+    public function existsByEmail(string $_email): bool
     {
-        $_ret = DB::table('users')
+        return DB::table('users')
             ->where('email', $_email)
-            ->count();
-
-        return $_ret;
+            ->exists();
     }
 
     public function findListByRoomId(string $_roomId): array

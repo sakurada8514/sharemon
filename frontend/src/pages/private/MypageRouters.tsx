@@ -95,7 +95,17 @@ const MypageRouters: React.FC<MypageRoutersProps> = ({
           }
         />
         <Route exact path="/mypage/budget" children={<BudgetList />} />
-        <Route exact path="/mypage/budget/regist" children={<RegistBudget />} />
+        <Route
+          exact
+          path="/mypage/budget/regist"
+          children={
+            <RegistBudget
+              handleAlertOpen={handleAlertOpen}
+              setAlertSeverity={setAlertSeverity}
+              setAlertMessage={setAlertMessage}
+            />
+          }
+        />
       </Switch>
     </AnimatePresence>
   );

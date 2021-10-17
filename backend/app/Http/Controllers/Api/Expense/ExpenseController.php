@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Expense;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Expense\EditExpenseRequest;
 use App\Http\Requests\Expense\RegistExpenseRequest;
 use App\Services\Expense\ExpenseService;
 use App\Services\Lib\S3Service;
@@ -75,7 +76,7 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RegistExpenseRequest $request, int $id)
+    public function update(EditExpenseRequest $request, int $id)
     {
         $_user = Auth::user();
 

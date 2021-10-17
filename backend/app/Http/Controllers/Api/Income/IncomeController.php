@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Income;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Income\EditIncomeRequest;
 use App\Http\Requests\Income\RegistIncomeRequest;
 use App\Services\Income\IncomeService;
 use Illuminate\Http\JsonResponse;
@@ -67,7 +68,7 @@ class IncomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RegistIncomeRequest $request, int $id)
+    public function update(EditIncomeRequest $request, int $id)
     {
         $_user = Auth::user();
         $_editData = $request->only('income', 'regist_date', 'category_id', 'comment', 'repetition_flg');

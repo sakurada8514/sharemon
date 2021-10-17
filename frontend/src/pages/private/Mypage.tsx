@@ -36,7 +36,12 @@ export default function Mypage() {
 
   const { data: roomName, error: roomNameError } = useSWR(
     ["/room/", user.room_id],
-    getRoomNameApi
+    getRoomNameApi,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
 
   if (roomNameError) {
