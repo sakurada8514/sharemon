@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { useParams, useHistory, NavLink } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import useSWR from "swr";
-import { IconButton, Skeleton } from "@mui/material";
+import { Skeleton } from "@mui/material";
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
 import { AlertProps } from "@material-ui/lab";
 
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import BackButton from "components/Atoms/Buttons/BackButton";
+import EditIconButton from "components/Atoms/Buttons/EditIconButton";
+import DeleteIconButton from "components/Atoms/Buttons/DeleteIconButton";
 
 import { fetcherApi } from "api/fetcher";
 import { deleteExpenseApi } from "api/Expense";
@@ -45,10 +45,6 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
     history.push("/error");
   }
 
-  const handleBackClick = () => {
-    history.goBack();
-  };
-
   const handleDeleteButtonClick = async () => {
     setLoading(true);
     const response = await deleteExpenseApi(detail.id);
@@ -67,29 +63,20 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
       history.push("/mypage/expense/edit/" + detail.id);
     }
   };
+
   return (
     <div className="px-4 py-2">
       <div className="flex justify-between">
-        <button className="flex items-center py-2" onClick={handleBackClick}>
-          <NavigateBeforeIcon className="w-7 h-7" />
-          <span className="text-lg">戻る</span>
-        </button>
+        <BackButton />
         <div>
-          <IconButton
-            aria-label="edit"
+          <EditIconButton
+            handleEditButtonClick={handleEditButtonClick}
             size="large"
-            color="primary"
-            onClick={handleEditButtonClick}
-          >
-            <EditIcon fontSize="inherit" />
-          </IconButton>
-          <IconButton
-            aria-label="delete"
+          />
+          <DeleteIconButton
+            handleDeleteButtonClick={handleDeleteButtonClick}
             size="large"
-            onClick={handleDeleteButtonClick}
-          >
-            <DeleteIcon fontSize="inherit" className="text-red-500" />
-          </IconButton>
+          />
         </div>
       </div>
 

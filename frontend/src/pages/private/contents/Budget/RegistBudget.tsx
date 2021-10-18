@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import useSWR from "swr";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 import BudgetForm from "components/Form/BudgetForm";
+import BackButton from "components/Atoms/Buttons/BackButton";
 import { OK, VALIDATION } from "utils/constant";
 
 import { fetcherApi } from "api/fetcher";
@@ -42,7 +42,6 @@ const RegistBudget: React.FC<RegistBudgetProps> = ({
     }
   );
   const handleChangeBudget = (e: any) => setBudget(e.target.value);
-  const handleBackClick = () => [history.goBack()];
   const handleChangeCategory = (e: any) => setCategory(e.target.value);
 
   const registBudget = async () => {
@@ -65,11 +64,8 @@ const RegistBudget: React.FC<RegistBudgetProps> = ({
     setLoading(false);
   };
   return (
-    <>
-      <button className="flex items-center py-2" onClick={handleBackClick}>
-        <NavigateBeforeIcon className="w-7 h-7" />
-        <span className="text-lg">戻る</span>
-      </button>
+    <div className="px-4 py2">
+      <BackButton />
       <BudgetForm
         budget={budget}
         errors={errors}
@@ -81,7 +77,7 @@ const RegistBudget: React.FC<RegistBudgetProps> = ({
         buttonText="予算作成"
         apiMethod={registBudget}
       />
-    </>
+    </div>
   );
 };
 export default RegistBudget;

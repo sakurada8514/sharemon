@@ -56,7 +56,12 @@ class ExpenseCategoriesSeeder extends Seeder
                 'del_flg' => '0'
             ],
             [
-                'category_name' => '交通費、車両費',
+                'category_name' => '交通費',
+                'all_flg' => '1',
+                'del_flg' => '0'
+            ],
+            [
+                'category_name' => '車両費',
                 'all_flg' => '1',
                 'del_flg' => '0'
             ],

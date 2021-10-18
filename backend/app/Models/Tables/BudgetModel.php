@@ -16,15 +16,22 @@ class BudgetModel extends BaseModel
         DB::table($this->table)->insert($_insert);
     }
 
-    public function findListByRoomId(int $_roomId)
+    public function findListWithExpenseByRoomId(int $_roomId)
     {
         $_ret = DB::table("$this->table as b")
             ->join('expense_categories as ec', 'b.category_id', '=', 'ec.category_id')
+            ->leftJoinSub(
+                $this->_findThisMonthTotalExpenseByCategorySubQuery($_roomId),
+                'e',
+                'b.category_id',
+                '=',
+                'e.category_id'
+            )
             ->where([
                 ['b.room_id', $_roomId],
                 ['b.del_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.OFF')]
             ])
-            ->select('b.id', 'b.budget', 'ec.category_name')
+            ->select('b.id', 'b.budget', 'ec.category_name', 'e.total_expense')
             ->get();
 
         return $this->_convertArray($_ret);
@@ -38,5 +45,20 @@ class BudgetModel extends BaseModel
                 ['room_id', $_roomId]
             ])
             ->exists();
+    }
+
+    private function _findThisMonthTotalExpenseByCategorySubQuery(int $_roomId)
+    {
+        return DB::table('expenses')
+            ->where([
+                ['room_id', $_roomId],
+                ['del_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.OFF')]
+            ])
+            ->where(function ($query) {
+                $query->whereYear('regist_date', now()->format('Y'))
+                    ->whereMonth('regist_date', now()->format('m'));
+            })
+            ->selectRaw('sum(expense) as total_expense,category_id')
+            ->groupBy('category_id');
     }
 }

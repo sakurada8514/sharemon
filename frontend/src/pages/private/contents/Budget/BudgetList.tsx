@@ -6,7 +6,6 @@ import { Skeleton } from "@mui/material";
 import { LinearProgress } from "@mui/material";
 
 import EditIcon from "@mui/icons-material/Edit";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import MoneyIcon from "@mui/icons-material/Money";
 
 import { fetcherApi } from "api/fetcher";
@@ -42,10 +41,33 @@ const BudgetList = () => {
                   </div>
                 </div>
                 <div className="w-2/3 flex flex-col justify-between">
-                  <LinearProgress className="h-5" variant="buffer" value={30} />
+                  <LinearProgress
+                    className="h-5"
+                    variant="determinate"
+                    value={data.percent}
+                  />
                   <div className="flex items-end justify-end">
-                    <p className="text-sm">30%</p>
-                    <p className="text-sm w-3/5 text-right">今月残り 10000円</p>
+                    <p className="text-sm text-right text-gray-600">
+                      使用率{" "}
+                      <span className="font-medium text-black">
+                        {data.percent}%
+                      </span>
+                    </p>
+                    {data.remaining > 0 ? (
+                      <p className="text-sm w-3/5 text-right text-gray-600">
+                        今月残り{" "}
+                        <span className="font-medium text-black">
+                          {data.remaining}円
+                        </span>
+                      </p>
+                    ) : (
+                      <p className="text-sm w-3/5 text-right text-gray-600">
+                        今月{" "}
+                        <span className="font-medium text-black">
+                          {data.remaining}円
+                        </span>
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>

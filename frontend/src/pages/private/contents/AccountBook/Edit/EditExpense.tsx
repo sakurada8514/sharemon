@@ -5,13 +5,11 @@ import { DatePickerProps } from "@material-ui/pickers";
 import { AlertProps } from "@material-ui/lab";
 import { Dispatch, SetStateAction } from "react";
 
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-
+import BackButton from "components/Atoms/Buttons/BackButton";
 import ExpenseForm from "components/Form/ExpenseForm";
 import AjaxLoading from "components/Atoms/Loading/AjaxLoading";
 import { OK, VALIDATION } from "utils/constant";
 
-import { getCategoryList as getCategoryListApi } from "api/Expense/category";
 import { editExpense as editExpenseApi } from "api/Expense/regist";
 import { fetcherApi } from "api/fetcher";
 
@@ -140,14 +138,9 @@ const EditExpense: React.FC<EditExpenseProps> = ({
     setLoading(false);
   }
 
-  const handleBackClick = () => [history.goBack()];
-
   return (
-    <div className="px-2 pt-2">
-      <button className="flex items-center py-2" onClick={handleBackClick}>
-        <NavigateBeforeIcon className="w-7 h-7" />
-        <span className="text-lg">戻る</span>
-      </button>
+    <div className="px-4 pt-2">
+      <BackButton />
       <ExpenseForm
         apiMethod={editExpense}
         expense={expense}

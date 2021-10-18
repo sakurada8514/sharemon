@@ -17,7 +17,12 @@ class BudgetService extends BaseService
 
     public function findList(int $_roomId)
     {
-        return $this->_budgetModel->findListByRoomId($_roomId);
+        $_budgetList = $this->_budgetModel->findListWithExpenseByRoomId($_roomId);
+        array_walk($_budgetList, function (&$_budget) {
+            $_budget['percent'] = round(((int)$_budget['total_expense'] / (int)$_budget['budget']) * 100);
+            $_budget['remaining'] = (int)$_budget['budget'] - (int)$_budget['total_expense'];
+        });
+        return $_budgetList;
     }
 
     public function insertBudget(array $_data, Authenticatable $_user)
