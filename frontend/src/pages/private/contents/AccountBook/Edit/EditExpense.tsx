@@ -59,14 +59,20 @@ const EditExpense: React.FC<EditExpenseProps> = ({
   }, []);
 
   const getExpenseDetail = async () => {
-    const response = await fetcherApi("/expense/" + id, "detail");
+    const response = await fetcherApi("/expense/" + id);
 
-    setExpense(response.expense);
-    setDate(response.regist_date);
-    setCategory(response.category_id);
-    setComment(response.comment ? response.comment : "");
-    setRepetition(response.repetition_flg);
-    setReceiptImgPreview(response.img_url);
+    if (response.status === OK) {
+      setExpense(response.data.detail.expense);
+      setDate(response.data.detail.regist_date);
+      setCategory(response.data.detail.category_id);
+      setComment(
+        response.data.detail.comment ? response.data.detail.comment : ""
+      );
+      setRepetition(response.data.detail.repetition_flg);
+      setReceiptImgPreview(response.data.detail.img_url);
+    } else {
+      history.push("/error");
+    }
     setAjaxLoading(false);
   };
 

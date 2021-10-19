@@ -37,6 +37,16 @@ class BudgetModel extends BaseModel
         return $this->_convertArray($_ret);
     }
 
+    public function findByBudgetId(int $_budgetId)
+    {
+        $_ret = DB::table($this->table)
+            ->where('id', $_budgetId)
+            ->select('budget', 'category_id')
+            ->first();
+
+        return $this->_convertArray($_ret);
+    }
+
     public function existsByCategoryIdWithRoomId(int $_categoryId, int $_roomId)
     {
         return DB::table($this->table)
@@ -45,6 +55,17 @@ class BudgetModel extends BaseModel
                 ['room_id', $_roomId]
             ])
             ->exists();
+    }
+
+    public function updateData(int $_budgetId, array $_data)
+    {
+        $_update = $this->_createInsertUpdateData($_data, $this->_getBaseDefaultUpdateData());
+
+        DB::table($this->table)
+            ->where('id', $_budgetId)
+            ->update($_update);
+
+        return;
     }
 
     private function _findThisMonthTotalExpenseByCategorySubQuery(int $_roomId)

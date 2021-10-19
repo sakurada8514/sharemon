@@ -25,8 +25,19 @@ class BudgetService extends BaseService
         return $_budgetList;
     }
 
+    public function findDetail(int $_budgetId)
+    {
+        return $this->_budgetModel->findByBudgetId($_budgetId);
+    }
+
     public function insertBudget(array $_data, Authenticatable $_user)
     {
         $this->_budgetModel->insert($this->_addUserData($_data, $_user));
+    }
+
+    public function editBudget(int $_budgetId, array $_data)
+    {
+        $this->_budgetModel->updateData($_budgetId, $_data);
+        return;
     }
 }

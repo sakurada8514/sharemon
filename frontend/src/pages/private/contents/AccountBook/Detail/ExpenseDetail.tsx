@@ -59,13 +59,11 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
   };
 
   const handleEditButtonClick = () => {
-    if (detail) {
-      history.push("/mypage/expense/edit/" + detail.id);
-    }
+    history.push("/mypage/expense/edit/" + id);
   };
 
   return (
-    <div className="px-4 py-2">
+    <div className="px-4 py-1">
       <div className="flex justify-between">
         <BackButton />
         <div>

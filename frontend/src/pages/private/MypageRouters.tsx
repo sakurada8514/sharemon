@@ -11,6 +11,7 @@ import EditExpense from "./contents/AccountBook/Edit/EditExpense";
 import EditIncome from "./contents/AccountBook/Edit/EditIncome";
 import BudgetList from "./contents/Budget/BudgetList";
 import RegistBudget from "./contents/Budget/RegistBudget";
+import EditBudget from "./contents/Budget/EditBudget";
 import Home from "./contents/Home";
 import RegistMoney from "./contents/AccountBook/Regist/RegistTemplate";
 import Error from "pages/Error";
@@ -100,6 +101,17 @@ const MypageRouters: React.FC<MypageRoutersProps> = ({
           path="/mypage/budget/regist"
           children={
             <RegistBudget
+              handleAlertOpen={handleAlertOpen}
+              setAlertSeverity={setAlertSeverity}
+              setAlertMessage={setAlertMessage}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/mypage/budget/edit/:id"
+          children={
+            <EditBudget
               handleAlertOpen={handleAlertOpen}
               setAlertSeverity={setAlertSeverity}
               setAlertMessage={setAlertMessage}

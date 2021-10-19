@@ -60,13 +60,19 @@ const EditIncome: React.FC<EditIncomeProps> = ({
   }, []);
 
   const getIncomeDetail = async () => {
-    const response = await fetcherApi("/expense/" + id, "detail");
+    const response = await fetcherApi("/expense/" + id);
 
-    setIncome(response.expense);
-    setDate(response.regist_date);
-    setCategory(response.category_id);
-    setComment(response.comment ? response.comment : "");
-    setRepetition(response.repetition_flg);
+    if (response.status === OK) {
+      setIncome(response.data.detail.expense);
+      setDate(response.data.detail.regist_date);
+      setCategory(response.data.detail.category_id);
+      setComment(
+        response.data.detail.comment ? response.data.detail.comment : ""
+      );
+      setRepetition(response.data.detail.repetition_flg);
+    } else {
+      history.push("/error");
+    }
     setAjaxLoading(false);
   };
 

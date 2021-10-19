@@ -52,7 +52,8 @@ class BudgetController extends Controller
      */
     public function show($id)
     {
-        //
+        $_detail = $this->_budgetService->findDetail($id);
+        return response()->json(['detail' => $_detail]);
     }
 
     /**
@@ -62,9 +63,11 @@ class BudgetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
-        //
+        $_data = $request->only('category_id', 'budget');
+        $this->_budgetService->editBudget($id, $_data);
+        return response()->json([]);
     }
 
     /**

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import useSWR from "swr";
 import { useHistory } from "react-router";
-import { Fab, Modal, Fade } from "@mui/material";
+import { Fab } from "@mui/material";
 import { Skeleton } from "@mui/material";
 import { LinearProgress } from "@mui/material";
 
 import EditIcon from "@mui/icons-material/Edit";
 import MoneyIcon from "@mui/icons-material/Money";
+
+import EditIconButton from "components/Atoms/Buttons/EditIconButton";
 
 import { fetcherApi } from "api/fetcher";
 const BudgetList = () => {
@@ -23,6 +25,9 @@ const BudgetList = () => {
   const handleRegistClick = () => {
     history.push("/mypage/budget/regist");
   };
+  const handleEditClick = (id: number) => {
+    history.push("/mypage/budget/edit/" + id);
+  };
   return (
     <>
       <div className="pt-3">
@@ -34,7 +39,13 @@ const BudgetList = () => {
                 className="flex justify-between px-4 py-6 border-b"
               >
                 <div className="w-1/3">
-                  <p className="text-xl">{data.category_name}</p>
+                  <div className="flex">
+                    <p className="text-lg">{data.category_name}</p>
+                    <EditIconButton
+                      handleEditButtonClick={() => handleEditClick(data.id)}
+                      size="small"
+                    />
+                  </div>
                   <div className="flex items-center">
                     <MoneyIcon className="w-6 h-6 bg-yellow-400 text-white mr-2 rounded-full p-1" />
                     <p>{data.budget}円</p>
