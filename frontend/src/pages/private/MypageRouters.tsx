@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import { AlertProps } from "@material-ui/lab";
 
 import List from "./contents/AccountBook/List/ListTemplate";
+import Graph from "./contents/Graph/Graph";
 import ExpenseDetail from "./contents/AccountBook/Detail/ExpenseDetail";
 import IncomeDetail from "./contents/AccountBook/Detail/IncomeDetail";
 import EditExpense from "./contents/AccountBook/Edit/EditExpense";
@@ -118,6 +119,7 @@ const MypageRouters: React.FC<MypageRoutersProps> = ({
             />
           }
         />
+        <Route exact path="/mypage/graph" children={<Graph />} />
       </Switch>
     </AnimatePresence>
   );
