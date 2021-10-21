@@ -1,33 +1,37 @@
-import { Doughnut, Chart } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 function ExpenseChart() {
-  Chart.register(ChartDataLabels);
   const graphdata = {
     datasets: [
       {
-        data: [15, 25, 35],
+        data: [15, 25, 35, 25, 35, 25, 35],
         backgroundColor: ["#B9D8F7", "#FFE5EC", "#DEDFE0"],
       },
     ],
-    labels: ["item1", "item2", "item3"],
   };
-
+  const labels = [
+    "item1",
+    "item2",
+    "item3",
+    "item1",
+    "item2",
+    "item3",
+    "item1",
+  ];
   const doughnutOptions = {
-    legend: {
-      display: false,
+    tooltips: {
+      enabled: false,
     },
-    options: {
-      responsive: false,
-    },
+    responsive: true,
     plugins: {
       datalabels: {
-        color: "#000",
+        color: "#111111",
         font: {
           size: 20,
         },
         formatter: (value, ctx) => {
-          return value + "%";
+          return labels[ctx.dataIndex] + value + "%";
         },
       },
     },
@@ -36,7 +40,11 @@ function ExpenseChart() {
   return (
     <div>
       <div>
-        <Doughnut data={graphdata} options={doughnutOptions} />
+        <Doughnut
+          data={graphdata}
+          options={doughnutOptions}
+          plugins={[ChartDataLabels]}
+        />
       </div>
     </div>
   );
