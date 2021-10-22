@@ -1,52 +1,40 @@
 import { Doughnut } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
-function ExpenseChart() {
+import { GRAPH_COLOR_LIST, DOUGHNUT_GRAPH_OPTIONS } from "utils/constant";
+
+type ChartProps = {
+  datas: number[];
+  labels: string[];
+};
+
+const ExpenseChart: React.FC<ChartProps> = ({ datas, labels }) => {
   const graphdata = {
     datasets: [
       {
-        data: [15, 25, 35, 25, 35, 25, 35],
-        backgroundColor: ["#B9D8F7", "#FFE5EC", "#DEDFE0"],
+        data: datas,
+        backgroundColor: GRAPH_COLOR_LIST,
       },
     ],
-  };
-  const labels = [
-    "item1",
-    "item2",
-    "item3",
-    "item1",
-    "item2",
-    "item3",
-    "item1",
-  ];
-  const doughnutOptions = {
-    tooltips: {
-      enabled: false,
-    },
-    responsive: true,
-    plugins: {
-      datalabels: {
-        color: "#111111",
-        font: {
-          size: 20,
-        },
-        formatter: (value, ctx) => {
-          return labels[ctx.dataIndex] + value + "%";
-        },
-      },
-    },
+    labels: labels,
   };
 
   return (
     <div>
-      <div>
+      <div className="max-w-min mx-auto p-4 relative">
         <Doughnut
           data={graphdata}
-          options={doughnutOptions}
+          options={DOUGHNUT_GRAPH_OPTIONS}
           plugins={[ChartDataLabels]}
+          width={300}
+          height={300}
         />
+        <div className="absolute top-2/4 right-2/4 transform translate-x-1/2 -translate-y-2/4">
+          <p className="text-xl font-bold text-center">支出</p>
+          <p className="text-center text-lg">200000円</p>
+        </div>
       </div>
     </div>
   );
-}
+};
 export default ExpenseChart;

@@ -2,7 +2,7 @@ import React, { useGlobal, useEffect, useState } from "reactn";
 import useSWR from "swr";
 import { useHistory } from "react-router";
 import { Box, Typography, Avatar } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
+import { Skeleton } from "@mui/material";
 
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
@@ -35,13 +35,13 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
             {roomName}
           </Typography>
         ) : (
-          <Skeleton className="w-1/2 h-8 mb-2" />
+          <Skeleton variant="rectangular" className="w-1/2 h-8 mb-2" />
         )}
         <Box display="flex" flexWrap="wrap" justifyContent="space-between">
           {!member ? (
             <>
               <Box className="w-full justify-between flex-wrap">
-                <Skeleton className="w-full h-8 my-1" />
+                <Skeleton variant="rectangular" className="w-full h-8 my-1" />
                 {/* <Skeleton className="w-full h-9" /> */}
               </Box>
             </>
@@ -83,7 +83,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
                     <Skeleton className="w-2/3 h-7" />
                   ) : (
                     <p className="text-lg font-medium">
-                      {balance.expense.total}円
+                      {balance.expense.total}回
                     </p>
                   )}
                 </div>

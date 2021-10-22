@@ -64,7 +64,7 @@ const MainListItems: React.FC<MainListItemsProps> = ({ sideMenuOpen }) => {
             <ListItemText primary="履歴" />
           </ListItem>
         </NavLink>
-        <NavLink to="/mypage/list" activeClassName={classes.activeNav} exact>
+        <NavLink to="/mypage/graph" activeClassName={classes.activeNav} exact>
           <ListItem
             button
             className={sideMenuOpen ? "pl-12 transition" : "pl-8"}
