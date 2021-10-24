@@ -99,7 +99,7 @@ export default function ListTemplate() {
 
   return (
     <Box className="pt-1">
-      <div className="flex pb-2">
+      <div className="flex pb-2 overflow-hidden">
         <FormControl className="w-1/2 ml-1">
           <InputLabel id="sort_select">ソート</InputLabel>
           <Select

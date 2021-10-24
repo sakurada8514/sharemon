@@ -93,6 +93,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: text;
 }
 .react-calendar__tile:disabled {
   background-color: #f0f0f0;

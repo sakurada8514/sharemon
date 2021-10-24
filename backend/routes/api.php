@@ -45,6 +45,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('income', IncomeController::class);
 
     Route::apiResource('incomecategory', IncomeCategoryController::class);
+
+    Route::get('budget/total', [BudgetController::class, 'getBudgetTotal']);
     Route::apiResource('budget', BudgetController::class);
 
     Route::get('balance/month', [BalanceController::class, 'getBalanceOfMonth']);

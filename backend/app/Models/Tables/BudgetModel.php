@@ -47,6 +47,16 @@ class BudgetModel extends BaseModel
         return $this->_convertArray($_ret);
     }
 
+    public function findTotal(int $_roomId)
+    {
+        return DB::table($this->table)
+            ->where([
+                ['room_id', $_roomId],
+                ['del_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.OFF')]
+            ])
+            ->sum('budget');
+    }
+
     public function existsByCategoryIdWithRoomId(int $_categoryId, int $_roomId)
     {
         return DB::table($this->table)

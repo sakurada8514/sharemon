@@ -30,6 +30,11 @@ class BudgetService extends BaseService
         return $this->_budgetModel->findByBudgetId($_budgetId);
     }
 
+    public function findTotal(int $_roomId)
+    {
+        return $this->_budgetModel->findTotal($_roomId);
+    }
+
     public function insertBudget(array $_data, Authenticatable $_user)
     {
         $this->_budgetModel->insert($this->_addUserData($_data, $_user));

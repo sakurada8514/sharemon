@@ -80,4 +80,12 @@ class BudgetController extends Controller
     {
         //
     }
+
+    public function getBudgetTotal()
+    {
+        $_roomId = Auth::user()->room_id;
+        $_total = $this->_budgetService->findTotal($_roomId);
+
+        return response()->json(['total' => $_total]);
+    }
 }
