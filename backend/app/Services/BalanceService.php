@@ -38,4 +38,12 @@ class BalanceService extends BaseService
 
         return ['expense' => $_expenseDaily, 'income' => $_incomeDaily];
     }
+
+    public function getBalanceByCategory(string $_date)
+    {
+        $_roomId = Auth::user()->room_id;
+        $_expense = $this->_expenseModel->findExpenseTotalByCategory($_roomId, new Carbon($_date));
+        $_income = $this->_incomeModel->findIncomeTotalByCategory($_roomId, new Carbon($_date));
+        return ['expense' => $_expense, 'income' => $_income];
+    }
 }

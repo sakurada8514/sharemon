@@ -111,6 +111,29 @@ class ExpenseModel extends BaseModel
 
         return $this->_convertArray($_ret);
     }
+    public function findExpenseTotalByCategory(string $_roomId, Carbon $_date)
+    {
+        $_ret = DB::table("$this->table as e")
+            ->where('e.room_id', $_roomId)
+            ->where(function ($query) use ($_date) {
+                $query->where(function ($query) use ($_date) {
+                    $query->whereYear('e.regist_date', $_date->format('Y'))
+                        ->whereMonth('e.regist_date', $_date->format('m'));
+                })->orWhere(function ($query) use ($_date) {
+                    $query->where('e.repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON'))
+                        ->where('e.regist_date', '<', $_date);
+                });
+            })
+            ->where('e.del_flg', config('Const.webDB.DEL_FLG.OFF'))
+            ->join('expense_categories as ec', 'e.category_id', '=', 'ec.category_id')
+            ->select('ec.category_name')
+            ->selectRaw('sum(e.expense) as total')
+            ->groupBy('e.category_id')
+            ->get();
+
+        return $this->_convertArray($_ret);
+    }
+
 
     public function insert(array $_registData, ?string $_s3ImgUrl = null): void
     {
@@ -124,6 +147,7 @@ class ExpenseModel extends BaseModel
 
         return;
     }
+
 
     public function updateData(array $_date, ?string $_s3ImgUrl = null)
     {

@@ -51,4 +51,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('balance/month', [BalanceController::class, 'getBalanceOfMonth']);
     Route::get('balance/daily/{date}', [BalanceController::class, 'getBalanceOfDaily']);
+    Route::get('balance/category/{date}', [BalanceController::class, 'getBalanceByCategory']);
 });

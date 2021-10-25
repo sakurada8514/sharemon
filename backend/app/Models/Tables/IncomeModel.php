@@ -101,6 +101,28 @@ class IncomeModel extends BaseModel
 
         return $this->_convertArray($_ret);
     }
+    public function findIncomeTotalByCategory(string $_roomId, Carbon $_date)
+    {
+        $_ret = DB::table("$this->table as i")
+            ->where('i.room_id', $_roomId)
+            ->where(function ($query) use ($_date) {
+                $query->where(function ($query) use ($_date) {
+                    $query->whereYear('i.regist_date', $_date->format('Y'))
+                        ->whereMonth('i.regist_date', $_date->format('m'));
+                })->orWhere(function ($query) use ($_date) {
+                    $query->where('i.repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON'))
+                        ->where('i.regist_date', '<', $_date);
+                });
+            })
+            ->where('i.del_flg', config('Const.webDB.DEL_FLG.OFF'))
+            ->join('income_categories as ic', 'i.category_id', '=', 'ic.category_id')
+            ->select('ic.category_name')
+            ->selectRaw('sum(i.income) as total')
+            ->groupBy('i.category_id')
+            ->get();
+
+        return $this->_convertArray($_ret);
+    }
 
     public function insert(array $_registData): void
     {
