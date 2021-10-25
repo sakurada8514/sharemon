@@ -1,4 +1,4 @@
-import React, { useGlobal, useEffect, useState } from "reactn";
+import React from "reactn";
 import useSWR from "swr";
 import { useHistory } from "react-router";
 import { Box, Typography, Avatar } from "@material-ui/core";

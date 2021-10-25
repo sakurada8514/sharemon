@@ -3,9 +3,10 @@ import useSWR from "swr";
 import { useHistory } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import { Box } from "@material-ui/core";
-import clsx from "clsx";
 import { AlertProps } from "@material-ui/lab";
 import { Drawer } from "@mui/material";
+import clsx from "clsx";
+import MediaQuery from "react-responsive";
 
 import SideMenu from "../../components/SideMenu/SideMenu";
 import BottomAppBar from "../../components/SideMenu/BottomAppBar";
@@ -13,8 +14,6 @@ import Header from "../../components/Header/Header";
 import AlertMessage from "../../components/Atoms/AlertMessage";
 import TransitionMotion from "../../components/Route/Motion";
 import MypageRouters from "./MypageRouters";
-import MediaQuery from "react-responsive";
-
 import { OK } from "../../utils/constant";
 
 import { createInviteUrl as createInviteUrlApi } from "../../api/Room/invite";
