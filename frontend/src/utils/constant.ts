@@ -41,7 +41,7 @@ export const DOUGHNUT_GRAPH_OPTIONS = {
         size: 16,
       },
       formatter: (value, ctx) => {
-        return ctx.chart.data.labels[ctx.dataIndex] + "\n" + value + "%";
+        return ctx.chart.data.labels[ctx.dataIndex] + "\n " + value + "%";
       },
     },
   },

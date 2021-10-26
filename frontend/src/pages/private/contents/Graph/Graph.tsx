@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import useSWR from "swr";
+import MyDatePicker from "components/Atoms/Form/DatePicker";
 
 import ExpenseChart from "components/Chart/ExpenseChart";
 
@@ -16,27 +16,41 @@ const Graph = () => {
   const [expenseGraphLabels, setExpenseGraphLabels] = useState([]);
   const [incomeGraphDatas, setIncomeGraphDatas] = useState([]);
   const [incomeGraphLabels, setIncomeGraphLabels] = useState([]);
-
-  const { data: balance, error: balanceError } = useSWR(
-    "balance/month",
-    fetcherApi
-  );
+  const [balance, setBalance] = useState(null);
 
   useEffect(() => {
-    getGraphData();
-  }, []);
+    const setup = async () => {
+      const res = await getBalance(); //月毎に撮れるように
+      await getGraphData(res);
+    };
+    setup();
+  }, [date]);
 
-  const getGraphData = async () => {
+  const getBalance = async () => {
+    const response = await fetcherApi("balance/month");
+
+    if (response.status === OK) {
+      setBalance(response.data);
+    } else {
+      history.push("/error");
+    }
+    return response.data;
+  };
+
+  const getGraphData = async (balance) => {
     const response = await fetcherApi(
       "balance/category/" + formatDate(date, "yyyy-MM-dd")
     );
+
     if (response.status === OK) {
       setGraphData(
+        balance,
         response.data.expense,
         setExpenseGraphDatas,
         setExpenseGraphLabels
       );
       setGraphData(
+        balance,
         response.data.income,
         setIncomeGraphDatas,
         setIncomeGraphLabels
@@ -46,12 +60,22 @@ const Graph = () => {
     }
   };
 
-  const setGraphData = (graphDatas, setDataMethod, setLabelMethod) => {
+  const setGraphData = (balance, graphDatas, setDataMethod, setLabelMethod) => {
     let datas = [];
     let labels = [];
+    let other = 0;
     for (let i of graphDatas) {
-      datas.push(i.total);
+      const percent = Math.round((i.total / balance.expense.total) * 100);
+      if (percent <= 5) {
+        other += percent;
+        continue;
+      }
+      datas.push(percent);
       labels.push(i.category_name);
+    }
+    if (other > 0) {
+      datas.push(other);
+      labels.push("その他");
     }
     setDataMethod(datas);
     setLabelMethod(labels);
@@ -59,11 +83,12 @@ const Graph = () => {
 
   return (
     <>
+      <MyDatePicker date={date} setDate={setDate} />
       {balance && (
         <ExpenseChart
           datas={expenseGraphDatas}
           labels={expenseGraphLabels}
-          total={balance.data.expense.total}
+          total={balance.expense.total}
         />
       )}
     </>

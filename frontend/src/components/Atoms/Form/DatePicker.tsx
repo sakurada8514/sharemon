@@ -16,7 +16,7 @@ class ExtendedUtils extends DateFnsUtils {
 type MyDatePickerProps = {
   date: Date;
   setDate: DatePickerProps["onChange"];
-  errors: any;
+  errors?: any;
 };
 
 const MyDatePicker: React.FC<MyDatePickerProps> = ({
@@ -37,8 +37,8 @@ const MyDatePicker: React.FC<MyDatePickerProps> = ({
         animateYearScrolling
         fullWidth
         margin="normal"
-        error={typeof errors.regist_date !== "undefined"}
-        helperText={errors.regist_date}
+        // error={typeof errors.regist_date !== "undefined"}
+        // helperText={errors.regist_date}
       />
     </MuiPickersUtilsProvider>
   );
