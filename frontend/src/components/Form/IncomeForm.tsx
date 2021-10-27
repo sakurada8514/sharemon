@@ -77,7 +77,13 @@ const IncomeForm: React.FC<IncomeFormProps> = ({
             }}
           />
 
-          <MyDatePicker date={date} setDate={setDate} errors={errors} />
+          <MyDatePicker
+            date={date}
+            setDate={setDate}
+            views={["year", "month", "date"]}
+            format="yyyy/MM/dd"
+            openTo="date"
+          />
           <FormControl
             variant="outlined"
             fullWidth

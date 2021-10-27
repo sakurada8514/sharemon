@@ -13,9 +13,9 @@ class BalanceController extends Controller
     {
         $this->_balanceService = $_balanceService;
     }
-    public function getBalanceOfMonth()
+    public function getBalanceOfMonth(string $_date)
     {
-        list($_expenseTotal, $_incomeTotal) = $this->_balanceService->getBalanceOfThisMonth();
+        list($_expenseTotal, $_incomeTotal) = $this->_balanceService->getBalanceOfThisMonth($_date);
 
         return $this->jsonResponse(['expense' => $_expenseTotal, 'income' => $_incomeTotal]);
     }

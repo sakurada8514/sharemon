@@ -20,11 +20,11 @@ class BalanceService extends BaseService
         $this->_expenseModel = $_expenseModel;
         $this->_incomeModel = $_incomeModel;
     }
-    public function getBalanceOfThisMonth()
+    public function getBalanceOfThisMonth(string $_date)
     {
         $_roomId = Auth::user()->room_id;
-        $_expenseTotal = $this->_expenseModel->findTotalOfThisMonth($_roomId);
-        $_incomeTotal = $this->_incomeModel->findTotalOfThisMonth($_roomId);
+        $_expenseTotal = $this->_expenseModel->findTotalOfThisMonth($_roomId, new Carbon($_date));
+        $_incomeTotal = $this->_incomeModel->findTotalOfThisMonth($_roomId, new Carbon($_date));
 
         return [$_expenseTotal, $_incomeTotal];
     }

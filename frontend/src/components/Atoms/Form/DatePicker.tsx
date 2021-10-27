@@ -16,13 +16,17 @@ class ExtendedUtils extends DateFnsUtils {
 type MyDatePickerProps = {
   date: Date;
   setDate: DatePickerProps["onChange"];
-  errors?: any;
+  views: DatePickerProps["views"];
+  format: DatePickerProps["format"];
+  openTo: DatePickerProps["openTo"];
 };
 
 const MyDatePicker: React.FC<MyDatePickerProps> = ({
   date,
   setDate,
-  errors,
+  views,
+  format,
+  openTo,
 }) => {
   return (
     <MuiPickersUtilsProvider utils={ExtendedUtils} locale={jaLocale}>
@@ -33,10 +37,12 @@ const MyDatePicker: React.FC<MyDatePickerProps> = ({
         cancelLabel="キャンセル"
         value={date}
         onChange={setDate}
-        format="yyyy/MM/dd"
+        format={format}
         animateYearScrolling
         fullWidth
         margin="normal"
+        views={views}
+        openTo={openTo}
         // error={typeof errors.regist_date !== "undefined"}
         // helperText={errors.regist_date}
       />

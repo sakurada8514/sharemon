@@ -32,8 +32,8 @@ export const DOUGHNUT_GRAPH_OPTIONS = {
   legend: {
     display: false,
   },
-  responsive: false,
-  maintainAspectRatio: false,
+  responsive: true,
+  maintainAspectRatio: true,
   plugins: {
     datalabels: {
       color: "#111111",

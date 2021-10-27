@@ -22,7 +22,7 @@ const ExpenseChart: React.FC<ChartProps> = ({ datas, labels, total }) => {
 
   return (
     <div>
-      <div className="max-w-min mx-auto p-4 relative">
+      <div className="max-w-min mx-auto relative">
         <Doughnut
           data={graphdata}
           options={DOUGHNUT_GRAPH_OPTIONS}

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import MyDatePicker from "components/Atoms/Form/DatePicker";
+import { InputLabel, Select, MenuItem, FormControl } from "@mui/material";
 
+import MyDatePicker from "components/Atoms/Form/DatePicker";
 import ExpenseChart from "components/Chart/ExpenseChart";
 
 import { fetcherApi } from "api/fetcher";
@@ -27,7 +28,9 @@ const Graph = () => {
   }, [date]);
 
   const getBalance = async () => {
-    const response = await fetcherApi("balance/month");
+    const response = await fetcherApi(
+      "balance/month/" + formatDate(date, "yyyy-MM-dd")
+    );
 
     if (response.status === OK) {
       setBalance(response.data);
@@ -83,7 +86,34 @@ const Graph = () => {
 
   return (
     <>
-      <MyDatePicker date={date} setDate={setDate} />
+      <div className="px-2 flex">
+        <div className="w-1/2 pr-1">
+          <MyDatePicker
+            date={date}
+            setDate={setDate}
+            views={["year", "month"]}
+            format="yyyy/MM"
+            openTo="month"
+          />
+        </div>
+        <div className="w-1/2 pl-1">
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="select-outlined-label">グラフ</InputLabel>
+            <Select
+              labelId="select-outlined-label"
+              id="select-outlined"
+              // value={category}
+              // onChange={handleChangeCategory}
+              label="グラフ"
+            >
+              <MenuItem selected value="0">
+                支出
+              </MenuItem>
+              <MenuItem value="1">収入</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+      </div>
       {balance && (
         <ExpenseChart
           datas={expenseGraphDatas}

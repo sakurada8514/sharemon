@@ -21,7 +21,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
     fetcherApi
   );
   const { data: balance, error: balanceError } = useSWR(
-    "balance/month",
+    "balance/month/" + formatDate(new Date(), "yyyy-MM-dd"),
     fetcherApi
   );
   const { data: budget, error: budgetError } = useSWR(
