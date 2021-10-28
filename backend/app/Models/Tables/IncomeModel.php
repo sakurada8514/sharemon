@@ -65,16 +65,16 @@ class IncomeModel extends BaseModel
         return $this->_convertArray($_ret);
     }
 
-    public function findTotalOfThisMonth(string $_roomId)
+    public function findTotalOfThisMonth(string $_roomId, Carbon $_date)
     {
         return DB::table($this->table)
-            ->where(function ($query) {
-                $query->where(function ($query) {
-                    $query->whereYear('regist_date', now()->format('Y'))
-                        ->whereMonth('regist_date', now()->format('m'));
-                })->orWhere(function ($query) {
+            ->where(function ($query) use ($_date) {
+                $query->where(function ($query) use ($_date) {
+                    $query->whereYear('regist_date', $_date->format('Y'))
+                        ->whereMonth('regist_date', $_date->format('m'));
+                })->orWhere(function ($query) use ($_date) {
                     $query->where('repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON'))
-                        ->where('regist_date', '<', now());
+                        ->where('regist_date', '<', $_date);
                 });
             })
             ->where([

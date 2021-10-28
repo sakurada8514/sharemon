@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { InputLabel, Select, MenuItem, FormControl } from "@mui/material";
+import { Skeleton } from "@mui/material";
 
 import MyDatePicker from "components/Atoms/Form/DatePicker";
-import ExpenseChart from "components/Chart/ExpenseChart";
+import DoughnutChart from "components/Chart/DoughnutChart";
 
 import { fetcherApi } from "api/fetcher";
 
 import { formatDate } from "utils/handy";
-import { OK, VALIDATION } from "utils/constant";
+import { OK } from "utils/constant";
 
 const Graph = () => {
   const history = useHistory();
   const [date, setDate] = useState(new Date());
+  const [graphType, setGraphType] = useState("0");
   const [expenseGraphDatas, setExpenseGraphDatas] = useState([]);
   const [expenseGraphLabels, setExpenseGraphLabels] = useState([]);
   const [incomeGraphDatas, setIncomeGraphDatas] = useState([]);
@@ -47,13 +49,13 @@ const Graph = () => {
 
     if (response.status === OK) {
       setGraphData(
-        balance,
+        balance.expense.total,
         response.data.expense,
         setExpenseGraphDatas,
         setExpenseGraphLabels
       );
       setGraphData(
-        balance,
+        balance.income.total,
         response.data.income,
         setIncomeGraphDatas,
         setIncomeGraphLabels
@@ -63,12 +65,12 @@ const Graph = () => {
     }
   };
 
-  const setGraphData = (balance, graphDatas, setDataMethod, setLabelMethod) => {
+  const setGraphData = (total, graphDatas, setDataMethod, setLabelMethod) => {
     let datas = [];
     let labels = [];
     let other = 0;
     for (let i of graphDatas) {
-      const percent = Math.round((i.total / balance.expense.total) * 100);
+      const percent = Math.round((i.total / total) * 100);
       if (percent <= 5) {
         other += percent;
         continue;
@@ -82,6 +84,9 @@ const Graph = () => {
     }
     setDataMethod(datas);
     setLabelMethod(labels);
+  };
+  const handleChangeGraphType = (e: any) => {
+    setGraphType(e.target.value);
   };
 
   return (
@@ -102,23 +107,38 @@ const Graph = () => {
             <Select
               labelId="select-outlined-label"
               id="select-outlined"
-              // value={category}
-              // onChange={handleChangeCategory}
+              value={graphType}
+              onChange={handleChangeGraphType}
               label="グラフ"
             >
-              <MenuItem selected value="0">
-                支出
-              </MenuItem>
+              <MenuItem value="0">支出</MenuItem>
               <MenuItem value="1">収入</MenuItem>
             </Select>
           </FormControl>
         </div>
       </div>
-      {balance && (
-        <ExpenseChart
-          datas={expenseGraphDatas}
-          labels={expenseGraphLabels}
-          total={balance.expense.total}
+      {balance && expenseGraphDatas ? (
+        graphType === "0" ? (
+          <DoughnutChart
+            datas={expenseGraphDatas}
+            labels={expenseGraphLabels}
+            graphName="支出"
+            total={balance.expense.total}
+          />
+        ) : (
+          <DoughnutChart
+            datas={incomeGraphDatas}
+            labels={incomeGraphLabels}
+            graphName="収入"
+            total={balance.income.total}
+          />
+        )
+      ) : (
+        <Skeleton
+          className="m-auto"
+          variant="circular"
+          width={300}
+          height={300}
         />
       )}
     </>
