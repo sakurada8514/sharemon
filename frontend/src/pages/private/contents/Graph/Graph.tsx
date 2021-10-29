@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { InputLabel, Select, MenuItem, FormControl } from "@mui/material";
+import { Select, FormControl, InputLabel, MenuItem } from "@material-ui/core";
 import { Skeleton } from "@mui/material";
 
 import MyDatePicker from "components/Atoms/Form/DatePicker";
@@ -20,6 +20,7 @@ const Graph = () => {
   const [incomeGraphDatas, setIncomeGraphDatas] = useState([]);
   const [incomeGraphLabels, setIncomeGraphLabels] = useState([]);
   const [balance, setBalance] = useState(null);
+  const [categoryBalance, setCategoryBalance] = useState(null);
 
   useEffect(() => {
     const setup = async () => {
@@ -48,6 +49,7 @@ const Graph = () => {
     );
 
     if (response.status === OK) {
+      setCategoryBalance(response.data);
       setGraphData(
         balance.expense.total,
         response.data.expense,
@@ -102,7 +104,7 @@ const Graph = () => {
           />
         </div>
         <div className="w-1/2 pl-1">
-          <FormControl fullWidth margin="normal">
+          <FormControl fullWidth margin="normal" variant="outlined">
             <InputLabel id="select-outlined-label">グラフ</InputLabel>
             <Select
               labelId="select-outlined-label"
@@ -110,6 +112,7 @@ const Graph = () => {
               value={graphType}
               onChange={handleChangeGraphType}
               label="グラフ"
+              color="primary"
             >
               <MenuItem value="0">支出</MenuItem>
               <MenuItem value="1">収入</MenuItem>
@@ -117,29 +120,73 @@ const Graph = () => {
           </FormControl>
         </div>
       </div>
-      {balance && expenseGraphDatas ? (
+      {balance && categoryBalance ? (
         graphType === "0" ? (
-          <DoughnutChart
-            datas={expenseGraphDatas}
-            labels={expenseGraphLabels}
-            graphName="支出"
-            total={balance.expense.total}
-          />
+          <>
+            <DoughnutChart
+              datas={expenseGraphDatas}
+              labels={expenseGraphLabels}
+              graphName="支出"
+              total={balance.expense.total}
+            />
+            <div className="mt-4 border-t">
+              {categoryBalance.expense.map((data: any) => {
+                return (
+                  <div
+                    key={data.category_name}
+                    className="flex justify-between px-4 py-4 border-b"
+                  >
+                    <div>
+                      <p className="text-xl">{data.category_name}</p>
+                    </div>
+                    <div className="text-right flex flex-col items-end">
+                      <p className="text-xl mb-1">{data.total}円</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
         ) : (
-          <DoughnutChart
-            datas={incomeGraphDatas}
-            labels={incomeGraphLabels}
-            graphName="収入"
-            total={balance.income.total}
-          />
+          <>
+            <DoughnutChart
+              datas={incomeGraphDatas}
+              labels={incomeGraphLabels}
+              graphName="収入"
+              total={balance.income.total}
+            />
+            <div className="mt-4 border-t">
+              {categoryBalance.income.map((data: any) => {
+                return (
+                  <div
+                    key={data.category_name}
+                    className="flex justify-between px-4 py-4 border-b"
+                  >
+                    <div>
+                      <p className="text-xl">{data.category_name}</p>
+                    </div>
+                    <div className="text-right flex flex-col items-end">
+                      <p className="text-xl mb-1">{data.total}円</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
         )
       ) : (
-        <Skeleton
-          className="m-auto"
-          variant="circular"
-          width={300}
-          height={300}
-        />
+        <div className="px-4">
+          <Skeleton
+            className="m-auto"
+            variant="circular"
+            width={300}
+            height={300}
+          />
+          <Skeleton variant="rectangular" className="h-12 mt-8 mb-4" />
+          <Skeleton variant="rectangular" className="h-12 my-4" />
+          <Skeleton variant="rectangular" className="h-12 my-4" />
+          <Skeleton variant="rectangular" className="h-12 my-4" />
+        </div>
       )}
     </>
   );

@@ -7,6 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
+import PieChartIcon from "@material-ui/icons/PieChart";
 
 type BottomAppBarProps = {
   handleMobileSideMenuOpen: () => void;
@@ -41,9 +42,9 @@ const BottomAppBar: React.FC<BottomAppBarProps> = ({
               <ListAltIcon className="w-7 h-7" />
             </IconButton>
           </NavLink>
-          <NavLink to="/mypage/regist" exact>
+          <NavLink to="/mypage/graph" exact>
             <IconButton>
-              <PlaylistAddCheckIcon className="w-7 h-7" />
+              <PieChartIcon className="w-7 h-7" />
             </IconButton>
           </NavLink>
         </Toolbar>

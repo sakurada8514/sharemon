@@ -43,9 +43,9 @@ const SideMenu: React.FC<SideMenuProps> = ({
         <MainListItems sideMenuOpen={sideMenuOpen} />
       </List>
       <Divider />
-      <List>
+      {/* <List>
         <SecondaryListItems />
-      </List>
+      </List> */}
     </Drawer>
   );
 };
