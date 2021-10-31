@@ -1,10 +1,10 @@
 import React, { useState, useGlobal } from "reactn";
 import { useHistory } from "react-router-dom";
 
-import { createRoom as createRoomApi } from "../../api/Room/room";
-import { OK, VALIDATION } from "../../utils/constant";
-import RegistRoomForm from "../../components/Form/RegistRoomForm";
-import TransitionMotion from "../../components/Route/Motion";
+import { createRoom as createRoomApi } from "api/Room/room";
+import { OK, VALIDATION } from "utils/constant";
+import RegistRoomForm from "components/Form/RegistRoomForm";
+import TransitionMotion from "components/Route/Motion";
 
 export default function RegistRoom() {
   const history = useHistory();
