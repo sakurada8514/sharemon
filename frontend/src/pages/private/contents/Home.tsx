@@ -6,6 +6,8 @@ import { Skeleton } from "@mui/material";
 
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
+import BarChart from "components/Chart/BarChart";
+
 import { fetcherApi } from "api/fetcher";
 import { formatDate } from "../../../utils/handy";
 type HomeProps = {
@@ -166,6 +168,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
           <Typography variant="h5" gutterBottom>
             グラフ
           </Typography>
+          <BarChart />
         </Box>
       </Box>
     </div>
