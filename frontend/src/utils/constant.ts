@@ -46,3 +46,66 @@ export const DOUGHNUT_GRAPH_OPTIONS = {
     },
   },
 };
+export const BAR_GRAPH_OPTIONS = {
+  tooltips: {
+    enabled: false,
+  },
+  legend: {
+    display: false,
+  },
+  scales: {
+    // 軸設定
+    xAxes: [
+      // Ｘ軸設定
+      {
+        display: true, // 表示の有無
+        gridLines: {
+          // 補助線
+          display: false, // 補助線なし
+        },
+        ticks: {
+          fontSize: 14, // フォントサイズ
+        },
+      },
+    ],
+    yAxes: [
+      // Ｙ軸設定
+      {
+        display: false, // 表示の有無
+        gridLines: {
+          // 補助線
+          display: false, // 補助線なし
+        },
+        ticks: {
+          // 目盛り
+          min: 0, // 最小値
+        },
+      },
+    ],
+  },
+  layout: {
+    // 全体のレイアウト
+    padding: {
+      // 余白
+      left: 0,
+      right: 0,
+      top: 12,
+      bottom: 0,
+    },
+  },
+  responsive: true,
+  maintainAspectRatio: true,
+  plugins: {
+    datalabels: {
+      color: "#111111",
+      anchor: "end",
+      align: "top",
+      font: {
+        size: 12,
+      },
+      formatter: (value, ctx) => {
+        return value + "円";
+      },
+    },
+  },
+};

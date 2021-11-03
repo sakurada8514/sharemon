@@ -165,9 +165,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
       </Box>
       <Box display="flex" justifyContent="space-between">
         <Box className="w-full bg-white p-3 rounded shadow mb-6">
-          <Typography variant="h5" gutterBottom>
-            グラフ
-          </Typography>
+          <Typography variant="h5">グラフ</Typography>
           <BarChart />
         </Box>
       </Box>

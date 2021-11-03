@@ -1,16 +1,16 @@
 import { Bar } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
-import { GRAPH_COLOR_LIST, DOUGHNUT_GRAPH_OPTIONS } from "utils/constant";
+import { BAR_GRAPH_OPTIONS } from "utils/constant";
 
-type ChartProps = {
-  // datas: number[];
-  // labels: string[];
-  // graphName: string;
-  // total: number;
-};
+// type ChartProps = {
+//   // datas: number[];
+//   // labels: string[];
+//   // graphName: string;
+//   // total: number;
+// };
 
-const BarChart: React.FC<ChartProps> = () => {
+const BarChart = () => {
   // const graphdata = {
   //   datasets: [
   //     {
@@ -22,12 +22,12 @@ const BarChart: React.FC<ChartProps> = () => {
   // };
   const graphdata = {
     // x 軸のラベル
-    labels: ["1 月", "2 月", "3 月", "4 月", "5 月", "6 月", "7 月"],
+    labels: ["1 月", "2 月", "3 月", "4 月", "5 月", "6 月"],
     datasets: [
       {
         label: "Dataset",
         // データの値
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: [65222, 59444, 8033, 81333, 56333, 55333],
         // グラフの背景色
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
@@ -56,7 +56,13 @@ const BarChart: React.FC<ChartProps> = () => {
   return (
     <div>
       <div className="max-w-min mx-auto relative">
-        <Bar data={graphdata} />
+        <Bar
+          data={graphdata}
+          options={BAR_GRAPH_OPTIONS}
+          plugins={[ChartDataLabels]}
+          width={320}
+          height={200}
+        />
       </div>
     </div>
   );
