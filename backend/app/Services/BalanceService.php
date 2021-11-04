@@ -46,4 +46,10 @@ class BalanceService extends BaseService
         $_income = $this->_incomeModel->findIncomeTotalByCategory($_roomId, new Carbon($_date));
         return ['expense' => $_expense, 'income' => $_income];
     }
+
+    public function getExpenseTotalOfHalfYear()
+    {
+        // 繰り返し分取得して足し算
+        return $this->_expenseModel->findTotalOfHalfYear(Auth::user()->room_id);
+    }
 }

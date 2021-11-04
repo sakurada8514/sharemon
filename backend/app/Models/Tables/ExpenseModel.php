@@ -134,6 +134,21 @@ class ExpenseModel extends BaseModel
         return $this->_convertArray($_ret);
     }
 
+    public function findTotalOfHalfYear(string $_roomId)
+    {
+        $_ret = DB::table($this->table)
+            ->where('regist_date', '>', now()->subMonth(6)->startOfMonth())
+            ->where([
+                ['room_id', $_roomId],
+                ['del_flg', config('Const.webDB.DEL_FLG.OFF')]
+            ])
+            ->selectRaw('sum(expense) as total,DATE_FORMAT(regist_date, "%Y-%m") as regist_month')
+            ->groupByRaw('regist_month')
+            ->get();
+
+        return $this->_convertArray($_ret);
+    }
+
 
     public function insert(array $_registData, ?string $_s3ImgUrl = null): void
     {

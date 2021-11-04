@@ -32,4 +32,11 @@ class BalanceController extends Controller
         $_balanceData = $this->_balanceService->getBalanceByCategory($_date);
         return $this->jsonResponse(['expense' => $_balanceData['expense'], 'income' => $_balanceData['income']]);
     }
+
+    public function getBalanceOfHalfYear()
+    {
+        $_balanceData = $this->_balanceService->getExpenseTotalOfHalfYear();
+
+        return $this->jsonResponse(['halfYearData' => $_balanceData]);
+    }
 }

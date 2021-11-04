@@ -117,6 +117,8 @@ const EditExpense: React.FC<EditExpenseProps> = ({
   };
 
   async function editExpense() {
+    console.log(id);
+
     setLoading(true);
     const response = await editExpenseApi(
       id,

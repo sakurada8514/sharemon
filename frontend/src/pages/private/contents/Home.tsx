@@ -30,6 +30,10 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
     ["budget/total", "total"],
     fetcherApi
   );
+  const { data: graphData, error: graphDataError } = useSWR(
+    ["balance/expense/halfyear", "halfYearData"],
+    fetcherApi
+  );
 
   if (memberError || balanceError || budgetError) {
     history.push("/error");

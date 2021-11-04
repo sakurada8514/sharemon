@@ -24,7 +24,6 @@ class EditIncomeRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required', 'integer'],
             'income' => ['required', 'integer'],
             'regist_date' => ['required', 'date'],
             'category_id' => ['required'],

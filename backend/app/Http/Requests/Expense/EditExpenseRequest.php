@@ -24,7 +24,6 @@ class EditExpenseRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required', 'integer'],
             'expense' => ['required', 'integer'],
             'regist_date' => ['required', 'date'],
             'category_id' => ['required'],
