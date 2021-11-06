@@ -20,6 +20,8 @@ class BalanceService extends BaseService
         $this->_expenseModel = $_expenseModel;
         $this->_incomeModel = $_incomeModel;
     }
+
+    // TODO:: expenseとincome分けるべき
     public function getBalanceOfThisMonth(string $_date)
     {
         $_roomId = Auth::user()->room_id;
@@ -49,7 +51,16 @@ class BalanceService extends BaseService
 
     public function getExpenseTotalOfHalfYear()
     {
-        // 繰り返し分取得して足し算
-        return $this->_expenseModel->findTotalOfHalfYear(Auth::user()->room_id);
+        $_repetitionExpenseList = $this->_expenseModel->findByRepetition(Auth::user()->room_id);
+        $_expenseTotal = $this->_expenseModel->findTotalOfHalfYear(Auth::user()->room_id);
+
+        array_walk($_expenseTotal, function (&$_data) use ($_repetitionExpenseList) {
+            foreach ($_repetitionExpenseList as $_repetitionExpense) {
+                if ((new Carbon($_data['total_month']))->gt((new Carbon($_repetitionExpense['regist_month'])))) {
+                    $_data['total'] += $_repetitionExpense['expense'];
+                }
+            }
+        });
+        return $_expenseTotal;
     }
 }

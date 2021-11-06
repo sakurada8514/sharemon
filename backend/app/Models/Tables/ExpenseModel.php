@@ -142,8 +142,22 @@ class ExpenseModel extends BaseModel
                 ['room_id', $_roomId],
                 ['del_flg', config('Const.webDB.DEL_FLG.OFF')]
             ])
-            ->selectRaw('sum(expense) as total,DATE_FORMAT(regist_date, "%Y-%m") as regist_month')
-            ->groupByRaw('regist_month')
+            ->selectRaw('sum(expense) as total,DATE_FORMAT(regist_date, "%Y-%m") as total_month')
+            ->groupByRaw('total_month')
+            ->get();
+
+        return $this->_convertArray($_ret);
+    }
+
+    public function findByRepetition(string $_roomId)
+    {
+        $_ret = DB::table($this->table)
+            ->where([
+                ['room_id', $_roomId],
+                ['repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON')],
+                ['del_flg', config('Const.webDB.DEL_FLG.OFF')]
+            ])
+            ->selectRaw('expense, DATE_FORMAT(regist_date, "%Y-%m") as regist_month')
             ->get();
 
         return $this->_convertArray($_ret);
