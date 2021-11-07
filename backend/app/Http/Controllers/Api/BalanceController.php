@@ -37,6 +37,6 @@ class BalanceController extends Controller
     {
         $_balanceData = $this->_balanceService->getExpenseTotalOfHalfYear();
 
-        return $this->jsonResponse(['halfYearData' => $_balanceData]);
+        return $this->jsonResponse($_balanceData, 'Balance.ExpenseTotalOfHalfYear');
     }
 }

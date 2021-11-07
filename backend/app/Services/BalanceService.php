@@ -54,6 +54,18 @@ class BalanceService extends BaseService
         $_repetitionExpenseList = $this->_expenseModel->findByRepetition(Auth::user()->room_id);
         $_expenseTotal = $this->_expenseModel->findTotalOfHalfYear(Auth::user()->room_id);
 
+        for ($i = 0; $i < 6; $i++) {
+            foreach ($_expenseTotal as $item) {
+                if ((new Carbon($item['total_month']))->startOfMonth()->eq(now()->subMonth($i)->startOfMonth())) {
+                    continue 2;
+                }
+            }
+            $_expenseTotal[] = [
+                'total' => '0',
+                'total_month' => now()->subMonth($i)->format('Y-m')
+            ];
+        }
+
         array_walk($_expenseTotal, function (&$_data) use ($_repetitionExpenseList) {
             foreach ($_repetitionExpenseList as $_repetitionExpense) {
                 if ((new Carbon($_data['total_month']))->gt((new Carbon($_repetitionExpense['regist_month'])))) {

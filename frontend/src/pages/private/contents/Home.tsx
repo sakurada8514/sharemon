@@ -35,7 +35,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
     fetcherApi
   );
 
-  if (memberError || balanceError || budgetError) {
+  if (memberError || balanceError || budgetError || graphDataError) {
     history.push("/error");
   }
 
@@ -54,7 +54,6 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
             <>
               <Box className="w-full justify-between flex-wrap">
                 <Skeleton variant="rectangular" className="w-full h-8 my-1" />
-                {/* <Skeleton className="w-full h-9" /> */}
               </Box>
             </>
           ) : (

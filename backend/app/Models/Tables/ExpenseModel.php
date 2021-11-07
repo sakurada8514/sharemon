@@ -137,7 +137,7 @@ class ExpenseModel extends BaseModel
     public function findTotalOfHalfYear(string $_roomId)
     {
         $_ret = DB::table($this->table)
-            ->where('regist_date', '>', now()->subMonth(6)->startOfMonth())
+            ->where('regist_date', '>', now()->subMonth(5)->startOfMonth())
             ->where([
                 ['room_id', $_roomId],
                 ['del_flg', config('Const.webDB.DEL_FLG.OFF')]

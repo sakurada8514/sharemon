@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Http\ViewModels\Balance;
+
+use App\Http\ViewModels\Core\CommonTrait;
+use App\Http\ViewModels\Core\ViewModel;
+
+class ExpenseTotalOfHalfYearViewModel implements ViewModel
+{
+    use CommonTrait;
+    public function apply(array $data): array
+    {
+        array_multisort(array_map("strtotime", array_column($data, 'total_month')), SORT_ASC, $data);
+
+        return [
+            'detail' =>  $data
+        ];
+    }
+}
