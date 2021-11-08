@@ -11,9 +11,12 @@ class ExpenseTotalOfHalfYearViewModel implements ViewModel
     public function apply(array $data): array
     {
         array_multisort(array_map("strtotime", array_column($data, 'total_month')), SORT_ASC, $data);
+        array_walk($data, function (&$_item) {
+            $_item['total_month'] = $this->convertDate($_item['total_month'], 'n月');
+        });
 
         return [
-            'detail' =>  $data
+            'halfYearData' =>  $data
         ];
     }
 }

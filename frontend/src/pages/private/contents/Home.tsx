@@ -1,4 +1,4 @@
-import React from "reactn";
+import React, { useState, useEffect } from "react";
 import useSWR from "swr";
 import { useHistory } from "react-router";
 import { Box, Typography, Avatar } from "@material-ui/core";
@@ -7,7 +7,7 @@ import { Skeleton } from "@mui/material";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import BarChart from "components/Chart/BarChart";
-
+import { OK } from "utils/constant";
 import { fetcherApi } from "api/fetcher";
 import { formatDate } from "../../../utils/handy";
 type HomeProps = {
@@ -17,6 +17,8 @@ type HomeProps = {
 const Home: React.FC<HomeProps> = ({ roomName }) => {
   const history = useHistory();
   const thisMonth = formatDate(new Date(), "MM").replace(/^0/g, "");
+  const [halfYearGraphData, setHalfYearGraphData] = useState(null);
+  const [halfYearGraphLabel, setHalfYearGraphLabel] = useState(null);
 
   const { data: member, error: memberError } = useSWR(
     ["/member", "memberList"],
@@ -30,14 +32,35 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
     ["budget/total", "total"],
     fetcherApi
   );
-  const { data: graphData, error: graphDataError } = useSWR(
-    ["balance/expense/halfyear", "halfYearData"],
-    fetcherApi
-  );
 
-  if (memberError || balanceError || budgetError || graphDataError) {
+  if (memberError || balanceError || budgetError) {
     history.push("/error");
   }
+
+  const getGraphData = async () => {
+    const res = await fetcherApi("balance/expense/halfyear");
+    if (res.status === OK) {
+      console.log(res);
+
+      setGraphData(res.data.halfYearData);
+    } else {
+      history.push("/error");
+    }
+  };
+  const setGraphData = (graphData) => {
+    let dataAry = [];
+    let labelAry = [];
+    for (let i of graphData) {
+      dataAry.push(i.total);
+      labelAry.push(i.total_month);
+    }
+    setHalfYearGraphData(dataAry);
+    setHalfYearGraphLabel(labelAry);
+    console.log(halfYearGraphData, halfYearGraphLabel);
+  };
+  useEffect(() => {
+    getGraphData();
+  }, []);
 
   return (
     <div className="p-3">
@@ -168,8 +191,12 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
       </Box>
       <Box display="flex" justifyContent="space-between">
         <Box className="w-full bg-white p-3 rounded shadow mb-6">
-          <Typography variant="h5">グラフ</Typography>
-          <BarChart />
+          <Typography variant="h5">支出推移</Typography>
+          {halfYearGraphData && halfYearGraphLabel ? (
+            <BarChart datas={halfYearGraphData} labels={halfYearGraphLabel} />
+          ) : (
+            <Skeleton variant="rectangular" className="h-48 mt-2 w-full" />
+          )}
         </Box>
       </Box>
     </div>
