@@ -55,6 +55,9 @@ export default function Mypage() {
 
   const handleSideMenuOpen = () => setSideMenuOpen(true);
   const handleSideMenuClose = () => setSideMenuOpen(false);
+  const handleSideMenuToggle = () => {
+    setSideMenuOpen(!sideMenuOpen);
+  };
   const handleMobileSideMenuOpen = () => setMobileSideMenuOpen(true);
   const handleMobileSideMenuClose = () => setMobileSideMenuOpen(false);
 
@@ -140,10 +143,10 @@ export default function Mypage() {
           <MediaQuery query="(min-width: 768px)">
             <SideMenu
               sideMenuOpen={sideMenuOpen}
-              handleSideMenuClose={handleSideMenuClose}
+              handleSideMenuClose={handleSideMenuToggle}
             />
           </MediaQuery>
-          <main className="flex-grow min-h-screen bg-gray-50 transition pt-14 pb-16">
+          <main className="flex-grow min-h-screen bg-gray-50 transition pt-14 pb-16 md:pt-16">
             <AlertMessage
               alertOpen={alertOpen}
               severity={alertSeverity}

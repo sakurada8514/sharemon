@@ -5,6 +5,12 @@
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   line-height: 1.125em;
 }
+@media screen and (min-width: 768px) {
+  .react-calendar {
+    margin: 0 auto;
+    max-width: 530px;
+  }
+}
 .react-calendar--doubleView {
   width: 700px;
 }

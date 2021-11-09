@@ -78,9 +78,9 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
         </div>
       </div>
 
-      <div className="flex justify-between py-5 border-b border-blue-100">
+      <div className="flex justify-between py-5 border-b border-blue-100 md:justify-start">
         {detail ? (
-          <p className="text-2xl">{detail.category_name}</p>
+          <p className="text-2xl md:mr-16">{detail.category_name}</p>
         ) : (
           <Skeleton variant="rectangular" className="h-8 w-1/3" />
         )}

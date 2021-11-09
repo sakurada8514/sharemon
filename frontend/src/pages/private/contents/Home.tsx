@@ -101,18 +101,18 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
         <Typography variant="h5" gutterBottom>
           {thisMonth}月の収支
         </Typography>
-        <div className="flex justify-around flex-col">
-          <div className="w-full text-center mb-6">
+        <div className="flex justify-around flex-col md:flex-row">
+          <div className="w-full text-center mb-6 md:mr-1 md:mb-0">
             <Typography
               variant="h6"
               className="bg-green-400 text-white rounded rounded-b-none py-1"
             >
               支出
             </Typography>
-            <div className="flex bg-green-50 border-green-400 border-2 border-t-0 rounded rounded-t-none p-4">
-              <div className=" w-3/5 mr-3">
+            <div className="flex bg-green-50 border-green-400 border-2 border-t-0 rounded rounded-t-none p-4 md:flex-col">
+              <div className=" w-3/5 mr-3 md:w-full md:mr-0">
                 <div className="flex justify-between">
-                  <p className="w-2/5 text-left text-gray-600">合計：</p>
+                  <p className="w-2/5 text-left text-gray-600">合計</p>
                   {!balance ? (
                     <Skeleton className="w-2/3 h-7" />
                   ) : (
@@ -122,7 +122,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
                   )}
                 </div>
                 <div className="flex justify-between">
-                  <p className="w-2/5 text-left text-gray-600">記録数：</p>
+                  <p className="w-2/5 text-left text-gray-600">記録数</p>
                   {!balance ? (
                     <Skeleton className="w-1/3 h-7" />
                   ) : (
@@ -132,15 +132,15 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
                   )}
                 </div>
               </div>
-              <div className=" w-2/5">
+              <div className=" w-2/5 md:w-full">
                 {balance && budget ? (
                   budget - balance.data.expense.total > 0 ? (
-                    <>
+                    <div className=" md:flex md:justify-between">
                       <p className="text-gray-600">予算残り</p>
                       <p className="text-lg font-medium">
                         {budget - balance.data.expense.total}円
                       </p>
-                    </>
+                    </div>
                   ) : (
                     <>
                       <p className="text-gray-600">予算より</p>
@@ -150,22 +150,25 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
                     </>
                   )
                 ) : (
-                  <Skeleton variant="rectangular" className="h-14 w-full" />
+                  <Skeleton
+                    variant="rectangular"
+                    className="h-14 w-full md:h-7"
+                  />
                 )}
               </div>
             </div>
           </div>
-          <div className="w-full text-center">
+          <div className="w-full text-center md:ml-1">
             <Typography
               variant="h6"
               className="bg-blue-400 text-white rounded rounded-b-none py-1"
             >
               収入
             </Typography>
-            <div className="flex bg-blue-50 border-blue-400 border-2 border-t-0 rounded rounded-t-none p-4">
+            <div className="flex bg-blue-50 border-blue-400 border-2 border-t-0 rounded rounded-t-none p-4 md:pb-11">
               <div className=" w-full mr-6">
                 <div className="flex justify-between">
-                  <p className="w-1/2 text-left text-gray-600">合計：</p>
+                  <p className="w-1/2 text-left text-gray-600">合計</p>
                   {!balance ? (
                     <Skeleton className="w-2/3 h-7" />
                   ) : (
@@ -175,7 +178,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
                   )}
                 </div>
                 <div className="flex justify-between">
-                  <p className="w-1/2 text-left text-gray-600">記録数：</p>
+                  <p className="w-1/2 text-left text-gray-600">記録数</p>
                   {!balance ? (
                     <Skeleton className="w-2/3 h-7" />
                   ) : (
@@ -195,7 +198,10 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
           {halfYearGraphData && halfYearGraphLabel ? (
             <BarChart datas={halfYearGraphData} labels={halfYearGraphLabel} />
           ) : (
-            <Skeleton variant="rectangular" className="h-48 mt-2 w-full" />
+            <Skeleton
+              variant="rectangular"
+              className="h-48 mt-2 w-full md:h-80"
+            />
           )}
         </Box>
       </Box>

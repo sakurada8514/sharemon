@@ -99,7 +99,7 @@ export default function ListTemplate() {
 
   return (
     <Box className="pt-1">
-      <div className="flex pb-2 overflow-hidden">
+      <div className="flex pb-2 overflow-hidden md:justify-around">
         <FormControl className="w-1/2 ml-1">
           <InputLabel id="sort_select">ソート</InputLabel>
           <Select
@@ -152,8 +152,9 @@ export default function ListTemplate() {
             prev2Label={null}
           />
         ))}
-      <AppBar position="static" className="bg-gray-50 text-black shadow-none ">
+      <AppBar position="static" className="bg-gray-50 text-black shadow-none">
         <Tabs
+          centered
           value={tabValue}
           onChange={handleTabChange}
           className="flex justify-center"
