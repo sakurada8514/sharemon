@@ -46,13 +46,24 @@ const BarChart = ({ datas, labels }) => {
             height={200}
           />
         </MediaQuery>
-        <MediaQuery query="(min-width: 767px)">
+        <MediaQuery query="(max-width: 1024px)">
+          <MediaQuery query="(min-width: 767px)">
+            <Bar
+              data={graphdata}
+              options={BAR_GRAPH_OPTIONS}
+              plugins={[ChartDataLabels]}
+              width={500}
+              height={350}
+            />
+          </MediaQuery>
+        </MediaQuery>
+        <MediaQuery query="(min-width: 1024px)">
           <Bar
             data={graphdata}
             options={BAR_GRAPH_OPTIONS}
             plugins={[ChartDataLabels]}
-            width={500}
-            height={350}
+            width={800}
+            height={550}
           />
         </MediaQuery>
       </div>

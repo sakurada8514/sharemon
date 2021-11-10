@@ -86,8 +86,13 @@ class BudgetModel extends BaseModel
                 ['del_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.OFF')]
             ])
             ->where(function ($query) {
-                $query->whereYear('regist_date', now()->format('Y'))
-                    ->whereMonth('regist_date', now()->format('m'));
+                $query->where(function ($query) {
+                    $query->whereYear('regist_date', now()->format('Y'))
+                        ->whereMonth('regist_date', now()->format('m'));
+                })->orWhere(function ($query) {
+                    $query->where('repetition_flg', config('Const.webDB.EXPENSES.REPETITION_FLG.ON'))
+                        ->where('regist_date', '<', now());
+                });
             })
             ->selectRaw('sum(expense) as total_expense,category_id')
             ->groupBy('category_id');

@@ -67,99 +67,95 @@ const ExpenseForm: React.FC<RegistExpenseFormProps> = ({
   handleFileReset,
 }) => {
   return (
-    <Box className="bg-gray-50">
-      <Box>
-        <Box>
-          <Typography className="pt-4 text-gray-400">*は必須です</Typography>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="expense"
-            label="支出金額"
-            name="expense"
-            autoComplete="expense"
-            autoFocus
-            value={expense}
-            onChange={handleChangeExpense}
-            error={typeof errors.expense !== "undefined"}
-            helperText={errors.expense}
-            InputProps={{
-              endAdornment: <InputAdornment position="end">円</InputAdornment>,
-            }}
-          />
+    <Box className="bg-gray-50 lg:flex">
+      <Box className="lg:w-1/2">
+        <Typography className="pt-4 text-gray-400">*は必須です</Typography>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="expense"
+          label="支出金額"
+          name="expense"
+          autoComplete="expense"
+          autoFocus
+          value={expense}
+          onChange={handleChangeExpense}
+          error={typeof errors.expense !== "undefined"}
+          helperText={errors.expense}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">円</InputAdornment>,
+          }}
+        />
 
-          <MyDatePicker
-            date={date}
-            setDate={setDate}
-            views={["year", "month", "date"]}
-            format="yyyy/MM/dd"
-            openTo="date"
-          />
-          <FormControl
-            variant="outlined"
-            fullWidth
-            required
-            margin="normal"
-            error={typeof errors.category_id !== "undefined"}
+        <MyDatePicker
+          date={date}
+          setDate={setDate}
+          views={["year", "month", "date"]}
+          format="yyyy/MM/dd"
+          openTo="date"
+        />
+        <FormControl
+          variant="outlined"
+          fullWidth
+          required
+          margin="normal"
+          error={typeof errors.category_id !== "undefined"}
+        >
+          <InputLabel id="select-outlined-label">カテゴリー</InputLabel>
+          <Select
+            labelId="select-outlined-label"
+            id="select-outlined"
+            value={category}
+            onChange={handleChangeCategory}
+            label="カテゴリー"
           >
-            <InputLabel id="select-outlined-label">カテゴリー</InputLabel>
-            <Select
-              labelId="select-outlined-label"
-              id="select-outlined"
-              value={category}
-              onChange={handleChangeCategory}
-              label="カテゴリー"
-            >
-              {categoryList &&
-                categoryList.map((data: any) => {
-                  return (
-                    <MenuItem key={data.category_id} value={data.category_id}>
-                      {data.category_name}
-                    </MenuItem>
-                  );
-                })}
-            </Select>
-          </FormControl>
-          <TextField
-            variant="outlined"
-            id="comment"
-            label="利用場所/用途"
-            multiline
-            rows={5}
-            value={comment}
-            onChange={handleChangeComment}
-            fullWidth
-            margin="normal"
-            error={typeof errors.comment !== "undefined"}
-            helperText={errors.comment}
+            {categoryList &&
+              categoryList.map((data: any) => {
+                return (
+                  <MenuItem key={data.category_id} value={data.category_id}>
+                    {data.category_name}
+                  </MenuItem>
+                );
+              })}
+          </Select>
+        </FormControl>
+        <TextField
+          variant="outlined"
+          id="comment"
+          label="利用場所/用途"
+          multiline
+          rows={5}
+          value={comment}
+          onChange={handleChangeComment}
+          fullWidth
+          margin="normal"
+          error={typeof errors.comment !== "undefined"}
+          helperText={errors.comment}
+        />
+        <Box>
+          <FormControlLabel
+            control={
+              <Switch checked={repetition} onChange={handleToggleRepetition} />
+            }
+            label="繰り返し登録（固定費等）"
+            labelPlacement="start"
           />
-          <Box>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={repetition}
-                  onChange={handleToggleRepetition}
-                />
-              }
-              label="繰り返し登録（固定費等）"
-              labelPlacement="start"
+        </Box>
+        <MediaQuery query="(min-width: 1024px)">
+          <Box className="flex justify-center mt-6">
+            <LoadingButton
+              handleButtonClick={apiMethod}
+              loading={loading}
+              text={"支出作成"}
+              color={"secondary"}
+              fullWidth={true}
             />
           </Box>
-          <MediaQuery query="(min-width: 960px)">
-            <Box className="flex justify-center mt-6">
-              <LoadingButton
-                handleButtonClick={apiMethod}
-                loading={loading}
-                text={"支出作成"}
-                color={"secondary"}
-              />
-            </Box>
-          </MediaQuery>
-        </Box>
+        </MediaQuery>
       </Box>
-      <Box className="flex flex-col items-center w-full mt-4">
+      <Box className="flex flex-col items-center w-full mt-4 lg:w-1/2 lg:pl-8 lg:pt-8">
         <Box className="w-full">
           <input
             id="myInput"

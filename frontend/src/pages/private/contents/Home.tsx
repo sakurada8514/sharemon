@@ -64,7 +64,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
 
   return (
     <div className="p-3">
-      <Box className="w-full bg-white p-3 rounded shadow mb-6">
+      <Box className="w-full bg-white p-3 rounded shadow mb-6 lg:p-6">
         {roomName ? (
           <Typography variant="h5" className="mb-2">
             {roomName}
@@ -72,7 +72,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
         ) : (
           <Skeleton variant="rectangular" className="w-1/2 h-8 mb-2" />
         )}
-        <Box display="flex" flexWrap="wrap" justifyContent="space-between">
+        <Box className="flex flex-wrap justify-between lg:justify-start">
           {!member ? (
             <>
               <Box className="w-full justify-between flex-wrap">
@@ -83,7 +83,10 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
             member.map(
               (data: { name: string; nickname: string; id: number }) => {
                 return (
-                  <Box className="w-1/2 my-1 flex items-center" key={data.id}>
+                  <Box
+                    className="w-1/2 my-1 flex items-center lg:w-1/4"
+                    key={data.id}
+                  >
                     <Avatar className="w-8 h-8 mr-3">
                       <AccountCircleIcon className="w-8 h-8" />
                     </Avatar>
@@ -97,12 +100,12 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
           )}
         </Box>
       </Box>
-      <Box className="w-full bg-white p-3 rounded shadow mb-6">
+      <Box className="w-full bg-white p-3 rounded shadow mb-6 lg:p-6">
         <Typography variant="h5" gutterBottom>
           {thisMonth}月の収支
         </Typography>
         <div className="flex justify-around flex-col md:flex-row">
-          <div className="w-full text-center mb-6 md:mr-1 md:mb-0">
+          <div className="w-full text-center mb-6 md:mr-1 md:mb-0 lg:mr-4">
             <Typography
               variant="h6"
               className="bg-green-400 text-white rounded rounded-b-none py-1"
@@ -158,7 +161,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
               </div>
             </div>
           </div>
-          <div className="w-full text-center md:ml-1">
+          <div className="w-full text-center md:ml-1 lg:ml-4">
             <Typography
               variant="h6"
               className="bg-blue-400 text-white rounded rounded-b-none py-1"
@@ -193,7 +196,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
         </div>
       </Box>
       <Box display="flex" justifyContent="space-between">
-        <Box className="w-full bg-white p-3 rounded shadow mb-6">
+        <Box className="w-full bg-white p-3 rounded shadow mb-6 lg:p-6">
           <Typography variant="h5">支出推移</Typography>
           {halfYearGraphData && halfYearGraphLabel ? (
             <BarChart datas={halfYearGraphData} labels={halfYearGraphLabel} />

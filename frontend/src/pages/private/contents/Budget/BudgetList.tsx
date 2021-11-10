@@ -64,7 +64,7 @@ const BudgetList = () => {
                         {data.percent}%
                       </span>
                     </p>
-                    {data.remaining > 0 ? (
+                    {data.remaining >= 0 ? (
                       <p className="text-sm w-3/5 text-right text-gray-600">
                         今月残り{" "}
                         <span className="font-medium text-black">

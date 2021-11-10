@@ -36,6 +36,7 @@ const RegistTemplate: React.FC<RegistTemplateProps> = ({
           className="bg-gray-50 text-black shadow-none "
         >
           <Tabs
+            centered
             value={tabValue}
             onChange={handleTabChange}
             aria-label="regist Template"
