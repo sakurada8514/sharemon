@@ -34,7 +34,7 @@ const BudgetForm: React.FC<BudgetFormProps> = React.memo(
   }) => {
     return (
       <>
-        <div className="">
+        <div className="lg:w-1/2">
           <FormControl
             variant="outlined"
             fullWidth

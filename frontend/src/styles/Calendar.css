@@ -11,6 +11,12 @@
     max-width: 530px;
   }
 }
+@media screen and (min-width: 1024px) {
+  .react-calendar {
+    margin: 0 auto;
+    max-width: 800px;
+  }
+}
 .react-calendar--doubleView {
   width: 700px;
 }

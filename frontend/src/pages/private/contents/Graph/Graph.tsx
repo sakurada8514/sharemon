@@ -93,7 +93,7 @@ const Graph = () => {
 
   return (
     <>
-      <div className="px-2 flex">
+      <div className="px-2 flex lg:w-2/3 lg:mx-auto">
         <div className="w-1/2 pr-1">
           <MyDatePicker
             date={date}
@@ -123,55 +123,67 @@ const Graph = () => {
       {balance && categoryBalance ? (
         graphType === "0" ? (
           <>
-            <DoughnutChart
-              datas={expenseGraphDatas}
-              labels={expenseGraphLabels}
-              graphName="支出"
-              total={balance.expense.total}
-            />
-            <div className="mt-4 border-t">
-              {categoryBalance.expense.map((data: any) => {
-                return (
-                  <div
-                    key={data.category_name}
-                    className="flex justify-between px-4 py-4 border-b"
-                  >
-                    <div>
-                      <p className="text-xl">{data.category_name}</p>
-                    </div>
-                    <div className="text-right flex flex-col items-end">
-                      <p className="text-xl mb-1">{data.total}円</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            {expenseGraphDatas.length > 0 ? (
+              <>
+                <DoughnutChart
+                  datas={expenseGraphDatas}
+                  labels={expenseGraphLabels}
+                  graphName="支出"
+                  total={balance.expense.total}
+                />
+                <div className="mt-4 border-t lg:w-2/3 lg:mx-auto">
+                  {categoryBalance.expense.map((data: any) => {
+                    return (
+                      <div
+                        key={data.category_name}
+                        className="flex justify-between px-4 py-4 border-b"
+                      >
+                        <div>
+                          <p className="text-xl">{data.category_name}</p>
+                        </div>
+                        <div className="text-right flex flex-col items-end">
+                          <p className="text-xl mb-1">{data.total}円</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            ) : (
+              <p className="text-center mt-8">登録なし</p>
+            )}
           </>
         ) : (
           <>
-            <DoughnutChart
-              datas={incomeGraphDatas}
-              labels={incomeGraphLabels}
-              graphName="収入"
-              total={balance.income.total}
-            />
-            <div className="mt-4 border-t">
-              {categoryBalance.income.map((data: any) => {
-                return (
-                  <div
-                    key={data.category_name}
-                    className="flex justify-between px-4 py-4 border-b"
-                  >
-                    <div>
-                      <p className="text-xl">{data.category_name}</p>
-                    </div>
-                    <div className="text-right flex flex-col items-end">
-                      <p className="text-xl mb-1">{data.total}円</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            {incomeGraphDatas.length > 0 ? (
+              <>
+                <DoughnutChart
+                  datas={incomeGraphDatas}
+                  labels={incomeGraphLabels}
+                  graphName="収入"
+                  total={balance.income.total}
+                />
+                <div className="mt-4 border-t">
+                  {categoryBalance.income.map((data: any) => {
+                    return (
+                      <div
+                        key={data.category_name}
+                        className="flex justify-between px-4 py-4 border-b"
+                      >
+                        <div>
+                          <p className="text-xl">{data.category_name}</p>
+                        </div>
+                        <div className="text-right flex flex-col items-end">
+                          <p className="text-xl mb-1">{data.total}円</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            ) : (
+              <p className="text-center mt-8">登録なし</p>
+            )}
           </>
         )
       ) : (

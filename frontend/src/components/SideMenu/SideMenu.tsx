@@ -28,6 +28,7 @@ const SideMenu: React.FC<SideMenuProps> = ({
       classes={{
         paper: clsx(
           classes.drawerPaper,
+          "z-20",
           !sideMenuOpen && classes.drawerPaperClose
         ),
       }}

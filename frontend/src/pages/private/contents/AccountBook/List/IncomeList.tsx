@@ -16,7 +16,7 @@ const IncomeList: React.FC<IncomeListProps> = ({
   loadMoreIncome,
 }) => {
   return (
-    <>
+    <div className="lg:w-2/3 lg:mx-auto">
       {incomeList ? (
         incomeList.length > 0 ? (
           incomeList.map((data: any) => {
@@ -57,7 +57,7 @@ const IncomeList: React.FC<IncomeListProps> = ({
         </div>
       )}
       {!isIncomeLast && <LoadMoreButton loadMore={loadMoreIncome} />}
-    </>
+    </div>
   );
 };
 

@@ -146,7 +146,7 @@ const ExpenseDetail: React.FC<ExpenseDetailProps> = ({
         {detail ? (
           detail.img_url ? (
             <img
-              className="pt-2 w-full h-auto"
+              className="pt-2 w-full h-auto lg:w-1/2"
               src={detail.img_url}
               alt="レシート画像"
             />

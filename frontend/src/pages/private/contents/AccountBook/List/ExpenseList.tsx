@@ -16,7 +16,7 @@ const ExpenseList: React.FC<ExpemseListProps> = ({
   loadMoreExpense,
 }) => {
   return (
-    <>
+    <div className="lg:w-2/3 lg:mx-auto">
       {expenseList ? (
         expenseList.length > 0 ? (
           expenseList.map((data: any) => {
@@ -57,7 +57,7 @@ const ExpenseList: React.FC<ExpemseListProps> = ({
         </div>
       )}
       {!isExpenseLast && <LoadMoreButton loadMore={loadMoreExpense} />}
-    </>
+    </div>
   );
 };
 
