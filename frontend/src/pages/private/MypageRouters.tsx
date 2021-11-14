@@ -15,6 +15,8 @@ import RegistBudget from "./contents/Budget/RegistBudget";
 import EditBudget from "./contents/Budget/EditBudget";
 import Home from "./contents/Home";
 import RegistMoney from "./contents/AccountBook/Regist/RegistTemplate";
+import ProfileSetting from "./contents/settings/ProfileSetting";
+import RoomSetting from "./contents/settings/RoomSetting";
 import Error from "pages/Error";
 
 export type MypageRoutersProps = {
@@ -120,6 +122,12 @@ const MypageRouters: React.FC<MypageRoutersProps> = ({
           }
         />
         <Route exact path="/mypage/graph" children={<Graph />} />
+        <Route
+          exact
+          path="/mypage/settings/profile"
+          children={<ProfileSetting />}
+        />
+        <Route exact path="/mypage/settings/room" children={<RoomSetting />} />
       </Switch>
     </AnimatePresence>
   );

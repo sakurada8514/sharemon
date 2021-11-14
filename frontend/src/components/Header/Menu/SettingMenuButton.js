@@ -5,6 +5,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { makeStyles } from "@material-ui/core/styles";
+import { NavLink } from "react-router-dom";
 
 export default function SettingMenuButton(props) {
   const classes = useStyles();
@@ -25,9 +26,14 @@ export default function SettingMenuButton(props) {
         open={Boolean(props.settingMenuOpen)}
         onClose={props.handleSettingMenuClose}
       >
-        <MenuItem>プロフィール設定</MenuItem>
-        <MenuItem>ルーム設定</MenuItem>
-        <MenuItem>家計簿設定</MenuItem>
+        <NavLink to="/mypage/settings/profile" exact>
+          <MenuItem onClick={props.handleSettingMenuClose}>
+            プロフィール設定
+          </MenuItem>
+        </NavLink>
+        <NavLink to="/mypage/settings/room" exact>
+          <MenuItem onClick={props.handleSettingMenuClose}>ルーム設定</MenuItem>
+        </NavLink>
         <MenuItem onClick={props.logout}>ログアウト</MenuItem>
       </StyledMenu>
     </>
