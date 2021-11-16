@@ -1,12 +1,33 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useGlobal } from "reactn";
 import { TextField } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
+import LoadingButton from "components/Atoms/Buttons/LoadingButton";
+import { AlertProps } from "@material-ui/lab";
+import { Dispatch, SetStateAction } from "react";
+import { OK, VALIDATION } from "utils/constant";
 
-const ProfileSetting = () => {
+import { editProfile } from "api/User/index";
+
+type ProfileSettingProps = {
+  handleAlertOpen: (closedTime?: number) => void;
+  setAlertSeverity: React.Dispatch<
+    React.SetStateAction<AlertProps["severity"]>
+  >;
+  setAlertMessage: Dispatch<SetStateAction<string>>;
+};
+
+const ProfileSetting: React.FC<ProfileSettingProps> = ({
+  handleAlertOpen,
+  setAlertSeverity,
+  setAlertMessage,
+}) => {
   const [name, setName] = useState("");
   const [iconImg, setIconImg] = useState("");
   const [iconImgPreview, setIconImgPreview] = useState<any>("");
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState([]);
+  const user = useGlobal("user")[0];
 
   const fileInput = useRef(null);
 
@@ -33,11 +54,24 @@ const ProfileSetting = () => {
       setIconImg(file);
     }
   };
-  const handleFileReset = () => {
-    fileInput.current.value = "";
-    setIconImg("");
-    setIconImgPreview("");
-  };
+  async function editProfileSubmit() {
+    setLoading(true);
+    const response = await editProfile(user.id, name, iconImg);
+
+    if (response.status === OK) {
+      handleAlertOpen();
+      setAlertMessage("正常に支出を作成しました");
+    } else if (response.status === VALIDATION) {
+      setErrors(response.data.errors);
+    } else {
+      handleAlertOpen(6000);
+      setAlertSeverity("error");
+      setAlertMessage(
+        "何かしらのエラーが発生しました。時間をおいてから再度お試しください。"
+      );
+    }
+    setLoading(false);
+  }
   return (
     <div className="px-4 pt-2">
       <Typography variant="h5" gutterBottom>
@@ -78,11 +112,18 @@ const ProfileSetting = () => {
         color="primary"
         size={"large"}
         // startIcon={<ReceiptIcon />}
-        className="py-1 px-12 text-lg mt-4 w-full"
+        className="py-1 px-12 mt-4 mb-8 w-full"
         onClick={handleClickFileInput}
       >
         アイコン変更
       </Button>
+      <LoadingButton
+        handleButtonClick={editProfileSubmit}
+        loading={loading}
+        text={"プロフィール編集"}
+        color={"secondary"}
+        fullWidth={true}
+      />
     </div>
   );
 };

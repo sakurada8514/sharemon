@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Core\UserBaseModel;
+use App\Models\Tables\S3ImageModel;
 use App\Notifications\PasswordResetNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
@@ -59,6 +60,21 @@ class User extends UserBaseModel
 
         DB::table('users')->insert($_insert);
         return;
+    }
+
+    public function updateData(array $_data, ?string $_s3ImgUrl = null)
+    {
+        $_s3ImageModel = new S3ImageModel();
+        if (isset($_s3ImgUrl)) {
+            $_s3ImageId = $_s3ImageModel->insert($_s3ImgUrl);
+        }
+
+        $_update = $this->_createInsertUpdateData($_data, $this->_getBaseDefaultUpdateData());
+        DB::table('users')->where('id', $_data['id'])->update($_update);
+
+        // on dup & profileのテーブル構成
+        $_updateProfile = $this->_createInsertUpdateData(['s3_image_id' => $_s3ImageId], $this->_getBaseDefaultUpdateData());
+        DB::table('user_profiles')->where('user_id', $_data['id'])->update($_updateProfile);
     }
 
     public function updateByEmail(array $_data): void

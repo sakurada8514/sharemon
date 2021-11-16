@@ -26,6 +26,9 @@ class S3Service extends BaseService
             case config('Const.s3Service.S3_CALL_CLASS.expense'):
                 $this->_dirName .= $_user->room_id . '/expense';
                 break;
+            case config('Const.s3Service.S3_CALL_CLASS.profileIcon'):
+                $this->_dirName .= $_user->room_id . '/profileIcon/' . $_user->id;
+                break;
             default:
                 break;
         }

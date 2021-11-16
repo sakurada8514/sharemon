@@ -145,7 +145,6 @@ class AuthController extends Controller
         }
 
         $_user = json_decode(json_encode($_user), true);
-        // return response()->json(['user' => $_user]);
         return $this->jsonResponse($_user, 'Auth.AuthUser');
     }
 }

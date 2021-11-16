@@ -11,7 +11,8 @@ class AuthUserViewModel implements ViewModel
         return [
             'user' => [
                 'name'    => $data['name'],
-                'room_id' => $data['room_id']
+                'room_id' => $data['room_id'],
+                'id'      => $data['id']
             ]
         ];
     }

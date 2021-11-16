@@ -19,6 +19,13 @@ class UserService extends BaseService
         return $this->_userModel->findInfoByUserId($_userId);
     }
 
+    public function editProfile(array $_editData, string $_s3ImgUrl)
+    {
+        $this->_userModel->virtualMethodTransaction('updateData', [$_editData, $_s3ImgUrl]);
+
+        return;
+    }
+
     // public function findRoomId(string $_userId)
     // {
     //     $_userData = $this->_userModel->findInfoByUserId($_userId);

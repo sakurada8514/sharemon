@@ -3,17 +3,23 @@
 namespace App\Http\Controllers\Api\Rooms;
 
 use App\Http\Controllers\Controller;
+use App\Services\Lib\S3Service;
 use App\Services\RoomService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MemberController extends Controller
 {
     private ?RoomService $_roomService = null;
+    private ?S3Service $_s3Service = null;
+    private ?UserService $_userService = null;
 
-    public function __construct(RoomService $_roomService)
+    public function __construct(RoomService $_roomService, S3Service $_s3Service, UserService $_userService)
     {
         $this->_roomService = $_roomService;
+        $this->_s3Service = $_s3Service;
+        $this->_userService = $_userService;
     }
 
     /**
@@ -61,7 +67,10 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $_editData = $request->only('name');
+        $_editData['id'] = $id;
+        $_s3ImgUrl = $this->_s3Service->setDirName()->upload($request->file('icon'));
+        $this->_userService->editProfile($_editData, $_s3ImgUrl);
     }
 
     /**

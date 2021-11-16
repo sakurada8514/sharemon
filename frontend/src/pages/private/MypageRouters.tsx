@@ -125,7 +125,13 @@ const MypageRouters: React.FC<MypageRoutersProps> = ({
         <Route
           exact
           path="/mypage/settings/profile"
-          children={<ProfileSetting />}
+          children={
+            <ProfileSetting
+              handleAlertOpen={handleAlertOpen}
+              setAlertSeverity={setAlertSeverity}
+              setAlertMessage={setAlertMessage}
+            />
+          }
         />
         <Route exact path="/mypage/settings/room" children={<RoomSetting />} />
       </Switch>
