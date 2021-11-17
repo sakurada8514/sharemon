@@ -5,9 +5,9 @@ import TransitionMotion from "../components/Route/Motion";
 const Top = () => {
   return (
     <TransitionMotion>
-      <div className="bg-gray-800">
+      <div className="flex justify-center items-center flex-col mt-20">
         <NavBar></NavBar>
-        Top
+        <p className="text-2xl mt-6"> LP Coming Soon...</p>
       </div>
     </TransitionMotion>
   );

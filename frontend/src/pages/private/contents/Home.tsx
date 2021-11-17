@@ -81,18 +81,24 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
             </>
           ) : (
             member.map(
-              (data: { name: string; nickname: string; id: number }) => {
+              (data: { name: string; img_url: string; id: number }) => {
                 return (
                   <Box
                     className="w-1/2 my-1 flex items-center lg:w-1/4"
                     key={data.id}
                   >
-                    <Avatar className="w-8 h-8 mr-3">
-                      <AccountCircleIcon className="w-8 h-8" />
-                    </Avatar>
-                    <Typography variant="subtitle1">
-                      {data.nickname === null ? data.name : data.nickname}
-                    </Typography>
+                    {data.img_url !== null ? (
+                      <img
+                        className="w-8 h-8 mr-3 rounded-full"
+                        src={data.img_url}
+                        alt=""
+                      />
+                    ) : (
+                      <Avatar className="w-8 h-8 mr-3">
+                        <AccountCircleIcon className="w-8 h-8" />
+                      </Avatar>
+                    )}
+                    <Typography variant="subtitle1">{data.name}</Typography>
                   </Box>
                 );
               }
@@ -176,7 +182,10 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
                     <Skeleton className="w-2/3 h-7" />
                   ) : (
                     <p className="text-lg font-medium">
-                      {balance.data.income.total}円
+                      {balance.data.income.total !== null
+                        ? balance.data.income.total
+                        : 0}
+                      円
                     </p>
                   )}
                 </div>

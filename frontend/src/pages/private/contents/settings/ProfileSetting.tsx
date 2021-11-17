@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useGlobal } from "reactn";
+import { useHistory } from "react-router";
 import { TextField } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
@@ -6,8 +7,9 @@ import LoadingButton from "components/Atoms/Buttons/LoadingButton";
 import { AlertProps } from "@material-ui/lab";
 import { Dispatch, SetStateAction } from "react";
 import { OK, VALIDATION } from "utils/constant";
-
+import AjaxLoading from "components/Atoms/Loading/AjaxLoading";
 import { editProfile } from "api/User/index";
+import { fetcherApi } from "api/fetcher";
 
 type ProfileSettingProps = {
   handleAlertOpen: (closedTime?: number) => void;
@@ -22,11 +24,13 @@ const ProfileSetting: React.FC<ProfileSettingProps> = ({
   setAlertSeverity,
   setAlertMessage,
 }) => {
+  const history = useHistory();
   const [name, setName] = useState("");
   const [iconImg, setIconImg] = useState("");
   const [iconImgPreview, setIconImgPreview] = useState<any>("");
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState([]);
+  const [ajaxLoading, setAjaxLoading] = useState(false);
+  const [errors, setErrors] = useState(null);
   const user = useGlobal("user")[0];
 
   const fileInput = useRef(null);
@@ -54,6 +58,23 @@ const ProfileSetting: React.FC<ProfileSettingProps> = ({
       setIconImg(file);
     }
   };
+  useEffect(() => {
+    getProfile();
+  }, []);
+
+  const getProfile = async () => {
+    setAjaxLoading(true);
+    const response = await fetcherApi("/member/" + user.id);
+
+    if (response.status === OK) {
+      setName(response.data.profile.name);
+      setIconImgPreview(response.data.profile.img_url);
+    } else {
+      history.push("/error");
+    }
+    setAjaxLoading(false);
+  };
+
   async function editProfileSubmit() {
     setLoading(true);
     const response = await editProfile(user.id, name, iconImg);
@@ -73,7 +94,7 @@ const ProfileSetting: React.FC<ProfileSettingProps> = ({
     setLoading(false);
   }
   return (
-    <div className="px-4 pt-2">
+    <div className="px-4 pt-2 lg:w-1/2">
       <Typography variant="h5" gutterBottom>
         プロフィール
       </Typography>
@@ -89,15 +110,16 @@ const ProfileSetting: React.FC<ProfileSettingProps> = ({
         autoComplete="current-name"
         value={name}
         onChange={handleChangeName}
-        // error={
-        //   typeof errors.name !== "undefined" ||
-        //   typeof errors.auth !== "undefined"
-        // }
-        // helperText={errors.name || errors.auth}
+        // error={typeof errors.name !== "undefined"}
+        // helperText={errors.name}
       />
       <div className="flex justify-between items-center mt-6">
         <p className="">アイコン</p>
-        <img className="w-12 h-12 rounded-full" src={iconImgPreview} />
+        {iconImgPreview ? (
+          <img className="w-12 h-12 rounded-full" src={iconImgPreview} />
+        ) : (
+          <p>未設定</p>
+        )}
       </div>
       <input
         id="myInput"
@@ -124,6 +146,7 @@ const ProfileSetting: React.FC<ProfileSettingProps> = ({
         color={"secondary"}
         fullWidth={true}
       />
+      {ajaxLoading && <AjaxLoading />}
     </div>
   );
 };

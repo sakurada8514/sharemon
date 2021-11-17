@@ -17,7 +17,6 @@ class CreateUserProfilesTable extends Migration
             $table->bigIncrements('user_id');
             $table->bigInteger('s3_image_id')->unsigned();
             $table->date('birthday')->nullable();
-            $table->text('nickname');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

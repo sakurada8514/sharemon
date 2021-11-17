@@ -55,7 +55,9 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        //
+        $_profile = $this->_userService->findProfile($id);
+
+        return response()->json(['profile' => $_profile]);
     }
 
     /**
