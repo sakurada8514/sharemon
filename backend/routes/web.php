@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/redis_test', function () {
-//     session(['test' => 'test']);
-//     return session()->all();
-// });
+Route::get('/redis_test', function () {
+    session(['test' => 'test']);
+    return session()->all();
+});
 
 // // 専用登録ページへ飛ばす？登録フォームはリアクトで作るかどうか
 // Route::get('/regist/invite', [InviteController::class, "inviteRegistIndex"])->name("regist.invite");
