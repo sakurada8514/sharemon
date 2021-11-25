@@ -5,6 +5,6 @@ import axios from "axios";
 //   withCredentials: true,
 // });
 export const apiClient = axios.create({
-  baseURL: "http://35.75.50.32/api",
+  baseURL: "https://sharemon.xyz",
   withCredentials: true,
 });

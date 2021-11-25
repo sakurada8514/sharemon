@@ -28,3 +28,5 @@ Route::get('/redis_test', function () {
 // Route::get('{any}', function () {
 //     return view('app');
 // })->where('any', '.*');
+
+// ssh -i "~/.ssh/sharemon-key.pem" ec2-user@13.231.146.118
