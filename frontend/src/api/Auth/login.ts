@@ -6,7 +6,9 @@ export async function login(
   remember: boolean
 ): Promise<any> {
   // ログイン時にCSRFトークンを初期化
-  await apiClient.get("/csrf-cookie");
+  const r = await apiClient.get("/csrf-cookie");
+  console.log(r);
+
   const response = await apiClient
     .post("/login", { email, password, remember })
     .catch((err) => err.response);
