@@ -3,7 +3,6 @@ import { currentUser as currentUserApi } from "api/Auth/login";
 
 const useAuth = () => {
   const setUser = useGlobal("user")[1];
-  const [error, setError] = useGlobal("error");
   const [firstAuthLoading, setFirstAuthLoading] = useState(true);
 
   useEffect(() => {
@@ -18,9 +17,8 @@ const useAuth = () => {
       }
     }
     getCurrentUser();
-    setError(false);
   }, [setUser]);
 
-  return [error, firstAuthLoading];
+  return firstAuthLoading;
 };
 export default useAuth;

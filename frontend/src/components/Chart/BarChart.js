@@ -43,7 +43,7 @@ const BarChart = ({ datas, labels }) => {
             options={BAR_GRAPH_OPTIONS}
             plugins={[ChartDataLabels]}
             width={320}
-            height={200}
+            height={250}
           />
         </MediaQuery>
         <MediaQuery query="(max-width: 1024px)">

@@ -1,6 +1,6 @@
 import { createTheme } from "@material-ui/core/styles";
 
-export const theme = createTheme({
+const theme = createTheme({
   palette: {
     primary: {
       light: "rgba(52, 211, 153, 1)",
@@ -16,3 +16,4 @@ export const theme = createTheme({
     },
   },
 });
+export default theme;

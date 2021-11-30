@@ -1,4 +1,5 @@
 import { apiClient } from "../../utils/api";
+import type { User } from "types/entity/user";
 
 export async function login(
   email: string,
@@ -21,8 +22,10 @@ export async function logout(): Promise<any> {
   return response.status;
 }
 
-export async function currentUser(): Promise<any> {
+export async function currentUser(): Promise<User> {
   const response = await apiClient.get("/user");
+  console.log(response.data.user);
+
   return response.data.user;
 }
 

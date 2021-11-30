@@ -1,24 +1,19 @@
 import React from "reactn";
 import { BrowserRouter } from "react-router-dom";
+import ReactDOM from "react-dom";
+import reportWebVitals from "./reportWebVitals";
 
 import { ThemeProvider } from "@material-ui/core";
 
-import Routers from "./Routers";
-import { theme } from "./theme";
-import ReactDOM from "react-dom";
-import reportWebVitals from "./reportWebVitals";
-import Loading from "./components/Atoms/Loading/Loading";
-import ModalTemplate from "./components/Modal/ModalTemplate";
-import ErrorModal from "./components/Modal/ErrorModal";
+import theme from "theme";
+import Loading from "components/Atoms/Loading/Loading";
 import useAuth from "utils/hooks/useAuth";
-import "./styles/tailwind.css";
+import Routers from "./Routers";
+
+import "styles/tailwind.css";
 
 function App() {
-  const [error, firstAuthLoading] = useAuth();
-
-  function reload() {
-    window.location.reload();
-  }
+  const firstAuthLoading = useAuth();
 
   return firstAuthLoading ? (
     <Loading />
@@ -27,11 +22,6 @@ function App() {
       <BrowserRouter>
         <Routers />
       </BrowserRouter>
-      <ModalTemplate
-        show={error}
-        handleModalClose={reload}
-        body={<ErrorModal handleButtonClick={reload} />}
-      />
     </ThemeProvider>
   );
 }

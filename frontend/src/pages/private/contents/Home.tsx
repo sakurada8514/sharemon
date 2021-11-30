@@ -10,6 +10,7 @@ import BarChart from "components/Chart/BarChart";
 import { OK } from "utils/constant";
 import { fetcherApi } from "api/fetcher";
 import { formatDate } from "../../../utils/handy";
+
 type HomeProps = {
   roomName: string;
 };
