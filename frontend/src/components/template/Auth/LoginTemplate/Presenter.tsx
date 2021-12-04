@@ -1,47 +1,31 @@
-import React from "react";
+import React, { VFC } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
-import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import LoadingButton from "../Atoms/Buttons/LoadingButton";
-import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
+import LoadingButton from "components/Atoms/Buttons/LoadingButton";
+import { ChangeEvent } from "types/utils/event";
 
-type LoginFormProps = {
+type Props = {
   email: string;
   password: string;
   remember: boolean;
   loading: boolean;
   errors: any;
-  login: (e: any) => Promise<void>;
-  handleChangeEmail: (e: any) => void;
-  handleChangePassword: (e: any) => void;
-  handleChangeRemember: (e: any) => void;
+  handleLogin: () => Promise<void>;
+  handleChangeEmail: (e: ChangeEvent) => void;
+  handleChangePassword: (e: ChangeEvent) => void;
+  handleChangeRemember: () => void;
   pushRegist: () => void;
   pushPasswordReset: () => void;
 };
 
-const LoginForm: React.FC<LoginFormProps> = ({
-  email,
-  password,
-  remember,
-  errors,
-  loading,
-  handleChangeEmail,
-  handleChangePassword,
-  login,
-  handleChangeRemember,
-  pushRegist,
-  pushPasswordReset,
-}) => {
+const Presenter: VFC<Props> = (props) => {
   return (
     <div className="flex items-center bg-gray-50 min-h-screen">
       <Container component="main" maxWidth="xs">
@@ -63,13 +47,13 @@ const LoginForm: React.FC<LoginFormProps> = ({
               name="email"
               autoComplete="email"
               autoFocus
-              value={email}
-              onChange={handleChangeEmail}
+              value={props.email}
+              onChange={props.handleChangeEmail}
               error={
-                typeof errors.email !== "undefined" ||
-                typeof errors.auth !== "undefined"
+                typeof props.errors.email !== "undefined" ||
+                typeof props.errors.auth !== "undefined"
               }
-              helperText={errors.email}
+              helperText={props.errors.email}
             />
             <TextField
               variant="outlined"
@@ -81,35 +65,35 @@ const LoginForm: React.FC<LoginFormProps> = ({
               type="password"
               id="password"
               autoComplete="current-password"
-              value={password}
-              onChange={handleChangePassword}
+              value={props.password}
+              onChange={props.handleChangePassword}
               error={
-                typeof errors.password !== "undefined" ||
-                typeof errors.auth !== "undefined"
+                typeof props.errors.password !== "undefined" ||
+                typeof props.errors.auth !== "undefined"
               }
-              helperText={errors.password || errors.auth}
+              helperText={props.errors.password || props.errors.auth}
             />
             <FormControlLabel
               control={
                 <Checkbox
-                  value={remember}
+                  value={props.remember}
                   color="primary"
-                  onClick={handleChangeRemember}
+                  onClick={props.handleChangeRemember}
                 />
               }
               label="ログインを維持する"
             />
             <LoadingButton
-              handleButtonClick={login}
+              handleButtonClick={props.handleLogin}
               text={"ログイン"}
-              loading={loading}
+              loading={props.loading}
               fullWidth={true}
             />
-            <Box className="flex justify-between px-6 mt-4">
+            <div className="flex justify-between px-6 mt-4">
               <Link
                 color="secondary"
                 variant="body2"
-                onClick={pushRegist}
+                onClick={props.pushRegist}
                 className="cursor-pointer"
               >
                 {"ユーザー登録"}
@@ -117,12 +101,12 @@ const LoginForm: React.FC<LoginFormProps> = ({
               <Link
                 color="secondary"
                 variant="body2"
-                onClick={pushPasswordReset}
+                onClick={props.pushPasswordReset}
                 className="cursor-pointer"
               >
                 {"パスワードリセット"}
               </Link>
-            </Box>
+            </div>
           </form>
         </div>
       </Container>
@@ -130,4 +114,4 @@ const LoginForm: React.FC<LoginFormProps> = ({
   );
 };
 
-export default LoginForm;
+export default Presenter;

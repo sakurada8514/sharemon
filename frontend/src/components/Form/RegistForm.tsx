@@ -1,19 +1,16 @@
-import React from "react";
+import React, { VFC } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
-import LoadingButton from "../Atoms/Buttons/LoadingButton";
+import LoadingButton from "components/Atoms/Buttons/LoadingButton";
+import { ChangeEvent } from "types/utils/event";
 
-type RegistFormProps = {
+type Props = {
   email: string;
   password: string;
   name: string;
@@ -21,28 +18,14 @@ type RegistFormProps = {
   isInvite: boolean;
   loading: boolean;
   errors: any;
-  regist: (e: any) => Promise<void>;
-  handleChangeEmail: (e: any) => void;
-  handleChangePassword: (e: any) => void;
-  handleChangeName: (e: any) => void;
-  handleChangePasswordConfirmation: (e: any) => void;
-  pushLogin: (e: any) => void;
+  regist: () => Promise<void>;
+  handleChangeEmail: (e: ChangeEvent) => void;
+  handleChangePassword: (e: ChangeEvent) => void;
+  handleChangeName: (e: ChangeEvent) => void;
+  handleChangePasswordConfirmation: (e: ChangeEvent) => void;
+  pushLogin: () => void;
 };
-const RegistForm: React.FC<RegistFormProps> = ({
-  email,
-  password,
-  name,
-  password_confirmation,
-  isInvite,
-  loading,
-  errors,
-  handleChangeEmail,
-  handleChangePassword,
-  regist,
-  handleChangeName,
-  handleChangePasswordConfirmation,
-  pushLogin,
-}) => {
+const RegistForm: VFC<Props> = (props) => {
   return (
     <div className="flex items-center bg-gray-50 min-h-screen">
       <Container component="main" maxWidth="xs">
@@ -64,13 +47,13 @@ const RegistForm: React.FC<RegistFormProps> = ({
               name="name"
               autoComplete="name"
               autoFocus
-              value={name}
-              onChange={handleChangeName}
+              value={props.name}
+              onChange={props.handleChangeName}
               error={
-                typeof errors.name !== "undefined" ||
-                typeof errors.auth !== "undefined"
+                typeof props.errors.name !== "undefined" ||
+                typeof props.errors.auth !== "undefined"
               }
-              helperText={errors.name}
+              helperText={props.errors.name}
             />
             <TextField
               variant="outlined"
@@ -81,13 +64,13 @@ const RegistForm: React.FC<RegistFormProps> = ({
               label="メールアドレス"
               name="email"
               autoComplete="email"
-              value={email}
-              onChange={handleChangeEmail}
+              value={props.email}
+              onChange={props.handleChangeEmail}
               error={
-                typeof errors.email !== "undefined" ||
-                typeof errors.auth !== "undefined"
+                typeof props.errors.email !== "undefined" ||
+                typeof props.errors.auth !== "undefined"
               }
-              helperText={errors.email}
+              helperText={props.errors.email}
             />
             <TextField
               variant="outlined"
@@ -99,13 +82,13 @@ const RegistForm: React.FC<RegistFormProps> = ({
               type="password"
               id="password"
               autoComplete="current-password"
-              value={password}
-              onChange={handleChangePassword}
+              value={props.password}
+              onChange={props.handleChangePassword}
               error={
-                typeof errors.password !== "undefined" ||
-                typeof errors.auth !== "undefined"
+                typeof props.errors.password !== "undefined" ||
+                typeof props.errors.auth !== "undefined"
               }
-              helperText={errors.password}
+              helperText={props.errors.password}
             />
             <TextField
               variant="outlined"
@@ -117,24 +100,24 @@ const RegistForm: React.FC<RegistFormProps> = ({
               type="password"
               id="password_confirmation"
               autoComplete="current-password_confirmation"
-              value={password_confirmation}
-              onChange={handleChangePasswordConfirmation}
+              value={props.password_confirmation}
+              onChange={props.handleChangePasswordConfirmation}
               className="mb-6"
-              error={typeof errors.auth !== "undefined"}
-              helperText={errors.auth}
+              error={typeof props.errors.auth !== "undefined"}
+              helperText={props.errors.auth}
             />
             <LoadingButton
-              handleButtonClick={regist}
+              handleButtonClick={props.regist}
               text={"登録"}
-              loading={loading}
+              loading={props.loading}
               fullWidth={true}
             />
             <Box display="flex" justifyContent="center" className="mt-4">
-              {!isInvite && (
+              {!props.isInvite && (
                 <Link
                   color="secondary"
                   variant="body2"
-                  onClick={pushLogin}
+                  onClick={props.pushLogin}
                   className="cursor-pointer"
                 >
                   {"ログイン"}
