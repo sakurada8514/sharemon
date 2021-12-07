@@ -5,6 +5,7 @@ import RegistForm from "components/Form/RegistForm";
 import Presenter from "./Presenter";
 import { VFC } from "react";
 import { SetState } from "types/utils";
+import { ChangeEvent } from "types/utils/event";
 
 type Props = {
   regist: () => Promise<void>;
@@ -25,10 +26,11 @@ const RegistTemplate: VFC<Props> = (props) => {
 
   const [loading, setLoading] = useState(false);
 
-  const handleChangeName = (e: any) => props.setName(e.target.value);
-  const handleChangeEmail = (e: any) => props.setEmail(e.target.value);
-  const handleChangePassword = (e: any) => props.setPassword(e.target.value);
-  const handleChangePasswordConfirmation = (e: any) =>
+  const handleChangeName = (e: ChangeEvent) => props.setName(e.target.value);
+  const handleChangeEmail = (e: ChangeEvent) => props.setEmail(e.target.value);
+  const handleChangePassword = (e: ChangeEvent) =>
+    props.setPassword(e.target.value);
+  const handleChangePasswordConfirmation = (e: ChangeEvent) =>
     props.setPasswordConfirmation(e.target.value);
   const pushLogin = () => history.push("/login");
 

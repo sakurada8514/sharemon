@@ -1,4 +1,4 @@
-import React from "react";
+import React, { VFC } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,29 +10,20 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
-import LoadingButton from "../Atoms/Buttons/LoadingButton";
+import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "utils/constant";
+import LoadingButton from "../../../Atoms/Buttons/LoadingButton";
 
-type ReregistPasswordFormProps = {
+type Props = {
   password: string;
   password_confirmation: string;
   errors: any;
   loading: boolean;
-  reregistPassword: (e: any) => Promise<void>;
+  reregistPassword: () => void;
   handleChangePasswordConfirmation: (e: any) => void;
   handleChangePassword: (e: any) => void;
   pushLogin: (e: any) => void;
 };
-const ReregistPasswordForm: React.FC<ReregistPasswordFormProps> = ({
-  password,
-  password_confirmation,
-  errors,
-  loading,
-  reregistPassword,
-  handleChangePassword,
-  handleChangePasswordConfirmation,
-  pushLogin,
-}) => {
+const Presenter: VFC<Props> = (props) => {
   return (
     <div className="flex items-center bg-gray-50 min-h-screen">
       <Container component="main" maxWidth="xs">
@@ -54,13 +45,13 @@ const ReregistPasswordForm: React.FC<ReregistPasswordFormProps> = ({
               type="password"
               id="password"
               autoComplete="current-password"
-              value={password}
-              onChange={handleChangePassword}
+              value={props.password}
+              onChange={props.handleChangePassword}
               error={
-                typeof errors.password !== "undefined" ||
-                typeof errors.auth !== "undefined"
+                typeof props.errors.password !== "undefined" ||
+                typeof props.errors.auth !== "undefined"
               }
-              helperText={errors.password || errors.auth}
+              helperText={props.errors.password || props.errors.auth}
             />
             <TextField
               variant="outlined"
@@ -72,23 +63,23 @@ const ReregistPasswordForm: React.FC<ReregistPasswordFormProps> = ({
               type="password"
               id="password_confirmation"
               autoComplete="current-password_confirmation"
-              value={password_confirmation}
-              onChange={handleChangePasswordConfirmation}
+              value={props.password_confirmation}
+              onChange={props.handleChangePasswordConfirmation}
               className="mb-6"
-              error={typeof errors.auth !== "undefined"}
-              helperText={errors.auth}
+              error={typeof props.errors.auth !== "undefined"}
+              helperText={props.errors.auth}
             />
             <LoadingButton
-              handleButtonClick={reregistPassword}
+              handleButtonClick={props.reregistPassword}
               text={"パスワード再設定"}
-              loading={loading}
+              loading={props.loading}
               fullWidth={true}
             />
             <Box display="flex" justifyContent="center" className="mt-4">
               <Link
                 color="secondary"
                 variant="body2"
-                onClick={pushLogin}
+                onClick={props.pushLogin}
                 className="cursor-pointer"
               >
                 {"ログイン"}
@@ -101,4 +92,4 @@ const ReregistPasswordForm: React.FC<ReregistPasswordFormProps> = ({
   );
 };
 
-export default ReregistPasswordForm;
+export default Presenter;
