@@ -8,6 +8,7 @@ import ModalTemplate from "../../components/Modal/ModalTemplate";
 import TransitionMotion from "../../components/Route/Motion";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../utils/constant";
 import { BACK_COLOR_WHITE } from "../../utils/constant";
+import ResetPasswordTemplate from "components/template/Auth/ResetPasswordTemplate";
 
 import { resetPassword as resetPasswordApi } from "../../api/Auth/login";
 
@@ -16,82 +17,32 @@ export default function ResetPassword() {
 
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState([]);
-  const [modalShow, setModalShow] = useState(false);
-  const [loading, setLoading] = useState(false);
 
-  const handleChangeEmail = (e: any) => setEmail(e.target.value);
-  const handleModalToggle = () => setModalShow(!modalShow);
-  const pushLogin = () => history.push("/login");
-
-  async function resetPassword(e: any) {
-    setLoading(true);
-    e.preventDefault();
+  async function resetPassword() {
     const response = await resetPasswordApi(email);
     if (response.status === OK) {
-      setLoading(false);
-      setModalShow(true);
+      return true;
     } else if (
       response.status === UNAUTHORIZED ||
       response.status === VALIDATION
     ) {
-      setLoading(false);
       setErrors(response.data.errors);
     } else {
       history.push("/error");
     }
+    return false;
   }
 
   return (
     <>
       <TransitionMotion>
-        <ResetPasswordForm
-          resetPassword={resetPassword}
+        <ResetPasswordTemplate
           email={email}
           errors={errors}
-          loading={loading}
-          handleChangeEmail={handleChangeEmail}
-          pushLogin={pushLogin}
+          setEmail={setEmail}
+          resetPassword={resetPassword}
         />
       </TransitionMotion>
-
-      <ModalTemplate
-        show={modalShow}
-        handleModalClose={handleModalToggle}
-        body={modalBody(handleModalToggle)}
-      />
     </>
   );
 }
-//モーダル
-function modalBody(handleModalToggle: () => void) {
-  const classes = styles();
-
-  return (
-    <div className={classes.root}>
-      <h1>ご登録のメールアドレスにリセット用のURLを送信しました。</h1>
-      <Button variant="contained" color="secondary" onClick={handleModalToggle}>
-        閉じる
-      </Button>
-    </div>
-  );
-}
-
-const styles = makeStyles(() => ({
-  root: {
-    width: "90%",
-    maxWidth: "400px",
-    height: "30%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: BACK_COLOR_WHITE,
-    "&:focus-visible": {
-      outline: "none",
-    },
-    borderRadius: "10px",
-    "& > h1": {
-      marginBottom: "24px",
-    },
-  },
-}));

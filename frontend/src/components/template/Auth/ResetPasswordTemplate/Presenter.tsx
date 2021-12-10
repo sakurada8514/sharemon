@@ -1,6 +1,7 @@
 import React, { VFC } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
@@ -9,20 +10,23 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import { BACK_COLOR_WHITE } from "utils/constant";
+import {
+  BACK_COLOR_GREEN,
+  BACK_COLOR_WHITE,
+  SUB_COLOR_GREEN,
+} from "utils/constant";
 import LoadingButton from "../../../Atoms/Buttons/LoadingButton";
 import ModalTemplate from "components/Modal/ModalTemplate";
 
 type Props = {
-  password: string;
-  password_confirmation: string;
+  email: string;
   errors: any;
   loading: boolean;
-  modalShow: boolean;
-  reregistPassword: () => void;
-  handleChangePasswordConfirmation: (e: any) => void;
-  handleChangePassword: (e: any) => void;
+  resetPassword: () => Promise<void>;
+  handleChangeEmail: (e: any) => void;
   pushLogin: () => void;
+  modalShow: boolean;
+  handleModalToggle: () => void;
 };
 const Presenter: VFC<Props> = (props) => {
   return (
@@ -34,7 +38,7 @@ const Presenter: VFC<Props> = (props) => {
               <LockOutlinedIcon className="bg-green-500" />
             </Avatar>
             <Typography component="h1" variant="h5">
-              パスワード再設定
+              パスワードリセット
             </Typography>
             <form className="w-full mt-2">
               <TextField
@@ -42,60 +46,41 @@ const Presenter: VFC<Props> = (props) => {
                 margin="normal"
                 required
                 fullWidth
-                name="password"
-                label="パスワード"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={props.password}
-                onChange={props.handleChangePassword}
-                error={
-                  typeof props.errors.password !== "undefined" ||
-                  typeof props.errors.auth !== "undefined"
-                }
-                helperText={props.errors.password || props.errors.auth}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password_confirmation"
-                label="パスワード確認"
-                type="password"
-                id="password_confirmation"
-                autoComplete="current-password_confirmation"
-                value={props.password_confirmation}
-                onChange={props.handleChangePasswordConfirmation}
+                id="email"
+                label="メールアドレス"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                value={props.email}
+                onChange={props.handleChangeEmail}
+                error={typeof props.errors.email !== "undefined"}
+                helperText={props.errors.email}
                 className="mb-6"
-                error={typeof props.errors.auth !== "undefined"}
-                helperText={props.errors.auth}
               />
               <LoadingButton
-                handleButtonClick={props.reregistPassword}
-                text={"パスワード再設定"}
+                handleButtonClick={props.resetPassword}
+                text={"リセットメール送信"}
                 loading={props.loading}
                 fullWidth={true}
               />
-              <Box display="flex" justifyContent="center" className="mt-4">
+              <Box className="flex justify-center mt-4">
                 <Link
                   color="secondary"
                   variant="body2"
                   onClick={props.pushLogin}
                   className="cursor-pointer"
                 >
-                  {"ログイン"}
+                  {"ログインへ戻る"}
                 </Link>
               </Box>
             </form>
           </div>
         </Container>
       </div>
-
       <ModalTemplate
         show={props.modalShow}
-        handleModalClose={props.pushLogin}
-        body={modalBody(props.pushLogin)}
+        handleModalClose={props.handleModalToggle}
+        body={modalBody(props.handleModalToggle)}
       />
     </>
   );
@@ -108,10 +93,9 @@ function modalBody(handleModalToggle: () => void) {
 
   return (
     <div className={classes.root}>
-      <h1>パスワードのリセットが完了しました。</h1>
-      <p>ログインフォームへ戻りログインして下さい。</p>
+      <h1>ご登録のメールアドレスにリセット用のURLを送信しました。</h1>
       <Button variant="contained" color="secondary" onClick={handleModalToggle}>
-        ログインフォームへ
+        閉じる
       </Button>
     </div>
   );
@@ -132,9 +116,6 @@ const styles = makeStyles(() => ({
     },
     borderRadius: "10px",
     "& > h1": {
-      marginBottom: "8px",
-    },
-    "& > p": {
       marginBottom: "24px",
     },
   },
