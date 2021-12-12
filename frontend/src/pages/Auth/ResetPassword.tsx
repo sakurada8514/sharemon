@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
 
-import ResetPasswordForm from "../../components/Form/ResetPasswordForm";
 import ModalTemplate from "../../components/Modal/ModalTemplate";
 import TransitionMotion from "../../components/Route/Motion";
 import { OK, UNAUTHORIZED, VALIDATION } from "../../utils/constant";
