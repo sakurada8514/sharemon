@@ -8,7 +8,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import PieChartIcon from "@material-ui/icons/PieChart";
-
+import MoneyIcon from "@material-ui/icons/Money";
 type BottomAppBarProps = {
   handleMobileSideMenuOpen: () => void;
 };
@@ -19,12 +19,20 @@ const BottomAppBar: React.FC<BottomAppBarProps> = ({
     <React.Fragment>
       <AppBar className="fixed top-auto bottom-0 bg-white">
         <Toolbar>
-          <IconButton
+          <NavLink to="/mypage/budget" exact>
+            <IconButton
+              aria-label="open drawer"
+              onClick={handleMobileSideMenuOpen}
+            >
+              <MoneyIcon className="w-7 h-7" />
+            </IconButton>
+          </NavLink>
+          {/* <IconButton
             aria-label="open drawer"
             onClick={handleMobileSideMenuOpen}
           >
             <MenuIcon className="w-7 h-7" />
-          </IconButton>
+          </IconButton> */}
           <NavLink to="/mypage" exact>
             <IconButton className="ml-4">
               <HomeIcon className="w-7 h-7" />

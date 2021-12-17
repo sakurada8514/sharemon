@@ -32,7 +32,7 @@ export default function SettingMenuButton(props) {
           </MenuItem>
         </NavLink>
         <NavLink to="/mypage/settings/room" exact>
-          <MenuItem onClick={props.handleSettingMenuClose}>ルーム設定</MenuItem>
+          {/* <MenuItem onClick={props.handleSettingMenuClose}>ルーム設定</MenuItem> */}
         </NavLink>
         <MenuItem onClick={props.logout}>ログアウト</MenuItem>
       </StyledMenu>
