@@ -3,11 +3,11 @@ import { useHistory } from "react-router";
 import { TextField } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
-import LoadingButton from "components/Atoms/Buttons/LoadingButton";
+import LoadingButton from "components/Base/Buttons/LoadingButton";
 import { AlertProps } from "@material-ui/lab";
 import { Dispatch, SetStateAction } from "react";
 import { OK, VALIDATION } from "utils/constant";
-import AjaxLoading from "components/Atoms/Loading/AjaxLoading";
+import AjaxLoading from "components/Base/Loading/AjaxLoading";
 import { editProfile } from "api/User/index";
 import { fetcherApi } from "api/fetcher";
 

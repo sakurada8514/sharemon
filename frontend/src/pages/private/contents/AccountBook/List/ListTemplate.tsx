@@ -19,7 +19,7 @@ import Calendar from "react-calendar";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
-import TabPanel from "components/Atoms/TabPanel";
+import TabPanel from "components/Base/TabPanel";
 import ExpenseList from "pages/private/contents/AccountBook/List/ExpenseList";
 import IncomeList from "pages/private/contents/AccountBook/List/IncomeList";
 

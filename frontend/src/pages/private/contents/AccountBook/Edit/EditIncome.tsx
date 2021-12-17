@@ -5,9 +5,9 @@ import { useHistory, useParams } from "react-router";
 import { DatePickerProps } from "@material-ui/pickers";
 import { AlertProps } from "@material-ui/lab";
 
-import BackButton from "components/Atoms/Buttons/BackButton";
+import BackButton from "components/Base/Buttons/BackButton";
 import IncomeForm from "components/Form/IncomeForm";
-import AjaxLoading from "components/Atoms/Loading/AjaxLoading";
+import AjaxLoading from "components/Base/Loading/AjaxLoading";
 import { OK, VALIDATION } from "utils/constant";
 
 import { getCategoryList as getCategoryListApi } from "api/Income/category";

@@ -18,8 +18,8 @@ import { DatePickerProps } from "@material-ui/pickers";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import ClearIcon from "@material-ui/icons/Clear";
 
-import MyDatePicker from "../Atoms/Form/DatePicker";
-import LoadingButton from "../Atoms/Buttons/LoadingButton";
+import MyDatePicker from "../Base/Form/DatePicker";
+import LoadingButton from "../Base/Buttons/LoadingButton";
 
 type RegistExpenseFormProps = {
   apiMethod: () => Promise<void>;

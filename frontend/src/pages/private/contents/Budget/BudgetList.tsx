@@ -8,7 +8,7 @@ import { LinearProgress } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import MoneyIcon from "@mui/icons-material/Money";
 
-import EditIconButton from "components/Atoms/Buttons/EditIconButton";
+import EditIconButton from "components/Base/Buttons/EditIconButton";
 
 import { fetcherApi } from "api/fetcher";
 const BudgetList = () => {

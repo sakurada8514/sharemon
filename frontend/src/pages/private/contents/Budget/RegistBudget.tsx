@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import useSWR from "swr";
 
 import BudgetForm from "components/Form/BudgetForm";
-import BackButton from "components/Atoms/Buttons/BackButton";
+import BackButton from "components/Base/Buttons/BackButton";
 import { OK, VALIDATION } from "utils/constant";
 
 import { fetcherApi } from "api/fetcher";

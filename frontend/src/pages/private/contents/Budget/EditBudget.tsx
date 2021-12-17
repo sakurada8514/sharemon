@@ -4,8 +4,8 @@ import useSWR from "swr";
 import { AlertProps } from "@material-ui/lab";
 
 import BudgetForm from "components/Form/BudgetForm";
-import BackButton from "components/Atoms/Buttons/BackButton";
-import AjaxLoading from "components/Atoms/Loading/AjaxLoading";
+import BackButton from "components/Base/Buttons/BackButton";
+import AjaxLoading from "components/Base/Loading/AjaxLoading";
 import { OK, VALIDATION } from "utils/constant";
 
 import { fetcherApi } from "api/fetcher";

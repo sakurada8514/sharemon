@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@material-ui/core";
 
 import theme from "theme";
-import Loading from "components/Atoms/Loading/Loading";
+import Loading from "components/Base/Loading/Loading";
 import useAuth from "utils/hooks/useAuth";
 import Routers from "./Routers";
 

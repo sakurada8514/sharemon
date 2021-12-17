@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
 import ModalTemplate from "../Modal/ModalTemplate";
-import LoadingButton from "../Atoms/Buttons/LoadingButton";
+import LoadingButton from "../Base/Buttons/LoadingButton";
 
 type RegistRoomFormProps = {
   roomName: string;

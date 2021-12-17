@@ -7,7 +7,7 @@ import {
   Select,
   InputAdornment,
 } from "@mui/material";
-import LoadingButton from "../Atoms/Buttons/LoadingButton";
+import LoadingButton from "../Base/Buttons/LoadingButton";
 
 type BudgetFormProps = {
   errors: any;

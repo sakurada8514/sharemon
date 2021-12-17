@@ -11,7 +11,7 @@ import MediaQuery from "react-responsive";
 import SideMenu from "components/SideMenu/SideMenu";
 import BottomAppBar from "components/SideMenu/BottomAppBar";
 import Header from "components/Header/Header";
-import AlertMessage from "components/Atoms/AlertMessage";
+import AlertMessage from "components/Base/AlertMessage";
 import TransitionMotion from "components/Route/Motion";
 import MypageRouters from "./MypageRouters";
 import { OK } from "utils/constant";

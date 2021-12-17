@@ -14,8 +14,8 @@ import {
 } from "@material-ui/core";
 import { DatePickerProps } from "@material-ui/pickers";
 
-import MyDatePicker from "../Atoms/Form/DatePicker";
-import LoadingButton from "../Atoms/Buttons/LoadingButton";
+import MyDatePicker from "../Base/Form/DatePicker";
+import LoadingButton from "../Base/Buttons/LoadingButton";
 import { BACK_COLOR_GREEN } from "../../utils/constant";
 
 type IncomeFormProps = {

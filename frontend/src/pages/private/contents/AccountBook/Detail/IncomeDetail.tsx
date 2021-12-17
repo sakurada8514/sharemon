@@ -6,14 +6,14 @@ import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
 import { AlertProps } from "@material-ui/lab";
 
-import BackButton from "components/Atoms/Buttons/BackButton";
-import EditIconButton from "components/Atoms/Buttons/EditIconButton";
-import DeleteIconButton from "components/Atoms/Buttons/DeleteIconButton";
+import BackButton from "components/Base/Buttons/BackButton";
+import EditIconButton from "components/Base/Buttons/EditIconButton";
+import DeleteIconButton from "components/Base/Buttons/DeleteIconButton";
 
 import { fetcherApi } from "api/fetcher";
 import { deleteIncomeApi } from "api/Income";
 import { OK } from "utils/constant";
-import AjaxLoading from "components/Atoms/Loading/AjaxLoading";
+import AjaxLoading from "components/Base/Loading/AjaxLoading";
 
 type IncomeDetailRouteParams = {
   id: string;

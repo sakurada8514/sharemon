@@ -256,12 +256,12 @@ trait Converter
      *
      * @example
      * ```
-     * echo Carbon::now()->toAtomString();
+     * echo Carbon::now()->toBasetring();
      * ```
      *
      * @return string
      */
-    public function toAtomString()
+    public function toBasetring()
     {
         return $this->rawFormat(DateTime::ATOM);
     }
@@ -293,7 +293,7 @@ trait Converter
      */
     public function toIso8601String()
     {
-        return $this->toAtomString();
+        return $this->toBasetring();
     }
 
     /**

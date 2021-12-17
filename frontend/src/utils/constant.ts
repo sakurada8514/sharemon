@@ -98,7 +98,7 @@ export const BAR_GRAPH_OPTIONS = {
   plugins: {
     datalabels: {
       color: "#111111",
-      anchor: "end",
+      // anchor: "end",
       align: "top",
       font: {
         size: 12,

@@ -7,7 +7,7 @@ import { AlertProps } from "@material-ui/lab";
 import RegistExpense from "./RegistExpense";
 import RegistIncome from "./RegistIncome";
 import TransitionMotion from "components/Route/Motion";
-import TabPanel from "components/Atoms/TabPanel";
+import TabPanel from "components/Base/TabPanel";
 
 type RegistTemplateProps = {
   handleAlertOpen: (closedTime?: number) => void;

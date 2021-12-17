@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../components/Atoms/NavBar";
+import NavBar from "../components/Base/NavBar";
 import TransitionMotion from "../components/Route/Motion";
 
 const Top = () => {

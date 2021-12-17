@@ -5,9 +5,9 @@ import { DatePickerProps } from "@material-ui/pickers";
 import { AlertProps } from "@material-ui/lab";
 import { Dispatch, SetStateAction } from "react";
 
-import BackButton from "components/Atoms/Buttons/BackButton";
+import BackButton from "components/Base/Buttons/BackButton";
 import ExpenseForm from "components/Form/ExpenseForm";
-import AjaxLoading from "components/Atoms/Loading/AjaxLoading";
+import AjaxLoading from "components/Base/Loading/AjaxLoading";
 import { OK, VALIDATION } from "utils/constant";
 
 import { editExpense as editExpenseApi } from "api/Expense/regist";

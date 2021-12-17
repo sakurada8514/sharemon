@@ -12,7 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import LoadingButton from "../Atoms/Buttons/LoadingButton";
+import LoadingButton from "../Base/Buttons/LoadingButton";
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
 
 type LoginFormProps = {

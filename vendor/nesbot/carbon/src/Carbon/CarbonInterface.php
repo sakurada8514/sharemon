@@ -4383,12 +4383,12 @@ interface CarbonInterface extends DateTimeInterface, JsonSerializable
      *
      * @example
      * ```
-     * echo Carbon::now()->toAtomString();
+     * echo Carbon::now()->toBasetring();
      * ```
      *
      * @return string
      */
-    public function toAtomString();
+    public function toBasetring();
 
     /**
      * Format the instance as COOKIE

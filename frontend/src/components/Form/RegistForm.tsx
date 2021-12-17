@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import { BACK_COLOR_GREEN, SUB_COLOR_GREEN } from "../../utils/constant";
-import LoadingButton from "../Atoms/Buttons/LoadingButton";
+import LoadingButton from "../Base/Buttons/LoadingButton";
 
 type RegistFormProps = {
   email: string;

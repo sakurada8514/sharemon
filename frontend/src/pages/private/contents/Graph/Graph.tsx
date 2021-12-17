@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { Select, FormControl, InputLabel, MenuItem } from "@material-ui/core";
 import { Skeleton } from "@mui/material";
 
-import MyDatePicker from "components/Atoms/Form/DatePicker";
+import MyDatePicker from "components/Base/Form/DatePicker";
 import DoughnutChart from "components/Chart/DoughnutChart";
 
 import { fetcherApi } from "api/fetcher";
