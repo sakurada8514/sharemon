@@ -127,7 +127,10 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
                     <Skeleton className="w-2/3 h-7" />
                   ) : (
                     <p className="text-lg font-medium">
-                      {balance.data.expense.total}円
+                      {balance.data.expense.total !== null
+                        ? balance.data.expense.total
+                        : 0}
+                      円
                     </p>
                   )}
                 </div>
