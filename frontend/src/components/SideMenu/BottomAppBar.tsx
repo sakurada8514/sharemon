@@ -22,7 +22,7 @@ const BottomAppBar: React.FC<BottomAppBarProps> = ({
           <NavLink to="/mypage/budget" exact>
             <IconButton
               aria-label="open drawer"
-              onClick={handleMobileSideMenuOpen}
+              // onClick={handleMobileSideMenuOpen}
             >
               <MoneyIcon className="w-7 h-7" />
             </IconButton>
