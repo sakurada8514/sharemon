@@ -145,7 +145,7 @@ const Home: React.FC<HomeProps> = ({ roomName }) => {
                   )}
                 </div>
               </div>
-              <div className=" w-2/5 md:w-full">
+              <div className=" w-2/5 md:w-full lg:flex lg:justify-between">
                 {balance && budget ? (
                   budget - balance.data.expense.total > 0 ? (
                     <div className=" md:flex md:justify-between">
